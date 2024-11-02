@@ -14,13 +14,20 @@
 
 char	*ft_strchr(const char *str, int search_str)
 {
-	while (*str != '\0')
+	size_t	i;
+
+	i = 0;
+	while (str[i])
 	{
-		if (*str == (char)search_str)
+		if (str[i] == (char)search_str)
 		{
-			return ((char *)str);
+			break ;
 		}
-		str++;
+		i++;
+	}
+	if (str[i] == (char)search_str)
+	{
+		return ((char *)str + i);
 	}
 	return (0);
 }

@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 14:30:09 by hounejja          #+#    #+#             */
-/*   Updated: 2024/11/02 11:37:03 by hounejja         ###   ########.fr       */
+/*   Created: 2024/11/02 13:17:41 by hounejja          #+#    #+#             */
+/*   Updated: 2024/11/02 13:21:00 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *str, int c, size_t n)
+void	ft_lstdelone_bonus(t_list *lst, void (*del)(void *))
 {
-	size_t			i;
-	unsigned char	*str1;
-
-	str1 = str;
-	i = 0;
-	while (i < n)
-	{
-		str1[i] = (unsigned char)c;
-		i++;
-	}
-	return (str);
+	if (!lst)
+		lst->content = NULL;
+	del(lst->content);
+	free(lst);
 }

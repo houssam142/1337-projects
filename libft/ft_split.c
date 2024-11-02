@@ -6,13 +6,13 @@
 /*   By: hounejja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 20:26:44 by hounejja          #+#    #+#             */
-/*   Updated: 2024/10/25 11:37:31 by hounejja         ###   ########.fr       */
+/*   Updated: 2024/11/02 14:54:34 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**if_error(char **tab)
+static char	**ft_free(char **tab)
 {
 	unsigned int	i;
 
@@ -23,74 +23,85 @@ char	**if_error(char **tab)
 	return (NULL);
 }
 
-int	count_words(const char *str, char c)
+static int	count_words(char const *str, char c)
 {
 	int	i;
 	int	count;
 
 	i = 0;
 	count = 0;
-	while (str[i])
+	if (str)
 	{
-		if (str[i] == c)
-			i++;
-		else
+		while (str[i] != '\0')
 		{
-			count++;
-			while (str[i] != c && str[i])
+			while (str[i] != c && str[i] != '\0')
 				i++;
+			if (str[i] == c || str[i] == '\0')
+			{
+				count++;
+				if (str[i] != '\0')
+					i++;
+			}
 		}
 	}
 	return (count);
 }
 
-char	*ft_word(const char *s1, int *index, char c)
+static int	l_words(char const *str, int i, char c)
 {
-	char	*copy;
-	size_t	word_len;
-	int		i;
+	int	l;
 
-	word_len = 0;
-	while (s1[*index] == c)
-		(*index)++;
-	i = *index;
-	while (s1[i] && s1[i] != c)
+	l = 0;
+	if (str)
 	{
-		word_len++;
-		i++;
+		while (str[i] != c && str[i] != '\0')
+		{
+			i++;
+			l++;
+		}
 	}
-	copy = malloc(sizeof(char) * (word_len + 1));
-	if (!copy)
-		return (NULL);
-	i = 0;
-	while (s1[*index] && s1[*index] != c)
-		copy[i++] = s1[(*index)++];
-	copy[i] = '\0';
-	return (copy);
+	return (l);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**arr;
-	int		index;
-	int		wc;
 	int		i;
+	int		j;
+	int		k;
+	char	**tab;
 
-	index = 0;
 	i = 0;
-	if (!s)
-		return (NULL);
-	p = count_words(s, c);
-	arr = malloc(sizeof(char *) * (p + 1));
-	if (!arr)
-		return (NULL);
-	while (i < p)
+	j = 0;
+	tab = malloc(sizeof(char *) * (count_words(s, c) + 1));
+
+	while (s[i] != '\0')
 	{
-		arr[i] = ft_word(s, &index, c);
-		if (!arr[i])
-			return (if_error(arr));
-		i++;
+		while (s[i] == c && s[i] != '\0')
+			i++;
+		if (s[i] != '\0')
+		{
+			k = 0;
+			tab[j] = malloc(sizeof(char) * (l_words(s, i, c) + 1));
+			if (!tab[j])
+				return (ft_free(tab));
+			while (s[i] != c && s[i] != '\0')
+				tab[j][k++] = s[i++];
+			tab[j++][k] = '\0';
+		}
 	}
-	arr[i] = 0;
-	return (arr);
+	tab[j] = NULL;
+	return (tab);
 }
+//int main()
+//{
+//    const char *str = "Hello world this is a test";
+//    char delimiter = ',';    
+//    char **result = ft_split(str, delimiter);
+//    for (int i = 0; result[i]; i++) {
+//        printf("%s", result[i]);
+//		free(result[i]);
+//    }
+
+//    free(result);
+//    return 0;
+//}

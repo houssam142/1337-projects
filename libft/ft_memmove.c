@@ -14,29 +14,21 @@
 
 void	*ft_memmove(void *dest_str, const void *src_str, size_t numBytes)
 {
-	size_t	i;
-	char	*dest;
-	char	*src;
+	char		*dest;
+	const char	*src;
 
-	dest = (char *)dest_str;
-	src = (char *)src_str;
-	i = 0;
-	if (!dest || !src)
-		return (NULL);
-	if (i < 1)
-	{
-		ft_memcpy(dest, src, numBytes);
-	}
-	else
+	dest = dest_str;
+	src = src_str;
+	if (dest > src)
 	{
 		while (numBytes--)
-			*((unsigned char *)(dest + numBytes)) = *((unsigned char *)(src + numBytes));	
+		{
+			dest[numBytes] = src[numBytes];
+		}
+	}
+	else
+	{	
+		ft_memcpy(dest, src, numBytes);
 	}	
 	return (dest);
-}
-int main()
-{
-	char str[] = "hello worldk";
-	printf("%s\n", (char *)ft_memmove(str + 2, str, 5));
-	printf("\n%s", (char *)memmove(str + 2, str, 5));
 }

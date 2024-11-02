@@ -22,15 +22,15 @@ void	ft_putnbr_fd(int n, int fd)
 		write(fd, "-2147483648", 11);
 		return ;
 	}
-	else if (op < 0)
+	if (op < 0)
 	{
-		ft_putchar_fd('-', fd);
+		write(fd, "-", 1);
 		op *= -1;
 	}
-	else if (op > 9)
+	if (op > 9)
 	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
+		ft_putnbr_fd(op / 10, fd);
+		ft_putnbr_fd(op % 10, fd);
 	}
 	if (op >= 0 && op <= 9)
 	{

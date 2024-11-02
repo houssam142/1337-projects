@@ -25,11 +25,11 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 	while (str[i])
 	{
 		j = 0;
-		while (str[i + j] == to_find[j] && j < len && to_find[j] != '\0')
+		while (str[i + j] == to_find[j] && i + j < len)
 		{
 			j++;
 		}
-		if (to_find[j] == '\0')
+		if (j == ft_strlen(to_find))
 		{
 			return ((char *)str + i);
 		}

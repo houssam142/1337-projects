@@ -6,11 +6,12 @@
 /*   By: hounejja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:11:26 by hounejja          #+#    #+#             */
-/*   Updated: 2024/10/24 12:27:37 by hounejja         ###   ########.fr       */
+/*   Updated: 2024/11/02 15:34:31 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdint.h>
 
 void	*ft_calloc(size_t nitems, size_t size)
 {
@@ -19,9 +20,9 @@ void	*ft_calloc(size_t nitems, size_t size)
 
 	sum = (size * nitems);
 	res = malloc(sum);
-	if (!res)
+	if (res == NULL)
 	{
-		return (0);
+		return (NULL);
 	}
 	ft_bzero(res, sum);
 	return (res);

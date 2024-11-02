@@ -21,19 +21,17 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 
 	i = 0;
 	src_len = ft_strlen(src);
-	dest_len = ft_strlen(dest);
+	dest_len = ft_strlen((const char *)dest);
 	if (size <= dest_len)
-	{
 		return (size + src_len);
-	}
-	to_copy = size - dest_len;
+	to_copy = size - dest_len - 1;
 	if (to_copy > src_len)
-	{
 		to_copy = src_len;
-	}
 	while (i < to_copy)
+	{
 		dest[dest_len + i] = src[i];
-	i++;
+		i++;
+	}
 	dest[dest_len + to_copy] = '\0';
 	return (dest_len + src_len);
 }
