@@ -12,7 +12,11 @@
 
 #include "libft.h"
 
+<<<<<<< HEAD
+int	ft_lstsize(t_list *lst)
+=======
 int	ft_lstsize_bonus(t_list *lst)
+>>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 {
 	t_list	*curr;
 	size_t	i;

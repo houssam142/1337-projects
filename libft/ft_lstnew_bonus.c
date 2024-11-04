@@ -12,7 +12,11 @@
 
 #include "libft.h"
 
+<<<<<<< HEAD
+t_list	*ft_lstnew(void *content)
+=======
 t_list	*ft_lstnew_bonus(void *content)
+>>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 {
 	t_list	*new;
 

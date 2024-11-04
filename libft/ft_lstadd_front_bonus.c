@@ -12,7 +12,11 @@
 
 #include "libft.h"
 
+<<<<<<< HEAD
+void	ft_lstadd_front(t_list **lst, t_list *new)
+=======
 void	ft_lstadd_front_bonus(t_list **lst, t_list *new)
+>>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 {
 	if (lst)
 	{

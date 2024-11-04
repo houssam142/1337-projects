@@ -18,6 +18,14 @@ void	*ft_calloc(size_t nitems, size_t size)
 	void	*res;
 	size_t	sum;
 
+	if (nitems == 0 || size == 0)
+	{
+		return (malloc(0));
+	}
+	if (nitems > (size_t)(-1) / size)
+	{
+		return (NULL);
+	}
 	sum = (size * nitems);
 	res = malloc(sum);
 	if (res == NULL)

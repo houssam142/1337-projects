@@ -16,7 +16,11 @@ char	ft_toupper(char c)
 {
 	if (c >= 'a' && c <= 'z')
 	{
+<<<<<<< HEAD
+		return (c - 32);
+=======
 		c -= 32;
+>>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 	}
 	return (c);
 }
