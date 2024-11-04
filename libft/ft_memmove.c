@@ -17,11 +17,8 @@ void	*ft_memmove(void *dest_str, const void *src_str, size_t numBytes)
 	char		*dest;
 	const char	*src;
 
-<<<<<<< HEAD
 	if (numBytes == 0)
 		return (dest_str);
-=======
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 	dest = dest_str;
 	src = src_str;
 	if (dest > src)

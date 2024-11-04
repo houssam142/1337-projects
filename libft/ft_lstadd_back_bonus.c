@@ -24,26 +24,12 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		*lst = new;
 		return ;
 	}
-=======
-void	ft_lstadd_back_bonus(t_list **lst, t_list *new)
-{
-	t_list	*curr;
-
-	if (*lst == 0)
-		*lst = new;
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 	else
 	{
 		curr = *lst;
 		while (curr->next)
-<<<<<<< HEAD
 			curr = curr->next;
 		curr->next = new;
-=======
-		{
-			curr = curr->next;
-		}
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 	}
 }
 

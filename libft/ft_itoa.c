@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int	numlen(int nb)
+static int	numlen(int nb)
 {
 	int	count;
 
@@ -41,11 +41,8 @@ char	*ft_itoa(int n)
 	o = n;
 	i = numlen(n);
 	res = malloc(sizeof(char) * (i + 1));
-<<<<<<< HEAD
 	if (!res)
 		return (NULL);
-=======
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 	res[i--] = '\0';
 	if (o < 0)
 	{
@@ -64,9 +61,6 @@ char	*ft_itoa(int n)
 }
 //int main()
 //{
-<<<<<<< HEAD
 //	printf("%s", ft_itoa(2147483647));
-=======
 //	printf("%s", ft_itoa(2147483649));
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 //}

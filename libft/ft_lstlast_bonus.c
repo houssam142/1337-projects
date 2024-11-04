@@ -12,11 +12,7 @@
 
 #include "libft.h"
 
-<<<<<<< HEAD
 t_list	*ft_lstlast(t_list *lst)
-=======
-t_list	*ft_lstlast_bonus(t_list *lst)
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 {
 	if (!lst)
 		return (0);

@@ -6,11 +6,8 @@
 /*   By: hounejja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:23:55 by hounejja          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2024/10/30 16:06:25 by hounejja         ###   ########.fr       */
-=======
 /*   Updated: 2024/11/02 15:35:01 by hounejja         ###   ########.fr       */
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +59,13 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	*ft_memchr(const void *str, int c, size_t n);
 
-t_list	*ft_lstnew_bonus(void *content);
-void	ft_lstadd_front_bonus(t_list **lst, t_list *new);
-int		ft_lstsize_bonus(t_list *lst);
-void	ft_lstadd_back_bonus(t_list **lst, t_list *new);
-<<<<<<< HEAD
-=======
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_front(t_list **lst, t_list *new);
+int		ft_lstsize(t_list *lst);
+void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 
 #endif

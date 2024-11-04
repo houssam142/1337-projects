@@ -6,21 +6,14 @@
 /*   By: hounejja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 20:26:44 by hounejja          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2024/10/29 18:36:40 by hounejja         ###   ########.fr       */
-=======
 /*   Updated: 2024/11/02 14:54:34 by hounejja         ###   ########.fr       */
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-<<<<<<< HEAD
-static char	**if_error(char **tab)
-=======
 static char	**ft_free(char **tab)
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 {
 	unsigned int	i;
 
@@ -31,11 +24,7 @@ static char	**ft_free(char **tab)
 	return (NULL);
 }
 
-<<<<<<< HEAD
 static int	count_words(const char *str, char c)
-=======
-static int	count_words(char const *str, char c)
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 {
 	int	i;
 	int	count;
@@ -59,7 +48,6 @@ static int	count_words(char const *str, char c)
 	return (count);
 }
 
-<<<<<<< HEAD
 static int	ft_word(const char *s1, int index, char c)
 {
 	int	i;
@@ -74,40 +62,16 @@ static int	ft_word(const char *s1, int index, char c)
 		}
 	}
 	return (i);
-=======
-static int	l_words(char const *str, int i, char c)
-{
-	int	l;
-
-	l = 0;
-	if (str)
-	{
-		while (str[i] != c && str[i] != '\0')
-		{
-			i++;
-			l++;
-		}
-	}
-	return (l);
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 }
 
 char	**ft_split(char const *s, char c)
 {
-<<<<<<< HEAD
 	char	**arr;
 	int		index;
 	int		i;
 	int		p;
-=======
-	int		i;
-	int		j;
-	int		k;
-	char	**tab;
->>>>>>> b24c59b3ce0ed13393269951ba5fd487e0be51de
 
 	i = 0;
-<<<<<<< HEAD
 	arr = malloc(sizeof(char *) * (count_words(s, c) + 1));
 	while (s[i] != '\0')
 	{
