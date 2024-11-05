@@ -44,10 +44,6 @@ $(NAME): $(OBJS)
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS) $(BONUS_SRCS)
-	gcc -nostartfiles -shared -o libft.so $(OBJS) $(BONUS_OBJS)
-
 bonus: $(BONUS_SRCS) $(BONUS_OBJS)
 	$(LIBC) $(NAME) $(BONUS_OBJS)
 
