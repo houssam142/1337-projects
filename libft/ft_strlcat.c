@@ -22,17 +22,17 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 
 	i = 0;
 	l_src = ft_strlen(src);
-	if (!dst && size == 0)
+	if (!dest && size == 0)
 		return (l_src);
-	l_dest = ft_strlen(dst);
+	l_dest = ft_strlen(dest);
 	l = l_dest;
 	if (size <= l_dest)
 		return (l_src + size);
 	else
 	{
 		while (src[i] && l_dest < size - 1)
-			dst[l_dest++] = src[i++];
-		dst[l_dest] = '\0';
+			dest[l_dest++] = src[i++];
+		dest[l_dest] = '\0';
 		return (l + l_src);
 	}
 }
