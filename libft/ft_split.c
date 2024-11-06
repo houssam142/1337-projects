@@ -6,7 +6,7 @@
 /*   By: hounejja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 20:26:44 by hounejja          #+#    #+#             */
-/*   Updated: 2024/11/02 14:54:34 by hounejja         ###   ########.fr       */
+/*   Updated: 2024/11/03 13:06:48 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,16 @@ char	**ft_split(char const *s, char c)
 	tab[j] = NULL;
 	return (tab);
 }
+//int main()
+//{
+//    const char *str = "Hello world this is a test";
+//    char delimiter = ',';    
+//    char **result = ft_split(str, delimiter);
+//    for (int i = 0; result[i]; i++) {
+//        printf("%s", result[i]);
+//		free(result[i]);
+//    }
 
-/*
-int main()
-{
-        const char str[] = "";
-        char set = ',';
-        int i = 0;
-        char **res = ft_split(str, set);
-        while (res[i])
-        {
-                printf("%s", res[i]);
-                free(res[i]);
-                i++;
-        }
-        free(res);
-        return 0;
-}*/
+//    free(result);
+//    return 0;
+//}

@@ -6,16 +6,13 @@
 /*   By: hounejja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:23:55 by hounejja          #+#    #+#             */
-/*   Updated: 2024/10/30 16:06:25 by hounejja         ###   ########.fr       */
-/*   Updated: 2024/11/02 15:35:01 by hounejja         ###   ########.fr       */
+/*   Updated: 2024/11/06 14:05:36 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdio.h>
-# include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
 

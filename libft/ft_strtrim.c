@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	search(char const *s2, char c)
+int	search(char const *s2, char c)
 {
 	while (*s2 && c != *s2)
 	{
@@ -26,7 +26,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	i;
 	size_t	len;
 
-	if (!s1 || !set)
+	if (!s1)
 		return (NULL);
 	len = ft_strlen(s1);
 	i = 0;

@@ -6,7 +6,7 @@
 #    By: hounejja <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 11:10:55 by hounejja          #+#    #+#              #
-#    Updated: 2024/11/02 16:52:25 by hounejja         ###   ########.fr        #
+#    Updated: 2024/11/06 14:02:04 by hounejja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ BONUS_SRCS = ft_lstadd_back_bonus.c ft_lstadd_front_bonus.c ft_lstnew_bonus.c \
 
 OBJS = $(SRCS:.c=.o)
 
-CC = gcc
+CC = cc
 
 BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 	
@@ -41,11 +41,16 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(LIBC) $(NAME) $(OBJS)
 
+bonus: $(BONUS_SRCS) $(BONUS_OBJS)
+	$(LIBC) $(NAME) $(BONUS_OBJS)
+	touch bonus
+
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-bonus: $(BONUS_SRCS) $(BONUS_OBJS)
-	$(LIBC) $(NAME) $(BONUS_OBJS)
+so:
+	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS) $(BONUS_SRCS)
+	gcc -nostartfiles -shared -o libft.so $(OBJS) $(BONUS_OBJS)
 
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS)

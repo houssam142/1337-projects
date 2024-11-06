@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 16:16:10 by hounejja          #+#    #+#             */
-/*   Updated: 2024/10/25 18:34:59 by hounejja         ###   ########.fr       */
+/*   Created: 2024/11/04 18:17:51 by hounejja          #+#    #+#             */
+/*   Updated: 2024/11/06 14:07:42 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*str;
+	t_list	*res;
+	t_list	*curr;
 
-	if (!s)
+	if (!lst || !f || !del)
 		return (NULL);
-	if (start >= ft_strlen(s))
+	res = ft_lstnew(f(lst->content));
+	lst = lst->next;
+	while (lst)
 	{
-		return (ft_strdup(""));
+		curr = ft_lstnew(f(lst->content));
+		if (!curr)
+		{
+			ft_lstclear(&res, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&res, curr);
+		lst = lst->next;
 	}
-	if (ft_strlen(s) - start < len)
-	{
-		len = ft_strlen(s) - start;
-	}
-	str = malloc(sizeof(char) * (len + 1));
-	if (str == NULL)
-	{
-		return (NULL);
-	}
-	ft_strlcpy(str, start + s, len + 1);
-	return (str);
+	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: hounejja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 18:19:50 by hounejja          #+#    #+#             */
-/*   Updated: 2024/10/30 16:25:02 by hounejja         ###   ########.fr       */
+/*   Updated: 2024/11/06 13:59:14 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,17 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*curr;
 
-	if (!lst || !new)
-		return ;
 	if (*lst == NULL)
 	{
 		*lst = new;
-		return ;
 	}
 	else
 	{
 		curr = *lst;
 		while (curr->next)
+		{
 			curr = curr->next;
+		}
 		curr->next = new;
 	}
 }

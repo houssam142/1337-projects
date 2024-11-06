@@ -31,5 +31,5 @@ char	*ft_strdup(const char *str)
 		i++;
 	}
 	copy[i] = '\0';
-	return (copy);
+	return ((char *)copy);
 }
