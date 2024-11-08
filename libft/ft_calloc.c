@@ -1,0 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hounejja <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/23 17:11:26 by hounejja          #+#    #+#             */
+/*   Updated: 2024/11/02 15:34:31 by hounejja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+#include <stdint.h>
+
+void	*ft_calloc(size_t nitems, size_t size)
+{
+	void	*res;
+	size_t	sum;
+
+	if (nitems == 0 || size == 0)
+		return (NULL);
+	sum = (size * nitems);
+	res = malloc(sum);
+	if (res == NULL)
+	{
+		return (NULL);
+	}
+	ft_bzero(res, sum);
+	return (res);
+}
