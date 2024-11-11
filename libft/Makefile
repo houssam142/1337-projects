@@ -6,7 +6,7 @@
 #    By: hounejja <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 11:10:55 by hounejja          #+#    #+#              #
-#    Updated: 2024/11/06 19:53:43 by hounejja         ###   ########.fr        #
+#    Updated: 2024/11/10 22:51:05 by hounejja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ LIBC = ar rc
 
 CFLAGS = -Wall -Wextra -Werror
 
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
@@ -51,10 +52,11 @@ bonus: $(BONUS_SRCS) $(BONUS_OBJS)
 
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS)
+	touch clean
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all fclean re

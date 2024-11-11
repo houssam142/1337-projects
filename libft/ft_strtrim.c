@@ -6,13 +6,13 @@
 /*   By: hounejja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:33:13 by hounejja          #+#    #+#             */
-/*   Updated: 2024/10/26 11:02:04 by hounejja         ###   ########.fr       */
+/*   Updated: 2024/11/10 10:30:41 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	search(char const *s2, char c)
+static int	search(char const *s2, char c)
 {
 	while (*s2 && c != *s2)
 	{

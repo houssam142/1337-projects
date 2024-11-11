@@ -22,8 +22,6 @@ typedef struct s_list
 	struct s_list	*next;
 }t_list;
 
-char	ft_toupper(char c);
-char	ft_tolower(char c);
 char	*ft_strrchr(const char *str, int c);
 char	*ft_strnstr(const char *str, const char *to_find, size_t len);
 char	*ft_strchr(const char *str, int search_str);
@@ -38,6 +36,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlen(const char *str);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
+int		ft_toupper(int c);
+int		ft_tolower(int c);
 int		ft_atoi(const char *str);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
