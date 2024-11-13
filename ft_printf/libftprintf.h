@@ -16,7 +16,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include <stdint.h>
 
 int	ft_printf(const char *w, ...);
 int	ft_putchar(char c);

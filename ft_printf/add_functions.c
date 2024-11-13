@@ -26,7 +26,7 @@ int	ft_putstr(const char *str)
 	count = 0;
 	i = 0;
 	if (!str)
-		return (write(1, "NULL", 4));
+		return (write(1, "(null)", 6));
 	while (str[i])
 	{
 		write(1, &str[i], 1);
@@ -90,9 +90,8 @@ int	dectohexu(unsigned int a)
 	if (a >= 16)
 	{
 		count += dectohexu(a / 16);
-		count += ft_putchar(str[a % 16]);
 	}
-	else
-		count += ft_putchar(str[a % 16]);
+	ft_putchar(str[a % 16]);
+	count++;
 	return (count);
 }
