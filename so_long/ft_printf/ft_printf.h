@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 20:59:18 by hounejja          #+#    #+#             */
-/*   Updated: 2024/11/26 22:44:55 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/03/14 02:08:07 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-int	ft_printf(const char *w, ...);	
-int	ft_putchar(char c);
-int	ft_putstr(const char *str);
-int	print_hex(unsigned int hex, char format);
-int	print_unsigned_int(unsigned int n);
-int	print_addres(void *ptr);
-int	print_int(int n);
+int		ft_printf(const char *w, ...);
+int		ft_putchar(char c);
+int		ft_putstr(const char *str);
+int		print_hex(unsigned int hex, char format);
+int		print_unsigned_int(unsigned int n);
+int		print_addres(void *ptr);
+long	print_int(long int n);
 
 #endif

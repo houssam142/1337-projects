@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 01:28:23 by hounejja          #+#    #+#             */
-/*   Updated: 2025/03/09 14:19:52 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/03/15 23:23:52 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,27 @@ int	key_pressed(int key, t_win *win)
 	return (0);
 }
 
-void	new_window(char *file, t_win *w)
+void	new_window(t_win *w)
 {
 	w->mlx = mlx_init();
-	w->win = mlx_new_window(w->mlx, w->width * 32, w->height * 32, file);
+	if (!w->mlx)
+	{
+		free(w->mlx);
+		ft_free(w->map);
+		exit(1);
+	}
 	render(w);
+	size_of_win(w);
+	w->win = mlx_new_window(w->mlx, w->width * 32, w->height * 32, "./so_long");
+	if (!w->win)
+	{
+		mlx_destroy_display(w->mlx);
+		free(w->mlx);
+		ft_free(w->map);
+		exit(1);
+	}
 	render_images(w);
-	mlx_hook(w->win, 2, 1, key_pressed, w);
+	mlx_hook(w->win, 2, 1L << 0, key_pressed, w);
 	mlx_hook(w->win, 17, 0, close_win, w);
 	mlx_loop(w->mlx);
 	ft_free(w->map);

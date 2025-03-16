@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 11:04:49 by hounejja          #+#    #+#             */
-/*   Updated: 2025/03/09 01:56:50 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:15:22 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,17 @@ void	render_images(t_win *game)
 
 void	render(t_win *w)
 {
-	w->wall = mlx_xpm_file_to_image(w->mlx, "Texture/imgs/blockSimple.xpm",
+	w->wall = mlx_xpm_file_to_image(w->mlx, "texture/imgs/blockSimple.xpm",
 			&w->width, &w->height);
 	w->player = mlx_xpm_file_to_image(w->mlx,
-			"Texture/imgs/idle_00.xpm", &w->width,
+			"texture/imgs/idle_00.xpm", &w->width,
 			&w->height);
-	w->door = mlx_xpm_file_to_image(w->mlx, "Texture/imgs/exit_close_01.xpm",
+	w->door = mlx_xpm_file_to_image(w->mlx, "texture/imgs/exit_close_01.xpm",
 			&w->width, &w->height);
 	w->collec = mlx_xpm_file_to_image(w->mlx,
-			"Texture/imgs/star_00.xpm", &w->width,
+			"texture/imgs/star_00.xpm", &w->width,
 			&w->height);
-	w->floor = mlx_xpm_file_to_image(w->mlx, "Texture/imgs/midBlocks_02.xpm",
+	w->floor = mlx_xpm_file_to_image(w->mlx, "texture/imgs/midBlocks_02.xpm",
 			&w->width, &w->height);
+	error_check(w);
 }

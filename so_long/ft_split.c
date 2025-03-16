@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 20:26:44 by hounejja          #+#    #+#             */
-/*   Updated: 2025/03/04 23:20:57 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/03/11 23:38:54 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**ft_free(char **tab)
 	return (NULL);
 }
 
-static int	count_words(char const *str, char c)
+int	count_words(char const *str, char c)
 {
 	int	count;
 	int	in_word;
@@ -48,7 +48,7 @@ static int	count_words(char const *str, char c)
 	return (count);
 }
 
-static char	*get_word(const char *s1, int *index, char c)
+char	*get_word(const char *s1, int *index, char c)
 {
 	char	*copy;
 	size_t	word_len;

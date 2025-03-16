@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 13:56:14 by hounejja          #+#    #+#             */
-/*   Updated: 2025/03/01 18:04:03 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:14:40 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	{
 		if (s1[i] == '\0' || s2[i] == '\0')
 		{
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+			return (s1[i] - s2[i]);
 		}
 		if (s1[i] != s2[i])
 		{
-			return (((unsigned char)s1[i] - (unsigned char)s2[i]));
+			return (s1[i] - s2[i]);
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 23:57:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/03/09 02:00:15 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:22:19 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,37 @@ int	check_length_walls(char **map)
 	len = ft_strlen(map[0]);
 	while (map[i])
 	{
-		if (ft_strlen(map[i]) > len || ft_strlen(map[i]) < len)
+		if ((ft_strlen(map[i]) > len || ft_strlen(map[i]) < len))
+		{
+			write(2, "Error\n", 6);
+			write(2, "Not the same length\n", 21);
 			return (0);
+		}
 		i++;
 	}
 	return (1);
 }
 
-char	*get_map_caracters(char *map)
+char	*get_map_characters(char *map)
 {
 	char	*line;
 	char	*characters;
 	int		fd_map;
 
 	line = NULL;
-	fd_map = open(map, O_RDONLY);
 	characters = NULL;
-	check_file(map);
+	fd_map = check_file(map);
 	line = get_next_line(fd_map);
 	if (!line)
-		exit(1);
+		return (NULL);
 	while (line)
 	{
 		if (!characters)
+		{
 			characters = ft_strdup(line);
+			if (!characters)
+				return (NULL);
+		}
 		else
 			ft_join_and_free(&characters, line);
 		free(line);

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	ft_putnbr(int n)
+static void	ft_putnbr(long int n)
 {
 	if (n == -2147483648)
 	{
@@ -36,10 +36,10 @@ static void	ft_putnbr(int n)
 	}
 }
 
-int	print_int(int n)
+long	print_int(long int n)
 {
-	int	i;
-	int	np;
+	long			i;
+	long int		np;
 
 	i = 0;
 	np = n;

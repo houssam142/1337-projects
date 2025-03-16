@@ -6,13 +6,13 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 20:21:05 by hounejja          #+#    #+#             */
-/*   Updated: 2025/03/07 23:29:36 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/03/11 23:40:34 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_strchr(const char *str, int search_str)
+char	*ft_strchr(const char *str, int search_str)
 {
 	size_t	i;
 
@@ -30,7 +30,7 @@ static char	*ft_strchr(const char *str, int search_str)
 	return (0);
 }
 
-static char	*keep_rest(char *temp, int start)
+char	*keep_rest(char *temp, int start)
 {
 	char	*rest;
 	int		len;
@@ -46,7 +46,7 @@ static char	*keep_rest(char *temp, int start)
 	return (rest);
 }
 
-static char	*extract_line(char *temp, int *start_next)
+char	*extract_line(char *temp, int *start_next)
 {
 	char	*line;
 	int		i;
@@ -66,7 +66,7 @@ static char	*extract_line(char *temp, int *start_next)
 	return (line);
 }
 
-static char	*new_line(int fd, char *buffer, char *temp)
+char	*new_line(int fd, char *buffer, char *temp)
 {
 	ssize_t	read_bytes;
 	char	*new_temp;

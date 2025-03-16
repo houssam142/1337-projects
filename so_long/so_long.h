@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 17:53:01 by hounejja          #+#    #+#             */
-/*   Updated: 2025/03/09 14:20:49 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:22:02 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_win
 }			t_win;
 
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
+void		error_check(t_win *w);
 void		get_position(t_win *game, int *x, int *y, char asset);
 int			plays(int key, t_win *game, void *img);
 int			line_all_ones(char *line, char one);
@@ -58,9 +59,8 @@ void		flood_fill(char **map, int x, int y, t_win *w);
 int			first_and_last(char *str);
 int			ft_strlen1(char *str);
 int			tab_length(char **arr);
-char		*get_map_caracters(char *map);
-int			check_map_caracters(char *characters, t_win *w);
-int			check_map_rectangular(char **map);
+char		*get_map_characters(char *map);
+int			check_map_characters(char *characters, t_win *w);
 int			check_wall(char **map);
 void		raise_error(void);
 int			check_map_walls(char **map);
@@ -68,10 +68,10 @@ void		size_of_win(t_win *game);
 void		ft_join_and_free(char **str, void *buf);
 int			check_length_walls(char **map);
 int			count_collectibles(t_win *game);
-void		check_file(char *file);
+int			check_file(char *file);
 void		draw_map(t_win *game, void *img, char c);
 char		**ft_split(char const *s, char c);
-void		new_window(char *file, t_win *w);
+void		new_window(t_win *w);
 char		**ft_free(char **tab);
 void		init_param(t_win *w);
 char		**check_map(char *map, t_win *w);
