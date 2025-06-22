@@ -1,0 +1,80 @@
+#include "minishell.h"
+
+static long	ft_new_atoi(const char *str, int *lvl)
+{
+	long		res;
+	int		sign;
+	unsigned int	i;
+
+	res = 0;
+	sign = 1;
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\v' || \
+			str[i] == '\n' || str[i] == '\r' || str[i] == '\f')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i++] == '-')
+			sign = -1;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + str[i] - '0';
+		i++;
+	}
+	*lvl = res * sign;
+	if (str[i])
+		return (0);
+	else
+		return (1);
+}
+
+static void	shell_up(int lvl, t_cmd_exec *tmp, char *str)
+{
+	if (lvl < 0)
+		lvl = 0;
+	else if (lvl >= 0 && lvl <= 999)
+		lvl++;
+	else
+	{
+		ft_putstr_fd("Minishell: warning: shell level (", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd(") too high, resetting to 1\n", 2);
+		lvl = 1;
+	}
+	if (lvl == 1000)
+	{
+		free(tmp->value);
+		tmp->value = ft_strdup("");
+	}
+	else
+	{
+		free(tmp->value);
+		tmp->value = ft_itoa(lvl);
+	}
+}
+
+void	shell_vl(t_cmd_exec **env_lst)
+{
+	t_cmd_exec	*new_ele;
+	t_cmd_exec	*tmp;
+	int		lvl;
+
+	tmp = *env_lst;
+	while (tmp)
+	{
+		if (!ft_strncmp(tmp->name, "SHLVL", ft_strlen(tmp->name)))
+		{
+			if (ft_new_atoi(tmp->value, &lvl) == 0)
+				lvl = 1;
+			shell_up(lvl, tmp, tmp->value);
+			break ;
+		}
+		tmp = tmp->next;
+	}
+	if (!tmp)
+	{
+		new_ele = lst_new_ele(ft_strdup("SHLVL"), ft_strdup("1"));
+		ft_lstadd_back(env_lst, new_ele);
+	}
+}
