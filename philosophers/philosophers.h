@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/03/24 23:49:30 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/04/27 21:41:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <pthread.h>
 # include <stdio.h>
+# include <stdarg.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
@@ -29,6 +30,8 @@ typedef struct s_info
 	int				num_of_times_to_eat;
 	int				this_time;
 	int				*death;
+	int				full;
+	int				died;
 }					t_info;
 
 typedef struct s_mutex
@@ -55,8 +58,11 @@ int					handle_arg(t_info *arg, char **av, int ac);
 int					convert_to_misec(int time);
 void				print_msg(char *msg, int time, int id);
 void				print(char c, t_philo *philo, int id);
+int				ft_putchar(char c);
+int				ft_putstr(const char *str);
+long				print_int(long int n);
+int				ft_printf(const char *w, ...);
 void				*check_if_death(void *args);
-void				destroy_mutex_and_free(t_philo *philo, void *arg1,
-						void *arg2);
+void				destroy_mutex_and_free(t_philo *philo, pthread_mutex_t *fork);
 
 #endif

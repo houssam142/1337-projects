@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/03/24 23:49:32 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/04/27 22:04:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	handle_arg(t_info *arg, char **av, int ac)
 	arg->time_to_die = ft_atoi(av[2]);
 	arg->time_to_eat = ft_atoi(av[3]);
 	arg->time_to_sleep = ft_atoi(av[4]);
+	arg->full = 0;
+	arg->died = 0;
 	if (av[5])
 		arg->num_of_times_to_eat = ft_atoi(av[5]);
 	return (0);
@@ -59,14 +61,17 @@ void	print(char c, t_philo *philo, int id)
 	pthread_mutex_unlock(philo->mutex.p);
 }
 
-void	destroy_mutex_and_free(t_philo *philo, void *arg1, void *arg2)
+void	destroy_mutex_and_free(t_philo *philo, pthread_mutex_t *fork)
 {
 	int	i;
 
 	i = 0;
 	while (i < philo->arguments->num_of_philo)
-		pthread_mutex_destroy(&philo->mutex.fork[i++]);
+	{
+		pthread_mutex_destroy(&fork[i]);
+		i++;
+	}
 	pthread_mutex_destroy(philo->mutex.p);
-	free(arg1);
-	free(arg2);
+	free(fork);
+	free(philo);
 }
