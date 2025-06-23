@@ -20,9 +20,8 @@ int	convert_to_misec(int time)
 
 int	handle_arg(t_info *arg, char **av, int ac)
 {
-	if ((ac != 5 && ac != 6) || ft_atoi(av[1]) > 200
-		|| ft_atoi(av[2]) < 60 || ft_atoi(av[3]) < 60
-		|| ft_atoi(av[4]) < 60)
+	if ((ac != 5 && ac != 6) || ft_atoi(av[1]) > 200 || ft_atoi(av[2]) < 60
+		|| ft_atoi(av[3]) < 60 || ft_atoi(av[4]) < 60)
 		return (1);
 	arg->num_of_philo = ft_atoi(av[1]);
 	arg->time_to_die = ft_atoi(av[2]);
@@ -39,8 +38,8 @@ void	print(char c, t_philo *philo, int id)
 {
 	pthread_mutex_lock(philo->mutex.p);
 	if (c == 'F')
-		print_msg("has taken a fork\n",
-			time_1() - philo->arguments->this_time, id);
+		print_msg("has taken a fork\n", time_1() - philo->arguments->this_time,
+			id);
 	else if (c == 'E')
 	{
 		print_msg("is eating", time_1() - philo->arguments->this_time, id);

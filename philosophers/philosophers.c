@@ -20,22 +20,22 @@ void	*check_if_death(void *arg)
 	while (1)
 	{
 		if (*(philo->arguments->death))
-			break;
-
+			break ;
 		if (philo->must_die <= time_1())
 		{
 			pthread_mutex_lock(philo->mutex.p);
 			if (!*(philo->arguments->death))
 			{
-				print_msg("died\n", time_1() - philo->arguments->this_time, philo->id);
+				print_msg("died\n", time_1() - philo->arguments->this_time,
+					philo->id);
 				*(philo->arguments->death) = 1;
 			}
 			pthread_mutex_unlock(philo->mutex.p);
-			break;
+			break ;
 		}
 		else if (*(philo->full) == philo->arguments->num_of_philo)
-			break;
-		usleep(10);
+			break ;
+		usleep(100);
 	}
 	return (NULL);
 }
@@ -63,22 +63,25 @@ void	*exec(void *args)
 		print('E', philo, philo->id);
 		philo->must_die = time_1() + philo->arguments->time_to_die;
 		usleep(convert_to_misec(philo->arguments->time_to_eat));
-		if (philo->arguments->num_of_times_to_eat > 0 &&
-			++philo->eat_count == philo->arguments->num_of_times_to_eat)
-			*(philo->full) += 1;
 		pthread_mutex_unlock(&philo->mutex.fork[philo->id]);
 		pthread_mutex_unlock(&philo->mutex.fork[(philo->id + 1)
 			% philo->arguments->num_of_philo]);
+		if (*(philo->arguments->death))
+			break ;
 		print('S', philo, philo->id);
 		usleep(convert_to_misec(philo->arguments->time_to_sleep));
+		if (*(philo->arguments->death))
+                        break ;
 		print('T', philo, philo->id);
+		if (*(philo->arguments->death))
+                        break ;
 	}
 	pthread_join(philo->alive, NULL);
 	return (NULL);
 }
 
-void	init_param(t_info *info, t_philo *philo,
-	pthread_mutex_t *p, pthread_mutex_t *fork)
+void	init_param(t_info *info, t_philo *philo, pthread_mutex_t *p,
+		pthread_mutex_t *fork)
 {
 	int	i;
 
@@ -103,7 +106,7 @@ int	main(int ac, char **av)
 {
 	t_info			arguments;
 	t_philo			*philo;
-	pthread_mutex_t	*fork;	
+	pthread_mutex_t	*fork;
 	pthread_mutex_t	p;
 	int				i;
 
@@ -118,7 +121,7 @@ int	main(int ac, char **av)
 	init_param(&arguments, philo, &p, fork);
 	while (1)
 	{
-		if (*(philo->arguments->death) == 1	
+		if (*(philo->arguments->death) == 1
 			|| *(philo->full) == arguments.num_of_philo)
 			break ;
 		usleep(10);
