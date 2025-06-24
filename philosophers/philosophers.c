@@ -23,14 +23,12 @@ void	*check_if_death(void *arg)
 			break ;
 		if (philo->must_die <= time_1())
 		{
-			pthread_mutex_lock(philo->mutex.p);
 			if (!*(philo->arguments->death))
 			{
 				print_msg("died\n", time_1() - philo->arguments->this_time,
 					philo->id);
 				*(philo->arguments->death) = 1;
 			}
-			pthread_mutex_unlock(philo->mutex.p);
 			break ;
 		}
 		else if (*(philo->full) == philo->arguments->num_of_philo)
@@ -52,32 +50,27 @@ void	*exec(void *args)
 
 	philo = (t_philo *)args;
 	death_events(philo);
-	while ((*philo->arguments->death) == 0 &&
-			*(philo->full) != philo->arguments->num_of_philo)
+	if (philo->arguments->num_of_philo == 1)
+		return (one_philo(philo), NULL);
+	while ((*philo->arguments->death) == 0
+		&& *(philo->full) != philo->arguments->num_of_philo)
 	{
-		pthread_mutex_lock(&philo->mutex.fork[philo->id]);
-		print('F', philo, philo->id);
-		pthread_mutex_lock(&philo->mutex.fork[(philo->id + 1)
-			% philo->arguments->num_of_philo]);
-		print('F', philo, philo->id);
-		print('E', philo, philo->id);
-		philo->must_die = time_1() + philo->arguments->time_to_die;
-		usleep(convert_to_misec(philo->arguments->time_to_eat));
-		pthread_mutex_unlock(&philo->mutex.fork[philo->id]);
-		pthread_mutex_unlock(&philo->mutex.fork[(philo->id + 1)
-			% philo->arguments->num_of_philo]);
-		if (*(philo->arguments->death))
+		if (take_forks(philo))
+			break ;
+		update_eating(philo);
+		put_forks(philo);
+		if (philo->eat_count == philo->arguments->num_of_times_to_eat
+			|| *(philo->arguments->death))
 			break ;
 		print('S', philo, philo->id);
 		usleep(convert_to_misec(philo->arguments->time_to_sleep));
 		if (*(philo->arguments->death))
-                        break ;
+			break ;
 		print('T', philo, philo->id);
 		if (*(philo->arguments->death))
-                        break ;
+			break ;
 	}
-	pthread_join(philo->alive, NULL);
-	return (NULL);
+	return (pthread_join(philo->alive, NULL), NULL);
 }
 
 void	init_param(t_info *info, t_philo *philo, pthread_mutex_t *p,
@@ -115,7 +108,6 @@ int	main(int ac, char **av)
 		return (1);
 	philo = malloc(sizeof(t_philo) * arguments.num_of_philo);
 	fork = malloc(sizeof(pthread_mutex_t) * (arguments.num_of_philo));
-	arguments.this_time = time_1();
 	while (i < arguments.num_of_philo)
 		pthread_mutex_init(&fork[i++], NULL);
 	init_param(&arguments, philo, &p, fork);
@@ -129,6 +121,5 @@ int	main(int ac, char **av)
 	i = 0;
 	while (i < arguments.num_of_philo)
 		pthread_join(philo[i++].philo, NULL);
-	destroy_mutex_and_free(philo, fork);
-	return (0);
+	return (destroy_mutex_and_free(philo, fork), 0);
 }

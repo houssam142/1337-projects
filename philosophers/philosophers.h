@@ -58,11 +58,13 @@ int					handle_arg(t_info *arg, char **av, int ac);
 int					convert_to_misec(int time);
 void				print_msg(char *msg, int time, int id);
 void				print(char c, t_philo *philo, int id);
-int					ft_putchar(char c);
-int					ft_putstr(const char *str);
-long				print_int(long int n);
-int					ft_printf(const char *w, ...);
+int					take_forks(t_philo *philo);
+void				one_philo(t_philo *philo);
+void				increment_full(t_philo *philo);
+void				put_forks(t_philo *philo);
+void				update_eating(t_philo *philo);
 void				*check_if_death(void *args);
-void				destroy_mutex_and_free(t_philo *philo, pthread_mutex_t *fork);
+void				destroy_mutex_and_free(t_philo *philo,
+						pthread_mutex_t *fork);
 
 #endif

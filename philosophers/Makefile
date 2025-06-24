@@ -18,7 +18,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g3
 
-UTILS = utils.c helpers.c ft_atoi.c
+UTILS = utils.c helpers.c utils2.c
 
 OBJ = $(SRC:.c=.o)
 

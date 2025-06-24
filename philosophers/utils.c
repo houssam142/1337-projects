@@ -12,6 +12,13 @@
 
 #include "philosophers.h"
 
+void	increment_full(t_philo *philo)
+{
+	pthread_mutex_lock(philo->mutex.p);
+	*(philo->full) += 1;
+	pthread_mutex_unlock(philo->mutex.p);
+}
+
 int	convert_to_misec(int time)
 {
 	time *= 1000;
@@ -29,6 +36,7 @@ int	handle_arg(t_info *arg, char **av, int ac)
 	arg->time_to_sleep = ft_atoi(av[4]);
 	arg->full = 0;
 	arg->died = 0;
+	arg->this_time = time_1();
 	if (av[5])
 		arg->num_of_times_to_eat = ft_atoi(av[5]);
 	return (0);
@@ -43,10 +51,7 @@ void	print(char c, t_philo *philo, int id)
 	else if (c == 'E')
 	{
 		print_msg("is eating", time_1() - philo->arguments->this_time, id);
-		philo->eat_count += 1;
 		printf(" (%d)\n", philo->eat_count);
-		if (philo->arguments->num_of_times_to_eat == philo->eat_count)
-			*(philo->full) += 1;
 	}
 	else if (c == 'S')
 		print_msg("is sleeping\n", time_1() - philo->arguments->this_time, id);
@@ -66,10 +71,7 @@ void	destroy_mutex_and_free(t_philo *philo, pthread_mutex_t *fork)
 
 	i = 0;
 	while (i < philo->arguments->num_of_philo)
-	{
-		pthread_mutex_destroy(&fork[i]);
-		i++;
-	}
+		pthread_mutex_destroy(&fork[i++]);
 	pthread_mutex_destroy(philo->mutex.p);
 	free(fork);
 	free(philo);

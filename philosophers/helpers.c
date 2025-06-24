@@ -12,6 +12,38 @@
 
 #include "philosophers.h"
 
+void	put_forks(t_philo *philo)
+{
+	pthread_mutex_unlock(&philo->mutex.fork[philo->id]);
+	pthread_mutex_unlock(&philo->mutex.fork[(philo->id + 1)
+		% philo->arguments->num_of_philo]);
+}
+
+void	one_philo(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->mutex.fork[philo->id]);
+	print('F', philo, philo->id);
+	usleep(philo->arguments->time_to_die);
+	pthread_mutex_unlock(&philo->mutex.fork[philo->id]);
+}
+
+int	take_forks(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->mutex.fork[philo->id]);
+	print('F', philo, philo->id);
+	pthread_mutex_lock(&philo->mutex.fork
+	[(philo->id + 1) % philo->arguments->num_of_philo]);
+	if (*(philo->arguments->death))
+	{
+		pthread_mutex_unlock(&philo->mutex.fork[philo->id]);
+		pthread_mutex_unlock(&philo->mutex.fork[(philo->id + 1)
+			% philo->arguments->num_of_philo]);
+		return (1);
+	}
+	print('F', philo, philo->id);
+	return (0);
+}
+
 int	time_1(void)
 {
 	struct timeval	time;

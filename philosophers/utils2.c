@@ -12,6 +12,15 @@
 
 #include "philosophers.h"
 
+void	update_eating(t_philo *philo)
+{
+	philo->must_die = time_1() + philo->arguments->time_to_die;
+	print('E', philo, philo->id);
+	usleep(convert_to_misec(philo->arguments->time_to_eat));
+	if (++philo->eat_count == philo->arguments->num_of_times_to_eat)
+		increment_full(philo);
+}
+
 int	ft_isspace(char c)
 {
 	return (c == '\t' || c == '\r' || c == '\f' || c == '\v' || c == 32
