@@ -62,6 +62,7 @@ int		parsing_line(char *line, t_token **toks, t_cmd_exec **env_lst);
 void		lst_clear(t_cmd_exec **lst, void (*del)(void *));
 void		p_expansion(t_token *toks, t_cmd_exec *env_lst);
 void		ft_lstadd_front(t_cmd_exec **lst, t_cmd_exec *new);
+char		*erase_spaces(char *str);
 void		ft_lstadd_back(t_cmd_exec **lst, t_cmd_exec *new);
 int		arg_count(t_token **toks, t_cmd *cmd);
 void		lst_del(t_cmd_exec *lst, void (*del)(void *));

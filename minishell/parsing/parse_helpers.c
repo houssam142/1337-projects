@@ -1,5 +1,10 @@
 #include "../minishell.h"
 
+void	check_condit()
+{
+	
+}
+
 static void	helper(t_token *toks, int *i, char c)
 {
 	toks->quote[*i] = '1';

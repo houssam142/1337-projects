@@ -1,5 +1,38 @@
 #include "minishell.h"
 
+char	*erase_spaces(char *str)
+{
+	int		i;
+	int		j;
+	int		space;
+	char	*res;
+
+	if (!str)
+		return (NULL);
+	res = malloc(ft_strlen(str) + 1);
+	i = 0;
+	j = 0;
+	if (!res)
+		return (NULL);
+	while (str[i])
+	{
+		if (str[i] == 32 || str[i] == '\t')
+		{
+			if (!space)
+				res[j++] = ' ';
+			space = 1;
+		}
+		else
+		{
+			res[j++] = str[i];
+			space = 0;
+		}
+		i++;
+	}
+	res[j] = '\0';
+	return (res);
+}
+
 static long	ft_new_atoi(const char *str, int *lvl)
 {
 	long		res;

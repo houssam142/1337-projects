@@ -1,12 +1,15 @@
 #include "minishell.h"
 
-static int	ft_replace(t_token *toks, int i, int j, t_cmd_exec *env_lst)
+static int	ft_replace(t_token *toks, int i, int j, t_cmd_exec *env_lst, int strip)
 {
 	char	*value;
 	char	*blank;
 	char	*str;
 
-	value = ft_strdup(env_lst->value);
+	if (strip)
+		value = erase_spaces(env_lst->value);
+	else
+		value = ft_strdup(env_lst->value);
 	toks->value[i] = '\0';
 	str = ft_strjoin(toks->value, value);
 	free(value);
@@ -53,8 +56,10 @@ static int	ft_is_found2(t_token *toks, int *i, int j, t_cmd_exec *tmp)
 static int	ft_is_found(t_token *toks, int *i, int j, int quote)
 {
 	t_cmd_exec	*tmp;
-	int		res;
+	int			res;
+	int			strip;
 
+	strip = !quote;
 	tmp = malloc(sizeof(t_cmd_exec) * 1);
 	if (!tmp)
 		return (-1);
@@ -67,7 +72,7 @@ static int	ft_is_found(t_token *toks, int *i, int j, int quote)
 		tmp->name[1] = '0';
 	tmp->name[1] = '\0';
 	ft_is_found2(toks, i, j, tmp);
-	res = ft_replace(toks, *i, j, tmp);
+	res = ft_replace(toks, *i, j, tmp, strip);
 	if (!((j - *i) == 1 && (tmp->name[0] == '1' || \
 			      (toks->value[j] == '\"' || toks->value[j] == '\''))))
 		*i = *i - 1;
@@ -99,7 +104,7 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	}
 	free(new_str);
 	if (env_lst != NULL)
-		return (ft_replace(t, *i, j, env_lst));
+		return (ft_replace(t, *i, j, env_lst, !w));
 	else
 		return (ft_is_found(t, i, j, w));
 }
@@ -119,7 +124,7 @@ void	p_expansion(t_token *toks, t_cmd_exec *env_lst)
 		}
 		else if (toks->value[i] == '\"')
 		{
-			while (toks->value[++i] != '\"')
+			while (toks->value[i] && toks->value[++i] != '\"')
 				if (toks->value[i] == '$')
 					search_and_replace(toks, &i, env_lst, 1);
 		}
