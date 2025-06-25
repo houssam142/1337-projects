@@ -31,12 +31,11 @@ static int	opers(t_token *toks)
 	{
 		if (toks->type == 'o')
 		{
-			if (ft_strncmp(toks->value, ">", 2) == 0 || \
-					ft_strncmp(toks->value, ">>", 3) == 0 || \
-					ft_strncmp(toks->value, "<", 2) == 0 || \
-					ft_strncmp(toks->value, "<<", 3) == 0)
+			if (ft_strncmp(toks->value, ">", 2) == 0 || ft_strncmp(toks->value,
+					">>", 3) == 0 || ft_strncmp(toks->value, "<", 2) == 0
+				|| ft_strncmp(toks->value, "<<", 3) == 0)
 				toks->type = 'r';
-			else if (ft_strncmp(toks->value, "|", 2) == 0)
+			else if (ft_strncmp(toks->value, "|", 2) == 0 && toks->next)
 				toks->type = 'c';
 			else
 			{
@@ -63,7 +62,7 @@ static void	clear_all(t_cmd **cmds, t_token **tokens)
 
 int	parsing_line(char *line, t_token **toks, t_cmd_exec **env_lst)
 {
-	int	count;
+	int		count;
 	char	chars[11];
 	t_cmd	*cmd;
 
@@ -74,7 +73,7 @@ int	parsing_line(char *line, t_token **toks, t_cmd_exec **env_lst)
 	if (count > 0)
 	{
 		toks_arr(line, chars, toks);
-		if (opers(*toks) == -1)	
+		if (opers(*toks) == -1)
 		{
 			lst_clear_tok(toks, &free);
 			return (-1);
@@ -85,4 +84,3 @@ int	parsing_line(char *line, t_token **toks, t_cmd_exec **env_lst)
 	}
 	return (1);
 }
-

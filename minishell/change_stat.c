@@ -9,6 +9,6 @@ void	change_stat(t_cmd_exec **env_lst, int stat)
 		tmp = tmp->next;
 	tmp->status = stat;
 	if (tmp->value)
-		free(tmp->value);	
+		free(tmp->value);
 	tmp->value = ft_itoa(tmp->status);
 }

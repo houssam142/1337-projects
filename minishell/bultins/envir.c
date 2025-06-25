@@ -2,7 +2,7 @@
 
 int	env(t_cmd_exec **env_lst)
 {
-	int	i;
+	int		i;
 	char	**env;
 
 	i = -1;

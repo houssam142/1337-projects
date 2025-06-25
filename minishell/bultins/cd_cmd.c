@@ -38,7 +38,7 @@ static int	find_home(t_cmd_exec **env_lst, char **path)
 int	cd(t_cmd *cmd, t_cmd_exec **env_lst)
 {
 	char	*path;
-	int	res;
+	int		res;
 
 	res = 0;
 	if (!cmd->args[1])

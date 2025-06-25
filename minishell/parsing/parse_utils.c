@@ -9,8 +9,8 @@ static void	final_parsing(t_token **toks, t_cmd_exec *env_lst)
 	tmp2 = tmp;
 	while (tmp && tmp->type != 'c')
 	{
-		if (tmp2 != tmp && tmp2->type == 'r' && \
-				ft_strncmp(tmp2->value, "<<", 3) == 0)
+		if (tmp2 != tmp && tmp2->type == 'r' && ft_strncmp(tmp2->value, "<<",
+				3) == 0)
 			tmp->type = 'h';
 		quote_count(tmp);
 		if (tmp->type != 'h')
@@ -82,7 +82,7 @@ static int	parse_pipe(t_token **toks, t_cmd *last)
 {
 	t_token	*tmp;
 	t_cmd	*new_cmd;
-	int	fd[2];
+	int		fd[2];
 
 	last->pipe = 1;
 	tmp = *toks;
@@ -100,7 +100,7 @@ static int	parse_pipe(t_token **toks, t_cmd *last)
 int	toks_to_struct(t_token **toks, t_cmd **cmd, t_cmd_exec **env_lst)
 {
 	t_cmd	*last;
-	int	id;
+	int		id;
 
 	id = 0;
 	cmd_init(cmd);

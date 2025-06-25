@@ -13,7 +13,7 @@ static t_cmd_exec	*env_content(char *before, char *after)
 	return (node);
 }
 
-static	int	exit_status(t_cmd_exec *node, t_cmd_exec **env_lst)
+static int	exit_status(t_cmd_exec *node, t_cmd_exec **env_lst)
 {
 	char	*blank;
 
@@ -31,7 +31,7 @@ static	int	exit_status(t_cmd_exec *node, t_cmd_exec **env_lst)
 
 int	env_to_lst(char **env, t_cmd_exec **env_lst)
 {
-	int		i;
+	int			i;
 	char		*line;
 	t_cmd_exec	*node;
 

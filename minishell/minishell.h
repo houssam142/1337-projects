@@ -19,6 +19,7 @@ typedef struct s_token
 	char		type;
 	char		*quote;
 	char		*value;
+	int			strip;
 	struct s_token	*next;
 } t_token;
 
@@ -29,7 +30,7 @@ typedef struct s_cmd_exec
 	char			*value;
 	int			status;
 	int			sigint_child;
-	t_token			*token;
+	t_token			*toks;
 	struct termios		origin_term;
 	struct	s_cmd_exec	*next;
 }	t_cmd_exec;
@@ -100,6 +101,7 @@ void		quote_del(t_token *toks);
 char		*ft_strjoin_sep(char *path, char *cmd, char c);
 void		arr_free(char **arr);
 void		dups(t_cmd *tmp);
+void		build_new_tok_val(t_token *toks, char *value, int i, int j);
 char		**env_lst_to_arr(t_cmd_exec *env_lst, char meaning, int quote);
 void		exec(t_cmd **cmd, t_cmd_exec **env_lst);
 

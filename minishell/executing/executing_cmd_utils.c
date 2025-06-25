@@ -33,7 +33,7 @@ static char	*find_path(t_cmd_exec *env_lst, char *cmd)
 {
 	char	**path;
 	char	*value;
-	int	i;
+	int		i;
 
 	i = -1;
 	path = find_and_split(env_lst);
@@ -55,7 +55,7 @@ static char	*find_path(t_cmd_exec *env_lst, char *cmd)
 static int	built(t_cmd *cmd)
 {
 	int	i;
-	
+
 	i = 0;
 	if (cmd->args != NULL)
 	{

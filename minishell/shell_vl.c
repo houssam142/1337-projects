@@ -1,5 +1,18 @@
 #include "minishell.h"
 
+void	build_new_tok_val(t_token *toks, char *value, int i, int j)
+{
+	char	*str;
+
+	toks->value[i] = '\0';
+	str = ft_strjoin(toks->value, value);
+	free(value);
+	value = ft_strjoin(str, toks->value + j);
+	free(str);
+	free(toks->value);
+	toks->value = value;
+}
+
 char	*erase_spaces(char *str)
 {
 	int		i;
@@ -7,14 +20,12 @@ char	*erase_spaces(char *str)
 	int		space;
 	char	*res;
 
-	if (!str)
-		return (NULL);
 	res = malloc(ft_strlen(str) + 1);
-	i = 0;
+	i = -1;
 	j = 0;
 	if (!res)
 		return (NULL);
-	while (str[i])
+	while (str[++i])
 	{
 		if (str[i] == 32 || str[i] == '\t')
 		{
@@ -27,23 +38,21 @@ char	*erase_spaces(char *str)
 			res[j++] = str[i];
 			space = 0;
 		}
-		i++;
 	}
-	res[j] = '\0';
-	return (res);
+	return (res[j] = '\0', res);
 }
 
 static long	ft_new_atoi(const char *str, int *lvl)
 {
-	long		res;
-	int		sign;
+	long			res;
+	int				sign;
 	unsigned int	i;
 
 	res = 0;
 	sign = 1;
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\v' || \
-			str[i] == '\n' || str[i] == '\r' || str[i] == '\f')
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\v' || str[i] == '\n'
+		|| str[i] == '\r' || str[i] == '\f')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
@@ -91,7 +100,7 @@ void	shell_vl(t_cmd_exec **env_lst)
 {
 	t_cmd_exec	*new_ele;
 	t_cmd_exec	*tmp;
-	int		lvl;
+	int			lvl;
 
 	tmp = *env_lst;
 	while (tmp)

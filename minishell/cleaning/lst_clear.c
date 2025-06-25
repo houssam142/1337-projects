@@ -15,7 +15,7 @@ void	lst_clear(t_cmd_exec **lst, void (*del)(void *))
 	}
 }
 
-void	lst_clear_tok(t_token **lst, void (del)(void *))
+void	lst_clear_tok(t_token **lst, void(del)(void *))
 {
 	t_token	*tmp;
 

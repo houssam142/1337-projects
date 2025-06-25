@@ -53,7 +53,7 @@ static t_cmd	*close_pipes(t_cmd **cmd, int id)
 
 static void	not_built(t_cmd_exec **env_lst, t_cmd *exec_cmd)
 {
-	int	i;
+	int		i;
 	char	**env;
 
 	env = env_lst_to_arr(*env_lst, 'e', 0);

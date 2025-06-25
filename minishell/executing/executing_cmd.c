@@ -58,7 +58,7 @@ static void	parent_proc(t_cmd **cmd, t_cmd_exec **env_lst)
 
 static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
 {
-	int	my_pid;
+	int		my_pid;
 	t_cmd	*tmp;
 	t_cmd	*tmp2;
 
@@ -84,8 +84,7 @@ static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
 void	exec(t_cmd **cmd, t_cmd_exec **env_lst)
 {
 	(*cmd)->path = find_cmd(*cmd, *env_lst);
-	if ((*cmd)->path && (*cmd)->builtin == 1 && \
-			(*cmd)->next == NULL)
+	if ((*cmd)->path && (*cmd)->builtin == 1 && (*cmd)->next == NULL)
 		exec_built(*cmd, env_lst, 0);
 	else
 		exec_in_process(cmd, env_lst);

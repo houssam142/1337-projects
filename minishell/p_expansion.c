@@ -10,13 +10,7 @@ static int	ft_replace(t_token *toks, int i, int j, t_cmd_exec *env_lst, int stri
 		value = erase_spaces(env_lst->value);
 	else
 		value = ft_strdup(env_lst->value);
-	toks->value[i] = '\0';
-	str = ft_strjoin(toks->value, value);
-	free(value);
-	value = ft_strjoin(str, toks->value + j);
-	free(str);
-	free(toks->value);
-	toks->value = value;
+	build_new_tok_val(toks, value, i, j);
 	blank = malloc(sizeof(char) * (ft_strlen(env_lst->value) + 1));
 	if (!blank)
 		return (-1);
@@ -57,9 +51,8 @@ static int	ft_is_found(t_token *toks, int *i, int j, int quote)
 {
 	t_cmd_exec	*tmp;
 	int			res;
-	int			strip;
 
-	strip = !quote;
+	toks->strip = (quote == 0);
 	tmp = malloc(sizeof(t_cmd_exec) * 1);
 	if (!tmp)
 		return (-1);
@@ -72,7 +65,7 @@ static int	ft_is_found(t_token *toks, int *i, int j, int quote)
 		tmp->name[1] = '0';
 	tmp->name[1] = '\0';
 	ft_is_found2(toks, i, j, tmp);
-	res = ft_replace(toks, *i, j, tmp, strip);
+	res = ft_replace(toks, *i, j, tmp, toks->strip);
 	if (!((j - *i) == 1 && (tmp->name[0] == '1' || \
 			      (toks->value[j] == '\"' || toks->value[j] == '\''))))
 		*i = *i - 1;

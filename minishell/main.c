@@ -46,7 +46,7 @@ int	main(int ac, char **av, char **env)
 	char		*cmd;
 	t_cmd_exec	*env_lst;
 	t_token		*tok;
-	int		status;
+	int			status;
 
 	if (start(ac, av, env, &env_lst) == 1)
 		return (0);
@@ -55,7 +55,7 @@ int	main(int ac, char **av, char **env)
 		cmd = readline("<minishell> ");
 		if (!cmd)
 		{
-			ft_putstr_fd("exit\n" ,1);
+			ft_putstr_fd("exit\n", 1);
 			exit(0);
 		}
 		if (*cmd)

@@ -4,7 +4,7 @@ static int	split_ifs(t_token *tmp, char *ifs, int *i)
 {
 	char	*new_str;
 	t_token	*new_ele;
-	int	j;
+	int		j;
 
 	j = *i;
 	tmp->value[*i] = '\0';
@@ -27,7 +27,7 @@ static int	split_ifs(t_token *tmp, char *ifs, int *i)
 static void	search_ifs(t_token **toks, char *ifs)
 {
 	t_token	*tmp;
-	int	i;
+	int		i;
 
 	tmp = *toks;
 	while (tmp && tmp->type != 'c')
@@ -43,8 +43,8 @@ static void	search_ifs(t_token **toks, char *ifs)
 				else if (tmp->value[i] == '\"' && tmp->quote[i] == '1')
 					while (!(tmp->value[++i] == '\"' && tmp->quote[i] == '1'))
 						;
-				else if (ft_strchr(ifs, tmp->value[i]) && \
-						tmp->quote[i] == '2' && split_ifs(tmp, ifs, &i))
+				else if (ft_strchr(ifs, tmp->value[i]) && tmp->quote[i] == '2'
+					&& split_ifs(tmp, ifs, &i))
 					break ;
 			}
 		}

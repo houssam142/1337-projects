@@ -23,18 +23,17 @@ static int	exit_stat_corr(long res)
 static int	parsing_code(t_cmd *cmd, int *k)
 {
 	long	res;
-	int	i;
+	int		i;
 
 	i = -1;
 	while (cmd->args[1][++i])
-			if (!(ft_isdigit(cmd->args[1][i]) == 1 || \
-					(!i && cmd->args[1][i] == '-') || \
-					 (!i && cmd->args[1][i] == '+')))
+		if (!(ft_isdigit(cmd->args[1][i]) == 1 || (!i && cmd->args[1][i] == '-')
+				|| (!i && cmd->args[1][i] == '+')))
 			break ;
 	if (cmd->args[1][i] == '\0')
 	{
 		res = ft_atoi(cmd->args[1], k);
-		res= exit_stat_corr(res);
+		res = exit_stat_corr(res);
 	}
 	else
 	{

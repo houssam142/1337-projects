@@ -2,7 +2,7 @@
 
 static int	print_env(t_cmd_exec **env_lst)
 {
-	int	i;
+	int		i;
 	char	**envp;
 
 	i = -1;
@@ -27,7 +27,7 @@ static int	print_env(t_cmd_exec **env_lst)
 	}
 }
 
-static t_cmd_exec	*env_var_update(t_cmd_exec **env_lst, char *before_eql, \
+static t_cmd_exec	*env_var_update(t_cmd_exec **env_lst, char *before_eql,
 		char *after_eql, char meaning)
 {
 	t_cmd_exec	*tmp;
@@ -47,8 +47,8 @@ static t_cmd_exec	*env_var_update(t_cmd_exec **env_lst, char *before_eql, \
 	return (tmp);
 }
 
-static void	export_new(t_cmd_exec **env_lst, char *before_eql, \
-		char *after_eql, char meaning)
+static void	export_new(t_cmd_exec **env_lst, char *before_eql, char *after_eql,
+		char meaning)
 {
 	char		*name;
 	char		*value;

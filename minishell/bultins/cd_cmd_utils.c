@@ -54,9 +54,10 @@ static int	cd_parent(char *path, t_cmd_exec **env_lst, char *oldpwd)
 		return (0);
 	}
 	if (exit_stat)
-		ft_putstr_fd("cd: error retrieving current directory: getcwd: " \
-				"cannot access parent directories: No such file or " \
-				"directory\n", 2);
+		ft_putstr_fd("cd: error retrieving current directory: getcwd: "
+						"cannot access parent directories: No such file or "
+						"directory\n",
+						2);
 	else
 		perror(path);
 	free(path);
@@ -69,7 +70,7 @@ static int	cd_parent(char *path, t_cmd_exec **env_lst, char *oldpwd)
 int	change_dir(char *path, t_cmd_exec **env_lst)
 {
 	char	*old_pwd;
-	int	pid;
+	int		pid;
 
 	old_pwd = getold(env_lst);
 	pid = fork();

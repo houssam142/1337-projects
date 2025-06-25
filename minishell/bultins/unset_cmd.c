@@ -8,8 +8,8 @@ static void	find_and_del(t_cmd *cmd, t_cmd_exec **env_lst, int i)
 	tmp1 = *env_lst;
 	while (tmp1)
 	{
-		if (tmp1->next && !ft_strncmp(cmd->args[i], tmp1->next->name, \
-					ft_strlen(cmd->args[i]) + 1))
+		if (tmp1->next && !ft_strncmp(cmd->args[i], tmp1->next->name,
+				ft_strlen(cmd->args[i]) + 1))
 		{
 			tmp2 = tmp1->next;
 			if (tmp1->next->next)
@@ -39,7 +39,7 @@ static void	pwd_fake(t_cmd_exec *env_lst)
 static void	unset_vars(t_cmd *cmd, t_cmd_exec **env_lst, int *res)
 {
 	t_cmd_exec	*tmp;
-	int		i;
+	int			i;
 
 	i = 0;
 	while (cmd->args[++i])
@@ -48,8 +48,8 @@ static void	unset_vars(t_cmd *cmd, t_cmd_exec **env_lst, int *res)
 		{
 			if (!ft_strncmp(cmd->args[i], "PWD", 4))
 				pwd_fake(*env_lst);
-			else if (!ft_strncmp(cmd->args[i], (*env_lst)->name, \
-						ft_strlen(cmd->args[i]) + 1))
+			else if (!ft_strncmp(cmd->args[i], (*env_lst)->name,
+					ft_strlen(cmd->args[i]) + 1))
 			{
 				tmp = *env_lst;
 				*env_lst = (*env_lst)->next;

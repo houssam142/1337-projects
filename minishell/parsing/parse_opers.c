@@ -16,7 +16,7 @@ static int	parsing_in(t_cmd *cmd, t_cmd_exec **env_lst)
 	else if (!ft_strncmp(cmd->op, "<<", 3))
 		return (heredoc(cmd, env_lst));
 	return (0);
-}	
+}
 
 static void	parsing_out(t_cmd *cmd)
 {
@@ -28,8 +28,8 @@ static void	parsing_out(t_cmd *cmd)
 	cmd->std_out = fd;
 }
 
-static int	parsing_redirs(t_token **toks, t_cmd *cmd, \
-		t_token **tmp, t_cmd_exec **env_lst)
+static int	parsing_redirs(t_token **toks, t_cmd *cmd, t_token **tmp,
+		t_cmd_exec **env_lst)
 {
 	int	fd;
 
@@ -57,7 +57,7 @@ static int	parsing_redirs(t_token **toks, t_cmd *cmd, \
 int	parsing_opers(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 {
 	t_token	*tmp;
-	int	stat;
+	int		stat;
 
 	stat = 0;
 	while ((*toks) != NULL && (*toks)->type != 'c' && stat >= 0)
@@ -68,13 +68,14 @@ int	parsing_opers(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 		tmp = *toks;
 		*toks = (*toks)->next;
 		lst_del_tok(tmp, &free);
-		if (*toks && ((*toks)->type == 'v' || \
-					(*toks)->type == 'h' || (*toks)->type == 'H'))
+		if (*toks && ((*toks)->type == 'v' || (*toks)->type == 'h'
+				|| (*toks)->type == 'H'))
 			stat = parsing_redirs(toks, cmd, &tmp, env_lst);
 		else
 		{
-			ft_putstr_fd("Minishell Syntax error: Undefined value after " \
-					"operator\n", 2);
+			ft_putstr_fd("Minishell Syntax error: Undefined value after "
+							"operator\n",
+							2);
 			return (-2);
 		}
 	}

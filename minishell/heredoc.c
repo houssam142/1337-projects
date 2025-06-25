@@ -32,8 +32,7 @@ static void	go_heredoc(t_cmd *cmd, t_cmd_exec *env_lst, int fd_doc)
 		line = readline("heredoc> ");
 		if (!line)
 			break ;
-		if (!ft_strncmp(line, cmd->op_value, \
-					ft_strlen(cmd->op_value) + 1))
+		if (!ft_strncmp(line, cmd->op_value, ft_strlen(cmd->op_value) + 1))
 			break ;
 		if (cmd->delimiter == 'h')
 			line = line_expansion(line, env_lst);

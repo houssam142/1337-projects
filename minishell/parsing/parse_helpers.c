@@ -1,8 +1,7 @@
 #include "../minishell.h"
 
-void	check_condit()
+void	check_condit(void)
 {
-	
 }
 
 static void	helper(t_token *toks, int *i, char c)

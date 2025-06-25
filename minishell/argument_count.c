@@ -18,7 +18,7 @@ static void	arg_delete_next(t_token **toks, t_token **tmp1, t_token **tmp2)
 
 static void	arg_to_arr(t_token **toks, t_cmd *cmd)
 {
-	int	i;
+	int		i;
 	t_token	*tmp1;
 	t_token	*tmp2;
 
@@ -42,7 +42,7 @@ static void	arg_to_arr(t_token **toks, t_cmd *cmd)
 
 int	arg_count(t_token **toks, t_cmd *cmd)
 {
-	int	count;
+	int		count;
 	t_token	*tmp;
 
 	tmp = *toks;

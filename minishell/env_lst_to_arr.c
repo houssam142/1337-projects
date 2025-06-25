@@ -7,9 +7,9 @@ static int	ft_size(t_cmd_exec *lst, char meaning)
 	count = 0;
 	while (lst)
 	{
-		if ((meaning == 'x' && (lst->meaning == 'e' || lst->meaning == 'x' || \
-						lst->meaning == 'q')) || \
-				(meaning == 'e' && lst->meaning == 'e'))
+		if ((meaning == 'x' && (lst->meaning == 'e' || lst->meaning == 'x'
+					|| lst->meaning == 'q')) || (meaning == 'e'
+				&& lst->meaning == 'e'))
 			count++;
 		lst = lst->next;
 	}
@@ -39,8 +39,8 @@ static void	find_and_join(t_cmd_exec *env_lst, int quote, char **arr, int *i)
 
 	if (quote == 1)
 	{
-		if (ft_strncmp(env_lst->value, "", ft_strlen(env_lst->value)) || \
-				env_lst->meaning == 'q')
+		if (ft_strncmp(env_lst->value, "", ft_strlen(env_lst->value))
+			|| env_lst->meaning == 'q')
 		{
 			tmp = ft_strjoin(env_lst->name, "=\"");
 			arr[*i] = ft_strjoin(tmp, env_lst->value);
@@ -62,8 +62,8 @@ static void	find_and_join(t_cmd_exec *env_lst, int quote, char **arr, int *i)
 
 char	**env_lst_to_arr(t_cmd_exec *env_lst, char meaning, int quote)
 {
-	int	size;
-	int	i;
+	int		size;
+	int		i;
 	char	**arr;
 
 	i = 0;
@@ -74,9 +74,9 @@ char	**env_lst_to_arr(t_cmd_exec *env_lst, char meaning, int quote)
 	arr[size] = '\0';
 	while (env_lst)
 	{
-		if ((meaning == 'x' && (env_lst->meaning == 'e' || \
-						env_lst->meaning == 'x' || env_lst->meaning == 'q')) || \
-				(meaning == 'e' && env_lst->meaning == 'e'))
+		if ((meaning == 'x' && (env_lst->meaning == 'e'
+					|| env_lst->meaning == 'x' || env_lst->meaning == 'q'))
+			|| (meaning == 'e' && env_lst->meaning == 'e'))
 			find_and_join(env_lst, quote, arr, &i);
 		env_lst = env_lst->next;
 	}

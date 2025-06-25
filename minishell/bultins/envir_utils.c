@@ -19,12 +19,12 @@ int	check_var_name(char *str, int *res, t_cmd_exec **env_lst)
 	i = -1;
 	while (str[++i])
 	{
-		if (!i && ((str[0] == '_') || (str[0] >= 'a' && str[0] <= 'z') || \
-					(str[0] >= 'A' && str[0] <= 'Z')))
+		if (!i && ((str[0] == '_') || (str[0] >= 'a' && str[0] <= 'z')
+				|| (str[0] >= 'A' && str[0] <= 'Z')))
 			continue ;
-		else if (i && ((str[i] >= 48 && str[i] <= 57) || \
-					(str[i] >= 'a' && str[i] <= 'z') || \
-					(str[i] >= 'A' && str[i] <= 'Z') || (str[i] == '_')))
+		else if (i && ((str[i] >= 48 && str[i] <= 57) || (str[i] >= 'a'
+					&& str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z')
+				|| (str[i] == '_')))
 			continue ;
 		else
 		{

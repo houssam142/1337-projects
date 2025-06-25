@@ -39,5 +39,4 @@ int	pwd(t_cmd_exec **env_lst)
 		change_stat(env_lst, 0);
 		return (0);
 	}
-
 }
