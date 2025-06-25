@@ -71,7 +71,7 @@ char	**env_lst_to_arr(t_cmd_exec *env_lst, char meaning, int quote)
 	arr = malloc(sizeof(char *) * (size + 1));
 	if (!arr)
 		return (NULL);
-	arr[size] = '\0';
+	arr[size] = NULL;
 	while (env_lst)
 	{
 		if ((meaning == 'x' && (env_lst->meaning == 'e'
