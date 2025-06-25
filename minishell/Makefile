@@ -6,7 +6,7 @@
 #    By: houssam <houssam@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/21 14:41:13 by nafarid           #+#    #+#              #
-#    Updated: 2025/06/25 13:01:31 by houssam          ###   ########.fr        #
+#    Updated: 2025/06/25 14:52:46 by houssam          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC = main.c bultins/echo_cmd.c \
 		cleaning/lst_del.c parsing/parse_helpers.c parsing/parse_opers.c cleaning/quote_del.c change_stat.c p_expansion.c \
 		argument_count.c word_split.c lstadd_front.c lstadd_back.c heredoc.c cleaning/lst_clear.c signals.c lst_new_ele.c arr_free.c tokens/toks_trim.c \
 		executing/run_child.c executing/dups.c executing/executing_utils.c executing/signal_exec.c bultins/unset_cmd.c bultins/exit_cmd.c \
-		tokens/lstadd_back_token.c env_lst_to_arr.c tokens/lst_last_token.c shell_vl.c ft_lstlast.c utils.c
+		tokens/lstadd_back_token.c env_lst_to_arr.c tokens/lst_last_token.c shell_vl.c ft_lstlast.c utils.c handle_dollar_cmd.c
 		
 OBJS = $(SRC:.c=.o)
 CC = cc

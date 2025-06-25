@@ -96,6 +96,7 @@ char		*find_cmd(t_cmd *cmd, t_cmd_exec *env_lst);
 void		exec_built(t_cmd *cmd, t_cmd_exec **env_lst, int child_par);
 void		ft_signals(void);
 void		quote_count(t_token *toks);
+int 		handle_split(t_token *toks, int i, int j, char *value);
 int		parsing_opers(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst);
 void		quote_del(t_token *toks);
 int		handle_double_dollar(t_token *t, int *i);
