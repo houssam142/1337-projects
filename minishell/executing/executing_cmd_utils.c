@@ -78,15 +78,6 @@ static int	built(t_cmd *cmd)
 	return (i);
 }
 
-static void	ft_str_tolower(char *str)
-{
-	int	i;
-
-	i = -1;
-	while (str[++i])
-		str[i] = ft_tolower(str[i]);
-}
-
 char	*find_cmd(t_cmd *cmd, t_cmd_exec *env_lst)
 {
 	char	*path;
@@ -94,7 +85,6 @@ char	*find_cmd(t_cmd *cmd, t_cmd_exec *env_lst)
 	path = NULL;
 	if (!cmd->args || !cmd->args[0])
 		return (0);
-	ft_str_tolower(cmd->args[0]);
 	if ((built(cmd) == 1) || (ft_strchr(cmd->args[0], '/') != 0))
 		path = ft_strdup(cmd->args[0]);
 	else
