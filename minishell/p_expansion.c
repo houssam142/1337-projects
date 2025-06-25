@@ -76,13 +76,15 @@ static int	ft_is_found(t_token *toks, int *i, int j, int quote)
 static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 {
 	char	*new_str;
-	int	j;
+	int		j;
 
+	if (t->value[*i + 1] == '$')
+		return (handle_double_dollar(t, i));
 	j = *i + 1;
 	while (t->value[j] != ' ' && t->value[j] && t->value[j] != '\t' && \
-			t->value[j] != '\"' && t->value[j] != '\'' && t->value[j] != '/' \
-			&& t->value[j] != '$' && t->value[j] != '=' && t->value[j] != ':')
-		j++;
+		t->value[j] != '\"' && t->value[j] != '\'' && t->value[j] != '/' \
+		&& t->value[j] != '$' && t->value[j] != '=' && t->value[j] != ':')
+			j++;
 	new_str = ft_substr(t->value, *i + 1, j - *i - 1);
 	while (env_lst)
 	{
@@ -91,10 +93,7 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 		env_lst = env_lst->next;
 	}
 	if (!new_str[0])
-	{
-		free(new_str);
-		return (0);
-	}
+		return (free(new_str), 0);
 	free(new_str);
 	if (env_lst != NULL)
 		return (ft_replace(t, *i, j, env_lst, !w));

@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:08:36 by aoussama          #+#    #+#             */
-/*   Updated: 2025/05/22 22:55:56 by nafarid          ###   ########.fr       */
+/*   Updated: 2025/06/25 14:02:40 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	add_env_var(t_cmd_exec **lst, const char *name, const char *value)
+{
+	t_cmd_exec	*node;
+
+	node = malloc(sizeof(t_cmd_exec));
+	if (!node)
+		return ;
+	node->name = ft_strdup(name);
+	node->value = ft_strdup(value);
+	node->next = *lst;
+	*lst = node;
+}
 
 static int	check_stat(t_cmd_exec *env_lst, int *status)
 {
@@ -37,6 +50,7 @@ static int	start(int ac, char **av, char **env, t_cmd_exec **env_lst)
 	}
 	ft_signals();
 	env_to_lst(env, env_lst);
+	add_env_var(env_lst, "0", "minishell");
 	shell_vl(env_lst);
 	return (0);
 }
