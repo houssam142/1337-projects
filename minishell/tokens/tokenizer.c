@@ -14,7 +14,7 @@ static void	single_quotes(char *line, int *i, int *count, char *chars)
 		}
 		(*i)++;
 		if (line[*i] == '\0' || ft_strchr(chars, line[*i]) != 0)
-			(count)++;
+			(*count)++;
 	}
 }
 
