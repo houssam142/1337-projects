@@ -81,7 +81,7 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	j = *i + 1;
 	while (t->value[j] != ' ' && t->value[j] && t->value[j] != '\t' && \
 			t->value[j] != '\"' && t->value[j] != '\'' && t->value[j] != '/' \
-			&& t->value[j] != '$' && t->value[j] != '=')
+			&& t->value[j] != '$' && t->value[j] != '=' && t->value[j] != ':')
 		j++;
 	new_str = ft_substr(t->value, *i + 1, j - *i - 1);
 	while (env_lst)
