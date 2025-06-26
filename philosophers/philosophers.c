@@ -70,7 +70,7 @@ void	*exec(void *args)
 		if (*(philo->arguments->death))
 			break ;
 	}
-	return (pthread_join(philo->alive, NULL), NULL);
+	return (NULL);
 }
 
 void	init_param(t_info *info, t_philo *philo, pthread_mutex_t *p,
@@ -93,6 +93,7 @@ void	init_param(t_info *info, t_philo *philo, pthread_mutex_t *p,
 		usleep(100);
 		i++;
 	}
+	pthread_join(philo->alive, NULL);
 }
 
 int	main(int ac, char **av)
