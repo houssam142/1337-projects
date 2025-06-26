@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd_cmd_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/26 21:39:27 by houssam           #+#    #+#             */
+/*   Updated: 2025/06/26 21:50:16 by houssam          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 static char	*getold(t_cmd_exec **env_lst)
@@ -55,9 +67,9 @@ static int	cd_parent(char *path, t_cmd_exec **env_lst, char *oldpwd)
 	}
 	if (exit_stat)
 		ft_putstr_fd("cd: error retrieving current directory: getcwd: "
-						"cannot access parent directories: No such file or "
-						"directory\n",
-						2);
+			"cannot access parent directories: No such file or "
+			"directory\n",
+			2);
 	else
 		perror(path);
 	free(path);

@@ -6,53 +6,64 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:43:41 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/25 14:56:42 by houssam          ###   ########.fr       */
+/*   Updated: 2025/06/26 22:33:10 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	add_split_toks(t_token *curr, char **parts)
+char	*ft_strdup_blank(char *s)
 {
-	int		i;
-	t_token	*new;
+	int		len;
+	char	*blank;
 
-	i = 1;
-	while (parts[i])
-	{
-		new = lst_new_ele_tok(0, ft_strdup(parts[i]));
-		if (!new)
-			return (-1);
-		new->next = curr->next;
-		curr->next = new;
-		curr = new;
-		i++;
-	}
-	return (0);
+	len = ft_strlen(s);
+	blank = malloc(len + 1);
+	if (!blank)
+		return (NULL);
+	ft_memset(blank, '2', len);
+	blank[len] = '\0';
+	return (blank);
 }
 
-int handle_split(t_token *toks, int i, int j, char *value)
+static t_token	*new_ele(char **parts, t_token *last, int i)
 {
-    char    **parts;
-    t_token *curr;
-    char	*tmp;
-	char	*new_val;
+	t_token	*curr;
+
+	curr = malloc(sizeof(t_token));
+	if (!curr)
+		return (NULL);
+	curr->value = ft_strdup(parts[i]);
+	curr->quote = ft_strdup_blank(parts[i]);
+	curr->next = last->next;
+	return (curr);
+}
+
+int	handle_split(t_token *toks, char *value)
+{
+	char	**parts;
+	t_token	*new;
+	t_token	*last;
+	int		i;
 
 	parts = ft_split(value, ' ');
 	if (!parts)
 		return (-1);
 	free(toks->value);
-	tmp = ft_substr(toks->value, 0, i);
-	toks->value = ft_strjoin(tmp, parts[0]);
-	free(tmp);
-	tmp = ft_strdup(toks->value + j);
-	new_val = ft_strjoin(toks->value, tmp);
-	free(tmp);
-	free(toks->value);
-	toks->value = new_val;
-	arr_free(parts);
-	curr = toks;
-	if (add_split_toks(curr, parts) == -1)
-		return (-1);
-	return (0);
+	free(toks->quote);
+	toks->value = ft_strdup(parts[0]);
+	toks->quote = ft_strdup_blank(parts[0]);
+	if (!toks->value || !toks->quote)
+		return (arr_free(parts), -1);
+	last = toks;
+	i = 0;
+	while (parts[++i])
+	{
+		new = new_ele(parts, last, i);
+		if (!new)
+			return (arr_free(parts), -1);
+		last->next = new;
+		last = new;
+	}
+	return (arr_free(parts), 0);
 }

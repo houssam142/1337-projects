@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   toks_trim.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/26 21:56:06 by houssam           #+#    #+#             */
+/*   Updated: 2025/06/26 21:56:08 by houssam          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 static t_token	*split_into_new_ele(char *str, t_token *tmp)
@@ -13,7 +25,7 @@ static void	toks_split(t_token **toks)
 {
 	t_token	*tmp;
 	char	**arr;
-	int	i;
+	int		i;
 
 	tmp = *toks;
 	i = -1;
@@ -58,15 +70,15 @@ void	toks_trim(t_token **toks)
 	toks_split(toks);
 	while (tmp1 != NULL)
 	{
-		if (((ft_strlen(tmp1->value) == 0) || tmp1->type == 'd') && \
-				tmp1 == *toks)
+		if (((ft_strlen(tmp1->value) == 0) || tmp1->type == 'd')
+			&& tmp1 == *toks)
 		{
 			*toks = tmp1->next;
 			lst_del_tok(tmp1, &free);
 			tmp1 = *toks;
 		}
-		else if ((tmp1->next) && ((ft_strlen(tmp1->next->value) == 0) || \
-					tmp1->next->type == 'd'))
+		else if ((tmp1->next) && ((ft_strlen(tmp1->next->value) == 0)
+				|| tmp1->next->type == 'd'))
 		{
 			tmp2 = tmp1->next;
 			tmp1->next = tmp1->next->next;

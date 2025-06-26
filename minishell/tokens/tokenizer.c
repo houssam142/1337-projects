@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/26 21:55:48 by houssam           #+#    #+#             */
+/*   Updated: 2025/06/26 21:55:49 by houssam          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 static void	single_quotes(char *line, int *i, int *count, char *chars)
@@ -46,8 +58,8 @@ static void	words_and_opers(char *line, int *i, int *count, char *chars)
 	}
 	else if (line[*i] != '\'' && line[*i] != '\"' && line[*i] != '\0')
 	{
-		while (ft_strchr(chars, line[*i]) == 0 && \
-				line[*i] && line[*i] != '\'' && line[*i] != '\"')
+		while (ft_strchr(chars, line[*i]) == 0 && line[*i] && line[*i] != '\''
+			&& line[*i] != '\"')
 			(*i)++;
 		if ((line[*i] != '\'' && line[*i] != '\"') || line[*i] == '\0')
 			(*count)++;

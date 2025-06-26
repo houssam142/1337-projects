@@ -51,7 +51,6 @@ static int	check_overf(const char *str, int i, int *k)
 	return (0);
 }
 
-
 long	ft_atoi(const char *str, int *k)
 {
 	int		i;

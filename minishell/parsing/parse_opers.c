@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_opers.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/26 21:59:52 by houssam           #+#    #+#             */
+/*   Updated: 2025/06/26 22:00:51 by houssam          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 static int	parsing_in(t_cmd *cmd, t_cmd_exec **env_lst)
@@ -74,8 +86,8 @@ int	parsing_opers(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 		else
 		{
 			ft_putstr_fd("Minishell Syntax error: Undefined value after "
-							"operator\n",
-							2);
+				"operator\n",
+				2);
 			return (-2);
 		}
 	}

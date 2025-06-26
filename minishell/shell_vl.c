@@ -1,14 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shell_vl.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/26 20:34:37 by houssam           #+#    #+#             */
+/*   Updated: 2025/06/26 20:34:39 by houssam          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	build_new_tok_val(t_token *toks, char *value, int i, int j)
 {
-	char	*str;
+	char	*prefix;
+	char	*suffix;
+	char	*new_val;
 
-	toks->value[i] = '\0';
-	str = ft_strjoin(toks->value, value);
+	prefix = ft_substr(toks->value, 0, i);
+	suffix = ft_strdup(toks->value + j);
+	new_val = ft_strjoin(prefix, value);
+	free(prefix);
 	free(value);
-	value = ft_strjoin(str, toks->value + j);
-	free(str);
+	value = ft_strjoin(new_val, suffix);
+	free(new_val);
+	free(suffix);
 	free(toks->value);
 	toks->value = value;
 }

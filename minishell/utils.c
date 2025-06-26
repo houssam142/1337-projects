@@ -6,16 +6,75 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:59:12 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/25 13:37:52 by houssam          ###   ########.fr       */
+/*   Updated: 2025/06/26 22:43:29 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int update_quote_double_dollar(t_token *t, int *i)
+t_token	*new_ele_tok_node(char **words, int i)
 {
-	char    *qtmp;
-	size_t  len;
+	t_token	*curr;
+
+	curr = malloc(sizeof(t_token));
+	if (!curr)
+		return (NULL);
+	curr->type = 'w';
+	curr->value = ft_strdup(words[i]);
+	curr->quote = ft_strdup("0");
+	curr->next = NULL;
+	if (!curr->value || !curr->quote)
+		return (NULL);
+	return (curr);
+}
+
+static int	ft_split_token_into_nodes_2(t_token *curr, char **words,
+		t_token *next)
+{
+	int		i;
+	t_token	*new;
+
+	i = 0;
+	while (words[++i])
+	{
+		new = new_ele_tok_node(words, i);
+		if (!new)
+			return (-1);
+		curr->next = new;
+		curr = new;
+	}
+	curr->next = next;
+	return (0);
+}
+
+int	split_token_into_nodes(t_token *tok)
+{
+	char	**words;
+	t_token	*curr;
+	t_token	*next;
+
+	if (!tok || !tok->value)
+		return (-1);
+	curr = tok;
+	next = tok->next;
+	words = ft_split(tok->value, ' ');
+	if (!words || !words[0])
+		return (-1);
+	free(curr->value);
+	curr->value = ft_strdup(words[0]);
+	free(curr->quote);
+	curr->quote = ft_strdup("0");
+	if (!curr->value || !curr->quote)
+		return (-1);
+	if (ft_split_token_into_nodes_2(curr, words, next) == -1)
+		return (-1);
+	return (arr_free(words), 0);
+}
+
+static int	update_quote_double_dollar(t_token *t, int *i)
+{
+	char	*qtmp;
+	size_t	len;
 
 	len = ft_strlen(t->quote);
 	qtmp = malloc(len + 2);
@@ -43,7 +102,7 @@ int	handle_double_dollar(t_token *t, int *i)
 	t->value[*i] = '\0';
 	tmp = ft_strjoin(t->value, pid);
 	if (!tmp)
-	return (free(pid), -1);
+		return (free(pid), -1);
 	rest = ft_strdup(t->value + *i + 2);
 	if (!rest)
 		return (free(tmp), free(pid), -1);
