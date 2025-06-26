@@ -49,10 +49,7 @@ void	print(char c, t_philo *philo, int id)
 		print_msg("has taken a fork\n", time_1() - philo->arguments->this_time,
 			id);
 	else if (c == 'E')
-	{
-		print_msg("is eating", time_1() - philo->arguments->this_time, id);
-		printf(" (%d)\n", philo->eat_count);
-	}
+		print_msg("is eating\n", time_1() - philo->arguments->this_time, id);
 	else if (c == 'S')
 		print_msg("is sleeping\n", time_1() - philo->arguments->this_time, id);
 	else if (c == 'T')
