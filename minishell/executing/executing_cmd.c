@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/05/11 13:21:07 by nafarid          ###   ########.fr       */
+/*   Updated: 2025/06/30 01:03:49 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
 	{
 		if (tmp->id == 0 || tmp2->pipe == 1)
 			my_pid = fork();
+		if (my_pid == -1)
+			return ;
 		if (!my_pid)
 			child_proc(cmd, env_lst, tmp->id);
 		else if (tmp)

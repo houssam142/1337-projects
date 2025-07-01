@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/26 22:19:41 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/01 15:01:49 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct s_cmd_exec
 	char				*value;
 	int					status;
 	int					sigint_child;
-	t_token				*toks;
 	struct termios		origin_term;
 	struct s_cmd_exec	*next;
 }						t_cmd_exec;
@@ -111,6 +110,7 @@ char					*find_cmd(t_cmd *cmd, t_cmd_exec *env_lst);
 void					exec_built(t_cmd *cmd, t_cmd_exec **env_lst,
 							int child_par);
 void					ft_signals(void);
+void					remove_empty_tokens(t_token **toks);
 int						should_strip(t_token *tok, int i);
 void					quote_count(t_token *toks);
 int						handle_split(t_token *toks, char *value);

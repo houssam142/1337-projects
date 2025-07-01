@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/27 18:43:51 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/01 14:49:12 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,16 @@ static int	ft_replace(t_token *toks, int i, int j, t_cmd_exec *env_lst)
 	build_new_tok_val(toks, value, i, j);
 	if (toks->strip)
 	{
-		if (split_token_into_nodes(toks) == -1)
-			return (-1);
+		if (toks->strip && !toks->value && toks->value[0] == '\0')
+			return (0);
+		if (ft_strchr(toks->value, ' '))
+		{
+			if (split_token_into_nodes(toks) == -1)
+				return (-1);
+		}
 		return (0);
 	}
-	if (copy_quotes(toks, env_lst, i, j) == -1)
+	else if (copy_quotes(toks, env_lst, i, j) == -1)
 		return (-1);
 	return (0);
 }

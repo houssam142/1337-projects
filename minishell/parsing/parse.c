@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:26 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/26 22:01:27 by houssam          ###   ########.fr       */
+/*   Updated: 2025/06/30 11:43:20 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ static int	opers(t_token *toks)
 
 static void	clear_all(t_cmd **cmds, t_token **tokens)
 {
+	t_cmd	*tmp;
+
 	lst_clear_tok(tokens, &free);
 	while (*cmds != NULL)
 	{
+		tmp = (*cmds)->next;
 		cmd_free(cmds);
-		*cmds = (*cmds)->next;
+		*cmds = tmp;
 	}
 }
 

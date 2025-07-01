@@ -6,11 +6,18 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:08:36 by aoussama          #+#    #+#             */
-/*   Updated: 2025/06/25 14:02:40 by houssam          ###   ########.fr       */
+/*   Updated: 2025/06/30 17:21:56 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	cleanup_readline(void)
+{
+	rl_clear_history();
+	rl_free_line_state();
+	rl_deprep_terminal();
+}
 
 static void	add_env_var(t_cmd_exec **lst, const char *name, const char *value)
 {
@@ -21,6 +28,8 @@ static void	add_env_var(t_cmd_exec **lst, const char *name, const char *value)
 		return ;
 	node->name = ft_strdup(name);
 	node->value = ft_strdup(value);
+	node->status = 0;
+	node->meaning = 0;
 	node->next = *lst;
 	*lst = node;
 }
@@ -70,7 +79,7 @@ int	main(int ac, char **av, char **env)
 		if (!cmd)
 		{
 			ft_putstr_fd("exit\n", 1);
-			exit(0);
+			exit((lst_clear(&env_lst, free), cleanup_readline(), 0));
 		}
 		if (*cmd)
 			add_history(cmd);
@@ -80,5 +89,6 @@ int	main(int ac, char **av, char **env)
 			break ;
 	}
 	lst_clear(&env_lst, free);
+	cleanup_readline();
 	return (status);
 }

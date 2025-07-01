@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:55:55 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/26 21:55:57 by houssam          ###   ########.fr       */
+/*   Updated: 2025/06/30 18:36:17 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,27 @@ static void	word_alloc(t_token **toks, int *j, size_t *word_len, char *line)
 
 	if (line && *word_len != 0)
 	{
-		str = malloc(sizeof(char) * (*word_len + 1));
-		ft_strlcpy(str, line, *word_len + 1);
+		if (*word_len == 0)
+			return;
+
+		str = malloc(*word_len + 1);
+		if (!str)
+			return ;
+
+		for (size_t k = 0; k < *word_len; k++)
+			str[k] = line[k];
+		str[*word_len] = '\0';
+
 		if (ft_strchr("<>|&;() \t\n", str[0]))
 			tok_ele = lst_new_ele_tok('o', str);
 		else
 			tok_ele = lst_new_ele_tok('w', str);
 		lstadd_back_tok(toks, tok_ele);
 		(*j)++;
-		line = NULL;
 		*word_len = 0;
 	}
 }
+
 
 static char	*single_quotes(char *line, int *i, size_t *word, char *chars)
 {
@@ -48,7 +57,7 @@ static char	*single_quotes(char *line, int *i, size_t *word, char *chars)
 		if (line[*i] == '\0' || ft_strchr(chars, line[*i]))
 			return (line + *i - *word);
 	}
-	return (0);
+	return (NULL);
 }
 
 static char	*double_quotes(char *line, int *i, size_t *word, char *chars)
@@ -67,7 +76,7 @@ static char	*double_quotes(char *line, int *i, size_t *word, char *chars)
 		if (line[*i] == '\0' || ft_strchr(chars, line[*i]))
 			return (line + *i - *word);
 	}
-	return (0);
+	return (NULL);
 }
 
 static char	*words_and_opers(char *line, int *i, size_t *word, char *chars)

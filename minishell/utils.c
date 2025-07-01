@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:59:12 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/26 22:43:29 by houssam          ###   ########.fr       */
+/*   Updated: 2025/06/29 15:38:42 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_token	*new_ele_tok_node(char **words, int i)
 }
 
 static int	ft_split_token_into_nodes_2(t_token *curr, char **words,
-		t_token *next)
+	t_token *next)
 {
 	int		i;
 	t_token	*new;
