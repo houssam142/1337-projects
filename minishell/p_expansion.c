@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/01 14:49:12 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/03 10:48:47 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,8 @@ static int	ft_replace(t_token *toks, int i, int j, t_cmd_exec *env_lst)
 	build_new_tok_val(toks, value, i, j);
 	if (toks->strip)
 	{
-		if (toks->strip && !toks->value && toks->value[0] == '\0')
-			return (0);
-		if (ft_strchr(toks->value, ' '))
-		{
-			if (split_token_into_nodes(toks) == -1)
-				return (-1);
-		}
+		if (split_token_into_nodes(toks) == -1)
+			return (-1);
 		return (0);
 	}
 	else if (copy_quotes(toks, env_lst, i, j) == -1)
@@ -90,20 +85,18 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 {
 	char	*new_str;
 	int		j;
+	int		inside_word;
 
-	if (t->value[*i + 1] == '$')
-		return (handle_double_dollar(t, i));
 	j = *i + 1;
 	if (t->value[j] == '?')
 		j++;
 	else
-	{
-		while (t->value[j] && !ft_strchr(" \t\"\'/$=:<>|", t->value[j]))
+		while (t->value[j] && !ft_strchr(" \t\"\'/$=:.<>|", t->value[j]))
 			j++;
-	}
 	new_str = ft_substr(t->value, *i + 1, j - *i - 1);
 	if (!new_str)
 		return (-1);
+	inside_word = (*i > 0 && !ft_strchr(" \t\'/$=<>|", t->value[*i - 1]));
 	while (env_lst)
 	{
 		if (!ft_strncmp(env_lst->name, new_str, ft_strlen(new_str) + 1))
@@ -113,10 +106,22 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	if (!new_str[0])
 		return (free(new_str), 0);
 	free(new_str);
-	if (env_lst != NULL)
-		return (t->strip = !w, ft_replace(t, *i, j, env_lst));
+	if (env_lst)
+	{
+		if (inside_word)
+			t->strip = 0;
+		else
+			t->strip = 1;
+		return (ft_replace(t, *i, j, env_lst));
+	}
 	else
+	{
+		if (inside_word)
+			t->strip = 0;
+		else
+			t->strip = 1;
 		return (ft_is_found(t, i, j, w));
+	}
 }
 
 void	p_expansion(t_token *toks, t_cmd_exec *env_lst)
