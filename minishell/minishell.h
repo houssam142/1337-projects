@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/01 15:01:49 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/03 15:13:02 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ int						handle_split(t_token *toks, char *value);
 int						parsing_opers(t_token **toks, t_cmd *cmd,
 							t_cmd_exec **env_lst);
 void					quote_del(t_token *toks);
+int						search_and_replace_helper(t_cmd_exec **env_lst,
+							char *new_str);
 int						handle_double_dollar(t_token *t, int *i);
 int						split_token_into_nodes(t_token *tok);
 char					*ft_strjoin_sep(char *path, char *cmd, char c);

@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:55:55 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/30 18:36:17 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/04 15:19:45 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,19 @@ static void	word_alloc(t_token **toks, int *j, size_t *word_len, char *line)
 {
 	t_token	*tok_ele;
 	char	*str;
+	size_t	k;
 
+	k = -1;
 	if (line && *word_len != 0)
 	{
 		if (*word_len == 0)
-			return;
-
+			return ;
 		str = malloc(*word_len + 1);
 		if (!str)
 			return ;
-
-		for (size_t k = 0; k < *word_len; k++)
+		while (++k < *word_len)
 			str[k] = line[k];
 		str[*word_len] = '\0';
-
 		if (ft_strchr("<>|&;() \t\n", str[0]))
 			tok_ele = lst_new_ele_tok('o', str);
 		else
@@ -39,7 +38,6 @@ static void	word_alloc(t_token **toks, int *j, size_t *word_len, char *line)
 		*word_len = 0;
 	}
 }
-
 
 static char	*single_quotes(char *line, int *i, size_t *word, char *chars)
 {

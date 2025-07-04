@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/03 10:48:47 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/04 15:27:36 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	if (t->value[j] == '?')
 		j++;
 	else
-		while (t->value[j] && !ft_strchr(" \t\"\'/$=:.<>|", t->value[j]))
+		while (t->value[j] && !ft_strchr(" \t\"\'/$=[]:.<>|", t->value[j]))
 			j++;
 	new_str = ft_substr(t->value, *i + 1, j - *i - 1);
 	if (!new_str)
@@ -109,17 +109,14 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	if (env_lst)
 	{
 		if (inside_word)
-			t->strip = 0;
+			t->strip = (!t->value[j] || t->value[j] == ':');
 		else
 			t->strip = 1;
 		return (ft_replace(t, *i, j, env_lst));
 	}
 	else
 	{
-		if (inside_word)
-			t->strip = 0;
-		else
-			t->strip = 1;
+		t->strip = !(inside_word != 0);
 		return (ft_is_found(t, i, j, w));
 	}
 }

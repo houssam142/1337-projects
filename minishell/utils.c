@@ -29,7 +29,7 @@ t_token	*new_ele_tok_node(char **words, int i)
 }
 
 static int	ft_split_token_into_nodes_2(t_token *curr, char **words,
-	t_token *next)
+		t_token *next)
 {
 	int		i;
 	t_token	*new;
