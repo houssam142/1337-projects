@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/04 15:27:36 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/05 14:26:10 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	j = *i + 1;
 	if (t->value[j] == '?')
 		j++;
+	if (ft_isdigit(t->value[j]))
+		j = *i + 2;
 	else
 		while (t->value[j] && !ft_strchr(" \t\"\'/$=[]:.<>|", t->value[j]))
 			j++;
@@ -110,15 +112,11 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	{
 		if (inside_word)
 			t->strip = (!t->value[j] || t->value[j] == ':');
-		else
-			t->strip = 1;
 		return (ft_replace(t, *i, j, env_lst));
 	}
 	else
-	{
 		t->strip = !(inside_word != 0);
-		return (ft_is_found(t, i, j, w));
-	}
+			return (ft_is_found(t, i, j, w));
 }
 
 void	p_expansion(t_token *toks, t_cmd_exec *env_lst)
