@@ -95,7 +95,7 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	while (env_lst)
 	{
 		if (!ft_strncmp(env_lst->name, new_str, ft_strlen(new_str) + 1))
-		break ;
+			break ;
 		env_lst = env_lst->next;
 	}
 	if (!new_str[0])
@@ -110,7 +110,7 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	}
 	else
 		t->strip = !(inside_word != 0);
-			return (ft_is_found(t, i, j, w));
+	return (ft_is_found(t, i, j, w));
 }
 
 void	p_expansion(t_token *toks, t_cmd_exec *env_lst)

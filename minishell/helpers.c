@@ -12,22 +12,23 @@
 
 #include "minishell.h"
 
-void func(t_token *t, int *i, int *j)
+void	func(t_token *t, int *i, int *j)
 {
 	if (t->value[*j] == '?')
 		(*j)++;
 	if (ft_isdigit(t->value[*j]))
 		*j = *i + 2;
-	else	
+	else
 		while (t->value[*j] && !ft_strchr(" \t\"\'/$=[]:.<>|", t->value[*j]))
 			(*j)++;
 }
 
-t_cmd_exec	*search_and_replace_helper(t_cmd_exec *env_lst, int *i, int j, t_token *t)
+t_cmd_exec	*search_and_replace_helper(t_cmd_exec *env_lst, int *i, int j,
+		t_token *t)
 {
-	char	*new_str;
+	char		*new_str;
 	t_cmd_exec	*tmp;
-	
+
 	new_str = ft_substr(t->value, *i + 1, j - *i - 1);
 	if (!new_str || !new_str[0])
 		return (NULL);

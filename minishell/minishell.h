@@ -110,7 +110,7 @@ char					*find_cmd(t_cmd *cmd, t_cmd_exec *env_lst);
 void					exec_built(t_cmd *cmd, t_cmd_exec **env_lst,
 							int child_par);
 void					ft_signals(void);
-void 					func(t_token *t, int *i, int *j);
+void					func(t_token *t, int *i, int *j);
 void					remove_empty_tokens(t_token **toks);
 int						should_strip(t_token *tok, int i);
 void					quote_count(t_token *toks);
@@ -118,8 +118,8 @@ int						handle_split(t_token *toks, char *value);
 int						parsing_opers(t_token **toks, t_cmd *cmd,
 							t_cmd_exec **env_lst);
 void					quote_del(t_token *toks);
-t_cmd_exec				*search_and_replace_helper(t_cmd_exec *env_lst,
-							int *i, int j, t_token *t);
+t_cmd_exec				*search_and_replace_helper(t_cmd_exec *env_lst, int *i,
+							int j, t_token *t);
 int						handle_double_dollar(t_token *t, int *i);
 int						split_token_into_nodes(t_token *tok);
 char					*ft_strjoin_sep(char *path, char *cmd, char c);
