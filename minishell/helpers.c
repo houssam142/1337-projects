@@ -6,13 +6,13 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:21:45 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/06 10:52:05 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/06 11:04:28 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void helper(t_token *t, int *i, int *j)
+void func(t_token *t, int *i, int *j)
 {
 	if (t->value[*j] == '?')
 		(*j)++;

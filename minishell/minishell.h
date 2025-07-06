@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/06 10:22:12 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/06 11:04:17 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char					*find_cmd(t_cmd *cmd, t_cmd_exec *env_lst);
 void					exec_built(t_cmd *cmd, t_cmd_exec **env_lst,
 							int child_par);
 void					ft_signals(void);
-void 					helper(t_token *t, int *i, int *j);
+void 					func(t_token *t, int *i, int *j);
 void					remove_empty_tokens(t_token **toks);
 int						should_strip(t_token *tok, int i);
 void					quote_count(t_token *toks);
