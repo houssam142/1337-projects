@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/05 16:54:15 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/06 10:52:29 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,30 +88,24 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	int		inside_word;
 
 	j = *i + 1;
-	if (t->value[j] == '?')
-		j++;
-	if (ft_isdigit(t->value[j]))
-		j = *i + 2;
-	else	
-		while (t->value[j] && !ft_strchr(" \t\"\'/$=[]:.<>|", t->value[j]))
-			j++;
+	helper(t, i, &j);
 	new_str = ft_substr(t->value, *i + 1, j - *i - 1);
 	if (!new_str)
 		return (-1);
-	inside_word = (*i > 0 && !ft_strchr(" \t\'/$=<>|", t->value[*i - 1]));
 	while (env_lst)
 	{
 		if (!ft_strncmp(env_lst->name, new_str, ft_strlen(new_str) + 1))
-			break ;
+		break ;
 		env_lst = env_lst->next;
 	}
 	if (!new_str[0])
 		return (free(new_str), 0);
 	free(new_str);
+	inside_word = (*i > 0 && !ft_strchr(" \t\'/$=<>|", t->value[*i - 1]));
 	if (env_lst)
 	{
 		if (inside_word)
-			t->strip = (!t->value[j] || t->value[j] == ':');
+			t->strip = (!t->value[j]);
 		return (ft_replace(t, *i, j, env_lst));
 	}
 	else
