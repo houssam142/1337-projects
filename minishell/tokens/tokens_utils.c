@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:55:55 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/04 15:19:45 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/06 00:22:29 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,20 @@ static void	word_alloc(t_token **toks, int *j, size_t *word_len, char *line)
 {
 	t_token	*tok_ele;
 	char	*str;
-	size_t	k;
 
-	k = -1;
 	if (line && *word_len != 0)
 	{
-		if (*word_len == 0)
+		str = malloc(sizeof(char) * (*word_len + 1));
+		if (!str || !line)
 			return ;
-		str = malloc(*word_len + 1);
-		if (!str)
-			return ;
-		while (++k < *word_len)
-			str[k] = line[k];
-		str[*word_len] = '\0';
+		ft_strlcpy(str, line, *word_len + 1);
 		if (ft_strchr("<>|&;() \t\n", str[0]))
 			tok_ele = lst_new_ele_tok('o', str);
 		else
 			tok_ele = lst_new_ele_tok('w', str);
 		lstadd_back_tok(toks, tok_ele);
 		(*j)++;
+		line = NULL;
 		*word_len = 0;
 	}
 }
@@ -45,7 +40,7 @@ static char	*single_quotes(char *line, int *i, size_t *word, char *chars)
 	{
 		(*word)++;
 		(*i)++;
-		while (line[*i] != '\'' && line[*i])
+		while (line[*i] != '\'' && line[*i] != '\0')
 		{
 			(*word)++;
 			(*i)++;
@@ -99,7 +94,7 @@ static char	*words_and_opers(char *line, int *i, size_t *word, char *chars)
 		if ((line[*i] != '\'' && line[*i] != '\"') || line[*i] == '\0')
 			return (line + *i - *word);
 	}
-	return (0);
+	return (NULL);
 }
 
 void	toks_arr(char *line, char *chars, t_token **toks)

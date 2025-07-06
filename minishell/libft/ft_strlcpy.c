@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aoussama <aoussama@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:54:02 by aoussama          #+#    #+#             */
-/*   Updated: 2024/11/04 20:22:21 by aoussama         ###   ########.fr       */
+/*   Updated: 2025/07/05 23:01:37 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,3 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t n)
 	dest[i] = '\0';
 	return (j);
 }
-// int main()
-// {
-// 	char p[] = "salam";
-// 	char o[6];
-// 	//ft_strlcpy(o,p, 5);
-// 	// printf("%ld\n", ft_strlcpy(o,p, 5));
-// 	printf("%ld\n",ft_strlcpy(o,p,8));
-// }

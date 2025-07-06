@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:56:06 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/30 02:39:21 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/06 00:23:56 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	toks_value_trim(t_token *toks)
 {
 	char	*str;
 
-	while (toks)
+	while (toks != NULL)
 	{
 		str = ft_strtrim(toks->value, " ");
 		free(toks->value);

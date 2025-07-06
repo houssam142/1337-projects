@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/05 14:26:10 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/05 16:54:15 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 		j++;
 	if (ft_isdigit(t->value[j]))
 		j = *i + 2;
-	else
+	else	
 		while (t->value[j] && !ft_strchr(" \t\"\'/$=[]:.<>|", t->value[j]))
 			j++;
 	new_str = ft_substr(t->value, *i + 1, j - *i - 1);
