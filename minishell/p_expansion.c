@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/08 17:28:23 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/08 21:12:18 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,15 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 		return (-1);
 	if (!new_str[0])
 		return (free(new_str), 0);
-	while (env_lst && ft_strncmp(env_lst->name, new_str,
-			ft_strlen(new_str) + 1))
+	while (env_lst && ft_strncmp(env_lst->name, new_str, ft_strlen(new_str)
+			+ 1))
 		env_lst = env_lst->next;
 	free(new_str);
 	inside_word = (*i > 0 && !ft_strchr(" \t/$=<>|", t->value[*i - 1]));
 	if (env_lst)
 	{
-			if (inside_word)
-				t->strip = (!t->value[j]);
+		if (inside_word)
+			t->strip = (!t->value[j]);
 		return (ft_replace(t, *i, j, env_lst));
 	}
 	t->strip = !(inside_word != 0);
