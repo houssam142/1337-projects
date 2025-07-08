@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:21:45 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/06 11:04:28 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/07 17:32:42 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,19 @@ char	*ft_strdup_repeat(char c, size_t len)
 
 int	copy_quotes(t_token *t, t_cmd_exec *env_lst, int i, int j)
 {
-	int		new_len;
-	int		val_len;
 	char	*new_quote;
+	char	*new_str;
 
-	new_len = ft_strlen(t->value);
-	val_len = ft_strlen(env_lst->value);
-	new_quote = malloc(new_len + 1);
+	new_quote = malloc(sizeof(char) * (ft_strlen(env_lst->value) + 1));
 	if (!new_quote)
 		return (-1);
-	ft_memcpy(new_quote, t->quote, i);
-	ft_memset(new_quote + i, '2', val_len);
-	ft_memcpy(new_quote + i + val_len, t->quote + j, ft_strlen(t->quote) - j);
-	new_quote[new_len] = '\0';
+	new_quote[ft_strlen(env_lst->value)] = '\0';
+	ft_memset(new_quote, '2', ft_strlen(env_lst->value));
+	t->quote[i] = '\0';
+	new_str = ft_strjoin(t->quote, new_quote);
+	free(new_quote);
+	new_quote = ft_strjoin(new_str, t->quote + j);
+	free(new_str);
 	free(t->quote);
 	t->quote = new_quote;
 	return (0);

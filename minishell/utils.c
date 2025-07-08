@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:59:12 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/29 15:38:42 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/07 20:37:04 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int	split_token_into_nodes(t_token *tok)
 		return (-1);
 	if (ft_split_token_into_nodes_2(curr, words, next) == -1)
 		return (-1);
-	return (arr_free(words), 0);
+	arr_free(words);
+	return (0);
 }
 
 static int	update_quote_double_dollar(t_token *t, int *i)

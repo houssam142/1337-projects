@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/06/30 01:03:49 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/06 15:27:30 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ static void	waiting(t_cmd_exec **env_lst)
 	{
 		if (WIFSIGNALED(exit_stat) != 0)
 		{
-			ft_putchar_fd('\n', 1);
+			ft_putchar_fd('\n', 1);	
+			printf("%d\n", exit_stat);
 			stat_code = WTERMSIG(exit_stat) + 128;
+			printf("%d\n", stat_code);
 			change_stat(env_lst, stat_code);
 		}
 		else if (WIFEXITED(exit_stat))
@@ -68,9 +70,10 @@ static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
 	while (tmp && my_pid != 0)
 	{
 		if (tmp->id == 0 || tmp2->pipe == 1)
-			my_pid = fork();
-		if (my_pid == -1)
-			return ;
+		{
+			if ((my_pid = fork()) == -1)
+				return ;
+		}
 		if (!my_pid)
 			child_proc(cmd, env_lst, tmp->id);
 		else if (tmp)
