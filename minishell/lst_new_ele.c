@@ -6,11 +6,40 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:20:05 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/05 19:39:31 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/08 17:27:21 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	check_ambiguous_redirect(t_token *toks)
+{
+	t_token	*curr;
+	t_token	*next;
+
+	curr = toks;
+	while (curr && curr->next)
+	{
+		if (curr->type == 'r' || curr->type == 'R')
+		{
+			next = curr->next;
+			if (!next->value || ft_strchr(next->value, ' '))
+			{
+				if (next->value)
+				{
+					ft_putstr_fd("minishell: ", 2);
+					ft_putstr_fd(next->value, 2);
+					ft_putstr_fd(": ambiguous redirect\n", 2);
+				}
+				else
+					printf("minishell: : ambiguous redirect\n");
+				return (1);
+			}
+		}
+		curr = curr->next;
+	}
+	return (0);
+}
 
 t_cmd_exec	*lst_new_ele(char *name, char *value)
 {
@@ -35,6 +64,7 @@ t_token	*lst_new_ele_tok(char type, char *value)
 		return (NULL);
 	new_ele->type = type;
 	new_ele->strip = 1;
+	new_ele->should_strip = 1;
 	new_ele->value = value;
 	new_ele->quote = (char *)ft_calloc(sizeof(char), (ft_strlen(value) + 1));
 	new_ele->quote[sizeof(char) * ft_strlen(value)] = '\0';

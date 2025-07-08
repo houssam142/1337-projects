@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:07 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/07 17:13:55 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/08 17:12:30 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ static void	final_parsing(t_token **toks, t_cmd_exec *env_lst)
 		if (tmp2 != tmp && tmp2->type == 'r' && ft_strncmp(tmp2->value, "<<",
 				3) == 0)
 			tmp->type = 'h';
+		if (tmp2 != tmp && tmp2->type == 'r' && !ft_strncmp(tmp2->value, "<", 2))
+			tmp->strip = 2;
+		else if (tmp2 != tmp && tmp2->type == 'r' && !ft_strncmp(tmp2->value, ">", 2))
+			tmp->strip = 2;
+		else if (tmp2 != tmp && tmp2->type == 'r' && !ft_strncmp(tmp2->value, ">>", 3))
+			tmp->strip = 2;
 		quote_count(tmp);
 		if (tmp->type != 'h')
 			p_expansion(tmp, env_lst);
@@ -46,6 +52,8 @@ static int	parsing_cmd(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 	int	i;
 
 	final_parsing(toks, *env_lst);
+	if (check_ambiguous_redirect(*toks))
+		return (-1);
 	arg_count(toks, cmd);
 	i = parsing_opers(toks, cmd, env_lst);
 	if (i == -1)

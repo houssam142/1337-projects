@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/07 11:42:32 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/08 14:35:38 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 typedef struct s_token
 {
 	char				type;
+	int					should_strip;
 	char				*quote;
 	char				*value;
 	int					strip;
@@ -88,6 +89,7 @@ t_token					*lst_new_ele_tok(char type, char *value);
 t_cmd_exec				*lst_new_ele(char *name, char *value);
 void					toks_trim(t_token **toks);
 t_token					*lst_last_tok(t_token *lst);
+int	check_ambiguous_redirect(t_token *toks);
 void					lstadd_back_tok(t_token **lst, t_token *node);
 int						change_dir(char *path, t_cmd_exec **env_lst);
 int						cd(t_cmd *cmd, t_cmd_exec **env_lst);
