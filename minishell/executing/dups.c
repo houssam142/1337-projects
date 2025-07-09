@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:46 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/26 22:01:47 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/09 15:54:26 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	dups(t_cmd *tmp)
 	{
 		tmp->std_in_dup1 = dup(0);
 		dup2(tmp->pipe_in, 0);
-		close(tmp->std_in);
+		close(tmp->pipe_in);
 	}
 	dups_outs(tmp);
 }
