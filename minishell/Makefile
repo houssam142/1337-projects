@@ -28,7 +28,7 @@ LIB = $(LIBFT_DIR)/libft.a
 all: $(NAME)
 
 $(NAME) : $(OBJS)
-	cd $(LIBFT_DIR) && $(MAKE) -s
+	@cd $(LIBFT_DIR) && $(MAKE) -s
 	$(CC) $(CFLAGS) $(OBJS) $(LIB) -o $(NAME) $(FLAGS)
 
 .o :.c

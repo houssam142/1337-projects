@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/08 21:12:00 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/09 15:31:08 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 typedef struct s_token
 {
 	char				type;
-	int					should_strip;
 	char				*quote;
 	char				*value;
 	int					strip;
@@ -78,6 +77,7 @@ int						copy_quotes(t_token *t, t_cmd_exec *env_lst, int i,
 							int j);
 void					ft_lstadd_front(t_cmd_exec **lst, t_cmd_exec *new);
 char					*erase_spaces(char *str);
+int						heredoc_max(t_token *toks);
 void					ft_lstadd_back(t_cmd_exec **lst, t_cmd_exec *new);
 int						arg_count(t_token **toks, t_cmd *cmd);
 void					lst_del(t_cmd_exec *lst, void (*del)(void *));
