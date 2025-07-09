@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/09 02:41:25 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/09 19:01:11 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 static int	ft_replace(t_token *toks, int i, int j, t_cmd_exec *env_lst)
 {
 	char	*value;
-
+	int		k;
+	
+	k = j;
+	while (toks->value[k])
+	{
+		if (!toks->value[k + 1] && toks->value[k] == '$')
+			toks->strip = 0;
+		k++;
+	}
 	if (toks->strip)
 		value = erase_spaces(env_lst->value);
 	else
@@ -25,11 +33,8 @@ static int	ft_replace(t_token *toks, int i, int j, t_cmd_exec *env_lst)
 	build_new_tok_val(toks, value, i, j);
 	if (toks->strip != 2)
 	{
-		if (toks->strip && ft_strchr(toks->value, ' '))
-		{
-			if (split_token_into_nodes(toks) == -1)
-				return (-1);
-		}
+		if (split_token_into_nodes(toks) == -1)
+			return (-1);
 	}
 	if (copy_quotes(toks, env_lst, i, j) == -1)
 		return (-1);
@@ -115,8 +120,8 @@ void	p_expansion(t_token *toks, t_cmd_exec *env_lst)
 {
 	int	i;
 
-	i = -1;
-	while (toks->value[++i])
+	i = 0;
+	while (toks->value[i])
 	{
 		if (toks->value[i] == '\'')
 		{
@@ -132,5 +137,6 @@ void	p_expansion(t_token *toks, t_cmd_exec *env_lst)
 		}
 		else if (toks->value[i] == '$')
 			search_and_replace(toks, &i, env_lst, 0);
+		i++;
 	}
 }
