@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 19:58:47 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/10 20:11:54 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,8 @@ void	*check_if_death(void *arg)
 	philo = (t_philo *)arg;
 	while (1)
 	{
-		pthread_mutex_lock(philo->mutex.p);
-		if (*(philo->arguments->death))
-		{
-			pthread_mutex_unlock(philo->mutex.p);
+		if (check_if_full_and_died(philo))
 			break ;
-		}
-		pthread_mutex_unlock(philo->mutex.p);
-		pthread_mutex_lock(&philo->arguments->full_lock);
-		if (*(philo->full) == philo->arguments->num_of_philo)
-		{
-			pthread_mutex_unlock(&philo->arguments->full_lock);
-			break ;
-		}
-		pthread_mutex_unlock(&philo->arguments->full_lock);
 		pthread_mutex_lock(&philo->must_die_lock);
 		if (philo->must_die <= time_1())
 		{

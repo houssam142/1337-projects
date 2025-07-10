@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 20:03:05 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/10 20:10:24 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int					convert_to_misec(int time);
 void				print_msg(char *msg, int time, int id);
 void				print(char c, t_philo *philo, int id);
 int					take_forks(t_philo *philo);
+int					check_if_full_and_died(t_philo *philo);
 void				one_philo(t_philo *philo);
 int					check_death_of_philo(t_philo *philo, int left, int right);
 void				increment_full(t_philo *philo);
