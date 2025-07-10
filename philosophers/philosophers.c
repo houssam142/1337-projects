@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/05/04 00:15:26 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/10 02:08:19 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,31 @@ void	*check_if_death(void *arg)
 	philo = (t_philo *)arg;
 	while (1)
 	{
+		pthread_mutex_lock(philo->mutex.p);
 		if (*(philo->arguments->death))
-			break ;
+		{
+			pthread_mutex_unlock(philo->mutex.p);
+			break;
+		}
+		if (*(philo->full) == philo->arguments->num_of_philo)
+		{
+			pthread_mutex_unlock(philo->mutex.p);
+			break;
+		}
+		pthread_mutex_unlock(philo->mutex.p);
 		if (philo->must_die <= time_1())
 		{
+			pthread_mutex_lock(philo->mutex.p);
 			if (!*(philo->arguments->death))
 			{
 				print_msg("died\n", time_1() - philo->arguments->this_time,
 					philo->id);
 				*(philo->arguments->death) = 1;
 			}
+			pthread_mutex_unlock(philo->mutex.p);
 			break ;
 		}
-		else if (*(philo->full) == philo->arguments->num_of_philo)
-			break ;
-		usleep(100);
+		usleep(10);
 	}
 	return (NULL);
 }
@@ -70,7 +80,7 @@ void	*exec(void *args)
 		if (*(philo->arguments->death))
 			break ;
 	}
-	return (NULL);
+	return (pthread_join(philo->alive, NULL), NULL);
 }
 
 void	init_param(t_info *info, t_philo *philo, pthread_mutex_t *p,
@@ -93,7 +103,6 @@ void	init_param(t_info *info, t_philo *philo, pthread_mutex_t *p,
 		usleep(100);
 		i++;
 	}
-	pthread_join(philo->alive, NULL);
 }
 
 int	main(int ac, char **av)
@@ -119,8 +128,8 @@ int	main(int ac, char **av)
 			break ;
 		usleep(10);
 	}
-	i = 0;
-	while (i < arguments.num_of_philo)
-		pthread_join(philo[i++].philo, NULL);
+	i = -1;
+	while (++i < arguments.num_of_philo)
+		pthread_join(philo[i].philo, NULL);
 	return (destroy_mutex_and_free(philo, fork), 0);
 }

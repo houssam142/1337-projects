@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:03:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/03/18 02:17:47 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/10 01:14:38 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int	ft_isspace(char c)
 		|| c == '\n');
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
-	int	x;
-	int	sign;
-	int	res;
+	int		x;
+	int		sign;
+	long	res;
 
 	x = 0;
 	sign = 1;
@@ -41,9 +41,7 @@ int	ft_atoi(const char *str)
 	if (str[x] == '-' || str[x] == '+')
 	{
 		if (str[x] == '-')
-		{
 			sign *= -1;
-		}
 		x++;
 	}
 	while (str[x] >= '0' && str[x] <= '9')

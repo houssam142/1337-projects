@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/04/27 21:41:42 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/10 02:08:23 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_info
 	int				time_to_die;
 	int				time_to_sleep;
 	int				time_to_eat;
-	int				num_of_times_to_eat;
+	long			num_of_times_to_eat;
 	int				this_time;
 	int				*death;
 	int				full;
@@ -53,7 +53,7 @@ typedef struct s_philo
 }					t_philo;
 
 int					time_1(void);
-int					ft_atoi(const char *str);
+long				ft_atoi(const char *str);
 int					handle_arg(t_info *arg, char **av, int ac);
 int					convert_to_misec(int time);
 void				print_msg(char *msg, int time, int id);

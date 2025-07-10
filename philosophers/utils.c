@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/04/27 22:04:08 by marvin           ###   ########.fr       */
+/*   Updated: 2025/07/10 02:08:26 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,14 @@ int	handle_arg(t_info *arg, char **av, int ac)
 	arg->full = 0;
 	arg->died = 0;
 	arg->this_time = time_1();
-	if (av[5])
+	if (ac == 6)
+	{
 		arg->num_of_times_to_eat = ft_atoi(av[5]);
+		if (arg->num_of_times_to_eat >= 2147483647)
+			return (1);
+	}
+	else
+		arg->num_of_times_to_eat = -1;
 	return (0);
 }
 
@@ -57,6 +63,7 @@ void	print(char c, t_philo *philo, int id)
 	else if (c == 'D')
 	{
 		print_msg("died\n", time_1() - philo->arguments->this_time, id);
+		pthread_mutex_unlock(philo->mutex.p);
 		return ;
 	}
 	pthread_mutex_unlock(philo->mutex.p);
