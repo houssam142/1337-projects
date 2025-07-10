@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+         #
+#    By: houssam <houssam@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/03/14 18:07:47 by hounejja          #+#    #+#              #
-#    Updated: 2025/07/10 01:16:44 by hounejja         ###   ########.fr        #
+#    Updated: 2025/07/10 20:01:02 by houssam          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g3
 
-UTILS = utils.c helpers.c utils2.c
+UTILS = utils.c helpers.c utils2.c utils3.c
 
 OBJ = $(SRC:.c=.o)
 

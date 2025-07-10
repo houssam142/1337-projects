@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 17:36:47 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/10 20:03:05 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_info
 	int				*death;
 	int				full;
 	int				died;
-	pthread_mutex_t			full_lock;
+	pthread_mutex_t	full_lock;
 }					t_info;
 
 typedef struct s_mutex
@@ -51,10 +51,11 @@ typedef struct s_philo
 	t_mutex			mutex;
 	pthread_t		philo;
 	pthread_t		alive;
-	pthread_mutex_t must_die_lock;
+	pthread_mutex_t	must_die_lock;
 }					t_philo;
 
 int					time_1(void);
+void				check_philo(t_philo *philo);
 long				ft_atoi(const char *str);
 int					handle_arg(t_info *arg, char **av, int ac);
 int					convert_to_misec(int time);
@@ -62,6 +63,7 @@ void				print_msg(char *msg, int time, int id);
 void				print(char c, t_philo *philo, int id);
 int					take_forks(t_philo *philo);
 void				one_philo(t_philo *philo);
+int					check_death_of_philo(t_philo *philo, int left, int right);
 void				increment_full(t_philo *philo);
 void				put_forks(t_philo *philo);
 void				update_eating(t_philo *philo);

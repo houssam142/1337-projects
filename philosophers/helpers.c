@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 01:14:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 02:11:46 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/10 20:03:18 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@ void	put_forks(t_philo *philo)
 
 void	one_philo(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->must_die_lock);
+	philo->must_die = time_1() + philo->arguments->time_to_die;
+	pthread_mutex_unlock(&philo->must_die_lock);
 	pthread_mutex_lock(&philo->mutex.fork[philo->id]);
 	print('F', philo, philo->id);
-	usleep(philo->arguments->time_to_die);
+	usleep(convert_to_misec(philo->arguments->time_to_die));
 	pthread_mutex_unlock(&philo->mutex.fork[philo->id]);
 	pthread_join(philo->alive, NULL);
 }
@@ -49,15 +52,8 @@ int	take_forks(t_philo *philo)
 		pthread_mutex_lock(&philo->mutex.fork[left]);
 		print('F', philo, philo->id);
 	}
-	pthread_mutex_lock(philo->mutex.p);
-	if (*(philo->arguments->death))
-	{
-		pthread_mutex_unlock(philo->mutex.p);
-		pthread_mutex_unlock(&philo->mutex.fork[left]);
-		pthread_mutex_unlock(&philo->mutex.fork[right]);
+	if (check_death_of_philo(philo, left, right))
 		return (1);
-	}
-	pthread_mutex_unlock(philo->mutex.p);
 	return (0);
 }
 

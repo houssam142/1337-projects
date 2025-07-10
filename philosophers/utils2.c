@@ -6,11 +6,30 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:03:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 17:50:52 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/10 19:57:35 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	check_philo(t_philo *philo)
+{
+	int	death_val;
+	int	full_val;
+
+	while (1)
+	{
+		pthread_mutex_lock(philo->mutex.p);
+		death_val = *(philo->arguments->death);
+		pthread_mutex_unlock(philo->mutex.p);
+		pthread_mutex_lock(&philo->arguments->full_lock);
+		full_val = *(philo->full);
+		pthread_mutex_unlock(&philo->arguments->full_lock);
+		if (death_val == 1 || full_val == philo->arguments->num_of_philo)
+			break ;
+		usleep(10);
+	}
+}
 
 int	is_all_full(t_philo *philo)
 {
