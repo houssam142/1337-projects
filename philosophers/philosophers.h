@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 20:10:24 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/10 21:06:06 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ typedef struct s_philo
 }					t_philo;
 
 int					time_1(void);
+int					should_stop(t_philo *philo);
+int					has_eaten_enough(t_philo *philo);
+int					is_dead(t_philo *philo);
 void				check_philo(t_philo *philo);
 long				ft_atoi(const char *str);
 int					handle_arg(t_info *arg, char **av, int ac);

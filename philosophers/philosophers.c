@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 20:11:54 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/10 21:05:04 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,46 +50,28 @@ void	death_events(t_philo *philo)
 void	*exec(void *args)
 {
 	t_philo	*philo;
-	int		death;
-	int		full;
 
 	philo = (t_philo *)args;
 	death_events(philo);
 	if (philo->arguments->num_of_philo == 1)
 		return (one_philo(philo), NULL);
-	while (1)
+	while (!should_stop(philo))
 	{
-		pthread_mutex_lock(philo->mutex.p);
-		death = *(philo->arguments->death);
-		pthread_mutex_unlock(philo->mutex.p);
-		full = is_all_full(philo);
-		if (death || full)
-			break ;
 		if (take_forks(philo))
 			break ;
 		update_eating(philo);
 		put_forks(philo);
-		pthread_mutex_lock(philo->mutex.p);
-		death = *(philo->arguments->death);
-		pthread_mutex_unlock(philo->mutex.p);
-		if (philo->eat_count == philo->arguments->num_of_times_to_eat || death)
+		if (has_eaten_enough(philo) || is_dead(philo))
 			break ;
 		print('S', philo, philo->id);
 		usleep(convert_to_misec(philo->arguments->time_to_sleep));
-		pthread_mutex_lock(philo->mutex.p);
-		death = *(philo->arguments->death);
-		pthread_mutex_unlock(philo->mutex.p);
-		if (death)
+		if (is_dead(philo))
 			break ;
 		print('T', philo, philo->id);
-		pthread_mutex_lock(philo->mutex.p);
-		death = *(philo->arguments->death);
-		pthread_mutex_unlock(philo->mutex.p);
-		if (death)
+		if (is_dead(philo))
 			break ;
 	}
-	pthread_join(philo->alive, NULL);
-	return (NULL);
+	return (pthread_join(philo->alive, NULL), NULL);
 }
 
 void	init_param(t_info *info, t_philo *philo, pthread_mutex_t *p,
