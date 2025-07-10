@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 02:08:26 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/10 17:43:30 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	increment_full(t_philo *philo)
 {
-	pthread_mutex_lock(philo->mutex.p);
+	pthread_mutex_lock(&philo->arguments->full_lock);
 	*(philo->full) += 1;
-	pthread_mutex_unlock(philo->mutex.p);
+	pthread_mutex_unlock(&philo->arguments->full_lock);
 }
 
 int	convert_to_misec(int time)
@@ -73,10 +73,14 @@ void	destroy_mutex_and_free(t_philo *philo, pthread_mutex_t *fork)
 {
 	int	i;
 
-	i = 0;
-	while (i < philo->arguments->num_of_philo)
-		pthread_mutex_destroy(&fork[i++]);
+	i = -1;
+	while (++i < philo->arguments->num_of_philo)
+	{
+		pthread_mutex_destroy(&fork[i]);
+		pthread_mutex_destroy(&philo[i].must_die_lock);
+	}
 	pthread_mutex_destroy(philo->mutex.p);
+	pthread_mutex_destroy(&philo->arguments->full_lock);
 	free(fork);
 	free(philo);
 }

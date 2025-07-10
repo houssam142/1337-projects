@@ -28,37 +28,37 @@ void	one_philo(t_philo *philo)
 	pthread_join(philo->alive, NULL);
 }
 
-int take_forks(t_philo *philo)
+int	take_forks(t_philo *philo)
 {
-    int left;
-    int right;
+	int	left;
+	int	right;
 
 	left = philo->id;
 	right = (philo->id + 1) % philo->arguments->num_of_philo;
-    if (left < right)
-    {
-        pthread_mutex_lock(&philo->mutex.fork[left]);
-        print('F', philo, philo->id);
-        pthread_mutex_lock(&philo->mutex.fork[right]);
-        print('F', philo, philo->id);
-    }
-    else
-    {
-        pthread_mutex_lock(&philo->mutex.fork[right]);
-        print('F', philo, philo->id);
-        pthread_mutex_lock(&philo->mutex.fork[left]);
-        print('F', philo, philo->id);
-    }
-    pthread_mutex_lock(philo->mutex.p);
-    if (*(philo->arguments->death))
-    {
-        pthread_mutex_unlock(philo->mutex.p);
-        pthread_mutex_unlock(&philo->mutex.fork[left]);
-        pthread_mutex_unlock(&philo->mutex.fork[right]);
-        return (1);
-    }
-    pthread_mutex_unlock(philo->mutex.p);
-    return (0);
+	if (left < right)
+	{
+		pthread_mutex_lock(&philo->mutex.fork[left]);
+		print('F', philo, philo->id);
+		pthread_mutex_lock(&philo->mutex.fork[right]);
+		print('F', philo, philo->id);
+	}
+	else
+	{
+		pthread_mutex_lock(&philo->mutex.fork[right]);
+		print('F', philo, philo->id);
+		pthread_mutex_lock(&philo->mutex.fork[left]);
+		print('F', philo, philo->id);
+	}
+	pthread_mutex_lock(philo->mutex.p);
+	if (*(philo->arguments->death))
+	{
+		pthread_mutex_unlock(philo->mutex.p);
+		pthread_mutex_unlock(&philo->mutex.fork[left]);
+		pthread_mutex_unlock(&philo->mutex.fork[right]);
+		return (1);
+	}
+	pthread_mutex_unlock(philo->mutex.p);
+	return (0);
 }
 
 int	time_1(void)

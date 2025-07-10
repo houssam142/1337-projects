@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 02:08:23 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/10 17:36:47 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define PHILOSOPHERS_H
 
 # include <pthread.h>
-# include <stdio.h>
 # include <stdarg.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <sys/time.h>
@@ -32,13 +32,14 @@ typedef struct s_info
 	int				*death;
 	int				full;
 	int				died;
+	pthread_mutex_t			full_lock;
 }					t_info;
 
 typedef struct s_mutex
 {
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	*p;
-}	t_mutex;
+}					t_mutex;
 
 typedef struct s_philo
 {
@@ -49,7 +50,8 @@ typedef struct s_philo
 	t_info			*arguments;
 	t_mutex			mutex;
 	pthread_t		philo;
-	pthread_t		alive;	
+	pthread_t		alive;
+	pthread_mutex_t must_die_lock;
 }					t_philo;
 
 int					time_1(void);
@@ -63,6 +65,7 @@ void				one_philo(t_philo *philo);
 void				increment_full(t_philo *philo);
 void				put_forks(t_philo *philo);
 void				update_eating(t_philo *philo);
+int					is_all_full(t_philo *philo);
 void				*check_if_death(void *args);
 void				destroy_mutex_and_free(t_philo *philo,
 						pthread_mutex_t *fork);
