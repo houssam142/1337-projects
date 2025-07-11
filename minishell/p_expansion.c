@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/11 01:18:20 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/11 01:19:43 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	if (env_lst)
 	{
 		if (inside_word)
-			t->strip = (!t->value[j] || w == 0);
+			t->strip = (w == 0);
 		return (ft_replace(t, *i, j, env_lst));
 	}
 	t->strip = !(inside_word != 0);
