@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:20:05 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/09 15:30:52 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/11 19:49:18 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	heredoc_max(t_token *toks)
 			heredoc_count++;
 			if (heredoc_count > 16)
 			{
-				ft_putstr_fd("minishell: maximum here-document count execeeded\n", 2);
+				ft_putstr_fd(
+					"minishell: maximum here-document count execeeded\n", 2);
 				return (-1);
 			}
 		}
@@ -86,7 +87,7 @@ t_token	*lst_new_ele_tok(char type, char *value)
 	if (!new_ele)
 		return (NULL);
 	new_ele->type = type;
-	new_ele->strip = 1;	
+	new_ele->strip = 1;
 	new_ele->value = value;
 	new_ele->quote = (char *)ft_calloc(sizeof(char), (ft_strlen(value) + 1));
 	new_ele->quote[sizeof(char) * ft_strlen(value)] = '\0';

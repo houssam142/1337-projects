@@ -16,7 +16,7 @@ static int	ft_replace(t_token *toks, int i, int j, t_cmd_exec *env_lst)
 {
 	char	*value;
 	int		k;
-	
+
 	k = j;
 	while (toks->value[k])
 	{

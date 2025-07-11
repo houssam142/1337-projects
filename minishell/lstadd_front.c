@@ -19,8 +19,8 @@ char	*remove_outer_quotes(char *s)
 	if (!s)
 		return (NULL);
 	len = ft_strlen(s);
-	if (len >= 2 && ((s[0] == '"' && s[len - 1] == '"')
-			|| (s[0] == '\'' && s[len - 1] == '\'')))
+	if (len >= 2 && ((s[0] == '"' && s[len - 1] == '"') || (s[0] == '\''
+				&& s[len - 1] == '\'')))
 		return (ft_substr(s, 1, len - 2));
 	return (ft_strdup(s));
 }
