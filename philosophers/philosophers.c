@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 21:05:04 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/10 21:38:55 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,5 +122,6 @@ int	main(int ac, char **av)
 	i = -1;
 	while (++i < arguments.num_of_philo)
 		pthread_join(philo[i].philo, NULL);
-	return (destroy_mutex_and_free(philo, fork), 0);
+	destroy_mutex_and_free(philo, fork);
+	return (0);
 }
