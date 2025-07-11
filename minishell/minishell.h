@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/09 15:31:08 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/11 17:19:10 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int						copy_quotes(t_token *t, t_cmd_exec *env_lst, int i,
 void					ft_lstadd_front(t_cmd_exec **lst, t_cmd_exec *new);
 char					*erase_spaces(char *str);
 int						heredoc_max(t_token *toks);
+char					*remove_outer_quotes(char *s);
 void					ft_lstadd_back(t_cmd_exec **lst, t_cmd_exec *new);
 int						arg_count(t_token **toks, t_cmd *cmd);
 void					lst_del(t_cmd_exec *lst, void (*del)(void *));

@@ -6,11 +6,24 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:20:22 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/08 21:11:50 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/11 17:18:52 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*remove_outer_quotes(char *s)
+{
+	size_t	len;
+
+	if (!s)
+		return (NULL);
+	len = ft_strlen(s);
+	if (len >= 2 && ((s[0] == '"' && s[len - 1] == '"')
+			|| (s[0] == '\'' && s[len - 1] == '\'')))
+		return (ft_substr(s, 1, len - 2));
+	return (ft_strdup(s));
+}
 
 void	ft_lstadd_front(t_cmd_exec **lst, t_cmd_exec *new)
 {
