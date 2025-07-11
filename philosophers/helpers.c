@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 01:14:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 20:03:18 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/11 03:15:04 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	take_forks(t_philo *philo)
 
 	left = philo->id;
 	right = (philo->id + 1) % philo->arguments->num_of_philo;
-	if (left < right)
+	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->mutex.fork[left]);
 		print('F', philo, philo->id);
