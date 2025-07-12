@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/11 22:04:33 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/12 02:33:45 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 		return (-1);
 	if (!new_str[0])
 		return (free(new_str), 0);
-	while (env_lst && ft_strncmp(env_lst->name, new_str, ft_strlen(new_str)
-			+ 1))
+	while (env_lst && ft_strncmp(env_lst->name, new_str,
+			ft_strlen(new_str) + 1))
 		env_lst = env_lst->next;
 	free(new_str);
 	inside_word = (*i > 0 && !ft_strchr(" \t/$=<>|", t->value[*i - 1]));
@@ -110,10 +110,11 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	{
 		if (inside_word)
 			t->strip = (w == 0);
+		else
+			t->strip = 1;
 		return (ft_replace(t, *i, j, env_lst));
 	}
-	t->strip = !(inside_word != 0);
-	return (ft_is_found(t, i, j, w));
+	return (t->strip = !(inside_word), ft_is_found(t, i, j, w));
 }
 
 void	p_expansion(t_token *toks, t_cmd_exec *env_lst)
