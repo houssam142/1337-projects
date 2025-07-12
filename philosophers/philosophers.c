@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 21:38:55 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/12 20:02:44 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	*exec(void *args)
 		if (is_dead(philo))
 			break ;
 	}
-	return (pthread_join(philo->alive, NULL), NULL);
+	pthread_join(philo->alive, NULL);
+	return (NULL);
 }
 
 void	init_param(t_info *info, t_philo *philo, pthread_mutex_t *p,
