@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:07 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/11 17:25:21 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/13 19:38:52 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	parsing_cmd(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 	int	i;
 
 	final_parsing(toks, *env_lst);
-	if (check_ambiguous_redirect(*toks) || heredoc_max(*toks))
+	if (check_ambiguous_redirect(*toks))
 		return (-1);
 	arg_count(toks, cmd);
 	i = parsing_opers(toks, cmd, env_lst);

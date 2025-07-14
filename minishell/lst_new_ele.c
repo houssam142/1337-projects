@@ -6,35 +6,11 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:20:05 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/12 01:31:00 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/13 19:38:23 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	heredoc_max(t_token *toks)
-{
-	int		heredoc_count;
-	t_token	*tmp;
-
-	tmp = toks;
-	heredoc_count = 0;
-	while (tmp && tmp->type != 'c')
-	{
-		if (tmp->type == 'r' && !ft_strncmp(tmp->value, "<<", 3))
-		{
-			heredoc_count++;
-			if (heredoc_count > 16)
-			{
-				ft_putstr_fd(
-					"minishell: maximum here-document count execeeded\n", 2);
-				return (-1);
-			}
-		}
-		tmp = tmp->next;
-	}
-	return (0);
-}
 
 int	check_ambiguous_redirect(t_token *toks)
 {

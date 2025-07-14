@@ -18,7 +18,6 @@ static void	suppress_out(void)
 
 	if (tcgetattr(0, &termios_p) != 0)
 		perror("Minishell: tcgetattr");
-	termios_p.c_lflag &= ~ECHOCTL;
 	if (tcsetattr(STDIN_FILENO, TCSANOW, &termios_p))
 		perror("Minishell: tcsetattr");
 }
