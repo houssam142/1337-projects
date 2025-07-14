@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 01:14:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/11 03:15:04 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/15 00:17:16 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	one_philo(t_philo *philo)
 	pthread_mutex_unlock(&philo->must_die_lock);
 	pthread_mutex_lock(&philo->mutex.fork[philo->id]);
 	print('F', philo, philo->id);
-	usleep(convert_to_misec(philo->arguments->time_to_die));
+	ft_usleep(philo->arguments->time_to_die, philo);
 	pthread_mutex_unlock(&philo->mutex.fork[philo->id]);
 	pthread_join(philo->alive, NULL);
 }

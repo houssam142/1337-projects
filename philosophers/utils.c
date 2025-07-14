@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 17:43:30 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/15 00:17:16 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ void	increment_full(t_philo *philo)
 	pthread_mutex_lock(&philo->arguments->full_lock);
 	*(philo->full) += 1;
 	pthread_mutex_unlock(&philo->arguments->full_lock);
-}
-
-int	convert_to_misec(int time)
-{
-	time *= 1000;
-	return (time);
 }
 
 int	handle_arg(t_info *arg, char **av, int ac)

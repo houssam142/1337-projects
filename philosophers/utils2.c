@@ -3,19 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:03:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/12 19:54:34 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/15 00:31:57 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	check_philo(t_philo *philo)
+int	check_philo(t_philo *philo)
 {
 	int	death_val;
 	int	full_val;
+	int	i;
 
 	while (1)
 	{
@@ -26,9 +27,10 @@ void	check_philo(t_philo *philo)
 		full_val = *(philo->full);
 		pthread_mutex_unlock(&philo->arguments->full_lock);
 		if (death_val == 1 || full_val == philo->arguments->num_of_philo)
-			break ;
+			return (1);
 		usleep(10);
 	}
+	return (0);
 }
 
 int	is_all_full(t_philo *philo)
@@ -47,7 +49,7 @@ void	update_eating(t_philo *philo)
 	philo->must_die = time_1() + philo->arguments->time_to_die;
 	pthread_mutex_unlock(&philo->must_die_lock);
 	print('E', philo, philo->id);
-	usleep(convert_to_misec(philo->arguments->time_to_eat));
+	ft_usleep(philo->arguments->time_to_eat, philo);
 	if (++philo->eat_count == philo->arguments->num_of_times_to_eat)
 		increment_full(philo);
 }

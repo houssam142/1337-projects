@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/10 21:06:06 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/15 00:27:19 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,15 @@ int					time_1(void);
 int					should_stop(t_philo *philo);
 int					has_eaten_enough(t_philo *philo);
 int					is_dead(t_philo *philo);
-void				check_philo(t_philo *philo);
+int					check_philo(t_philo *philo);
 long				ft_atoi(const char *str);
 int					handle_arg(t_info *arg, char **av, int ac);
-int					convert_to_misec(int time);
 void				print_msg(char *msg, int time, int id);
 void				print(char c, t_philo *philo, int id);
 int					take_forks(t_philo *philo);
 int					check_if_full_and_died(t_philo *philo);
 void				one_philo(t_philo *philo);
+int					ft_usleep(int time, t_philo *philo);
 int					check_death_of_philo(t_philo *philo, int left, int right);
 void				increment_full(t_philo *philo);
 void				put_forks(t_philo *philo);

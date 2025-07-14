@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/12 20:02:44 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/15 00:28:38 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ void	*check_if_death(void *arg)
 			{
 				print_msg("died\n", time_1() - philo->arguments->this_time,
 					philo->id);
-				*(philo->arguments->death) = 1;
+				*(philo->arguments->death) += 1;
 			}
 			pthread_mutex_unlock(philo->mutex.p);
-			break ;
 		}
 		pthread_mutex_unlock(&philo->must_die_lock);
 		usleep(100);
@@ -64,7 +63,7 @@ void	*exec(void *args)
 		if (has_eaten_enough(philo) || is_dead(philo))
 			break ;
 		print('S', philo, philo->id);
-		usleep(convert_to_misec(philo->arguments->time_to_sleep));
+		ft_usleep(philo->arguments->time_to_sleep, philo);
 		if (is_dead(philo))
 			break ;
 		print('T', philo, philo->id);
@@ -97,7 +96,8 @@ void	init_param(t_info *info, t_philo *philo, pthread_mutex_t *p,
 	i = -1;
 	while (++i < info->num_of_philo)
 	{
-		pthread_create(&philo[i].philo, NULL, exec, &philo[i]);
+		if (pthread_create(&philo[i].philo, NULL, exec, &philo[i]))
+			return ;
 		usleep(100);
 	}
 }
@@ -119,7 +119,8 @@ int	main(int ac, char **av)
 	while (i < arguments.num_of_philo)
 		pthread_mutex_init(&fork[i++], NULL);
 	init_param(&arguments, philo, &p, fork);
-	check_philo(philo);
+	if (check_philo(philo))
+		return (destroy_mutex_and_free(philo, fork), 1);
 	i = -1;
 	while (++i < arguments.num_of_philo)
 		pthread_join(philo[i].philo, NULL);
