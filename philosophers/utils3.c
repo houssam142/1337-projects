@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 20:00:05 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/10 21:05:21 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/15 01:12:28 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_dead(t_philo *philo)
 	int	death;
 
 	pthread_mutex_lock(philo->mutex.p);
-	death = *(philo->arguments->death);
+	death = (*philo->arguments->death);
 	pthread_mutex_unlock(philo->mutex.p);
 	return (death);
 }

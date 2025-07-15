@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_usleep.c                                        :+:      :+:    :+:   */
+/*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 23:59:31 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/15 00:17:16 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/15 05:11:07 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int	odd_philo(t_philo *philo, int left, int right)
+{
+	pthread_mutex_lock(&philo->mutex.fork[left]);
+	if (is_dead(philo))
+		return (pthread_mutex_unlock(&philo->mutex.fork[right]),
+			pthread_mutex_unlock(&philo->mutex.fork[left]), 1);
+	print('F', philo, philo->id);
+	pthread_mutex_lock(&philo->mutex.fork[right]);
+	if (is_dead(philo))
+		return (pthread_mutex_unlock(&philo->mutex.fork[right]),
+			pthread_mutex_unlock(&philo->mutex.fork[left]), 1);
+	print('F', philo, philo->id);
+	return (0);
+}
 
 int	ft_usleep(int time, t_philo *philo)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_child.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:13 by nafarid           #+#    #+#             */
-/*   Updated: 2025/05/11 13:21:13 by nafarid          ###   ########.fr       */
+/*   Updated: 2025/07/15 20:05:33 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,26 @@ static void	not_built(t_cmd_exec **env_lst, t_cmd *exec_cmd)
 {
 	int		i;
 	char	**env;
+	struct stat	sb;
 
 	env = env_lst_to_arr(*env_lst, 'e', 0);
+	if (!stat(exec_cmd->path, &sb))
+	{
+		if (S_ISDIR(sb.st_mode))
+		{
+			ft_putstr_fd("Minishell: ", 2);
+			ft_putstr_fd(exec_cmd->path, 2);
+			ft_putstr_fd(": is a directory\n", 2);
+			exit(126);
+		}
+		else if (access(exec_cmd->path, X_OK) == -1)
+		{
+			ft_putstr_fd("Minishell: ", 2);
+			ft_putstr_fd(exec_cmd->path, 2);
+			ft_putstr_fd(": Permission denied\n", 2);
+			exit(126);
+		}
+	}
 	i = execve(exec_cmd->path, exec_cmd->args, env);
 	if (i == -1)
 	{

@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/13 19:38:31 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/15 18:59:45 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
+# include <sys/stat.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
@@ -115,7 +116,7 @@ void					ft_signals(void);
 void					func(t_token *t, int *i, int *j);
 void					remove_empty_tokens(t_token **toks);
 int						should_strip(t_token *tok, int i);
-void					quote_count(t_token *toks, t_token *tmp2);
+void					quote_count(t_token *toks);
 int						handle_split(t_token *toks, char *value);
 int						parsing_opers(t_token **toks, t_cmd *cmd,
 							t_cmd_exec **env_lst);

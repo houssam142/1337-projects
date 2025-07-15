@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/15 00:27:19 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/15 06:14:48 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int					ft_usleep(int time, t_philo *philo);
 int					check_death_of_philo(t_philo *philo, int left, int right);
 void				increment_full(t_philo *philo);
 void				put_forks(t_philo *philo);
+int					odd_philo(t_philo *philo, int left, int right);
 void				update_eating(t_philo *philo);
 int					is_all_full(t_philo *philo);
 void				*check_if_death(void *args);

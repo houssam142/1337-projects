@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:21:45 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/11 21:32:08 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/15 07:36:15 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	remove_empty_tokens(t_token **toks)
 
 	curr = *toks;
 	prev = NULL;
-	while (curr)
+	while (curr && curr->type != 'r' && curr->type != 'R')
 	{
 		if (curr->value && (!curr->value[0] || curr->value[0] == 32))
 		{

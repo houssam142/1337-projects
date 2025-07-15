@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:33 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/12 02:15:04 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/15 19:02:04 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,16 @@ static void	ensure_quote_allocated(t_token *t)
 	}
 }
 
-void	quote_count(t_token *toks, t_token *tmp2)
+void	quote_count(t_token *toks)
 {
 	int	i;
 
 	i = -1;
-	if (tmp2 != toks && tmp2->type == 'r' && !ft_strncmp(tmp2->value, "<", 2))
+	if (toks->type == 'r' && !ft_strcmp(toks->value, "<"))
 		toks->strip = 2;
-	else if (tmp2 != toks && tmp2->type == 'r' && !ft_strncmp(tmp2->value, ">",
-			2))
+	else if (toks->type == 'r' && !ft_strcmp(toks->value, ">"))
 		toks->strip = 2;
-	else if (tmp2 != toks && tmp2->type == 'r' && !ft_strncmp(tmp2->value, ">>",
-			3))
+	else if (toks->type == 'r' && !ft_strcmp(toks->value, ">>"))
 		toks->strip = 2;
 	if (toks != NULL)
 	{

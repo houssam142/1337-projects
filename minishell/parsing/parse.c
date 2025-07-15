@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:26 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/30 11:43:20 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/15 14:47:47 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	cmd_free(t_cmd **cmd)
 	}
 }
 
-static int	opers(t_token *toks)
+static int	opers(t_token *toks, t_cmd_exec **env_lst)
 {
 	while (toks)
 	{
@@ -54,6 +54,7 @@ static int	opers(t_token *toks)
 				ft_putstr_fd("Minishell: Syntax error: unexpected token '", 2);
 				ft_putstr_fd(toks->value, 2);
 				ft_putstr_fd("'\n", 2);
+				change_stat(env_lst, 2);
 				return (-1);
 			}
 		}
@@ -88,7 +89,7 @@ int	parsing_line(char *line, t_token **toks, t_cmd_exec **env_lst)
 	if (count > 0)
 	{
 		toks_arr(line, chars, toks);
-		if (opers(*toks) == -1)
+		if (opers(*toks, env_lst) == -1)
 		{
 			lst_clear_tok(toks, &free);
 			return (-1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/15 00:28:38 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/15 07:21:17 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	*exec(void *args)
 			break ;
 		print('S', philo, philo->id);
 		ft_usleep(philo->arguments->time_to_sleep, philo);
+		usleep(700);
 		if (is_dead(philo))
 			break ;
 		print('T', philo, philo->id);
@@ -119,8 +120,7 @@ int	main(int ac, char **av)
 	while (i < arguments.num_of_philo)
 		pthread_mutex_init(&fork[i++], NULL);
 	init_param(&arguments, philo, &p, fork);
-	if (check_philo(philo))
-		return (destroy_mutex_and_free(philo, fork), 1);
+	check_philo(philo);
 	i = -1;
 	while (++i < arguments.num_of_philo)
 		pthread_join(philo[i].philo, NULL);
