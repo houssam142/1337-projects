@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:26 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/16 21:39:34 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/17 23:32:18 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	cmd_free(t_cmd **cmd)
 
 static int	opers(t_token *toks, t_cmd_exec **env_lst)
 {
+	t_token	*prev = toks;
 	while (toks)
 	{
 		if (toks->type == 'o')
@@ -47,7 +48,7 @@ static int	opers(t_token *toks, t_cmd_exec **env_lst)
 					">>", 3) == 0 || ft_strncmp(toks->value, "<", 2) == 0
 				|| ft_strncmp(toks->value, "<<", 3) == 0)
 				toks->type = 'r';
-			else if (ft_strncmp(toks->value, "|", 2) == 0 && toks->next)
+			else if (prev->type == 'w' && !ft_strncmp(toks->value, "|", 2) && toks->next)
 				toks->type = 'c';
 			else
 			{
