@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/09 13:51:12 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/17 05:29:40 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	waiting(t_cmd_exec **env_lst)
 {
 	int	exit_stat;
 	int	stat_code;
+	int	sig;
 
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
@@ -23,9 +24,15 @@ static void	waiting(t_cmd_exec **env_lst)
 	{
 		if (WIFSIGNALED(exit_stat) != 0)
 		{
-			ft_putchar_fd('\n', 1);
-			stat_code = WTERMSIG(exit_stat) + 128;
-			change_stat(env_lst, stat_code);
+			sig = WTERMSIG(exit_stat);
+			if (sig == SIGPIPE)
+				stat_code = 1;
+			else
+			{
+				ft_putchar_fd('\n', 1);
+				stat_code = sig + 128;
+				change_stat(env_lst, stat_code);
+		}
 		}
 		else if (WIFEXITED(exit_stat))
 		{
@@ -70,7 +77,16 @@ static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
 		if (tmp->id == 0 || tmp2->pipe == 1)
 			my_pid = fork();
 		if (!my_pid)
+		{
+			if (tmp->redir_error)
+			{
+				ft_putstr_fd("Minishell: ", 2);
+				ft_putstr_fd(tmp->op_value, 2);
+				ft_putstr_fd(": no such file or directory\n", 2);
+				exit(1);
+			}
 			child_proc(cmd, env_lst, tmp->id);
+		}
 		else if (tmp)
 		{
 			tmp2 = tmp;
@@ -83,8 +99,17 @@ static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
 
 void	exec(t_cmd **cmd, t_cmd_exec **env_lst)
 {
+	int	any_redir_error = 0;
+	t_cmd *tmp = *cmd;
+
+	while (tmp)
+	{
+		if (tmp->redir_error)
+			any_redir_error = 1;
+		tmp = tmp->next;
+	}
 	(*cmd)->path = find_cmd(*cmd, *env_lst);
-	if ((*cmd)->path && (*cmd)->builtin == 1 && (*cmd)->next == NULL)
+	if ((*cmd)->path && (*cmd)->builtin == 1 && (*cmd)->next == NULL && !any_redir_error)
 		exec_built(*cmd, env_lst, 0);
 	else
 		exec_in_process(cmd, env_lst);

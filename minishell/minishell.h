@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/15 18:59:45 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/16 23:39:02 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_cmd
 	int					pipe;
 	char				*path;
 	char				delimiter;
+	int					redir_error;
 	struct s_cmd		*next;
 }						t_cmd;
 

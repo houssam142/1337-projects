@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:39:47 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/15 14:26:05 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/17 06:21:43 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	parsing_code(t_cmd *cmd, int *k)
 		ft_putstr_fd("Minishell: exit: ", 2);
 		ft_putstr_fd(cmd->args[1], 2);
 		ft_putstr_fd(": numeric arg required\n", 2);
-		res = 255;
+		res = 2;
 	}
 	return (res);
 }

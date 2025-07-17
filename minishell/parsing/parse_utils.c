@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:07 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/15 21:57:16 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/17 06:14:52 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,11 @@ static int	parsing_cmd(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 
 	if (final_parsing(toks, *env_lst))
 		return (-1);
-	if (check_ambiguous_redirect(*toks))
-		return (change_stat(env_lst, 1), -1);
 	arg_count(toks, cmd);
 	i = parsing_opers(toks, cmd, env_lst);
 	if (i == -1)
 	{
-		ft_putstr_fd("Minishell: ", 2);
-		ft_putstr_fd(cmd->op_value, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
+		cmd->redir_error = 1;
 		change_stat(env_lst, 1);
 	}
 	if (i == -2)
@@ -66,8 +62,6 @@ static int	parsing_cmd(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 	}
 	if (i == -3)
 		change_stat(env_lst, 1);
-	if (i < 0)
-		return (-1);
 	return (0);
 }
 
@@ -87,6 +81,7 @@ static void	cmd_init(t_cmd **cmd)
 	(*cmd)->std_out = 1;
 	(*cmd)->std_err = 2;
 	(*cmd)->pipe = 0;
+	(*cmd)->redir_error = 0;
 	(*cmd)->pipe_out = 0;
 	(*cmd)->pipe_in = 0;
 	(*cmd)->std_in_dup1 = 0;
@@ -121,9 +116,15 @@ int	toks_to_struct(t_token **toks, t_cmd **cmd, t_cmd_exec **env_lst)
 
 	id = 0;
 	cmd_init(cmd);
-	if (parsing_cmd(toks, *cmd, env_lst) == -1)
+	if (parsing_cmd(toks, *cmd, env_lst))
 		return (-1);
 	(*cmd)->id = id;
+	while (*toks)
+	{
+		if ((*toks)->type == 'c')
+			break;
+		*toks = (*toks)->next;
+	}
 	while ((*toks) && ft_strncmp((*toks)->value, "|", 2) == 0)
 	{
 		last = *cmd;
