@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:59:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/17 06:15:53 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/17 18:12:10 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static int	parsing_in(t_cmd *cmd, t_cmd_exec **env_lst)
 		if (fd < 0)
 		{
 			cmd->redir_error = 1;
-			// ft_putstr_fd("Minishell: ", 2);
-			// perror(cmd->op_value);
+			ft_putstr_fd("Minishell: ", 2);
+			perror(cmd->op_value);
 			return (-1);
 		}
 		if (cmd->std_in != 0)
@@ -101,21 +101,19 @@ int	parsing_opers(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 {
 	t_token	*tmp;
 	int		stat;
-	t_token	**tmp2;
 
 	stat = 0;
-	tmp2 = toks;
-	while ((*tmp2) != NULL && (*tmp2)->type != 'c' && stat >= 0)
+	while ((*toks) != NULL && (*toks)->type != 'c' && stat >= 0)
 	{
 		if (cmd->op != NULL)
 			free(cmd->op);
-		cmd->op = ft_strdup((*tmp2)->value);
-		tmp = *tmp2;
-		*tmp2 = (*tmp2)->next;
+		cmd->op = ft_strdup((*toks)->value);
+		tmp = *toks;
+		*toks = (*toks)->next;
 		lst_del_tok(tmp, &free);
-		if (tmp2 && ((*tmp2)->type == 'v' || (*tmp2)->type == 'h'
-				|| (*tmp2)->type == 'H'))
-			stat = parsing_redirs(tmp2, cmd, &tmp, env_lst);
+		if (*toks && ((*toks)->type == 'v' || (*toks)->type == 'h'
+				|| (*toks)->type == 'H'))
+			stat = parsing_redirs(toks, cmd, &tmp, env_lst);
 		else
 		{
 			ft_putstr_fd("Minishell Syntax error: Undefined value after "

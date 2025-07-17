@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:45:37 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/07 12:02:14 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/17 07:24:34 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ int	cd(t_cmd *cmd, t_cmd_exec **env_lst)
 	int		res;
 
 	res = 0;
+	if (cmd->args[2])
+	{
+		ft_putstr_fd("Minishell: cd: too many arguments\n", 2);
+		change_stat(env_lst, 1);
+		return (1);
+	}
 	if (!cmd->args[1])
 		res = find_home(env_lst, &path);
 	else
