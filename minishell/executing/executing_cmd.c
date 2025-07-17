@@ -6,11 +6,18 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/17 05:29:40 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/17 20:37:31 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	handle_sigquit(int sig)
+{
+	(void)sig;
+	write(1, "Quit (core dumped)\n", 20);
+	exit(131);
+}
 
 static void	waiting(t_cmd_exec **env_lst)
 {
@@ -19,7 +26,7 @@ static void	waiting(t_cmd_exec **env_lst)
 	int	sig;
 
 	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, handle_sigquit);
 	while (wait(&exit_stat) != -1 || errno != ECHILD)
 	{
 		if (WIFSIGNALED(exit_stat) != 0)

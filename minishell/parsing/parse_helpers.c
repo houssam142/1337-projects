@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:33 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/15 19:02:04 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/17 18:17:45 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,6 @@ void	quote_count(t_token *toks)
 	int	i;
 
 	i = -1;
-	if (toks->type == 'r' && !ft_strcmp(toks->value, "<"))
-		toks->strip = 2;
-	else if (toks->type == 'r' && !ft_strcmp(toks->value, ">"))
-		toks->strip = 2;
-	else if (toks->type == 'r' && !ft_strcmp(toks->value, ">>"))
-		toks->strip = 2;
 	if (toks != NULL)
 	{
 		ensure_quote_allocated(toks);

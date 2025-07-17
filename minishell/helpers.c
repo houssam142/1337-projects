@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:21:45 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/17 08:01:55 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/17 20:03:04 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	func(t_token *t, int *i, int *j)
 	}
 	else
 	{
-		while (t->value[*j] && !ft_strchr(" \t\"\'/?$=[]:.<>|", t->value[*j]) && ft_isalpha(t->value[*j]))
+		while (t->value[*j] && !ft_strchr(" \t\"\'/?$=[]:.<>|", t->value[*j])
+				&& ft_isalpha(t->value[*j]))
+			(*j)++;
+		while (t->value[*j] == '_' || ft_isalpha(t->value[*j]))
 			(*j)++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:59:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/17 18:12:10 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/17 18:18:17 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,6 @@ static int	parsing_redirs(t_token **toks, t_cmd *cmd, t_token **tmp,
 	*tmp = *toks;
 	*toks = (*toks)->next;
 	lst_del_tok(*tmp, &free);
-	if (cmd->op_value[0] == '\0')
-	{
-		ft_putstr_fd("minishell: ambiguous redirect\n", 2);
-		return (-3);
-	}
 	if (!ft_strncmp(cmd->op, ">", 2))
 	{
 		fd = open(cmd->op_value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
