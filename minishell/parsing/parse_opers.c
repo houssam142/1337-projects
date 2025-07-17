@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:59:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/17 18:18:17 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/17 20:50:16 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ static int	parsing_redirs(t_token **toks, t_cmd *cmd, t_token **tmp,
 		if (fd < 0)
 		{
 			cmd->redir_error = 1;
-			ft_putstr_fd("Minishell: ", 2);
-			perror(cmd->op_value);
 			return (-1);
 		}
 		if (cmd->std_out != 1)
