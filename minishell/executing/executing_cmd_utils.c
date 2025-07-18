@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:47:17 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/15 18:51:28 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/18 03:25:05 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*find_path(t_cmd_exec *env_lst, char *cmd)
 	}
 	if (path != NULL)
 		arr_free(path);
-	return (0);
+	return (NULL);
 }
 
 static int	built(t_cmd *cmd)

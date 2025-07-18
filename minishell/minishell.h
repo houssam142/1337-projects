@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/17 23:15:40 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/18 03:27:10 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_cmd
 }						t_cmd;
 
 int						env_to_lst(char **env, t_cmd_exec **env_lst);
+void	clear_all(t_cmd **cmds, t_token **tokens);
 void					toks_arr(char *line, char *chars, t_token **toks);
 void					change_stat(t_cmd_exec **env_lst, int stat);
 int						parsing_line(char *line, t_token **toks,

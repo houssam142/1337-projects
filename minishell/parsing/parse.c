@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:26 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/17 23:32:18 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/18 03:27:00 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	opers(t_token *toks, t_cmd_exec **env_lst)
 	return (0);
 }
 
-static void	clear_all(t_cmd **cmds, t_token **tokens)
+void	clear_all(t_cmd **cmds, t_token **tokens)
 {
 	t_cmd	*tmp;
 

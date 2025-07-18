@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:08:36 by aoussama          #+#    #+#             */
-/*   Updated: 2025/06/30 17:21:56 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/18 02:45:57 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,6 @@ static void	cleanup_readline(void)
 	rl_clear_history();
 	rl_free_line_state();
 	rl_deprep_terminal();
-}
-
-static void	add_env_var(t_cmd_exec **lst, const char *name, const char *value)
-{
-	t_cmd_exec	*node;
-
-	node = malloc(sizeof(t_cmd_exec));
-	if (!node)
-		return ;
-	node->name = ft_strdup(name);
-	node->value = ft_strdup(value);
-	node->status = 0;
-	node->meaning = 0;
-	node->next = *lst;
-	*lst = node;
 }
 
 static int	check_stat(t_cmd_exec *env_lst, int *status)
@@ -59,7 +44,6 @@ static int	start(int ac, char **av, char **env, t_cmd_exec **env_lst)
 	}
 	ft_signals();
 	env_to_lst(env, env_lst);
-	add_env_var(env_lst, "0", "minishell");
 	shell_vl(env_lst);
 	return (0);
 }
