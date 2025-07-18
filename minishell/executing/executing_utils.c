@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:49:01 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/16 20:06:11 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/18 14:04:14 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strjoin_sep(char *path, char *cmd, char c)
 		s[i] = path[i];
 		i++;
 	}
-	s[i++] = c;
+	s[i++] = c;	
 	while (*cmd)
 	{
 		s[i] = *cmd++;

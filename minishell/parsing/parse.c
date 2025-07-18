@@ -6,13 +6,13 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:26 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/18 03:27:00 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/18 14:11:26 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	cmd_free(t_cmd **cmd)
+void	cmd_free(t_cmd **cmd)
 {
 	int	i;
 
@@ -27,8 +27,6 @@ static void	cmd_free(t_cmd **cmd)
 				free((*cmd)->args[i++]);
 			free((*cmd)->args);
 		}
-		if ((*cmd)->path)
-			free((*cmd)->path);
 		if ((*cmd)->op)
 			free((*cmd)->op);
 		if ((*cmd)->op_value)

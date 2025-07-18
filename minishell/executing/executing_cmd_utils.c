@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:47:17 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/18 03:25:05 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/18 14:23:04 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,14 @@ char	*find_cmd(t_cmd *cmd, t_cmd_exec *env_lst)
 	if (!cmd->args || !cmd->args[0])
 		return (0);
 	if ((built(cmd) == 1) || (ft_strchr(cmd->args[0], '/') != 0))
-		path = ft_strdup(cmd->args[0]);
+		path = cmd->args[0];
 	else
 	{
 		path = find_path(env_lst, cmd->args[0]);
 		if (path)
 		{
 			free(cmd->args[0]);
-			cmd->args[0] = ft_strdup(path);
+			cmd->args[0] = path;
 		}
 	}
 	if (!path)

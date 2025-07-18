@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:13 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/18 03:28:07 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/18 14:24:07 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,10 @@ static void	not_built(t_cmd_exec **env_lst, t_cmd *exec_cmd)
 	i = execve(exec_cmd->path, exec_cmd->args, env);
 	if (i == -1)
 	{
-		ft_putstr_fd("Minishell: command not found: ", 2);
-		ft_putstr_fd(exec_cmd->args[0], 2);
-		ft_putchar_fd('\n', 2);
+		ft_putstr_fd("Minishell: command not found \n", 2);
+		// ft_putstr_fd(exec_cmd->args[0], 2);
 		lst_clear(env_lst, &free);
-		clear_all(&exec_cmd, NULL);
+		cmd_free(&exec_cmd);
 		arr_free(env);
 		exit(127);
 	}
@@ -104,6 +103,7 @@ void	child_proc(t_cmd **cmd, t_cmd_exec **env_lst, int id)
 		ft_putstr_fd(exec_cmd->args[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
 		lst_clear(env_lst, &free);
+		cmd_free(cmd);
 		exit(127);
 	}
 	if (exec_cmd->builtin != 1)
