@@ -30,7 +30,7 @@ char	*ft_strjoin_sep(char *path, char *cmd, char c)
 		s[i] = path[i];
 		i++;
 	}
-	s[i++] = c;	
+	s[i++] = c;
 	while (*cmd)
 	{
 		s[i] = *cmd++;

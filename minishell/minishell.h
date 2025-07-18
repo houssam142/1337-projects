@@ -14,7 +14,6 @@
 # define MINISHELL_H
 
 # include "libft/libft.h"
-# include <sys/stat.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <readline/history.h>
@@ -22,6 +21,7 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <termios.h>
 # include <unistd.h>
@@ -130,6 +130,7 @@ int						split_token_into_nodes(t_token *tok);
 char					*ft_strjoin_sep(char *path, char *cmd, char c);
 void					arr_free(char **arr);
 void					dups(t_cmd *tmp);
+void					check_if_dir(t_cmd *exec_cmd);
 void					build_new_tok_val(t_token *toks, char *value, int i,
 							int j);
 char					**env_lst_to_arr(t_cmd_exec *env_lst, char meaning,

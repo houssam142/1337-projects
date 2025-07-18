@@ -37,7 +37,9 @@ void	cmd_free(t_cmd **cmd)
 
 static int	opers(t_token *toks, t_cmd_exec **env_lst)
 {
-	t_token	*prev = toks;
+	t_token	*prev;
+
+	prev = toks;
 	while (toks)
 	{
 		if (toks->type == 'o')
@@ -46,7 +48,8 @@ static int	opers(t_token *toks, t_cmd_exec **env_lst)
 					">>", 3) == 0 || ft_strncmp(toks->value, "<", 2) == 0
 				|| ft_strncmp(toks->value, "<<", 3) == 0)
 				toks->type = 'r';
-			else if (prev->type == 'w' && !ft_strncmp(toks->value, "|", 2) && toks->next)
+			else if (prev->type == 'w' && !ft_strncmp(toks->value, "|", 2)
+				&& toks->next)
 				toks->type = 'c';
 			else
 			{

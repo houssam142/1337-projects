@@ -101,8 +101,8 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 		return (-1);
 	if (!new_str[0])
 		return (free(new_str), 0);
-	while (env_lst && ft_strncmp(env_lst->name, new_str,
-			ft_strlen(new_str) + 1))
+	while (env_lst && ft_strncmp(env_lst->name, new_str, ft_strlen(new_str)
+			+ 1))
 		env_lst = env_lst->next;
 	free(new_str);
 	inside_word = (*i > 0 && !ft_strchr(" \t/$=<>|", t->value[*i - 1]));

@@ -39,7 +39,7 @@ static void	waiting(t_cmd_exec **env_lst)
 				ft_putchar_fd('\n', 1);
 				stat_code = sig + 128;
 				change_stat(env_lst, stat_code);
-		}
+			}
 		}
 		else if (WIFEXITED(exit_stat))
 		{
@@ -106,9 +106,11 @@ static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
 
 void	exec(t_cmd **cmd, t_cmd_exec **env_lst)
 {
-	int	any_redir_error = 0;
-	t_cmd *tmp = *cmd;
+	int		any_redir_error;
+	t_cmd	*tmp;
 
+	any_redir_error = 0;
+	tmp = *cmd;
 	while (tmp)
 	{
 		if (tmp->redir_error)
@@ -116,7 +118,8 @@ void	exec(t_cmd **cmd, t_cmd_exec **env_lst)
 		tmp = tmp->next;
 	}
 	(*cmd)->path = find_cmd(*cmd, *env_lst);
-	if ((*cmd)->path && (*cmd)->builtin == 1 && (*cmd)->next == NULL && !any_redir_error)
+	if ((*cmd)->path && (*cmd)->builtin == 1 && (*cmd)->next == NULL
+		&& !any_redir_error)
 		exec_built(*cmd, env_lst, 0);
 	else
 		exec_in_process(cmd, env_lst);

@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:07 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/18 13:52:56 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/18 21:40:26 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int	toks_to_struct(t_token **toks, t_cmd **cmd, t_cmd_exec **env_lst)
 	while ((*toks))
 	{
 		if ((*toks)->type == 'c')
-			break;
+			break ;
 		*toks = (*toks)->next;
 	}
 	while ((*toks) && ft_strncmp((*toks)->value, "|", 2) == 0)

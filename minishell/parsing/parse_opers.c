@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:59:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/17 20:50:16 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/18 14:52:40 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ static int	parsing_in(t_cmd *cmd, t_cmd_exec **env_lst)
 
 static int	parsing_out(t_cmd *cmd)
 {
+	int	fd;
+
 	if (!ft_strncmp(cmd->op, ">>", 3))
 	{
-		int	fd;
-
 		fd = open(cmd->op_value, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (fd < 0)
 		{
