@@ -26,7 +26,7 @@ int	check_philo(t_philo *philo)
 		full_val = *(philo->full);
 		pthread_mutex_unlock(&philo->arguments->full_lock);
 		if (death_val == 1 || full_val == philo->arguments->num_of_philo)
-			break;
+			break ;
 		usleep(10);
 	}
 	return (0);

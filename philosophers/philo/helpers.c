@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 01:14:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/15 06:14:45 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/19 00:19:12 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,16 @@ void	one_philo(t_philo *philo)
 
 int	take_forks(t_philo *philo)
 {
-	int	left = philo->id;
-	int	right = (philo->id + 1) % philo->arguments->num_of_philo;
+	int	left;
+	int	right;
 
+	left = philo->id;
+	right = (philo->id + 1) % philo->arguments->num_of_philo;
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->mutex.fork[right]);
 		if (is_dead(philo))
-		{
-			pthread_mutex_unlock(&philo->mutex.fork[right]);
-			return (1);
-		}
+			return (pthread_mutex_unlock(&philo->mutex.fork[right]), 1);
 		print('F', philo, philo->id);
 		pthread_mutex_lock(&philo->mutex.fork[left]);
 		if (is_dead(philo))
@@ -71,5 +70,5 @@ int	time_1(void)
 
 void	print_msg(char *message, int time, int id)
 {
-	printf("%d ms %d %s", time, id, message);
+	printf("%d ms %d %s", time, id + 1, message);
 }

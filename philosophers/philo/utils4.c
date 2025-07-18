@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 23:59:31 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/15 05:11:07 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/19 00:18:47 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+// static int	ft_issign(int c)
+// {
+// 	return ((c == '-'));
+// }
+
+int	check_arg(int ac, char **av)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = -1;
+	while (++i <= ac)
+	{
+		while (av[i][++j])
+		{
+			if (ft_isalpha(av[i][j]))
+				return (1);
+		}
+	}
+	return (0);
+}
 
 int	odd_philo(t_philo *philo, int left, int right)
 {
