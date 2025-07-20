@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/18 16:13:03 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/15 06:14:48 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ typedef struct s_philo
 }					t_philo;
 
 int					time_1(void);
-int					check_arg(int ac, char **av);
-int					ft_isalpha(int c);
 int					should_stop(t_philo *philo);
 int					has_eaten_enough(t_philo *philo);
 int					is_dead(t_philo *philo);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 01:14:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/19 00:19:12 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/15 06:14:45 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,17 @@ void	one_philo(t_philo *philo)
 
 int	take_forks(t_philo *philo)
 {
-	int	left;
-	int	right;
+	int	left = philo->id;
+	int	right = (philo->id + 1) % philo->arguments->num_of_philo;
 
-	left = philo->id;
-	right = (philo->id + 1) % philo->arguments->num_of_philo;
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(&philo->mutex.fork[right]);
 		if (is_dead(philo))
-			return (pthread_mutex_unlock(&philo->mutex.fork[right]), 1);
+		{
+			pthread_mutex_unlock(&philo->mutex.fork[right]);
+			return (1);
+		}
 		print('F', philo, philo->id);
 		pthread_mutex_lock(&philo->mutex.fork[left]);
 		if (is_dead(philo))
