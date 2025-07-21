@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:21:45 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/18 22:20:46 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/21 17:09:26 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ void	remove_empty_tokens(t_token **toks)
 			else
 				*toks = curr->next;
 			curr = curr->next;
-			free(to_delete->value);
-			free(to_delete);
+			lst_clear_tok(&to_delete, &free);
 		}
 		else
 		{

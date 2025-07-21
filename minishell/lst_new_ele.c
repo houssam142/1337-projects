@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:20:05 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/17 23:17:12 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/21 17:07:48 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_token	*lst_new_ele_tok(char type, char *value)
 		return (NULL);
 	new_ele->type = type;
 	new_ele->value = value;
-	new_ele->quote = (char *)ft_calloc(sizeof(char), (ft_strlen(value) + 1));
+	new_ele->quote = ft_calloc(sizeof(char), (ft_strlen(value) + 1));
 	new_ele->quote[sizeof(char) * ft_strlen(value)] = '\0';
 	new_ele->strip = 1;
 	new_ele->next = NULL;
