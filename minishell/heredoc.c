@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:21:01 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/20 04:00:30 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/21 04:35:59 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	go_heredoc(t_cmd *cmd, t_cmd_exec *env_lst, int fd_doc)
 		line = readline("heredoc> ");
 		if (!line)
 		{
+			lst_clear(&env_lst, &free);
+			cmd_free(&cmd);
 			ft_putchar_fd('\n', fd_doc);
 			break ;
 		}

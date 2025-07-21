@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:49:01 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/18 14:04:14 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/21 09:09:06 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	exec_run(t_cmd *cmd, t_cmd_exec **env_lst)
 	else if (!ft_strncmp(cmd->path, "export", 7))
 		return (ft_export(cmd, env_lst));
 	else if (!ft_strncmp(cmd->path, "echo", 5))
-		return (echo(cmd, env_lst));
+		return (ft_echo(cmd, env_lst));
 	else if (!ft_strncmp(cmd->path, "exit", 5))
 		return (ft_exit(cmd, env_lst));
 	else if (!ft_strncmp(cmd->path, "cd", 3))

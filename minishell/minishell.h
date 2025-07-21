@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/18 05:03:54 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/21 09:08:41 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int						cd(t_cmd *cmd, t_cmd_exec **env_lst);
 int						tokens_count(char *line, char *chars);
 int						pwd(t_cmd_exec **env_lst);
 int						unset(t_cmd *cmd, t_cmd_exec **env_lst);
-int						echo(t_cmd *cmd, t_cmd_exec **env_lst);
+int						ft_echo(t_cmd *cmd, t_cmd_exec **env_lst);
 int						env(t_cmd_exec **env_lst);
 int						ft_exit(t_cmd *cmd, t_cmd_exec **env_lst);
 int						ft_export(t_cmd *cmd, t_cmd_exec **env_lst);

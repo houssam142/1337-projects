@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:13 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/20 03:54:11 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/21 05:34:24 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,6 @@ static void	not_built(t_cmd_exec **env_lst, t_cmd *exec_cmd)
 		ft_putstr_fd("Minishell: ", 2);
 		ft_putstr_fd(exec_cmd->args[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
-		lst_clear(env_lst, &free);
-		cmd_free(&exec_cmd);
-		arr_free(env);
-		exit(127);
 	}
 	exit(2);
 }
@@ -84,6 +80,12 @@ void	child_proc(t_cmd **cmd, t_cmd_exec **env_lst, int id)
 	{
 		if (exec_cmd->path_error == 0)
 			exit(0);
+		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd(exec_cmd->args[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
+		lst_clear(env_lst, &free);
+		cmd_free(&exec_cmd);
+		exit(127);
 	}
 	if (exec_cmd->builtin != 1)
 		not_built(env_lst, exec_cmd);
