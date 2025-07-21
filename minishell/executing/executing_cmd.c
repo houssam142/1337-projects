@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/21 17:46:06 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/21 22:27:28 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
 				ft_putstr_fd("Minishell: ", 2);
 				ft_putstr_fd(tmp->op_value, 2);
 				ft_putstr_fd(": no such file or directory\n", 2);
+				lst_clear(env_lst, free);
+				cmd_free(cmd);
 				exit(1);
 			}
 			child_proc(cmd, env_lst, tmp->id);

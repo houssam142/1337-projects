@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:59:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/18 14:52:40 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/21 22:23:01 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ static int	parsing_in(t_cmd *cmd, t_cmd_exec **env_lst)
 		if (fd < 0)
 		{
 			cmd->redir_error = 1;
-			ft_putstr_fd("Minishell: ", 2);
-			perror(cmd->op_value);
 			return (-1);
 		}
 		if (cmd->std_in != 0)
