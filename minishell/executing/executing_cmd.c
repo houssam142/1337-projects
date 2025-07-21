@@ -6,27 +6,20 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/21 17:32:44 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/21 17:46:06 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	handle_sigquit(int sig)
-{
-	(void)sig;
-	write(1, "Quit (core dumped)\n", 20);
-	exit(131);
-}
-
-static void	waiting(t_cmd_exec **env_lst)
+static void	waiting(t_cmd_exec **env_lst, t_cmd **cmd)
 {
 	int	exit_stat;
 	int	stat_code;
 	int	sig;
 
 	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, handle_sigquit);
+	signal(SIGQUIT, SIG_IGN);
 	while (wait(&exit_stat) != -1 || errno != ECHILD)
 	{
 		if (WIFSIGNALED(exit_stat) != 0)
@@ -34,6 +27,13 @@ static void	waiting(t_cmd_exec **env_lst)
 			sig = WTERMSIG(exit_stat);
 			if (sig == SIGPIPE)
 				stat_code = 1;
+			if (sig == SIGQUIT)
+			{
+				printf("Quit (core dumped)\n");
+				lst_clear(env_lst, free);
+				cmd_free(cmd);
+				exit(131);
+			}
 			else
 			{
 				ft_putchar_fd('\n', 1);
@@ -67,7 +67,7 @@ static void	parent_proc(t_cmd **cmd, t_cmd_exec **env_lst)
 			close(tmp->pipe_in);
 		tmp = tmp->next;
 	}
-	waiting(env_lst);
+	waiting(env_lst, cmd);
 }
 
 static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
