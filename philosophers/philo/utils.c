@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/15 05:05:39 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/22 09:01:31 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,12 @@ void	increment_full(t_philo *philo)
 
 int	handle_arg(t_info *arg, char **av, int ac)
 {
-	if ((ac != 5 && ac != 6) || ft_atoi(av[1]) > 200 || ft_atoi(av[2]) < 60
+	if (ac != 5 && ac != 6)
+	{
+		if (check_arg(ac, av))
+			return (1);
+	}
+	if (ft_atoi(av[1]) > 200 || ft_atoi(av[2]) < 60
 		|| ft_atoi(av[3]) < 60 || ft_atoi(av[4]) < 60)
 		return (1);
 	arg->num_of_philo = ft_atoi(av[1]);
@@ -34,7 +39,8 @@ int	handle_arg(t_info *arg, char **av, int ac)
 	if (ac == 6)
 	{
 		arg->num_of_times_to_eat = ft_atoi(av[5]);
-		if (arg->num_of_times_to_eat >= 2147483647)
+		if (arg->num_of_times_to_eat > 2147483647
+			|| !arg->num_of_times_to_eat)
 			return (1);
 	}
 	else

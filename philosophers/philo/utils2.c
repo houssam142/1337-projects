@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:03:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/15 01:09:24 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/22 09:01:23 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_philo(t_philo *philo)
 		full_val = *(philo->full);
 		pthread_mutex_unlock(&philo->arguments->full_lock);
 		if (death_val == 1 || full_val == philo->arguments->num_of_philo)
-			break;
+			break ;
 		usleep(10);
 	}
 	return (0);

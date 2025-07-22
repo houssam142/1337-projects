@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/19 06:50:22 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/22 09:09:32 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,20 @@ void	*check_if_death(void *arg)
 		if (check_if_full_and_died(philo))
 			break ;
 		pthread_mutex_lock(&philo->must_die_lock);
-		if (philo->must_die <= time_1())
+        int must_die_time = philo->must_die;
+        pthread_mutex_unlock(&philo->must_die_lock);
+		if (must_die_time <= time_1())
 		{
-			pthread_mutex_unlock(&philo->must_die_lock);
 			pthread_mutex_lock(philo->mutex.p);
 			if (!*(philo->arguments->death))
 			{
 				print_msg("died\n", time_1() - philo->arguments->this_time,
 					philo->id);
-				*(philo->arguments->death) += 1;
+				*(philo->arguments->death) = 1;
 			}
 			pthread_mutex_unlock(philo->mutex.p);
+			break ;	
 		}
-		pthread_mutex_unlock(&philo->must_die_lock);
 		usleep(100);
 	}
 	return (NULL);
@@ -42,7 +43,9 @@ void	*check_if_death(void *arg)
 
 void	death_events(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->must_die_lock);
 	philo->must_die = time_1() + philo->arguments->time_to_die;
+	pthread_mutex_unlock(&philo->must_die_lock);
 	pthread_create(&philo->alive, NULL, check_if_death, philo);
 }
 
@@ -116,6 +119,8 @@ int	main(int ac, char **av)
 		return (1);
 	philo = malloc(sizeof(t_philo) * arguments.num_of_philo);
 	fork = malloc(sizeof(pthread_mutex_t) * (arguments.num_of_philo));
+	if (!fork || !philo)
+		return (1);
 	pthread_mutex_init(&arguments.full_lock, NULL);
 	while (i < arguments.num_of_philo)
 		pthread_mutex_init(&fork[i++], NULL);
