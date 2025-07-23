@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:07 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/21 17:07:56 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/23 01:57:49 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ static int	parse_pipe(t_token **toks, t_cmd *last)
 	t_cmd	*new_cmd;
 	int		fd[2];
 
+	while (last->next != NULL)
+		last = last->next;
 	last->pipe = 1;
 	tmp = *toks;
 	*toks = (*toks)->next;
@@ -116,8 +118,7 @@ int	toks_to_struct(t_token **toks, t_cmd **cmd, t_cmd_exec **env_lst)
 
 	id = 0;
 	cmd_init(cmd);
-	if (parsing_cmd(toks, *cmd, env_lst))
-		return (-1);
+	parsing_cmd(toks, *cmd, env_lst);
 	(*cmd)->id = id;
 	while ((*toks))
 	{
@@ -128,14 +129,11 @@ int	toks_to_struct(t_token **toks, t_cmd **cmd, t_cmd_exec **env_lst)
 	while ((*toks) && ft_strncmp((*toks)->value, "|", 2) == 0)
 	{
 		last = *cmd;
-		while (last->next != NULL)
-			last = last->next;
 		parse_pipe(toks, last);
 		last = *cmd;
 		while (last->next)
 			last = last->next;
-		if (parsing_cmd(toks, last, env_lst) == -1)
-			return (-1);
+		parsing_cmd(toks, last, env_lst);
 		last->id = ++id;
 	}
 	return (0);

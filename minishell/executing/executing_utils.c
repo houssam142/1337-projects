@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:49:01 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/21 09:09:06 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/23 03:51:02 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,14 @@ static void	exec_run_par(t_cmd *cmd, t_cmd_exec **env_lst)
 
 void	exec_built(t_cmd *cmd, t_cmd_exec **env_lst, int child_par)
 {
+	int exit_code;
+
 	if (!child_par)
 		exec_run_par(cmd, env_lst);
 	else if (child_par == 1)
-		exit(exec_run(cmd, env_lst));
+	{
+		exit_code = exec_run(cmd, env_lst);
+		lst_clear(env_lst, free);
+		exit(exit_code);
+	}
 }

@@ -23,7 +23,7 @@ void	func(t_token *t, int *i, int *j)
 	else
 	{
 		while (t->value[*j] && !ft_strchr(" \t\"\'/?$=[]:.<>|", t->value[*j])
-			&& ft_isalpha(t->value[*j]))
+				&& ft_isalpha(t->value[*j]))
 			(*j)++;
 		while (t->value[*j] == '_' || ft_isalpha(t->value[*j]))
 			(*j)++;

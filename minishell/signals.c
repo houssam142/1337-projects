@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:18:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/17 20:15:46 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/23 02:02:43 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,5 @@ void	ft_signals(void)
 	suppress_out();
 	signal(SIGINT, ft_sigint_ctrl_c);
 	signal(SIGQUIT, ft_handle_sigquit);
+	signal(SIGPIPE, SIG_IGN);
 }

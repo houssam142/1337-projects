@@ -6,41 +6,47 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/21 22:27:28 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/23 02:14:41 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+static void	waiting_helper(t_cmd_exec **env_lst, t_cmd **cmd, int *exit_stat,
+	int *stat_code)
+{
+	int	sig;
+
+	sig = WTERMSIG(*exit_stat);
+	if (sig == SIGPIPE)
+		*stat_code = 1;
+	else if (sig == SIGQUIT)
+	{
+		printf("Quit (core dumped)\n");
+		lst_clear(env_lst, free);
+		cmd_free(cmd);
+		exit(131);
+	}
+	else
+	{
+		ft_putchar_fd('\n', 1);
+		*stat_code = sig + 128;
+		change_stat(env_lst, *stat_code);
+	}
+}
+
 static void	waiting(t_cmd_exec **env_lst, t_cmd **cmd)
 {
 	int	exit_stat;
 	int	stat_code;
-	int	sig;
 
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGPIPE, SIG_IGN);
 	while (wait(&exit_stat) != -1 || errno != ECHILD)
 	{
 		if (WIFSIGNALED(exit_stat) != 0)
-		{
-			sig = WTERMSIG(exit_stat);
-			if (sig == SIGPIPE)
-				stat_code = 1;
-			if (sig == SIGQUIT)
-			{
-				printf("Quit (core dumped)\n");
-				lst_clear(env_lst, free);
-				cmd_free(cmd);
-				exit(131);
-			}
-			else
-			{
-				ft_putchar_fd('\n', 1);
-				stat_code = sig + 128;
-				change_stat(env_lst, stat_code);
-			}
-		}
+			waiting_helper(env_lst, cmd, &exit_stat, &stat_code);
 		else if (WIFEXITED(exit_stat))
 		{
 			stat_code = WEXITSTATUS(exit_stat);
@@ -108,20 +114,8 @@ static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
 
 void	exec(t_cmd **cmd, t_cmd_exec **env_lst)
 {
-	int		any_redir_error;
-	t_cmd	*tmp;
-
-	any_redir_error = 0;
-	tmp = *cmd;
-	while (tmp)
-	{
-		if (tmp->redir_error)
-			any_redir_error = 1;
-		tmp = tmp->next;
-	}
 	(*cmd)->path = find_cmd(*cmd, *env_lst);
-	if ((*cmd)->path && (*cmd)->builtin == 1 && (*cmd)->next == NULL
-		&& !any_redir_error)
+	if ((*cmd)->path && (*cmd)->builtin == 1 && (*cmd)->next == NULL)
 		exec_built(*cmd, env_lst, 0);
 	else
 		exec_in_process(cmd, env_lst);
