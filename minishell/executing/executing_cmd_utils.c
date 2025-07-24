@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:47:17 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/21 08:47:51 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 17:06:35 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static char	*find_path(t_cmd_exec *env_lst, char *cmd)
 	int		i;
 
 	i = -1;
+	if (!cmd || !cmd[0])
+		return NULL;
 	path = find_and_split(env_lst);
 	while (path && path[++i] != NULL)
 	{
@@ -84,7 +86,10 @@ char	*find_cmd(t_cmd *cmd, t_cmd_exec *env_lst)
 
 	path = NULL;
 	if (!cmd->args || !cmd->args[0])
+	{
+		cmd->path_error = 1;
 		return (NULL);
+	}
 	if ((built(cmd) == 1) || (ft_strchr(cmd->args[0], '/') != 0))
 		path = cmd->args[0];
 	else
