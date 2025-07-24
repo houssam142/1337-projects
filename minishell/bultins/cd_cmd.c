@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 13:45:37 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/17 07:24:34 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 13:13:15 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	find_home(t_cmd_exec **env_lst, char **path)
 	return (0);
 }
 
-int	cd(t_cmd *cmd, t_cmd_exec **env_lst)
+int	ft_cd(t_cmd *cmd, t_cmd_exec **env_lst)
 {
 	char	*path;
 	int		res;

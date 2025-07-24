@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:49:01 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/23 23:10:40 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 13:14:14 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	exec_run(t_cmd *cmd, t_cmd_exec **env_lst)
 	else if (!ft_strncmp(cmd->path, "exit", 5))
 		return (ft_exit(cmd, env_lst));
 	else if (!ft_strncmp(cmd->path, "cd", 3))
-		return (cd(cmd, env_lst));
+		return (ft_cd(cmd, env_lst));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/23 11:54:23 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 13:19:56 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	int		inside_word;
 
 	j = *i + 1;
-	func(t, i, &j);
+	func(t, &j);
 	new_str = ft_substr(t->value, *i + 1, j - *i - 1);
 	if (!new_str)
 		return (-1);

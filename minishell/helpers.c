@@ -6,15 +6,14 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:21:45 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/23 23:25:11 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 13:19:51 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	func(t_token *t, int *i, int *j)
+void	func(t_token *t, int *j)
 {
-	(void)i;
 	if (t->value[*j] == '?')
 	{
 		(*j)++;
