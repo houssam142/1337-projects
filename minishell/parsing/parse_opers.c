@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:59:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/24 13:12:53 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 15:19:06 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ static int	parsing_redirs(t_token **toks, t_cmd *cmd, t_token **tmp,
 	{
 		fd = open(cmd->op_value, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		if (fd < 0)
-		{
-			cmd->redir_error = 1;
-			return (-1);
-		}
+			return (cmd->redir_error = 1, -1);
 		if (cmd->std_out != 1)
 			close(cmd->std_out);
 		cmd->std_out = fd;
@@ -106,8 +103,7 @@ int	parsing_opers(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 		else
 		{
 			ft_putstr_fd("Minishell Syntax error: Undefined value after "
-				"operator\n",
-				2);
+				"operator\n", 2);
 			return (-2);
 		}
 	}
