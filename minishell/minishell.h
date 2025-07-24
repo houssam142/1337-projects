@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/24 13:20:30 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 14:59:11 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ typedef struct s_cmd_exec
 	char				meaning;
 	char				*value;
 	int					status;
-	int					sigint_child;
-	struct termios		origin_term;
 	struct s_cmd_exec	*next;
 }						t_cmd_exec;
 

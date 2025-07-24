@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/23 17:22:28 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 15:13:00 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ static void	waiting_helper(t_cmd_exec **env_lst, t_cmd **cmd, int *exit_stat,
 	int	sig;
 
 	sig = WTERMSIG(*exit_stat);
-	if (sig == SIGPIPE)
-		*stat_code = 1;
-	else if (sig == SIGQUIT)
+	if (sig == SIGQUIT)
 	{
 		printf("Quit (core dumped)\n");
 		lst_clear(env_lst, free);
@@ -29,7 +27,8 @@ static void	waiting_helper(t_cmd_exec **env_lst, t_cmd **cmd, int *exit_stat,
 	}
 	else
 	{
-		ft_putchar_fd('\n', 1);
+		if (sig == SIGINT)
+			ft_putchar_fd('\n', 1);
 		*stat_code = sig + 128;
 		change_stat(env_lst, *stat_code);
 	}

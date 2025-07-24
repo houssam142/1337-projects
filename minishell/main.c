@@ -6,11 +6,23 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:08:36 by aoussama          #+#    #+#             */
-/*   Updated: 2025/07/24 13:02:40 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 15:11:52 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+volatile int	g_exit_code = 0;
+
+static void	ft_handle_sigint(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+	g_exit_code = 130;
+}
 
 static void	cleanup_readline(void)
 {
@@ -59,6 +71,7 @@ int	main(int ac, char **av, char **env)
 		return (0);
 	while (1)
 	{
+		signal(SIGINT, ft_handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
 		cmd = readline("<minishell> ");
 		if (!cmd)
@@ -68,6 +81,11 @@ int	main(int ac, char **av, char **env)
 		}
 		if (*cmd)
 			add_history(cmd);
+		if (g_exit_code == 130)
+		{
+			change_stat(&env_lst, g_exit_code);
+			g_exit_code = 0;
+		}
 		parsing_line(cmd, &tok, &env_lst);
 		free(cmd);
 		if (check_stat(env_lst, &status) == 1)

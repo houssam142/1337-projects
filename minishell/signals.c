@@ -6,22 +6,11 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:18:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/24 12:59:04 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 15:03:29 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	suppress_out(void)
-{
-	struct termios	termios_p;
-
-	if (tcgetattr(0, &termios_p) != 0)
-		perror("Minishell: tcgetattr");
-	termios_p.c_lflag &= ~ECHONL;
-	if (tcsetattr(STDIN_FILENO, TCSANOW, &termios_p))
-		perror("Minishell: tcsetattr");
-}
 
 static void	ft_sigint_ctrl_c(int sig)
 {
@@ -47,7 +36,6 @@ void	handle_ctrl_c_heredoc(int sig)
 
 void	ft_signals(void)
 {
-	suppress_out();
 	signal(SIGINT, ft_sigint_ctrl_c);
 	signal(SIGQUIT, ft_handle_sigquit);
 }
