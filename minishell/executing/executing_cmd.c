@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/23 02:14:41 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/23 17:22:28 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static void	waiting(t_cmd_exec **env_lst, t_cmd **cmd)
 
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGPIPE, SIG_IGN);
 	while (wait(&exit_stat) != -1 || errno != ECHILD)
 	{
 		if (WIFSIGNALED(exit_stat) != 0)

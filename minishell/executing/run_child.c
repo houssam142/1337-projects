@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:13 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/23 03:09:23 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/23 23:16:31 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ void	child_proc(t_cmd **cmd, t_cmd_exec **env_lst, int id)
 
 	signal(SIGINT, proc_handle_ctrl_c);
 	signal(SIGQUIT, proc_handle_sigquit);
-	signal(SIGPIPE, SIG_DFL);
 	exec_cmd = close_pipes(cmd, id);
 	exec_cmd->path = find_cmd(exec_cmd, *env_lst);
 	if (!exec_cmd->path)

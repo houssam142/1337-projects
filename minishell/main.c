@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:08:36 by aoussama          #+#    #+#             */
-/*   Updated: 2025/07/18 02:45:57 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 13:02:40 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	main(int ac, char **av, char **env)
 		return (0);
 	while (1)
 	{
+		signal(SIGQUIT, SIG_IGN);
 		cmd = readline("<minishell> ");
 		if (!cmd)
 		{

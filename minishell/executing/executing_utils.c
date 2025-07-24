@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:49:01 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/23 03:51:02 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/23 23:10:40 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	exec_built(t_cmd *cmd, t_cmd_exec **env_lst, int child_par)
 	else if (child_par == 1)
 	{
 		exit_code = exec_run(cmd, env_lst);
+		arr_free(cmd->args);
 		lst_clear(env_lst, free);
 		exit(exit_code);
 	}

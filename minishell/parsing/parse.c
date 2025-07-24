@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:26 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/21 22:53:07 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/24 12:48:08 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static int	opers(t_token *toks, t_cmd_exec **env_lst)
 				return (-1);
 			}
 		}
+		prev = toks;
 		toks = toks->next;
 	}
 	return (0);
