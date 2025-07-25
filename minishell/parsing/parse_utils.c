@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:07 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/23 01:57:49 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/25 04:16:36 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ static int	parsing_cmd(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 		return (-1);
 	}
 	if (i == -3)
-		change_stat(env_lst, 1);
+	{
+		change_stat(env_lst, 130);
+		return (-1);
+	}
 	return (0);
 }
 
@@ -118,7 +121,8 @@ int	toks_to_struct(t_token **toks, t_cmd **cmd, t_cmd_exec **env_lst)
 
 	id = 0;
 	cmd_init(cmd);
-	parsing_cmd(toks, *cmd, env_lst);
+	if (parsing_cmd(toks, *cmd, env_lst))
+		return (-1);
 	(*cmd)->id = id;
 	while ((*toks))
 	{

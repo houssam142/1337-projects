@@ -6,13 +6,13 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:08:36 by aoussama          #+#    #+#             */
-/*   Updated: 2025/07/24 15:11:52 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/25 03:57:22 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-volatile int	g_exit_code = 0;
+static int	g_exit_code = 0;
 
 static void	ft_handle_sigint(int sig)
 {
