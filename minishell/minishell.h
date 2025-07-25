@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/25 04:16:40 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/25 08:41:54 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int						split_token_into_nodes(t_token *tok);
 char					*ft_strjoin_sep(char *path, char *cmd, char c);
 void					arr_free(char **arr);
 void					dups(t_cmd *tmp);
-void					check_if_dir(t_cmd *exec_cmd);
+void					check_if_dir(t_cmd *exec_cmd, t_cmd_exec **env_lst, char **env);
 void					build_new_tok_val(t_token *toks, char *value, int i,
 							int j);
 char					**env_lst_to_arr(t_cmd_exec *env_lst, char meaning,

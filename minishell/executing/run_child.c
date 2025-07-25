@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_child.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:13 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/25 05:37:08 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/25 08:41:38 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	not_built(t_cmd_exec **env_lst, t_cmd *exec_cmd)
 	char		**env;
 
 	env = env_lst_to_arr(*env_lst, 'e', 0);
-	check_if_dir(exec_cmd);
+	check_if_dir(exec_cmd, env_lst, env);
 	i = execve(exec_cmd->path, exec_cmd->args, env);
 	if (i == -1)
 	{
