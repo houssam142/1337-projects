@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/22 09:00:37 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/25 14:17:29 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_philo
 	pthread_t		philo;
 	pthread_t		alive;
 	pthread_mutex_t	must_die_lock;
+	pthread_mutex_t	eat_count_lock;
+
 }					t_philo;
 
 int					time_1(void);

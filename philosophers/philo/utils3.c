@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 20:00:05 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/22 09:01:16 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/25 14:19:26 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ int	is_dead(t_philo *philo)
 
 int	has_eaten_enough(t_philo *philo)
 {
-	return (philo->eat_count == philo->arguments->num_of_times_to_eat);
+	int	res;
+
+	pthread_mutex_lock(&philo->eat_count_lock);
+	res = (philo->eat_count == philo->arguments->num_of_times_to_eat);
+	pthread_mutex_unlock(&philo->eat_count_lock);
+	return (res);
 }
 
 int	should_stop(t_philo *philo)

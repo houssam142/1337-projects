@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/22 09:01:31 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/25 14:19:43 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	destroy_mutex_and_free(t_philo *philo, pthread_mutex_t *fork)
 	{
 		pthread_mutex_destroy(&fork[i]);
 		pthread_mutex_destroy(&philo[i].must_die_lock);
+		pthread_mutex_destroy(&philo[i].eat_count_lock);
 	}
 	pthread_mutex_destroy(philo->mutex.p);
 	pthread_mutex_destroy(&philo->arguments->full_lock);
