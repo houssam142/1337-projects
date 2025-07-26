@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 15:51:50 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 16:02:50 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int					is_dead(t_philo *philo);
 int					check_philo(t_philo *philo);
 long				ft_atoi(const char *str);
 int					handle_arg(t_info *arg, char **av, int ac);
-void				print_msg(char *msg, int time, int id);
+void				print_msg(char *msg, t_philo *philo, int id);
 void				print(char c, t_philo *philo, int id);
 int					take_forks(t_philo *philo);
 int					check_if_full_and_died(t_philo *philo);

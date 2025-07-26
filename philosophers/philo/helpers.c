@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 01:14:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/25 14:26:12 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 16:10:19 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ int	time_1(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
-void	print_msg(char *message, int time, int id)
+void	print_msg(char *message, t_philo *philo, int id)
 {
-	printf("%d ms %d %s", time, id + 1, message);
+	if (*(philo->arguments->death))
+		return;
+	printf("%d %d %s", time_1() - philo->arguments->this_time, id + 1, message);
 }

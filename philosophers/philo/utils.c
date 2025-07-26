@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 13:52:48 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 16:22:46 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,14 @@ void	increment_full(t_philo *philo)
 
 int	handle_arg(t_info *arg, char **av, int ac)
 {
-	if (ac != 5 && ac != 6)
-	{
-		if (check_arg(ac, av))
-			return (1);
-	}
+	if (check_arg(ac, av))
+		return (1);
 	if (ft_atoi(av[1]) > 200 || ft_atoi(av[2]) < 60
 		|| ft_atoi(av[3]) < 60 || ft_atoi(av[4]) < 60)
-		{
-			printf("Error: not enough time\n");
-			return (1);
-		}
+	{
+		printf("Error: not enough time\n");
+		return (1);
+	}
 	arg->num_of_philo = ft_atoi(av[1]);
 	arg->time_to_die = ft_atoi(av[2]);
 	arg->time_to_eat = ft_atoi(av[3]);
@@ -42,28 +39,27 @@ int	handle_arg(t_info *arg, char **av, int ac)
 		arg->num_of_times_to_eat = ft_atoi(av[5]);
 		if (arg->num_of_times_to_eat > 2147483647
 			|| !arg->num_of_times_to_eat)
-			return (1);
+			return (printf("Error: invalid number of times to eat\n"), 1);
 	}
 	else
 		arg->num_of_times_to_eat = -1;
-	return (0);
+	return (0);	
 }
 
 void	print(char c, t_philo *philo, int id)
 {
 	pthread_mutex_lock(philo->mutex.p);
 	if (c == 'F')
-		print_msg("has taken a fork\n", time_1() - philo->arguments->this_time,
-			id);
+		print_msg("has taken a fork\n", philo, id);
 	else if (c == 'E')
-		print_msg("is eating\n", time_1() - philo->arguments->this_time, id);
+		print_msg("is eating\n", philo, id);
 	else if (c == 'S')
-		print_msg("is sleeping\n", time_1() - philo->arguments->this_time, id);
+		print_msg("is sleeping\n", philo, id);
 	else if (c == 'T')
-		print_msg("is thinking\n", time_1() - philo->arguments->this_time, id);
+		print_msg("is thinking\n", philo, id);
 	else if (c == 'D')
 	{
-		print_msg("died\n", time_1() - philo->arguments->this_time, id);
+		print_msg("died\n", philo, id);
 		pthread_mutex_unlock(philo->mutex.p);
 		return ;
 	}
@@ -73,6 +69,7 @@ void	print(char c, t_philo *philo, int id)
 void	destroy_mutex_and_free(t_philo *philo, pthread_mutex_t *fork)
 {
 	int	i;
+
 
 	i = -1;
 	while (++i < philo->arguments->num_of_philo)

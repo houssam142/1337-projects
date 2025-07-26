@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 15:56:08 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 16:04:34 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ void	*check_if_death(void *arg)
 			if (!*(philo->arguments->death))
 			{
 				pthread_mutex_lock(philo->mutex.p);
-				print_msg("died\n", time_1() - philo->arguments->this_time,
-					philo->id);
+				print_msg("died\n", philo, philo->id);
 				*(philo->arguments->death) = 1;
 				pthread_mutex_unlock(philo->mutex.p);
 			}
