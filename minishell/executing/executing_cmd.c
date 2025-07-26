@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/25 04:11:45 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 09:00:25 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 static void	waiting_helper(t_cmd_exec **env_lst, t_cmd **cmd, int *exit_stat,
 	int *stat_code)
 {
+	(void)cmd;
 	int	sig;
 
 	sig = WTERMSIG(*exit_stat);
 	if (sig == SIGQUIT)
 	{
 		printf("Quit (core dumped)\n");
-		lst_clear(env_lst, free);
-		cmd_free(cmd);
-		exit(131);
+		*stat_code = sig + 128;
+		change_stat(env_lst, *stat_code);
 	}
 	else
 	{
@@ -107,7 +107,9 @@ static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
 		}
 	}
 	if (my_pid != 0)
+	{
 		parent_proc(cmd, env_lst);
+	}
 }
 
 void	exec(t_cmd **cmd, t_cmd_exec **env_lst)

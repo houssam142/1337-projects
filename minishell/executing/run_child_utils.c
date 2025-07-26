@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 22:44:03 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/26 08:12:07 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 08:19:46 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ void	check_if_dir(t_cmd *exec_cmd, t_cmd_exec **env_lst, char **env)
 {
 	struct stat	sb;
 
-	if ((!exec_cmd->path || exec_cmd->path[0] == '\0'
-			|| !ft_strcmp(exec_cmd->args[0], "sudo")) && !exec_cmd->args[0][0])
+	if (!ft_strcmp(exec_cmd->args[0], "sudo"))
 	{
 		ft_putstr_fd("Minishell: : command not found\n", 2);
 		lst_clear(env_lst, free);
