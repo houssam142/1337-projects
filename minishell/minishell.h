@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/26 08:55:44 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 11:41:55 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <readline/readline.h>
 # include <signal.h>
 # include <stdio.h>
+# include "get_next_line/get_next_line.h"
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
@@ -103,7 +104,7 @@ int						env(t_cmd_exec **env_lst);
 int						ft_exit(t_cmd *cmd, t_cmd_exec **env_lst);
 int						ft_export(t_cmd *cmd, t_cmd_exec **env_lst);
 int						check_var_name(char *str, int *res,
-							t_cmd_exec **env_lst);
+							t_cmd_exec **env_lst, t_cmd *cmd);
 void					shell_vl(t_cmd_exec **env_lst);
 t_cmd_exec				*ft_lstlast(t_cmd_exec *lst);
 void					lst_clear_tok(t_token **lst, void (*del)(void *));

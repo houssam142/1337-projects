@@ -35,38 +35,63 @@ static char	*line_expansion(char *line, t_cmd_exec *env_lst)
 	return (str);
 }
 
-static void	go_heredoc(t_cmd *cmd, t_cmd_exec *env_lst, int fd_doc)
+static void    go_heredoc(t_cmd *cmd, t_cmd_exec *env_lst, int fd_doc)
 {
-	char	*line;
+    char    *line;
+    char    *processed_line;
 
-	while (1)
-	{
-		line = readline("heredoc> ");
-		if (get_exit_code() == 130)
-		{
-			free(line);
-			lst_clear(&env_lst, &free);
-			cmd_free(&cmd);
-			exit(1);
-		}
-		if (!line)
-		{
-			lst_clear(&env_lst, &free);
-			cmd_free(&cmd);
-			ft_putstr_fd("Minishell: warning: here-document at line 1 delimited by end-of-file (wanted `EOF')\n",
-				2);
-			exit(0);
-		}
-		if (!ft_strncmp(line, cmd->op_value, ft_strlen(cmd->op_value) + 1))
-			break ;
-		if (cmd->delimiter == 'h')
-			line = line_expansion(line, env_lst);
-		ft_putstr_fd(line, fd_doc);
-		ft_putstr_fd("\n", fd_doc);
-		free(line);
-	}
-	if (line)
-		free(line);
+    while (1)
+    {
+        line = readline("heredoc> ");
+        if (get_exit_code() == 130)
+        {
+            if (line)
+                free(line);
+            lst_clear(&env_lst, &free);
+            cmd_free(&cmd);
+            exit(1);
+        }
+        if (!line)
+        {
+            lst_clear(&env_lst, &free);
+            cmd_free(&cmd);
+            ft_putstr_fd("Minishell: warning: here-document at line 1 delimited by end-of-file (wanted `", 2);
+            exit(0);
+        }        
+        if (!ft_strncmp(line, cmd->op_value, ft_strlen(cmd->op_value)) && 
+            ft_strlen(line) == ft_strlen(cmd->op_value))
+        {
+            free(line);
+            break ;
+        }        
+        if (cmd->delimiter == 'h')
+        {
+            processed_line = line_expansion(line, env_lst);
+            if (!processed_line)
+            {
+                lst_clear(&env_lst, &free);
+                cmd_free(&cmd);
+                exit(1);
+            }
+        }
+        else
+        {
+            processed_line = line;
+        }        
+        if (write(fd_doc, processed_line, ft_strlen(processed_line)) == -1)
+        {
+            perror("write");
+            free(processed_line);
+            exit(1);
+        }
+        if (write(fd_doc, "\n", 1) == -1)
+        {
+            perror("write");
+            free(processed_line);
+            exit(1);
+        }
+        free(processed_line);
+    }
 }
 
 static void	child_heredoc(t_cmd *cmd, t_cmd_exec **env_lst, int *heredoc)

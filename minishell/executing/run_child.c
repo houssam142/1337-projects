@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:13 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/26 08:14:19 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 11:44:56 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,15 @@ void	child_proc(t_cmd **cmd, t_cmd_exec **env_lst, int id)
 			cmd_free(&exec_cmd);
 			exit(0);
 		}
-		ft_putstr_fd("Minishell: ", 2);
-		ft_putstr_fd(exec_cmd->args[0], 2);
-		ft_putstr_fd(": command not found\n", 2);
-		lst_clear(env_lst, &free);
-		cmd_free(&exec_cmd);
-		exit(127);
+		else if (exec_cmd->args[0][0] != '~')
+		{
+			ft_putstr_fd("Minishell: ", 2);
+			ft_putstr_fd(exec_cmd->args[0], 2);
+			ft_putstr_fd(": command not found\n", 2);
+			lst_clear(env_lst, &free);
+			cmd_free(&exec_cmd);
+			exit(127);
+		}
 	}
 	if (exec_cmd->builtin != 1)
 		not_built(env_lst, exec_cmd);

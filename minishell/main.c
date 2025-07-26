@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:08:36 by aoussama          #+#    #+#             */
-/*   Updated: 2025/07/26 08:00:55 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 11:19:35 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static int	check_stat(t_cmd_exec *env_lst, int *status)
 {
 	while (env_lst->meaning != '?')
 		env_lst = env_lst->next;
+	if (env_lst->meaning == '?')
+		*status = env_lst->status;
 	if (env_lst->value)
 	{
 		if (ft_strncmp(env_lst->value, "exit", 5) == 0)
@@ -42,6 +44,30 @@ static int	check_stat(t_cmd_exec *env_lst, int *status)
 		}
 	}
 	return (0);
+}
+
+char *red_line(void)
+{
+    char *line = NULL;
+    char *r_line = NULL;
+    int len;
+    if (isatty(STDIN_FILENO))
+    {
+        r_line = readline("<minishell> ");
+    }
+    else
+    {
+        line = get_next_line(STDIN_FILENO);
+        if (!line)
+            return NULL;
+
+        len = ft_strlen(line);
+        if (len > 0 && line[len - 1] == '\n')
+            line[len - 1] = '\0';
+
+        r_line = line;
+    }
+    return r_line;
 }
 
 static int	start(int ac, char **av, char **env, t_cmd_exec **env_lst)
@@ -71,11 +97,12 @@ int	main(int ac, char **av, char **env)
 	{
 		signal(SIGINT, ft_handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
-		cmd = readline("<minishell> ");
+		cmd = red_line();
 		if (!cmd)
 		{
-			ft_putstr_fd("exit\n", 1);
-			exit((lst_clear(&env_lst, free), cleanup_readline(), 0));
+			if (isatty(STDIN_FILENO))
+				ft_putstr_fd("exit\n", 1);
+			exit((lst_clear(&env_lst, free), cleanup_readline(), status));
 		}
 		if (*cmd)
 			add_history(cmd);

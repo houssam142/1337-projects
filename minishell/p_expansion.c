@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/25 15:45:14 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 11:30:17 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,8 @@ void	p_expansion(t_token *toks, t_cmd_exec *env_lst)
 {
 	int	i;
 
-	i = 0;
-	while (toks->value[i])
+	i = -1;
+	while (toks->value[++i])
 	{
 		if (toks->value[i] == '\'')
 		{
@@ -138,6 +138,5 @@ void	p_expansion(t_token *toks, t_cmd_exec *env_lst)
 		}
 		else if (toks->value[i] == '$')
 			search_and_replace(toks, &i, env_lst, 0);
-		i++;
 	}
 }
