@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 23:59:31 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 18:38:12 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 21:18:11 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,13 @@ int	check_arg(int ac, char **av)
 	int	j;
 
 	i = 0;
-	if (ac < 5 || ac > 6)
+	j = -1;
+	while (++i <= ac)
 	{
-		printf("Error: wrong number of arguments\n");
-		return (1);
-	}
-	while (++i < ac)
-	{
-		j = -1;
 		while (av[i][++j])
 		{
 			if (ft_isalpha(av[i][j]))
-			{
-				printf("Error: arguments must be numbers\n");
 				return (1);
-			}
-			else if (av[i][j] == '-')
-				return (printf("Error: arguments must be positive\n"), 1);
 		}
 	}
 	return (0);
@@ -82,14 +72,14 @@ int	odd_philo(t_philo *philo, int left, int right)
 
 int	ft_usleep(int time, t_philo *philo)
 {
-	unsigned long	i;
+	int	i;
 
 	i = time_1();
-	while ((time_1() - i) < (unsigned long)time)
+	while (time_1() - i < time)
 	{
-		if (is_dead(philo))
+		if (check_if_full_and_died(philo))
 			return (1);
-		usleep(100);
+		usleep(900);
 	}
 	return (0);
 }
