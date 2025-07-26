@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 23:59:31 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/22 08:09:33 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/26 13:52:56 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@ int	check_arg(int ac, char **av)
 
 	i = 0;
 	j = -1;
+	if (ac < 5 || ac > 6)
+	{
+		printf("Error: wrong number of arguments\n");
+		return (1);
+	}
 	while (++i <= ac)
 	{
 		while (av[i][++j])
