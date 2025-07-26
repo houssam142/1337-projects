@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 13:44:47 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 13:48:08 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ int	handle_arg(t_info *arg, char **av, int ac)
 {
 	if (ac != 5 && ac != 6)
 	{
-		printf("Error: Invalid number of arguments.\n");
-		return (1);
+		if (check_arg(ac, av))
+			return (1);
 	}
-	if (check_arg(ac, av))
-		return (1);
 	if (ft_atoi(av[1]) > 200 || ft_atoi(av[2]) < 60
 		|| ft_atoi(av[3]) < 60 || ft_atoi(av[4]) < 60)
-		return (1);
+		{
+			printf("Error: not enough time\n");
+			return (1);
+		}
 	arg->num_of_philo = ft_atoi(av[1]);
 	arg->time_to_die = ft_atoi(av[2]);
 	arg->time_to_eat = ft_atoi(av[3]);
