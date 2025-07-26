@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 13:18:01 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 15:51:50 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void				put_forks(t_philo *philo);
 int					odd_philo(t_philo *philo, int left, int right);
 void				update_eating(t_philo *philo);
 int					is_all_full(t_philo *philo);
+void	death_events(t_philo *philo);
 void				*check_if_death(void *args);
 void				destroy_mutex_and_free(t_philo *philo,
 						pthread_mutex_t *fork);

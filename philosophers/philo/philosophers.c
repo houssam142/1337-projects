@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 13:39:52 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 15:56:08 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	*exec(void *args)
 		return (one_philo(philo), NULL);
 	while (!should_stop(philo))
 	{
+		if (philo->id % 2 == 1)
+			usleep(1000);
 		if (take_forks(philo))
 			break ;
 		update_eating(philo);
