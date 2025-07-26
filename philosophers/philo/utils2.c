@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:03:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 16:39:19 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 18:53:24 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,13 @@ int	is_all_full(t_philo *philo)
 void	update_eating(t_philo *philo)
 {
 	print('E', philo, philo->id);
+	death_events(philo);
 	ft_usleep(philo->arguments->time_to_eat, philo);
 	pthread_mutex_lock(&philo->eat_count_lock);
 	philo->eat_count++;
 	if (philo->eat_count == philo->arguments->num_of_times_to_eat)
 		increment_full(philo);
 	pthread_mutex_unlock(&philo->eat_count_lock);
-	death_events(philo);
 }
 
 int	ft_isspace(char c)

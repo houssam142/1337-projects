@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 16:38:12 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 18:36:50 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*check_if_death(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	while (time_1() < philo->arguments->this_time)
+        usleep(100);
 	while (1)
 	{
 		if (check_if_full_and_died(philo))
@@ -37,7 +39,7 @@ void	*check_if_death(void *arg)
 			break ;
 		}
 		pthread_mutex_unlock(&philo->must_die_lock);
-		usleep(100);
+		usleep(500);
 	}
 	return (NULL);
 }
@@ -56,7 +58,7 @@ void	*exec(void *args)
 	philo = (t_philo *)args;
 	death_events(philo);
 	if (philo->arguments->num_of_philo == 1)
-	return (one_philo(philo), NULL);
+		return (one_philo(philo), NULL);
 	while (!should_stop(philo))
 	{
 		if (philo->id % 2 == 1)
