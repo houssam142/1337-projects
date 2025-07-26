@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:21:01 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/25 05:24:40 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 08:02:09 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,20 @@ static void	go_heredoc(t_cmd *cmd, t_cmd_exec *env_lst, int fd_doc)
 	while (1)
 	{
 		line = readline("heredoc> ");
+		if (get_exit_code() == 130)
+		{
+			free(line);
+			lst_clear(&env_lst, &free);
+			cmd_free(&cmd);
+			exit(1);
+		}
 		if (!line)
 		{
 			lst_clear(&env_lst, &free);
 			cmd_free(&cmd);
 			ft_putstr_fd("Minishell: warning: here-document at line 1 delimited by end-of-file (wanted `EOF')\n",
-					2);
-			break ;
+				2);
+			exit(0);
 		}
 		if (!ft_strncmp(line, cmd->op_value, ft_strlen(cmd->op_value) + 1))
 			break ;
@@ -74,15 +81,18 @@ static void	child_heredoc(t_cmd *cmd, t_cmd_exec **env_lst, int *heredoc)
 static int	parent_heredoc(t_cmd *cmd, int *heredoc)
 {
 	int	exit_stat;
+	int	code;
 
 	signal(SIGINT, SIG_IGN);
 	wait(&exit_stat);
 	close(heredoc[1]);
 	if (WIFEXITED(exit_stat))
 	{
-		exit_stat = WEXITSTATUS(exit_stat);
-		if (exit_stat == 1)
+		code = WEXITSTATUS(exit_stat);
+		if (code == 1)
 			return (-3);
+		else if (code == 0)
+			return (-4);
 		else
 			cmd->std_in = dup(heredoc[0]);
 		close(heredoc[0]);

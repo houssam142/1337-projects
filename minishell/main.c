@@ -6,13 +6,11 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:08:36 by aoussama          #+#    #+#             */
-/*   Updated: 2025/07/25 03:57:22 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 08:00:55 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	g_exit_code = 0;
 
 static void	ft_handle_sigint(int sig)
 {
@@ -21,7 +19,7 @@ static void	ft_handle_sigint(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	g_exit_code = 130;
+	set_exit_code(130);
 }
 
 static void	cleanup_readline(void)
@@ -81,10 +79,10 @@ int	main(int ac, char **av, char **env)
 		}
 		if (*cmd)
 			add_history(cmd);
-		if (g_exit_code == 130)
+		if (get_exit_code() == 130)
 		{
-			change_stat(&env_lst, g_exit_code);
-			g_exit_code = 0;
+			change_stat(&env_lst, get_exit_code());
+			set_exit_code(0);
 		}
 		parsing_line(cmd, &tok, &env_lst);
 		free(cmd);

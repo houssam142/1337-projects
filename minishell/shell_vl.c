@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:37 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/23 11:59:55 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 06:46:08 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ void	build_new_tok_val(t_token *toks, char *value, int i, int j)
 	char	*suffix;
 	char	*clean_suffix;
 	char	*new_val;
-	int		k;
 
-	k = -1;
 	prefix = ft_substr(toks->value, 0, i);
 	suffix = ft_strdup(toks->value + j);
 	clean_suffix = remove_outer_quotes(suffix);
@@ -33,13 +31,7 @@ void	build_new_tok_val(t_token *toks, char *value, int i, int j)
 	free(clean_suffix);
 	free(toks->value);
 	toks->value = value;
-	while (toks->value[++k])
-	{
-		if ((toks->value[k] == '$' && !toks->value[k + 1])
-			|| toks->value[k] == '\'' || toks->value[k] == '\"'
-			|| toks->value[k] == '=')
-			toks->strip = 2;
-	}
+	check_if_should_split(toks);
 }
 
 char	*erase_spaces(char *str)

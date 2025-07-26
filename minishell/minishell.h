@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/25 08:41:54 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/26 07:03:22 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
-# include <termios.h>
 # include <unistd.h>
 
 typedef struct s_token
@@ -67,6 +66,9 @@ typedef struct s_cmd
 }						t_cmd;
 
 int						env_to_lst(char **env, t_cmd_exec **env_lst);
+int						get_exit_code(void);
+void					set_exit_code(int code);
+void					check_if_should_split(t_token *toks);
 void					cmd_free(t_cmd **cmd);
 void					toks_arr(char *line, char *chars, t_token **toks);
 void					change_stat(t_cmd_exec **env_lst, int stat);

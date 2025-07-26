@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 20:34:30 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/24 13:19:56 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/25 15:45:14 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	ft_replace(t_token *toks, int i, int j, t_cmd_exec *env_lst)
 			toks->strip = 0;
 		k++;
 	}
-	if (toks->strip)
+	if (toks->strip && toks->value[i - 1] != '=')
 		value = erase_spaces(env_lst->value);
 	else
 		value = ft_strdup(env_lst->value);
@@ -105,7 +105,7 @@ static int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 			+ 1))
 		env_lst = env_lst->next;
 	free(new_str);
-	inside_word = (*i > 0 && !ft_strchr(" \t/$=<>|", t->value[*i - 1]));
+	inside_word = (*i > 0 && !ft_strchr(" \t/$.<>|", t->value[*i - 1]));
 	if (env_lst)
 	{
 		if (inside_word)

@@ -6,11 +6,19 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 12:59:12 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/21 10:30:23 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 08:08:35 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	handle_ctrl_c_heredoc(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+	set_exit_code(130);
+	close(0);
+}
 
 t_token	*new_ele_tok_node(char **words, int i)
 {

@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:07 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/25 04:16:36 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 06:25:48 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static int	parsing_cmd(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 		change_stat(env_lst, 130);
 		return (-1);
 	}
+	if (i == -4)
+		return (change_stat(env_lst, 0), -1);
 	return (0);
 }
 

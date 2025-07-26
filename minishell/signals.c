@@ -6,11 +6,13 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:18:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/25 02:53:44 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 08:08:30 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	g_exit_code = 0;
 
 static void	ft_sigint_ctrl_c(int sig)
 {
@@ -19,19 +21,23 @@ static void	ft_sigint_ctrl_c(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	set_exit_code(130);
+}
+
+int	get_exit_code(void)
+{
+	return (g_exit_code);
+}
+
+void	set_exit_code(int code)
+{
+	g_exit_code = code;
 }
 
 static void	ft_handle_sigquit(int sig)
 {
 	(void)sig;
 	rl_redisplay();
-}
-
-void	handle_ctrl_c_heredoc(int sig)
-{
-	(void)sig;
-	write(1, "\n", 1);
-	exit(1);
 }
 
 void	ft_signals(void)

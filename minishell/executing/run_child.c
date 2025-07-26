@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_child.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:13 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/25 08:41:38 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/25 11:51:11 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,16 @@ static void	not_built(t_cmd_exec **env_lst, t_cmd *exec_cmd)
 
 	env = env_lst_to_arr(*env_lst, 'e', 0);
 	check_if_dir(exec_cmd, env_lst, env);
+	if (!exec_cmd->path)
+		exec_cmd->path = ft_strdup("");
 	i = execve(exec_cmd->path, exec_cmd->args, env);
 	if (i == -1)
 	{
-		ft_putstr_fd("Minishell: : command not found\n", 2);
+		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd(exec_cmd->args[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
 		arr_free(env);
+		free(exec_cmd->path);
 		cmd_free(&exec_cmd);
 		lst_clear(env_lst, free);
 		exit(127);
@@ -85,11 +90,12 @@ void	child_proc(t_cmd **cmd, t_cmd_exec **env_lst, int id)
 			cmd_free(&exec_cmd);
 			exit(0);
 		}
-		// ft_putstr_fd("Minishell: ", 2);
-		// ft_putstr_fd(": command not found\n", 2);
-		// lst_clear(env_lst, &free);
-		// cmd_free(&exec_cmd);
-		// exit(127);
+		ft_putstr_fd("Minishell: ", 2);
+		ft_putstr_fd(exec_cmd->args[0], 2);
+		ft_putstr_fd(": command not found\n", 2);
+		lst_clear(env_lst, &free);
+		cmd_free(&exec_cmd);
+		exit(127);
 	}
 	if (exec_cmd->builtin != 1)
 		not_built(env_lst, exec_cmd);
