@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 20:00:05 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/25 14:19:26 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 13:22:09 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	is_dead(t_philo *philo)
 {
 	int	death;
 
-	pthread_mutex_lock(philo->mutex.p);
-	death = (*philo->arguments->death);
-	pthread_mutex_unlock(philo->mutex.p);
+	pthread_mutex_lock(&philo->arguments->died_lock);
+	death = *(philo->arguments->death);
+	pthread_mutex_unlock(&philo->arguments->died_lock);
 	return (death);
 }
 
@@ -39,13 +39,13 @@ int	should_stop(t_philo *philo)
 
 int	check_if_full_and_died(t_philo *philo)
 {
-	pthread_mutex_lock(philo->mutex.p);
+	pthread_mutex_lock(&philo->arguments->died_lock);
 	if (*(philo->arguments->death))
 	{
-		pthread_mutex_unlock(philo->mutex.p);
+		pthread_mutex_unlock(&philo->arguments->died_lock);
 		return (1);
 	}
-	pthread_mutex_unlock(philo->mutex.p);
+	pthread_mutex_unlock(&philo->arguments->died_lock);
 	pthread_mutex_lock(&philo->arguments->full_lock);
 	if (*(philo->full) == philo->arguments->num_of_philo)
 	{

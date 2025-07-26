@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/25 14:45:53 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 13:39:52 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	*check_if_death(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
+	while (time_1() < philo->arguments->this_time)
+        usleep(10);
 	while (1)
 	{
 		if (check_if_full_and_died(philo))
@@ -25,15 +27,17 @@ void	*check_if_death(void *arg)
 		if (philo->must_die <= time_1())
 		{
 			pthread_mutex_unlock(&philo->must_die_lock);
-			pthread_mutex_lock(philo->mutex.p);
+			pthread_mutex_lock(&philo->arguments->died_lock);
 			if (!*(philo->arguments->death))
 			{
+				pthread_mutex_lock(philo->mutex.p);
 				print_msg("died\n", time_1() - philo->arguments->this_time,
 					philo->id);
 				*(philo->arguments->death) = 1;
+				pthread_mutex_unlock(philo->mutex.p);
 			}
-			pthread_mutex_unlock(philo->mutex.p);
-			break ;	
+			pthread_mutex_unlock(&philo->arguments->died_lock);
+			break ;
 		}
 		pthread_mutex_unlock(&philo->must_die_lock);
 		usleep(100);
@@ -46,7 +50,6 @@ void	death_events(t_philo *philo)
 	pthread_mutex_lock(&philo->must_die_lock);
 	philo->must_die = time_1() + philo->arguments->time_to_die;
 	pthread_mutex_unlock(&philo->must_die_lock);
-	pthread_create(&philo->alive, NULL, check_if_death, philo);
 }
 
 void	*exec(void *args)
@@ -74,7 +77,6 @@ void	*exec(void *args)
 		if (is_dead(philo))
 			break ;
 	}
-	pthread_join(philo->alive, NULL);
 	return (NULL);
 }
 
@@ -84,7 +86,10 @@ void init_param(t_info *info, t_philo *philo, pthread_mutex_t *p, pthread_mutex_
 
     pthread_mutex_init(p, NULL);
     pthread_mutex_init(&info->full_lock, NULL);
+    pthread_mutex_init(&info->died_lock, NULL);
 	i = 0;
+	info->full = 0;
+	info->died = 0;
     while (i < info->num_of_philo)
     {
         philo[i].eat_count = 0;
@@ -93,18 +98,18 @@ void init_param(t_info *info, t_philo *philo, pthread_mutex_t *p, pthread_mutex_
         philo[i].mutex.fork = fork;
         philo[i].mutex.p = p;
         philo[i].arguments->death = &info->died;
-        philo[i].must_die = 0;
+        philo[i].must_die = time_1() + info->time_to_die;
         pthread_mutex_init(&philo[i].must_die_lock, NULL);
         pthread_mutex_init(&philo[i].eat_count_lock, NULL);
         philo[i].full = &info->full;
         i++;
     }
-    i = 0;
-    while (i < info->num_of_philo)
+    i = -1;
+    while (++i < info->num_of_philo)
     {
         pthread_create(&philo[i].philo, NULL, exec, &philo[i]);
+		pthread_create(&philo[i].alive, NULL, check_if_death, &philo[i]);
         usleep(100);
-        i++;
     }
 }
 
@@ -129,7 +134,10 @@ int	main(int ac, char **av)
 	check_philo(philo);
 	i = -1;
 	while (++i < arguments.num_of_philo)
+	{
 		pthread_join(philo[i].philo, NULL);
+		pthread_join(philo[i].alive, NULL);	
+	}
 	destroy_mutex_and_free(philo, fork);
 	return (0);
 }

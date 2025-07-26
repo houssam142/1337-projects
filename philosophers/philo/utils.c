@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/25 14:19:43 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 13:22:43 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	increment_full(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->arguments->full_lock);
-	*(philo->full) += 1;
+	(*(philo->full))++;
 	pthread_mutex_unlock(&philo->arguments->full_lock);
 }
 
@@ -33,8 +33,6 @@ int	handle_arg(t_info *arg, char **av, int ac)
 	arg->time_to_die = ft_atoi(av[2]);
 	arg->time_to_eat = ft_atoi(av[3]);
 	arg->time_to_sleep = ft_atoi(av[4]);
-	arg->full = 0;
-	arg->died = 0;
 	arg->this_time = time_1();
 	if (ac == 6)
 	{

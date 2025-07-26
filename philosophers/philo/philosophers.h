@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/25 14:17:29 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/26 13:18:01 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_info
 	int				*death;
 	int				full;
 	int				died;
+	pthread_mutex_t	died_lock;
 	pthread_mutex_t	full_lock;
 }					t_info;
 
