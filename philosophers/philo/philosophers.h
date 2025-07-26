@@ -79,7 +79,7 @@ void				put_forks(t_philo *philo);
 int					odd_philo(t_philo *philo, int left, int right);
 void				update_eating(t_philo *philo);
 int					is_all_full(t_philo *philo);
-void	death_events(t_philo *philo);
+void				death_events(t_philo *philo);
 void				*check_if_death(void *args);
 void				destroy_mutex_and_free(t_philo *philo,
 						pthread_mutex_t *fork);

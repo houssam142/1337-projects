@@ -68,6 +68,6 @@ int	time_1(void)
 void	print_msg(char *message, t_philo *philo, int id)
 {
 	if (*(philo->arguments->death))
-		return;
+		return ;
 	printf("%d %d %s", time_1() - philo->arguments->this_time, id + 1, message);
 }

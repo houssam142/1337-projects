@@ -23,8 +23,8 @@ int	handle_arg(t_info *arg, char **av, int ac)
 {
 	if (check_arg(ac, av))
 		return (1);
-	if (ft_atoi(av[1]) > 200 || ft_atoi(av[2]) < 60
-		|| ft_atoi(av[3]) < 60 || ft_atoi(av[4]) < 60)
+	if (ft_atoi(av[1]) > 200 || ft_atoi(av[2]) < 60 || ft_atoi(av[3]) < 60
+		|| ft_atoi(av[4]) < 60)
 	{
 		printf("Error: not enough time\n");
 		return (1);
@@ -37,13 +37,12 @@ int	handle_arg(t_info *arg, char **av, int ac)
 	if (ac == 6)
 	{
 		arg->num_of_times_to_eat = ft_atoi(av[5]);
-		if (arg->num_of_times_to_eat > 2147483647
-			|| !arg->num_of_times_to_eat)
+		if (arg->num_of_times_to_eat > 2147483647 || !arg->num_of_times_to_eat)
 			return (printf("Error: invalid number of times to eat\n"), 1);
 	}
 	else
 		arg->num_of_times_to_eat = -1;
-	return (0);	
+	return (0);
 }
 
 void	print(char c, t_philo *philo, int id)
@@ -69,7 +68,6 @@ void	print(char c, t_philo *philo, int id)
 void	destroy_mutex_and_free(t_philo *philo, pthread_mutex_t *fork)
 {
 	int	i;
-
 
 	i = -1;
 	while (++i < philo->arguments->num_of_philo)
