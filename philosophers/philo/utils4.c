@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 23:59:31 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 21:18:11 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:11:38 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ int	ft_usleep(int time, t_philo *philo)
 	int	i;
 
 	i = time_1();
-	while (time_1() - i < time)
+	while ((time_1() - i) < time)
 	{
-		if (check_if_full_and_died(philo))
+		if (is_dead(philo))
 			return (1);
-		usleep(900);
+		usleep(100);
 	}
 	return (0);
 }

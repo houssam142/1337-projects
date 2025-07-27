@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 21:29:01 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:33:30 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	handle_arg(t_info *arg, char **av, int ac)
 	arg->time_to_sleep = ft_atoi(av[4]);
 	arg->full = 0;
 	arg->died = 0;
-	arg->this_time = time_1();
 	if (ac == 6)
 	{
 		arg->num_of_times_to_eat = ft_atoi(av[5]);

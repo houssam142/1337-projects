@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 01:14:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/26 21:33:16 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/07/27 10:34:33 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,29 @@
 
 void	put_forks(t_philo *philo)
 {
-	pthread_mutex_unlock(&philo->mutex.fork[philo->id]);
-	pthread_mutex_unlock(&philo->mutex.fork[(philo->id + 1)
+	pthread_mutex_unlock(&philo->mutex.fork[philo->id - 1]);
+	pthread_mutex_unlock(&philo->mutex.fork[(philo->id)
 		% philo->arguments->num_of_philo]);
 }
 
-// void	one_philo(t_philo *philo)
-// {
-// 	pthread_mutex_lock(&philo->must_die_lock);
-// 	philo->must_die = time_1() + philo->arguments->time_to_die;
-// 	pthread_mutex_unlock(&philo->must_die_lock);
-// 	pthread_mutex_lock(&philo->mutex.fork[philo->id]);
-// 	print('F', philo, philo->id);
-// 	ft_usleep(philo->arguments->time_to_die, philo);
-// 	pthread_mutex_unlock(&philo->mutex.fork[philo->id]);
-// 	pthread_join(philo->alive, NULL);
-// }
+void	one_philo(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->must_die_lock);
+	philo->must_die = time_1() + philo->arguments->time_to_die;
+	pthread_mutex_unlock(&philo->must_die_lock);
+	pthread_mutex_lock(&philo->mutex.fork[philo->id - 1]);
+	print('F', philo, philo->id);
+	ft_usleep(philo->arguments->time_to_die, philo);
+	pthread_mutex_unlock(&philo->mutex.fork[philo->id - 1]);
+}
 
 int	take_forks(t_philo *philo)
 {
 	int	left;
 	int	right;
 
-	left = philo->id;
-	right = (philo->id + 1) % philo->arguments->num_of_philo;
+	left = philo->id - 1;
+	right = philo->id % philo->arguments->num_of_philo;
 	if (philo->id % 2 == 0)
 	{
 		if (even_philo(philo, left, right))
@@ -67,5 +66,5 @@ int	time_1(void)
 
 void	print_msg(char *message, int time, int id)
 {
-	printf("%d %d %s", time, id, message);
+	printf("%d %d %s", time, id + 1, message);
 }
