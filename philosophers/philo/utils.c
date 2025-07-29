@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/29 10:19:10 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/29 18:52:47 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ int	handle_arg(t_info *arg, char **av, int ac)
 
 void	print(char c, t_philo *philo, int id)
 {
+	long	timestamp;
+
 	pthread_mutex_lock(philo->mutex.p);
 	if (!*(philo->arguments->death))
 	{
-		long timestamp = time_1() - philo->arguments->this_time;
+		timestamp = time_1() - philo->arguments->this_time;
 		if (c == 'F')
 			printf("%ld %d has taken a fork\n", timestamp, id + 1);
 		else if (c == 'E')
@@ -72,7 +74,7 @@ void	destroy_mutex_and_free(t_philo *philo, pthread_mutex_t *fork)
 	while (++i < philo->arguments->num_of_philo)
 	{
 		pthread_mutex_destroy(&fork[i]);
-		pthread_mutex_destroy(&philo[i].must_die_lock);
+		pthread_mutex_destroy(&philo[i].last_meal_lock);
 	}
 	pthread_mutex_destroy(philo->mutex.p);
 	pthread_mutex_destroy(&philo->arguments->full_lock);

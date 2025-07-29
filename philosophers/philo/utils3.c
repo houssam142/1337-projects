@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 20:00:05 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/28 17:40:17 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/29 18:27:20 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,11 @@ int	has_eaten_enough(t_philo *philo)
 	return (philo->eat_count == philo->arguments->num_of_times_to_eat);
 }
 
-int	should_stop(t_philo *philo)
-{
-	return (is_dead(philo) || is_all_full(philo));
-}
-
 int	check_if_full_and_died(t_philo *philo)
 {
-	t_info *info = philo[0].arguments;
+	t_info	*info;
 
+	info = philo[0].arguments;
 	if (info->num_of_times_to_eat > 0)
 	{
 		pthread_mutex_lock(&info->full_lock);
@@ -51,7 +47,6 @@ int	check_if_full_and_died(t_philo *philo)
 	}
 	return (0);
 }
-
 
 int	check_death_of_philo(t_philo *philo)
 {

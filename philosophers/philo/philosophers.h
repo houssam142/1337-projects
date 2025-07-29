@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/29 10:31:07 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/29 18:52:14 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,13 @@ typedef struct s_philo
 	t_info			*arguments;
 	t_mutex			mutex;
 	pthread_t		philo;
-
-	pthread_mutex_t	must_die_lock;
+	pthread_mutex_t	last_meal_lock;
 }					t_philo;
 
 unsigned long			time_1(void);
 int					even_philo(t_philo *philo, int left, int right);
 int					check_arg(int ac, char **av);
 int					ft_isalpha(int c);
-int					should_stop(t_philo *philo);
 int					has_eaten_enough(t_philo *philo);
 int					is_dead(t_philo *philo);
 long				ft_atoi(const char *str);

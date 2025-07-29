@@ -72,7 +72,7 @@ int	odd_philo(t_philo *philo, int left, int right)
 
 int	ft_usleep(unsigned long time, t_philo *philo)
 {
-	unsigned long start;
+	unsigned long	start;
 
 	start = time_1();
 	while ((time_1() - start) < time)
