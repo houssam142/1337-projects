@@ -6,52 +6,43 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:03:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/27 10:16:18 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/29 10:23:21 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	check_philo(t_philo *philo)
+void thinking_exec(t_philo *philo)
 {
-	int	death_val;
-	int	full_val;
+	int	think_time;
 
-	while (1)
-	{
-		pthread_mutex_lock(philo->mutex.p);
-		death_val = *(philo->arguments->death);
-		pthread_mutex_unlock(philo->mutex.p);
-		pthread_mutex_lock(&philo->arguments->full_lock);
-		full_val = *(philo->full);
-		pthread_mutex_unlock(&philo->arguments->full_lock);
-		if (death_val == 1 || full_val == philo->arguments->num_of_philo)
-			break ;
-		usleep(10);
-	}
-	return (0);
+	print('T', philo, philo->id);
+	think_time = philo->arguments->time_to_die - (philo->arguments->time_to_eat + philo->arguments->time_to_sleep);
+	if (think_time > 60)
+		ft_usleep((unsigned long)think_time - 10, philo);
 }
 
-int	is_all_full(t_philo *philo)
+int is_all_full(t_philo *philo)
 {
-	int	res;
+	int full;
 
 	pthread_mutex_lock(&philo->arguments->full_lock);
-	res = (*(philo->full) == philo->arguments->num_of_philo);
+	full = philo->arguments->full >= philo->arguments->num_of_philo;
 	pthread_mutex_unlock(&philo->arguments->full_lock);
-	return (res);
+	return (full);
 }
 
-void	update_eating(t_philo *philo)
+void update_eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->must_die_lock);
-	philo->must_die = time_1() + philo->arguments->time_to_die;
+	philo->last_meal = time_1();
 	pthread_mutex_unlock(&philo->must_die_lock);
 	print('E', philo, philo->id);
+	ft_usleep(philo->arguments->time_to_eat, philo);
+	pthread_mutex_lock(&philo->must_die_lock);
 	philo->eat_count++;
-	if (ft_usleep(philo->arguments->time_to_eat, philo))
-		return ;
-	if (philo->eat_count == philo->arguments->num_of_times_to_eat)
+	pthread_mutex_unlock(&philo->must_die_lock);
+	if (philo->eat_count >= philo->arguments->num_of_times_to_eat)
 		increment_full(philo);
 }
 

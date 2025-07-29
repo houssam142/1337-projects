@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 23:59:31 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/27 10:11:38 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/29 10:21:04 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,23 @@ int	odd_philo(t_philo *philo, int left, int right)
 	return (0);
 }
 
-int	ft_usleep(int time, t_philo *philo)
+int	ft_usleep(unsigned long time, t_philo *philo)
 {
-	int	i;
+	unsigned long start;
 
-	i = time_1();
-	while ((time_1() - i) < time)
+	start = time_1();
+	while ((time_1() - start) < time)
 	{
-		if (is_dead(philo))
+		pthread_mutex_lock(&philo->arguments->death_lock);
+		if (*(philo->arguments->death))
+		{
+			pthread_mutex_unlock(&philo->arguments->death_lock);
 			return (1);
-		usleep(100);
+		}
+		pthread_mutex_unlock(&philo->arguments->death_lock);
+		if (time_1() - start >= time)
+			break ;
+		usleep(1000);
 	}
 	return (0);
 }

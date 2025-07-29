@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/27 10:33:30 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/29 10:19:10 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,18 @@ int	handle_arg(t_info *arg, char **av, int ac)
 void	print(char c, t_philo *philo, int id)
 {
 	pthread_mutex_lock(philo->mutex.p);
-	if (c == 'F')
-		print_msg("has taken a fork\n", time_1() - philo->arguments->this_time,
-			id);
-	else if (c == 'E')
-		print_msg("is eating\n", time_1() - philo->arguments->this_time, id);
-	else if (c == 'S')
-		print_msg("is sleeping\n", time_1() - philo->arguments->this_time, id);
-	else if (c == 'T')
-		print_msg("is thinking\n", time_1() - philo->arguments->this_time, id);
+	if (!*(philo->arguments->death))
+	{
+		long timestamp = time_1() - philo->arguments->this_time;
+		if (c == 'F')
+			printf("%ld %d has taken a fork\n", timestamp, id + 1);
+		else if (c == 'E')
+			printf("%ld %d is eating\n", timestamp, id + 1);
+		else if (c == 'S')
+			printf("%ld %d is sleeping\n", timestamp, id + 1);
+		else if (c == 'T')
+			printf("%ld %d is thinking\n", timestamp, id + 1);
+	}
 	pthread_mutex_unlock(philo->mutex.p);
 }
 
