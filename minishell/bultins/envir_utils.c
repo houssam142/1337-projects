@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:50:35 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/26 11:41:21 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/23 11:54:06 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	print_error(char *str)
 	free(err);
 }
 
-int	check_var_name(char *str, int *res, t_cmd_exec **env_lst, t_cmd *cmd)
+int	check_var_name(char *str, int *res, t_cmd_exec **env_lst)
 {
 	int	i;
 
@@ -38,7 +38,7 @@ int	check_var_name(char *str, int *res, t_cmd_exec **env_lst, t_cmd *cmd)
 					&& str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z')
 				|| (str[i] == '_')))
 			continue ;
-		else if (ft_strcmp(cmd->path, "unset"))
+		else
 		{
 			print_error(str);
 			change_stat(env_lst, 1);

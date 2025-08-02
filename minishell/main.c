@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 13:08:36 by aoussama          #+#    #+#             */
-/*   Updated: 2025/07/26 11:19:35 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/02 18:29:50 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,6 @@ static int	check_stat(t_cmd_exec *env_lst, int *status)
 	return (0);
 }
 
-char *red_line(void)
-{
-    char *line = NULL;
-    char *r_line = NULL;
-    int len;
-    if (isatty(STDIN_FILENO))
-    {
-        r_line = readline("<minishell> ");
-    }
-    else
-    {
-        line = get_next_line(STDIN_FILENO);
-        if (!line)
-            return NULL;
-
-        len = ft_strlen(line);
-        if (len > 0 && line[len - 1] == '\n')
-            line[len - 1] = '\0';
-
-        r_line = line;
-    }
-    return r_line;
-}
-
 static int	start(int ac, char **av, char **env, t_cmd_exec **env_lst)
 {
 	(void)av;
@@ -80,7 +56,6 @@ static int	start(int ac, char **av, char **env, t_cmd_exec **env_lst)
 	}
 	ft_signals();
 	env_to_lst(env, env_lst);
-	shell_vl(env_lst);
 	return (0);
 }
 
@@ -97,11 +72,10 @@ int	main(int ac, char **av, char **env)
 	{
 		signal(SIGINT, ft_handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
-		cmd = red_line();
+		cmd = readline("<minishell> ");
 		if (!cmd)
 		{
-			if (isatty(STDIN_FILENO))
-				ft_putstr_fd("exit\n", 1);
+			ft_putstr_fd("\nexit\n", 1);
 			exit((lst_clear(&env_lst, free), cleanup_readline(), status));
 		}
 		if (*cmd)

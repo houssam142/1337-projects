@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:21:01 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/26 08:02:09 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/02 17:22:23 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ static void    go_heredoc(t_cmd *cmd, t_cmd_exec *env_lst, int fd_doc)
                 free(line);
             lst_clear(&env_lst, &free);
             cmd_free(&cmd);
-            exit(1);
+			exit(130);
         }
         if (!line)
         {
             lst_clear(&env_lst, &free);
             cmd_free(&cmd);
-            ft_putstr_fd("Minishell: warning: here-document at line 1 delimited by end-of-file (wanted `", 2);
-            exit(0);
+            ft_putstr_fd("Minishell: warning: here-document at line 1 delimited by end-of-file (wanted `\n", 2);
+			ft_putstr_fd(processed_line, 2);
+			break ;
         }        
         if (!ft_strncmp(line, cmd->op_value, ft_strlen(cmd->op_value)) && 
             ft_strlen(line) == ft_strlen(cmd->op_value))
@@ -75,21 +76,9 @@ static void    go_heredoc(t_cmd *cmd, t_cmd_exec *env_lst, int fd_doc)
             }
         }
         else
-        {
-            processed_line = line;
-        }        
-        if (write(fd_doc, processed_line, ft_strlen(processed_line)) == -1)
-        {
-            perror("write");
-            free(processed_line);
-            exit(1);
-        }
-        if (write(fd_doc, "\n", 1) == -1)
-        {
-            perror("write");
-            free(processed_line);
-            exit(1);
-        }
+            processed_line = line;      
+		ft_putstr_fd(processed_line, fd_doc);
+		ft_putstr_fd("\n", fd_doc);
         free(processed_line);
     }
 }
@@ -107,7 +96,7 @@ static int	parent_heredoc(t_cmd *cmd, int *heredoc)
 {
 	int	exit_stat;
 	int	code;
-
+	
 	signal(SIGINT, SIG_IGN);
 	wait(&exit_stat);
 	close(heredoc[1]);
@@ -115,13 +104,22 @@ static int	parent_heredoc(t_cmd *cmd, int *heredoc)
 	{
 		code = WEXITSTATUS(exit_stat);
 		if (code == 1)
+		{
+			close(heredoc[0]);
 			return (-3);
+		}
 		else if (code == 0)
-			return (-4);
-		else
-			cmd->std_in = dup(heredoc[0]);
-		close(heredoc[0]);
+		{
+			if (cmd->std_in != STDIN_FILENO)
+			close(cmd->std_in);
+			cmd->std_in = heredoc[0];
+			ft_signals();
+			return (0); 
+		}
 	}
+	if (cmd->std_in != STDIN_FILENO)
+		close(cmd->std_in);
+	cmd->std_in = heredoc[0];
 	ft_signals();
 	return (0);
 }

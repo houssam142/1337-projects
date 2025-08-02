@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:50:50 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/26 11:40:37 by houssam          ###   ########.fr       */
+/*   Updated: 2025/06/26 21:50:52 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	unset_vars(t_cmd *cmd, t_cmd_exec **env_lst, int *res)
 	i = 0;
 	while (cmd->args[++i])
 	{
-		if (!check_var_name(cmd->args[i], res, env_lst, cmd))
+		if (!check_var_name(cmd->args[i], res, env_lst))
 		{
 			if (!ft_strncmp(cmd->args[i], "PWD", 4))
 				pwd_fake(*env_lst);

@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:07 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/26 11:30:28 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/02 18:43:36 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ static int	final_parsing(t_token **toks, t_cmd_exec *env_lst)
 		tmp2 = tmp;
 		tmp = tmp->next;
 	}
+	remove_empty_tokens(toks);
+	if (!toks || !*toks)
+		return (-1);
 	word_split(toks, env_lst);
 	tmp = *toks;
 	while (tmp && tmp->type != 'c')
@@ -88,8 +91,8 @@ static void	cmd_init(t_cmd **cmd)
 	(*cmd)->redir_error = 0;
 	(*cmd)->pipe_out = 0;
 	(*cmd)->pipe_in = 0;
-	(*cmd)->std_in_dup1 = 0;
-	(*cmd)->std_out_dup1 = 0;
+	(*cmd)->std_in_dup1 = -1;
+	(*cmd)->std_out_dup1 = -1;
 	(*cmd)->delimiter = 0;
 	(*cmd)->next = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:19:02 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/23 03:47:08 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/01 15:12:25 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ static void	arg_to_arr(t_token **toks, t_cmd *cmd)
 		if (tmp1->type == 'w')
 		{
 			cmd->args[++i] = ft_strdup(tmp1->value);
+			if (tmp1->expanded)
+				cmd->path_error = 4;
 			arg_delete_next(toks, &tmp1, &tmp2);
 		}
 		else

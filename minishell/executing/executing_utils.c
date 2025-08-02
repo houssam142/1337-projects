@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:49:01 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/26 10:44:08 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/30 15:04:04 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strjoin_sep(char *path, char *cmd, char c)
 	return (s);
 }
 
-static int	exec_run(t_cmd *cmd, t_cmd_exec **env_lst)
+int	exec_run(t_cmd *cmd, t_cmd_exec **env_lst)
 {
 	if (!ft_strncmp(cmd->path, "pwd", 4))
 		return (pwd(env_lst));
@@ -61,7 +61,7 @@ static int	exec_run(t_cmd *cmd, t_cmd_exec **env_lst)
 
 static void	close_dups(t_cmd *cmd)
 {
-	if (cmd->std_in)
+	if (cmd->std_in != 0)
 	{
 		close(0);
 		dup2(cmd->std_in_dup1, 0);
@@ -75,7 +75,7 @@ static void	close_dups(t_cmd *cmd)
 	}
 }
 
-static void	exec_run_par(t_cmd *cmd, t_cmd_exec **env_lst)
+void	exec_run_par(t_cmd *cmd, t_cmd_exec **env_lst)
 {
 	dups(cmd);
 	exec_run(cmd, env_lst);
@@ -92,6 +92,7 @@ void	exec_built(t_cmd *cmd, t_cmd_exec **env_lst, int child_par)
 	{
 		exit_code = exec_run(cmd, env_lst);
 		lst_clear(env_lst, free);
+		cmd_free(&cmd);
 		exit(exit_code);
 	}
 }

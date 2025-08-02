@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:46:16 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/26 11:41:55 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/02 12:45:16 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <readline/readline.h>
 # include <signal.h>
 # include <stdio.h>
-# include "get_next_line/get_next_line.h"
 # include <stdlib.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
@@ -32,6 +31,7 @@ typedef struct s_token
 	char				*quote;
 	char				*value;
 	int					strip;
+	int					expanded;
 	struct s_token		*next;
 }						t_token;
 
@@ -43,6 +43,13 @@ typedef struct s_cmd_exec
 	int					status;
 	struct s_cmd_exec	*next;
 }						t_cmd_exec;
+
+typedef struct s_gc
+{
+	void *data;
+	struct s_gc *next;
+}t_gc;
+
 
 typedef struct s_cmd
 {
@@ -67,6 +74,7 @@ typedef struct s_cmd
 }						t_cmd;
 
 int						env_to_lst(char **env, t_cmd_exec **env_lst);
+void	restore_std_fds(t_cmd *tmp);
 int						get_exit_code(void);
 void					set_exit_code(int code);
 void					check_if_should_split(t_token *toks);
@@ -94,7 +102,7 @@ t_cmd_exec				*lst_new_ele(char *name, char *value);
 void					toks_trim(t_token **toks);
 t_token					*lst_last_tok(t_token *lst);
 void					lstadd_back_tok(t_token **lst, t_token *node);
-int						change_dir(char *path, t_cmd_exec **env_lst);
+char					*check_dir(t_cmd_exec **env_lst, char *path);
 int						ft_cd(t_cmd *cmd, t_cmd_exec **env_lst);
 int						tokens_count(char *line, char *chars);
 int						pwd(t_cmd_exec **env_lst);
@@ -104,7 +112,7 @@ int						env(t_cmd_exec **env_lst);
 int						ft_exit(t_cmd *cmd, t_cmd_exec **env_lst);
 int						ft_export(t_cmd *cmd, t_cmd_exec **env_lst);
 int						check_var_name(char *str, int *res,
-							t_cmd_exec **env_lst, t_cmd *cmd);
+							t_cmd_exec **env_lst);
 void					shell_vl(t_cmd_exec **env_lst);
 t_cmd_exec				*ft_lstlast(t_cmd_exec *lst);
 void					lst_clear_tok(t_token **lst, void (*del)(void *));
@@ -134,5 +142,12 @@ void					build_new_tok_val(t_token *toks, char *value, int i,
 char					**env_lst_to_arr(t_cmd_exec *env_lst, char meaning,
 							int quote);
 void					exec(t_cmd **cmd, t_cmd_exec **env_lst);
-
+int	exec_run(t_cmd *cmd, t_cmd_exec **env_lst);
+void	exec_run_par(t_cmd *cmd, t_cmd_exec **env_lst);
+void	cleanup(t_cmd_exec **env_lst, t_cmd **cmd,
+	t_cmd *exec_cmd, char **env);
+t_cmd	*close_pipes(t_cmd **cmd, int id);
+void	clear_all(t_cmd **cmds, t_token **tokens);
+char	*getold(t_cmd_exec **env_lst);
+void	change_env(char *oldpwd, char *newpwd, t_cmd_exec *env_lst);
 #endif

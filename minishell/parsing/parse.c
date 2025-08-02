@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:01:26 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/24 15:29:07 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/02 18:39:16 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	cmd_free(t_cmd **cmd)
 {
 	int	i;
 
-	i = 0;
 	if (!cmd || !*cmd)
 		return ;
 	if ((*cmd) != NULL)
 	{
+		i = 0;
 		if ((*cmd)->args)
 		{
 			while ((*cmd)->args[i] != NULL)
@@ -29,10 +29,12 @@ void	cmd_free(t_cmd **cmd)
 		}
 		if ((*cmd)->op)
 			free((*cmd)->op);
+		
 		if ((*cmd)->op_value)
 			free((*cmd)->op_value);
 		free(*cmd);
 	}
+	*cmd = NULL;
 }
 
 static int	opers(t_token *toks, t_cmd_exec **env_lst)
@@ -56,8 +58,7 @@ static int	opers(t_token *toks, t_cmd_exec **env_lst)
 				ft_putstr_fd("Minishell: Syntax error: unexpected token '", 2);
 				ft_putstr_fd(toks->value, 2);
 				ft_putstr_fd("'\n", 2);
-				change_stat(env_lst, 2);
-				return (-1);
+				return (change_stat(env_lst, 2), -1);
 			}
 		}
 		prev = toks;
@@ -87,7 +88,7 @@ int	parsing_line(char *line, t_token **toks, t_cmd_exec **env_lst)
 
 	cmd = NULL;
 	*toks = NULL;
-	ft_strlcpy(chars, "<>|&;() \t\n", 11);
+	ft_strlcpy(chars, "<>|;() \t\n", 11);
 	count = tokens_count(line, chars);
 	if (count > 0)
 	{
@@ -101,5 +102,7 @@ int	parsing_line(char *line, t_token **toks, t_cmd_exec **env_lst)
 			exec(&cmd, env_lst);
 		clear_all(&cmd, toks);
 	}
+	else if (count < 0)
+		change_stat(env_lst, 2);
 	return (1);
 }

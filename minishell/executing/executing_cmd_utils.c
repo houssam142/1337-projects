@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 21:47:17 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/25 15:51:44 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/01 15:18:43 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*find_path(t_cmd_exec *env_lst, char *cmd)
 	while (path && path[++i] != NULL)
 	{
 		value = ft_strjoin_sep(path[i], cmd, '/');
-		if (access(value, F_OK | X_OK) == 0)
+		if (access(value, X_OK) == 0 || access(value, F_OK) == 0)
 		{
 			arr_free(path);
 			return (value);
@@ -101,7 +101,7 @@ char	*find_cmd(t_cmd *cmd, t_cmd_exec *env_lst)
 			cmd->args[0] = path;
 		}
 	}
-	if (!path)
+	if (!path && cmd->path_error != 4)
 		cmd->path_error = 1;
 	return (path);
 }

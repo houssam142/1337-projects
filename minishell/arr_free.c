@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arr_free.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 22:18:53 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/26 22:18:54 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/31 23:30:40 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ void	arr_free(char **arr)
 			free(arr[i]);
 		free(arr);
 	}
+	arr = NULL;
 }

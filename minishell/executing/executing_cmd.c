@@ -6,16 +6,14 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/07/26 09:00:25 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/02 16:54:46 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	waiting_helper(t_cmd_exec **env_lst, t_cmd **cmd, int *exit_stat,
-	int *stat_code)
+static void	waiting_helper(t_cmd_exec **env_lst, int *exit_stat, int *stat_code)
 {
-	(void)cmd;
 	int	sig;
 
 	sig = WTERMSIG(*exit_stat);
@@ -34,7 +32,7 @@ static void	waiting_helper(t_cmd_exec **env_lst, t_cmd **cmd, int *exit_stat,
 	}
 }
 
-static void	waiting(t_cmd_exec **env_lst, t_cmd **cmd)
+static void	waiting(t_cmd_exec **env_lst)
 {
 	int	exit_stat;
 	int	stat_code;
@@ -44,7 +42,7 @@ static void	waiting(t_cmd_exec **env_lst, t_cmd **cmd)
 	while (wait(&exit_stat) != -1 || errno != ECHILD)
 	{
 		if (WIFSIGNALED(exit_stat) != 0)
-			waiting_helper(env_lst, cmd, &exit_stat, &stat_code);
+			waiting_helper(env_lst, &exit_stat, &stat_code);
 		else if (WIFEXITED(exit_stat))
 		{
 			stat_code = WEXITSTATUS(exit_stat);
@@ -71,7 +69,21 @@ static void	parent_proc(t_cmd **cmd, t_cmd_exec **env_lst)
 			close(tmp->pipe_in);
 		tmp = tmp->next;
 	}
-	waiting(env_lst, cmd);
+	waiting(env_lst);
+}
+
+void	restore_std_fds(t_cmd *tmp)
+{
+	if (tmp->std_in_dup1 != -1)
+	{
+		dup2(tmp->std_in_dup1, 0);
+		close(tmp->std_in_dup1);
+	}
+	if (tmp->std_out_dup1 != -1)
+	{
+		dup2(tmp->std_out_dup1, 1);
+		close(tmp->std_out_dup1);
+	}
 }
 
 static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
@@ -102,14 +114,13 @@ static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
 		}
 		else if (tmp)
 		{
+			restore_std_fds(tmp);
 			tmp2 = tmp;
 			tmp = tmp->next;
 		}
 	}
 	if (my_pid != 0)
-	{
 		parent_proc(cmd, env_lst);
-	}
 }
 
 void	exec(t_cmd **cmd, t_cmd_exec **env_lst)
