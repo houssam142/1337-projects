@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 23:59:31 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/29 10:21:04 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/02 02:29:59 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,17 @@ int	check_arg(int ac, char **av)
 	int	j;
 
 	i = 0;
-	j = -1;
-	while (++i <= ac)
+	if (ac < 5)
 	{
+		printf("Error\nnumber of args not enough\n");
+		return (1);
+	}
+	while (++i < ac)
+	{
+		j = -1;
 		while (av[i][++j])
 		{
-			if (ft_isalpha(av[i][j]))
+			if (ft_isalpha(av[i][j]) || av[i][j] == '-')
 				return (1);
 		}
 	}

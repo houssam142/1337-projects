@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/29 18:52:14 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/29 22:11:36 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,12 @@ typedef struct s_info
 	int				time_to_sleep;
 	int				time_to_eat;
 	long			num_of_times_to_eat;
-	unsigned long		this_time;
+	unsigned long	this_time;
 	int				*death;
 	int				full;
 	int				died;
 	pthread_mutex_t	full_lock;
 	pthread_mutex_t	death_lock;
-	pthread_mutex_t	start_mutex;
 	pthread_t		alive;
 
 }					t_info;
@@ -57,11 +56,12 @@ typedef struct s_philo
 	pthread_mutex_t	last_meal_lock;
 }					t_philo;
 
-unsigned long			time_1(void);
+unsigned long		time_1(void);
 int					even_philo(t_philo *philo, int left, int right);
 int					check_arg(int ac, char **av);
 int					ft_isalpha(int c);
 int					has_eaten_enough(t_philo *philo);
+void				monitor_helper(t_philo *philo, int i);
 int					is_dead(t_philo *philo);
 long				ft_atoi(const char *str);
 int					handle_arg(t_info *arg, char **av, int ac);

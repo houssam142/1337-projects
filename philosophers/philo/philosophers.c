@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/29 20:01:09 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/31 21:44:01 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,10 @@ void	*check_if_death(void *arg)
 		{
 			pthread_mutex_lock(&philo[i].last_meal_lock);
 			if ((time_1()
-					- philo[i].last_meal) >= (unsigned long)philo->arguments->time_to_die - 1)
+					- philo[i].last_meal) >= (unsigned long)
+				philo->arguments->time_to_die)
 			{
-				pthread_mutex_unlock(&philo[i].last_meal_lock);
-				pthread_mutex_lock(&philo->arguments->death_lock);
-				if (!(*philo->arguments->death))
-				{
-					pthread_mutex_lock(philo[i].mutex.p);
-					print_msg("died\n", time_1() - philo->arguments->this_time,
-						philo[i].id);
-					*philo->arguments->death = 1;
-					pthread_mutex_unlock(philo[i].mutex.p);
-				}
-				pthread_mutex_unlock(&philo->arguments->death_lock);
+				monitor_helper(philo, i);
 				return (NULL);
 			}
 			pthread_mutex_unlock(&philo[i].last_meal_lock);
@@ -52,8 +43,8 @@ void	*check_if_death(void *arg)
 
 void	death_events(t_philo *philo)
 {
-	int	i;
-	int	now;
+	int				i;
+	unsigned long	now;
 
 	i = 0;
 	now = time_1();
@@ -138,13 +129,10 @@ int	main(int ac, char **av)
 		return (1);
 	pthread_mutex_init(&arguments.full_lock, NULL);
 	pthread_mutex_init(&arguments.death_lock, NULL);
-	// pthread_mutex_init(&arguments.start_mutex, NULL);
 	i = 0;
 	while (i < arguments.num_of_philo)
 		pthread_mutex_init(&forks[i++], NULL);
-	// pthread_mutex_lock(&arguments.start_mutex);
 	init_param(&arguments, philo, &print_mutex, forks);
-	// pthread_mutex_unlock(&arguments.start_mutex);
 	pthread_create(&arguments.alive, NULL, check_if_death, philo);
 	i = 0;
 	while (i < arguments.num_of_philo)

@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/29 18:52:47 by houssam          ###   ########.fr       */
+/*   Updated: 2025/07/31 21:41:37 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	monitor_helper(t_philo *philo, int i)
+{
+	pthread_mutex_unlock(&philo[i].last_meal_lock);
+	pthread_mutex_lock(&philo->arguments->death_lock);
+	if (!(*philo->arguments->death))
+	{
+		pthread_mutex_lock(philo[i].mutex.p);
+		print_msg("died\n", time_1() - philo->arguments->this_time,
+			philo[i].id);
+		*philo->arguments->death = 1;
+		pthread_mutex_unlock(philo[i].mutex.p);
+	}
+	pthread_mutex_unlock(&philo->arguments->death_lock);
+}
 
 void	increment_full(t_philo *philo)
 {
@@ -21,11 +36,8 @@ void	increment_full(t_philo *philo)
 
 int	handle_arg(t_info *arg, char **av, int ac)
 {
-	if (ac != 5 && ac != 6)
-	{
-		if (check_arg(ac, av))
-			return (1);
-	}
+	if (check_arg(ac, av))
+		return (1);
 	if (ft_atoi(av[1]) > 200 || ft_atoi(av[2]) < 60 || ft_atoi(av[3]) < 60
 		|| ft_atoi(av[4]) < 60)
 		return (1);
@@ -39,16 +51,17 @@ int	handle_arg(t_info *arg, char **av, int ac)
 	{
 		arg->num_of_times_to_eat = ft_atoi(av[5]);
 		if (arg->num_of_times_to_eat > 2147483647 || !arg->num_of_times_to_eat)
+		{
+			printf("Error\nmore or not enough times to eat");
 			return (1);
+		}
 	}
-	else
-		arg->num_of_times_to_eat = -1;
 	return (0);
 }
 
 void	print(char c, t_philo *philo, int id)
 {
-	long	timestamp;
+	unsigned long	timestamp;
 
 	pthread_mutex_lock(philo->mutex.p);
 	if (!*(philo->arguments->death))
