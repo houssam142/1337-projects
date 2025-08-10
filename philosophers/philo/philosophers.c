@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/31 21:44:01 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/10 22:26:09 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*check_if_death(void *arg)
 		}
 		if (check_if_full_and_died(philo))
 			return (NULL);
-		usleep(philo->arguments->time_to_die / 10);
+		usleep(1000);
 	}
 	return (NULL);
 }

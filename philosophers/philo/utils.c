@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/31 21:41:37 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/10 22:22:56 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	print(char c, t_philo *philo, int id)
 	unsigned long	timestamp;
 
 	pthread_mutex_lock(philo->mutex.p);
+	pthread_mutex_lock(&philo->arguments->death_lock);
 	if (!*(philo->arguments->death))
 	{
 		timestamp = time_1() - philo->arguments->this_time;
@@ -76,6 +77,7 @@ void	print(char c, t_philo *philo, int id)
 		else if (c == 'T')
 			printf("%ld %d is thinking\n", timestamp, id + 1);
 	}
+	pthread_mutex_unlock(&philo->arguments->death_lock);
 	pthread_mutex_unlock(philo->mutex.p);
 }
 
