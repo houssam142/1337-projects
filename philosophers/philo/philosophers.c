@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/10 22:26:09 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/12 11:00:31 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	*check_if_death(void *arg)
 	int		i;
 
 	philo = (t_philo *)arg;
-	usleep(20 * (philo->arguments->num_of_philo / 2));
-	while (1)
+ 	while (1)
 	{
 		i = -1;
 		while (++i < philo->arguments->num_of_philo)
@@ -29,14 +28,15 @@ void	*check_if_death(void *arg)
 					- philo[i].last_meal) >= (unsigned long)
 				philo->arguments->time_to_die)
 			{
+				pthread_mutex_unlock(&philo[i].last_meal_lock);
 				monitor_helper(philo, i);
 				return (NULL);
 			}
 			pthread_mutex_unlock(&philo[i].last_meal_lock);
 		}
-		if (check_if_full_and_died(philo))
+		if (is_dead(philo) || is_all_full(philo))
 			return (NULL);
-		usleep(1000);
+		usleep(100);
 	}
 	return (NULL);
 }
@@ -67,9 +67,9 @@ void	*exec(void *args)
 	pthread_mutex_unlock(&philo->last_meal_lock);
 	if (philo->arguments->num_of_philo == 1)
 		return (one_philo(philo), NULL);
-	if (philo->id % 2 != 0)
+	if (philo->id % 2 == 0)
 		usleep(50);
-	while (!is_dead(philo))
+	while (!is_dead(philo) || !is_all_full(philo))
 	{
 		if (take_forks(philo))
 			break ;
@@ -91,9 +91,9 @@ void	init_param(t_info *info, t_philo *philo, pthread_mutex_t *print_mutex,
 {
 	int	i;
 
-	info->this_time = time_1();
 	info->died = 0;
 	info->full = 0;
+	info->this_time = time_1();
 	pthread_mutex_init(print_mutex, NULL);
 	i = -1;
 	while (++i < info->num_of_philo)

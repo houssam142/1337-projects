@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 01:14:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/29 18:52:53 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/12 10:49:47 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	take_forks(t_philo *philo)
 	}
 	else
 	{
-		usleep(100);
 		if (odd_philo(philo, left, right))
 			return (1);
 	}
@@ -42,12 +41,9 @@ void	put_forks(t_philo *philo)
 
 void	one_philo(t_philo *philo)
 {
-	pthread_mutex_lock(&philo->last_meal_lock);
-	philo->last_meal = time_1();
-	pthread_mutex_unlock(&philo->last_meal_lock);
 	pthread_mutex_lock(&philo->mutex.fork[philo->id]);
 	print('F', philo, philo->id);
-	ft_usleep(philo->arguments->time_to_die, philo);
+	ft_usleep((unsigned long)philo->arguments->time_to_die, philo);
 	pthread_mutex_unlock(&philo->mutex.fork[philo->id]);
 }
 

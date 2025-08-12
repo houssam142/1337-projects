@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/10 22:22:56 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/12 08:39:42 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,16 @@
 
 void	monitor_helper(t_philo *philo, int i)
 {
-	pthread_mutex_unlock(&philo[i].last_meal_lock);
+	pthread_mutex_lock(philo->mutex.p);
 	pthread_mutex_lock(&philo->arguments->death_lock);
 	if (!(*philo->arguments->death))
 	{
-		pthread_mutex_lock(philo[i].mutex.p);
 		print_msg("died\n", time_1() - philo->arguments->this_time,
 			philo[i].id);
 		*philo->arguments->death = 1;
-		pthread_mutex_unlock(philo[i].mutex.p);
 	}
 	pthread_mutex_unlock(&philo->arguments->death_lock);
+	pthread_mutex_unlock(philo->mutex.p);
 }
 
 void	increment_full(t_philo *philo)
@@ -45,8 +44,6 @@ int	handle_arg(t_info *arg, char **av, int ac)
 	arg->time_to_die = ft_atoi(av[2]);
 	arg->time_to_eat = ft_atoi(av[3]);
 	arg->time_to_sleep = ft_atoi(av[4]);
-	arg->full = 0;
-	arg->died = 0;
 	if (ac == 6)
 	{
 		arg->num_of_times_to_eat = ft_atoi(av[5]);
