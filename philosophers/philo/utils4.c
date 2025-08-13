@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils4.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 23:59:31 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/11 18:16:39 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/12 20:10:56 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ int	check_arg(int ac, char **av)
 		j = -1;
 		while (av[i][++j])
 		{
-			if (ft_isalpha(av[i][j]) || av[i][j] == '-')
+			if (ft_isalpha(av[i][j]))
+			{
+				printf("Error\nthere is an invalid character\n");
 				return (1);
+			}
 		}
 	}
 	return (0);
@@ -37,18 +40,18 @@ int	check_arg(int ac, char **av)
 
 int	even_philo(t_philo *philo, int left, int right)
 {
-	pthread_mutex_lock(&philo->mutex.fork[left]);
-	if (is_dead(philo))
-	{
-		pthread_mutex_unlock(&philo->mutex.fork[left]);
-		return (1);
-	}
-	print('F', philo, philo->id);
 	pthread_mutex_lock(&philo->mutex.fork[right]);
 	if (is_dead(philo))
 	{
 		pthread_mutex_unlock(&philo->mutex.fork[right]);
+		return (1);
+	}
+	print('F', philo, philo->id);
+	pthread_mutex_lock(&philo->mutex.fork[left]);
+	if (is_dead(philo))
+	{
 		pthread_mutex_unlock(&philo->mutex.fork[left]);
+		pthread_mutex_unlock(&philo->mutex.fork[right]);
 		return (1);
 	}
 	print('F', philo, philo->id);
@@ -57,18 +60,18 @@ int	even_philo(t_philo *philo, int left, int right)
 
 int	odd_philo(t_philo *philo, int left, int right)
 {
-	pthread_mutex_lock(&philo->mutex.fork[right]);
-	if (is_dead(philo))
-	{
-		pthread_mutex_unlock(&philo->mutex.fork[right]);
-		return (1);
-	}
-	print('F', philo, philo->id);
 	pthread_mutex_lock(&philo->mutex.fork[left]);
 	if (is_dead(philo))
 	{
 		pthread_mutex_unlock(&philo->mutex.fork[left]);
+		return (1);
+	}
+	print('F', philo, philo->id);
+	pthread_mutex_lock(&philo->mutex.fork[right]);
+	if (is_dead(philo))
+	{
 		pthread_mutex_unlock(&philo->mutex.fork[right]);
+		pthread_mutex_unlock(&philo->mutex.fork[left]);
 		return (1);
 	}
 	print('F', philo, philo->id);
@@ -91,7 +94,7 @@ int	ft_usleep(unsigned long time, t_philo *philo)
 		pthread_mutex_unlock(&philo->arguments->death_lock);
 		if (time_1() - start >= time)
 			break ;
-		usleep(500);
+		usleep(1000);
 	}
 	return (0);
 }

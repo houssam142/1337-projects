@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/12 08:39:42 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/13 01:09:38 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	monitor_helper(t_philo *philo, int i)
 {
-	pthread_mutex_lock(philo->mutex.p);
+	pthread_mutex_lock(philo[i].mutex.p);
 	pthread_mutex_lock(&philo->arguments->death_lock);
 	if (!(*philo->arguments->death))
 	{
@@ -23,7 +23,7 @@ void	monitor_helper(t_philo *philo, int i)
 		*philo->arguments->death = 1;
 	}
 	pthread_mutex_unlock(&philo->arguments->death_lock);
-	pthread_mutex_unlock(philo->mutex.p);
+	pthread_mutex_unlock(philo[i].mutex.p);
 }
 
 void	increment_full(t_philo *philo)
@@ -37,19 +37,25 @@ int	handle_arg(t_info *arg, char **av, int ac)
 {
 	if (check_arg(ac, av))
 		return (1);
-	if (ft_atoi(av[1]) > 200 || ft_atoi(av[2]) < 60 || ft_atoi(av[3]) < 60
-		|| ft_atoi(av[4]) < 60)
+	if (ft_atoi(av[1]) > 200)
+	{
+		printf("Error\narguments execeed requirements\n");
 		return (1);
+	}
 	arg->num_of_philo = ft_atoi(av[1]);
 	arg->time_to_die = ft_atoi(av[2]);
 	arg->time_to_eat = ft_atoi(av[3]);
 	arg->time_to_sleep = ft_atoi(av[4]);
+	if (arg->num_of_philo <= 0 || arg->time_to_die <= 0 || arg->time_to_eat <= 0
+		|| arg->time_to_sleep <= 0)
+		return (printf("Error\ninvalid number\n"), 1);
 	if (ac == 6)
 	{
 		arg->num_of_times_to_eat = ft_atoi(av[5]);
-		if (arg->num_of_times_to_eat > 2147483647 || !arg->num_of_times_to_eat)
+		if (arg->num_of_times_to_eat > 2147483647 || \
+			arg->num_of_times_to_eat <= 0)
 		{
-			printf("Error\nmore or not enough times to eat");
+			printf("Error\nmore or not enough times to eat\n");
 			return (1);
 		}
 	}
@@ -68,7 +74,10 @@ void	print(char c, t_philo *philo, int id)
 		if (c == 'F')
 			printf("%ld %d has taken a fork\n", timestamp, id + 1);
 		else if (c == 'E')
+		{
 			printf("%ld %d is eating\n", timestamp, id + 1);
+			philo->eat_count++;
+		}
 		else if (c == 'S')
 			printf("%ld %d is sleeping\n", timestamp, id + 1);
 		else if (c == 'T')

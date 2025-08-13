@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/12 11:00:31 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/13 00:32:10 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*check_if_death(void *arg)
 	int		i;
 
 	philo = (t_philo *)arg;
- 	while (1)
+	while (1)
 	{
 		i = -1;
 		while (++i < philo->arguments->num_of_philo)
@@ -36,7 +36,7 @@ void	*check_if_death(void *arg)
 		}
 		if (is_dead(philo) || is_all_full(philo))
 			return (NULL);
-		usleep(100);
+		usleep(10);
 	}
 	return (NULL);
 }
@@ -62,15 +62,14 @@ void	*exec(void *args)
 	t_philo	*philo;
 
 	philo = (t_philo *)args;
-	pthread_mutex_lock(&philo->last_meal_lock);
-	philo->last_meal = time_1();
-	pthread_mutex_unlock(&philo->last_meal_lock);
 	if (philo->arguments->num_of_philo == 1)
 		return (one_philo(philo), NULL);
 	if (philo->id % 2 == 0)
 		usleep(50);
 	while (!is_dead(philo) || !is_all_full(philo))
 	{
+		if (philo->id % 2 == 0)
+			print('T', philo, philo->id);
 		if (take_forks(philo))
 			break ;
 		update_eating(philo);
@@ -91,9 +90,9 @@ void	init_param(t_info *info, t_philo *philo, pthread_mutex_t *print_mutex,
 {
 	int	i;
 
+	info->this_time = time_1();
 	info->died = 0;
 	info->full = 0;
-	info->this_time = time_1();
 	pthread_mutex_init(print_mutex, NULL);
 	i = -1;
 	while (++i < info->num_of_philo)

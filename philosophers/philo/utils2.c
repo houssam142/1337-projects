@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:03:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/11 18:16:17 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/13 00:36:45 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	update_eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->last_meal_lock);
 	print('E', philo, philo->id);
 	ft_usleep((unsigned long)philo->arguments->time_to_eat, philo);
-	philo->eat_count++;
-	if (philo->eat_count >= philo->arguments->num_of_times_to_eat)
+	if (philo->eat_count >= philo->arguments->num_of_times_to_eat
+		&& philo->arguments->num_of_times_to_eat != 0)
 		increment_full(philo);
 }
 
