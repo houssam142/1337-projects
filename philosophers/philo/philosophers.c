@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/13 16:10:31 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/13 18:11:19 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*check_if_death(void *arg)
 		}
 		if (is_dead(philo) || is_all_full(philo))
 			return (NULL);
-		usleep(100);
+		usleep(10);
 	}
 	return (NULL);
 }
