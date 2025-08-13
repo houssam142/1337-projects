@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   helpers.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 01:14:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/12 20:15:45 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/13 15:23:24 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	take_forks(t_philo *philo)
 
 	left = philo->id;
 	right = (philo->id + 1) % philo->arguments->num_of_philo;
+	if (philo->id % 2 == 0)
+		print('T', philo, philo->id);
 	if (philo->id % 2 == 0)
 	{
 		if (even_philo(philo, left, right))

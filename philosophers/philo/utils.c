@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 02:12:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/13 01:09:38 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/13 10:43:35 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	monitor_helper(t_philo *philo, int i)
 {
-	pthread_mutex_lock(philo[i].mutex.p);
+	pthread_mutex_lock(philo->mutex.p);
 	pthread_mutex_lock(&philo->arguments->death_lock);
 	if (!(*philo->arguments->death))
 	{
@@ -23,7 +23,7 @@ void	monitor_helper(t_philo *philo, int i)
 		*philo->arguments->death = 1;
 	}
 	pthread_mutex_unlock(&philo->arguments->death_lock);
-	pthread_mutex_unlock(philo[i].mutex.p);
+	pthread_mutex_unlock(philo->mutex.p);
 }
 
 void	increment_full(t_philo *philo)
@@ -52,8 +52,8 @@ int	handle_arg(t_info *arg, char **av, int ac)
 	if (ac == 6)
 	{
 		arg->num_of_times_to_eat = ft_atoi(av[5]);
-		if (arg->num_of_times_to_eat > 2147483647 || \
-			arg->num_of_times_to_eat <= 0)
+		if (arg->num_of_times_to_eat > 2147483647
+			|| arg->num_of_times_to_eat <= 0)
 		{
 			printf("Error\nmore or not enough times to eat\n");
 			return (1);

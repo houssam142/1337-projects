@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:29:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/29 22:11:36 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/13 15:31:15 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ unsigned long		time_1(void);
 int					even_philo(t_philo *philo, int left, int right);
 int					check_arg(int ac, char **av);
 int					ft_isalpha(int c);
-int					has_eaten_enough(t_philo *philo);
 void				monitor_helper(t_philo *philo, int i);
 int					is_dead(t_philo *philo);
 long				ft_atoi(const char *str);
@@ -68,10 +67,8 @@ int					handle_arg(t_info *arg, char **av, int ac);
 void				print_msg(char *msg, int time, int id);
 void				print(char c, t_philo *philo, int id);
 int					take_forks(t_philo *philo);
-int					check_if_full_and_died(t_philo *philo);
 void				one_philo(t_philo *philo);
 int					ft_usleep(unsigned long time, t_philo *philo);
-int					check_death_of_philo(t_philo *philo);
 void				increment_full(t_philo *philo);
 void				put_forks(t_philo *philo);
 int					odd_philo(t_philo *philo, int left, int right);

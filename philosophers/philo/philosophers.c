@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:30:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/13 00:32:10 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/13 16:10:31 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ void	*check_if_death(void *arg)
 		while (++i < philo->arguments->num_of_philo)
 		{
 			pthread_mutex_lock(&philo[i].last_meal_lock);
-			if ((time_1()
-					- philo[i].last_meal) >= (unsigned long)
-				philo->arguments->time_to_die)
+			if ((time_1() - philo[i].last_meal)
+				>= (unsigned long)philo->arguments->time_to_die)
 			{
 				pthread_mutex_unlock(&philo[i].last_meal_lock);
 				monitor_helper(philo, i);
@@ -36,7 +35,7 @@ void	*check_if_death(void *arg)
 		}
 		if (is_dead(philo) || is_all_full(philo))
 			return (NULL);
-		usleep(10);
+		usleep(100);
 	}
 	return (NULL);
 }
@@ -68,19 +67,17 @@ void	*exec(void *args)
 		usleep(50);
 	while (!is_dead(philo) || !is_all_full(philo))
 	{
-		if (philo->id % 2 == 0)
-			print('T', philo, philo->id);
 		if (take_forks(philo))
 			break ;
 		update_eating(philo);
-		if (is_dead(philo) || is_all_full(philo))
+		if (is_dead(philo))
 			return (put_forks(philo), NULL);
 		put_forks(philo);
-		if (is_dead(philo))
-			break ;
 		print('S', philo, philo->id);
 		ft_usleep((unsigned long)philo->arguments->time_to_sleep, philo);
 		thinking_exec(philo);
+		if (is_dead(philo) || is_all_full(philo))
+			break ;
 	}
 	return (NULL);
 }
