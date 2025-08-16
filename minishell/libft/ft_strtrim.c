@@ -3,39 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 15:59:50 by aoussama          #+#    #+#             */
-/*   Updated: 2025/07/06 01:21:30 by houssam          ###   ########.fr       */
+/*   Created: 2024/10/26 13:05:03 by nafarid           #+#    #+#             */
+/*   Updated: 2024/11/10 14:51:15 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static int	check(const char *st, char c)
+{
+	int	i;
+
+	i = 0;
+	while (st[i])
+	{
+		if (st[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	first;
 	size_t	last;
-	size_t	i;
-	char	*trim;
 
-	if (!s1)
+	if (s1 == NULL || set == NULL)
 		return (NULL);
 	first = 0;
-	while (s1[first] && ft_strchr(set, s1[first]))
+	last = ft_strlen(s1) - 1;
+	while (check(set, s1[first]) == 1)
 		first++;
-	last = ft_strlen(s1);
-	while (last > first && ft_strchr(set, s1[last]))
+	if (!s1[first])
+		return (ft_strdup(""));
+	while (check(set, s1[last]) == 1)
 		last--;
-	if (first <= last)
-		trim = malloc(sizeof(char) * (last - first + 2));
-	else
-		trim = malloc(sizeof(char));
-	if (!trim)
-		return (NULL);
-	i = 0;
-	while (first <= last)
-		trim[i++] = s1[first++];
-	trim[i] = '\0';
-	return (trim);
+	return (ft_substr(s1, first, last - first + 1));
 }
+// #include <stdio.h>
+// int	main(void)
+// {
+// 	char s1[] = ",,,,,,,,,,,,jhklhjg,,,,,,,,,,,,,";
+// 	char set[] = ",,,,,,,,";
+// 	printf("%s\n", ft_strtrim(s1, set));
+// }

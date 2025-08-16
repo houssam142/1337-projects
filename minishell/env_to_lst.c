@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_to_lst.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 20:34:54 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/30 00:07:14 by houssam          ###   ########.fr       */
+/*   Created: 2025/08/07 20:12:22 by nafarid           #+#    #+#             */
+/*   Updated: 2025/08/08 11:47:54 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,13 @@ static int	exit_status(t_cmd_exec *node, t_cmd_exec **env_lst)
 {
 	char	*blank;
 
-	blank = malloc(sizeof(char) * 2);
+	blank = ft_malloc(sizeof(char) * 2);
 	if (!blank)
 		return (0);
 	blank[0] = '0';
 	blank[1] = '\0';
 	node = lst_new_ele(ft_strdup("?"), blank);
 	node->meaning = '?';
-	node->status = 0;
 	ft_lstadd_front(env_lst, node);
 	return (1);
 }

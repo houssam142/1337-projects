@@ -3,28 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 12:59:12 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/31 09:19:29 by houssam          ###   ########.fr       */
+/*   Created: 2025/08/07 20:16:12 by nafarid           #+#    #+#             */
+/*   Updated: 2025/08/09 12:09:25 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_ctrl_c_heredoc(int sig)
+void	ft_quote_removal(t_token **toks)
 {
-	(void)sig;
-	write(1, "\n", 1);
-	set_exit_code(130);
-	close(0);
+	t_token	*tmp;
+
+	tmp = *toks;
+	if (!tmp || !tmp->value || !tmp->quote)
+		return ;
+	while (tmp && tmp->type != 'c')
+	{
+		if (tmp->type != 'r')
+			quote_del(tmp);
+		tmp = tmp->next;
+	}
 }
 
 t_token	*new_ele_tok_node(char **words, int i)
 {
 	t_token	*curr;
 
-	curr = malloc(sizeof(t_token));
+	curr = ft_malloc(sizeof(t_token));
 	if (!curr)
 		return (NULL);
 	curr->type = 'w';
@@ -68,14 +75,11 @@ int	split_token_into_nodes(t_token *tok)
 	words = ft_split(tok->value, ' ');
 	if (!words || !words[0])
 		return (-1);
-	free(curr->value);
 	curr->value = ft_strdup(words[0]);
-	free(curr->quote);
 	curr->quote = ft_strdup("0");
 	if (!curr->value || !curr->quote)
 		return (-1);
 	if (ft_split_token_into_nodes_2(curr, words, next) == -1)
 		return (-1);
-	arr_free(words);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dups.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/31 23:42:13 by hounejja          #+#    #+#             */
-/*   Updated: 2025/07/31 23:42:15 by hounejja         ###   ########.fr       */
+/*   Created: 2025/08/07 20:08:00 by nafarid           #+#    #+#             */
+/*   Updated: 2025/08/12 18:31:42 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,16 @@ void	dups(t_cmd *tmp)
 		close(tmp->pipe_in);
 	}
 	dups_outs(tmp);
+}
+
+void	restore_std_fds(void)
+{
+	int	fd;
+
+	fd = 3;
+	while (fd < 1024)
+	{
+		close(fd);
+		fd++;
+	}
 }

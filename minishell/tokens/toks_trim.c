@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   toks_trim.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 21:56:06 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/06 00:23:56 by houssam          ###   ########.fr       */
+/*   Created: 2025/08/07 20:11:35 by nafarid           #+#    #+#             */
+/*   Updated: 2025/08/09 21:14:05 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,18 @@ static void	toks_split(t_token **toks)
 	int		i;
 
 	tmp = *toks;
-	i = -1;
 	while (tmp)
 	{
 		if (tmp->type == 'o' && (ft_strchr(tmp->value, ' ') != 0))
 		{
 			arr = ft_split(tmp->value, ' ');
 			tmp->type = 'd';
+			i = -1;
 			while (arr[++i] != NULL)
 			{
 				tmp->next = split_into_new_ele(arr[i], tmp);
 				tmp = tmp->next;
 			}
-			if (arr != NULL)
-				free(arr);
 		}
 		tmp = tmp->next;
 	}
@@ -54,7 +52,6 @@ static void	toks_value_trim(t_token *toks)
 	while (toks != NULL)
 	{
 		str = ft_strtrim(toks->value, " ");
-		free(toks->value);
 		toks->value = str;
 		toks = toks->next;
 	}
@@ -63,7 +60,6 @@ static void	toks_value_trim(t_token *toks)
 void	toks_trim(t_token **toks)
 {
 	t_token	*tmp1;
-	t_token	*tmp2;
 
 	tmp1 = *toks;
 	toks_value_trim(*toks);
@@ -74,15 +70,12 @@ void	toks_trim(t_token **toks)
 			&& tmp1 == *toks)
 		{
 			*toks = tmp1->next;
-			lst_del_tok(tmp1, &free);
 			tmp1 = *toks;
 		}
 		else if ((tmp1->next) && ((ft_strlen(tmp1->next->value) == 0)
 				|| tmp1->next->type == 'd'))
 		{
-			tmp2 = tmp1->next;
 			tmp1->next = tmp1->next->next;
-			lst_del_tok(tmp2, &free);
 		}
 		else if (tmp1)
 			tmp1 = tmp1->next;

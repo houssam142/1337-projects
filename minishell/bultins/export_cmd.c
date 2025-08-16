@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 21:51:26 by houssam           #+#    #+#             */
-/*   Updated: 2025/06/26 21:51:27 by houssam          ###   ########.fr       */
+/*   Created: 2025/08/07 20:07:24 by nafarid           #+#    #+#             */
+/*   Updated: 2025/08/07 20:07:26 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@ static int	print_env(t_cmd_exec **env_lst)
 	}
 	if (!envp[i])
 	{
-		arr_free(envp);
 		change_stat(env_lst, 0);
 		return (0);
 	}
 	else
 	{
-		arr_free(envp);
 		change_stat(env_lst, 1);
 		return (2);
 	}
@@ -49,7 +47,7 @@ static t_cmd_exec	*env_var_update(t_cmd_exec **env_lst, char *before_eql,
 	{
 		if (ft_strncmp(tmp->name, before_eql, ft_strlen(tmp->name) + 1) == 0)
 		{
-			free(tmp->value);
+			tmp->value = NULL;
 			tmp->value = ft_strdup(after_eql);
 			tmp->meaning = meaning;
 			break ;

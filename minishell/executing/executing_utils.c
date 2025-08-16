@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 21:49:01 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/30 15:04:04 by houssam          ###   ########.fr       */
+/*   Created: 2025/08/07 20:08:24 by nafarid           #+#    #+#             */
+/*   Updated: 2025/08/10 14:36:59 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strjoin_sep(char *path, char *cmd, char c)
 	if (!path || !cmd)
 		return (NULL);
 	len = ft_strlen(path) + ft_strlen(cmd);
-	s = malloc(len + 2);
+	s = ft_malloc(len + 2);
 	if (!s)
 		return (NULL);
 	i = 0;
@@ -43,11 +43,11 @@ char	*ft_strjoin_sep(char *path, char *cmd, char c)
 int	exec_run(t_cmd *cmd, t_cmd_exec **env_lst)
 {
 	if (!ft_strncmp(cmd->path, "pwd", 4))
-		return (pwd(env_lst));
+		return (ft_pwd(env_lst));
 	else if (!ft_strncmp(cmd->path, "env", 4))
-		return (env(env_lst));
+		return (ft_env(env_lst));
 	else if (!ft_strncmp(cmd->path, "unset", 6))
-		return (unset(cmd, env_lst));
+		return (ft_unset(cmd, env_lst));
 	else if (!ft_strncmp(cmd->path, "export", 7))
 		return (ft_export(cmd, env_lst));
 	else if (!ft_strncmp(cmd->path, "echo", 5))
@@ -86,13 +86,16 @@ void	exec_built(t_cmd *cmd, t_cmd_exec **env_lst, int child_par)
 {
 	int	exit_code;
 
+	if (cmd->redir_error)
+	{
+		change_stat(env_lst, 1);
+		return ;
+	}
 	if (!child_par)
 		exec_run_par(cmd, env_lst);
 	else if (child_par == 1)
 	{
 		exit_code = exec_run(cmd, env_lst);
-		lst_clear(env_lst, free);
-		cmd_free(&cmd);
 		exit(exit_code);
 	}
 }

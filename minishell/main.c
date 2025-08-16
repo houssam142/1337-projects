@@ -3,30 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 13:08:36 by aoussama          #+#    #+#             */
-/*   Updated: 2025/08/02 18:29:50 by houssam          ###   ########.fr       */
+/*   Created: 2025/08/07 20:15:02 by nafarid           #+#    #+#             */
+/*   Updated: 2025/08/13 11:11:05 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_handle_sigint(int sig)
+static void	check_ctrl_c(t_cmd_exec *env_lst)
+{
+	if (get_exit_code() == 130)
+	{
+		change_stat(&env_lst, get_exit_code());
+		set_exit_code(0);
+	}
+}
+
+void	ft_handle_sigint(int sig)
 {
 	(void)sig;
-	write(1, "\n", 1);
+	write(2, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 	set_exit_code(130);
-}
-
-static void	cleanup_readline(void)
-{
-	rl_clear_history();
-	rl_free_line_state();
-	rl_deprep_terminal();
 }
 
 static int	check_stat(t_cmd_exec *env_lst, int *status)
@@ -66,31 +68,22 @@ int	main(int ac, char **av, char **env)
 	t_token		*tok;
 	int			status;
 
+	status = 0;
 	if (start(ac, av, env, &env_lst) == 1)
 		return (0);
 	while (1)
 	{
 		signal(SIGINT, ft_handle_sigint);
 		signal(SIGQUIT, SIG_IGN);
-		cmd = readline("<minishell> ");
+		cmd = readline("<Minishell> ");
 		if (!cmd)
-		{
-			ft_putstr_fd("\nexit\n", 1);
-			exit((lst_clear(&env_lst, free), cleanup_readline(), status));
-		}
+			ft_exitt(&status);
 		if (*cmd)
 			add_history(cmd);
-		if (get_exit_code() == 130)
-		{
-			change_stat(&env_lst, get_exit_code());
-			set_exit_code(0);
-		}
+		check_ctrl_c(env_lst);
 		parsing_line(cmd, &tok, &env_lst);
-		free(cmd);
 		if (check_stat(env_lst, &status) == 1)
 			break ;
 	}
-	lst_clear(&env_lst, free);
-	cleanup_readline();
-	return (status);
+	return (free_grabage(), status);
 }

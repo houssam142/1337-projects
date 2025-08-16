@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 21:39:47 by houssam           #+#    #+#             */
-/*   Updated: 2025/07/17 06:21:43 by houssam          ###   ########.fr       */
+/*   Created: 2025/08/07 20:07:16 by nafarid           #+#    #+#             */
+/*   Updated: 2025/08/07 20:07:18 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ static void	run_exit(t_cmd_exec *env_lst)
 {
 	while (env_lst->meaning != '?')
 		env_lst = env_lst->next;
-	if (env_lst->value)
-		free(env_lst->value);
 	env_lst->value = ft_strdup("exit");
 }
 
@@ -90,6 +88,9 @@ int	ft_exit(t_cmd *cmd, t_cmd_exec **env_lst)
 		run_exit(*env_lst);
 	}
 	else
+	{
 		run_exit(*env_lst);
+		ft_putstr_fd("exit\n", 2);
+	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/02 16:54:46 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/10 14:36:55 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,95 +32,67 @@ static void	waiting_helper(t_cmd_exec **env_lst, int *exit_stat, int *stat_code)
 	}
 }
 
-static void	waiting(t_cmd_exec **env_lst)
+void	waiting(t_cmd_exec **env_lst, int idx, int *pids)
 {
 	int	exit_stat;
 	int	stat_code;
+	int	i;
 
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	while (wait(&exit_stat) != -1 || errno != ECHILD)
+	i = -1;
+	while (++i < idx)
 	{
-		if (WIFSIGNALED(exit_stat) != 0)
-			waiting_helper(env_lst, &exit_stat, &stat_code);
-		else if (WIFEXITED(exit_stat))
+		waitpid(pids[i], &exit_stat, 0);
+		if (i == idx - 1)
 		{
-			stat_code = WEXITSTATUS(exit_stat);
-			change_stat(env_lst, stat_code);
+			if (WIFSIGNALED(exit_stat) != 0)
+				waiting_helper(env_lst, &exit_stat, &stat_code);
+			else if (WIFEXITED(exit_stat))
+			{
+				stat_code = WEXITSTATUS(exit_stat);
+				change_stat(env_lst, stat_code);
+			}
 		}
 	}
 	ft_signals();
 }
 
-static void	parent_proc(t_cmd **cmd, t_cmd_exec **env_lst)
-{
-	t_cmd	*tmp;
-
-	tmp = *cmd;
-	while (tmp)
-	{
-		if (tmp->std_in != 0)
-			close(tmp->std_in);
-		if (tmp->std_out != 1)
-			close(tmp->std_out);
-		if (tmp->pipe_out != 0)
-			close(tmp->pipe_out);
-		if (tmp->pipe_in != 0)
-			close(tmp->pipe_in);
-		tmp = tmp->next;
-	}
-	waiting(env_lst);
-}
-
-void	restore_std_fds(t_cmd *tmp)
-{
-	if (tmp->std_in_dup1 != -1)
-	{
-		dup2(tmp->std_in_dup1, 0);
-		close(tmp->std_in_dup1);
-	}
-	if (tmp->std_out_dup1 != -1)
-	{
-		dup2(tmp->std_out_dup1, 1);
-		close(tmp->std_out_dup1);
-	}
-}
-
-static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
+static int	fork_and_execute(t_cmd **cmd, t_cmd_exec **env_lst, pid_t *pids)
 {
 	int		my_pid;
 	t_cmd	*tmp;
 	t_cmd	*tmp2;
+	int		idx;
 
 	tmp = *cmd;
 	tmp2 = tmp;
 	my_pid = 1;
+	idx = 0;
 	while (tmp && my_pid != 0)
 	{
 		if (tmp->id == 0 || tmp2->pipe == 1)
 			my_pid = fork();
 		if (!my_pid)
+			check_dir_exe(tmp, env_lst, cmd);
+		else if (tmp && my_pid > 0)
 		{
-			if (tmp->redir_error)
-			{
-				ft_putstr_fd("Minishell: ", 2);
-				ft_putstr_fd(tmp->op_value, 2);
-				ft_putstr_fd(": no such file or directory\n", 2);
-				lst_clear(env_lst, free);
-				cmd_free(cmd);
-				exit(1);
-			}
-			child_proc(cmd, env_lst, tmp->id);
-		}
-		else if (tmp)
-		{
-			restore_std_fds(tmp);
+			pids[idx++] = my_pid;
 			tmp2 = tmp;
 			tmp = tmp->next;
 		}
 	}
-	if (my_pid != 0)
-		parent_proc(cmd, env_lst);
+	return (idx);
+}
+
+static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
+{
+	pid_t	*pids;
+	int		process_count;
+
+	pids = allocate_pid_array(*cmd);
+	process_count = fork_and_execute(cmd, env_lst, pids);
+	parent_proc(env_lst, process_count, pids);
 }
 
 void	exec(t_cmd **cmd, t_cmd_exec **env_lst)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_del.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 21:52:23 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/01 20:42:53 by houssam          ###   ########.fr       */
+/*   Created: 2025/08/07 20:06:27 by nafarid           #+#    #+#             */
+/*   Updated: 2025/08/07 20:18:59 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	quote_del(t_token *toks)
 	char	*new_quote;
 
 	i = -1;
+	if (ft_strlen(toks->value) != ft_strlen(toks->quote))
+		return ;
 	while (toks->value[++i])
 	{
 		if ((toks->value[i] == '\'' || toks->value[i] == '\"')
@@ -26,15 +28,15 @@ void	quote_del(t_token *toks)
 		{
 			toks->value[i] = '\0';
 			new_value = ft_strjoin(toks->value, toks->value + i + 1);
-			free(toks->value);
-			toks->value = new_value;
 			toks->quote[i] = '\0';
 			new_quote = ft_strjoin(toks->quote, toks->quote + i + 1);
-			free(toks->quote);
+			if (!new_quote || !new_value)
+				return ;
+			toks->value = new_value;
 			toks->quote = new_quote;
-			--i;
 			if (toks->type == 'h')
 				toks->type = 'H';
+			i--;
 		}
 	}
 }

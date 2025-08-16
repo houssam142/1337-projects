@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lstadd_front.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 22:20:22 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/01 20:16:53 by houssam          ###   ########.fr       */
+/*   Created: 2025/08/07 20:14:46 by nafarid           #+#    #+#             */
+/*   Updated: 2025/08/13 11:14:05 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,46 +15,23 @@
 void	check_if_should_split(t_token *toks)
 {
 	int	k;
+	int	in_quotes;
 
 	k = -1;
+	in_quotes = 0;
 	while (toks->value[++k])
 	{
-		if ((toks->value[k] == '$' && !toks->value[k + 1])
-			|| ft_strchr("\'\"=.", toks->value[k]))
-			toks->strip = 2;
-	}
-}
-
-char	*remove_outer_quotes(char *s)
-{
-	char	*result;
-	int		i;
-	int		j;
-	char	quote_type;
-
-	if (!s)
-		return (NULL);
-	result = malloc(ft_strlen(s) + 1);
-	if (!result)
-		return (NULL);
-	i = 0;
-	j = 0;	
-	while (s[i])
-	{
-		if (s[i] == '\'' || s[i] == '"')
+		if (toks->value[k] == '"' && !in_quotes)
+			in_quotes = 1;
+		else if (toks->value[k] == '"' && in_quotes)
+			in_quotes = 0;
+		else if ((toks->value[k] == '$' && !toks->value[k + 1])
+			|| ft_strchr("=.\'", toks->value[k]) || in_quotes)
 		{
-			quote_type = s[i];
-			i++;
-			while (s[i] && s[i] != quote_type)
-				result[j++] = s[i++];
-			if (s[i] == quote_type)
-				i++;
+			toks->strip = 2;
+			return ;
 		}
-		else
-			result[j++] = s[i++];
-	}	
-	result[j] = '\0';
-	return (result);
+	}
 }
 
 void	ft_lstadd_front(t_cmd_exec **lst, t_cmd_exec *new)
@@ -64,4 +41,12 @@ void	ft_lstadd_front(t_cmd_exec **lst, t_cmd_exec *new)
 		new->next = *lst;
 		*lst = new;
 	}
+}
+
+void	ft_exitt(int *status)
+{
+	if (get_exit_code() == 130)
+		exit((ft_putstr_fd("\nexit\n", 2), free_grabage(), get_exit_code()));
+	else
+		exit((ft_putstr_fd("\nexit\n", 2), free_grabage(), *status));
 }

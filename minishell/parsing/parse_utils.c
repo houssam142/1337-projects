@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 22:01:07 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/02 18:43:36 by houssam          ###   ########.fr       */
+/*   Created: 2025/08/07 20:10:19 by nafarid           #+#    #+#             */
+/*   Updated: 2025/08/13 11:07:18 by nafarid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,7 @@ static int	final_parsing(t_token **toks, t_cmd_exec *env_lst)
 	remove_empty_tokens(toks);
 	if (!toks || !*toks)
 		return (-1);
-	word_split(toks, env_lst);
-	tmp = *toks;
-	while (tmp && tmp->type != 'c')
-	{
-		if (tmp->type != 'r')
-			quote_del(tmp);
-		tmp = tmp->next;
-	}
+	ft_quote_removal(toks);
 	return (0);
 }
 
@@ -74,7 +67,7 @@ static int	parsing_cmd(t_token **toks, t_cmd *cmd, t_cmd_exec **env_lst)
 
 static void	cmd_init(t_cmd **cmd)
 {
-	(*cmd) = malloc(sizeof(t_cmd));
+	(*cmd) = ft_malloc(sizeof(t_cmd));
 	if (!(*cmd))
 		return ;
 	(*cmd)->id = 0;
@@ -99,19 +92,22 @@ static void	cmd_init(t_cmd **cmd)
 
 static int	parse_pipe(t_token **toks, t_cmd *last)
 {
-	t_token	*tmp;
 	t_cmd	*new_cmd;
 	int		fd[2];
 
 	while (last->next != NULL)
 		last = last->next;
 	last->pipe = 1;
-	tmp = *toks;
 	*toks = (*toks)->next;
-	lst_del_tok(tmp, &free);
 	if (pipe(fd) == -1)
 		return (-1);
 	cmd_init(&new_cmd);
+	if (!new_cmd)
+	{
+		close(fd[0]);
+		close(fd[1]);
+		return (-1);
+	}
 	last->next = new_cmd;
 	last->pipe_out = fd[1];
 	last->next->pipe_in = fd[0];
@@ -128,12 +124,8 @@ int	toks_to_struct(t_token **toks, t_cmd **cmd, t_cmd_exec **env_lst)
 	if (parsing_cmd(toks, *cmd, env_lst))
 		return (-1);
 	(*cmd)->id = id;
-	while ((*toks))
-	{
-		if ((*toks)->type == 'c')
-			break ;
+	while ((*toks) && (*toks)->type == 'c')
 		*toks = (*toks)->next;
-	}
 	while ((*toks) && ft_strncmp((*toks)->value, "|", 2) == 0)
 	{
 		last = *cmd;
@@ -141,7 +133,8 @@ int	toks_to_struct(t_token **toks, t_cmd **cmd, t_cmd_exec **env_lst)
 		last = *cmd;
 		while (last->next)
 			last = last->next;
-		parsing_cmd(toks, last, env_lst);
+		if (parsing_cmd(toks, last, env_lst) == -1)
+			return (-1);
 		last->id = ++id;
 	}
 	return (0);
