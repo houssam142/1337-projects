@@ -6,10 +6,13 @@ CFLAGS = -Wall -Wextra -Werror -g3
 
 SRC = main.c
 
-OTHER_SRCS = parsing/parse_file.c utils/ft_strlen.c utils/ft_strncmp.c utils/ft_putstr_fd.c \
-	     parsing/check_map.c
+OTHER_SRCS = parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd.c \
+	     parsing/check_map.c utils/get_next_line_utils.c utils/get_next_line.c \
+		 utils/ft_atoi.c utils/ft_split.c utils/alloc.c
 
 OTHER_OBJS = $(OTHER_SRCS:.c=.o)
+
+MINILIBX_DIR = /usr/include/minilibx-linux
 
 OBJ = $(SRC:.c=.o)
 
