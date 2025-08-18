@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 06:18:30 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:01:06 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	struct_free(t_parse *data)
 {
-	ft_free(data->map);
 	free(data->path_e);
 	free(data->path_n);
 	free(data->path_s);
 	free(data->path_w);
 	free(data->celing_color);
 	free(data->floor_color);
+	// ft_free(data->map);
 }
 
 static void	init_parse(t_parse *data)
@@ -40,6 +40,12 @@ int	parse_args(char **av, t_parse *data)
 	check_file(av[1]);
 	check_extensions(av[1], data);
 	data->map = ft_return_map_game(av[1]);
+	if (!data->map)
+	{
+		ft_putstr_fd("Error: Map parsing failed\n", 2);
+		return (1);
+	}
+	check_colors(data);
 	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/18 05:24:45 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/18 10:13:23 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ char		*get_next_line(int fd);
 char		**ft_free(char **tab);
 void		ft_alloc_str(t_parse *data, int k, char c);
 char		**ft_split(char const *s, char c);
+void		check_colors(t_parse *data);
 int			ft_isspace(char c);
+int			ft_isdigit(int c);
 int			ft_atoi(const char *str);
 char		**arr_to_2darray(char *map);
 char		**ft_return_map_game(char *str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 04:05:03 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:40:21 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,11 @@ int	check_extensions(char *str, t_parse *data)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (count < 6)
+	if (count != 6)
 	{
-		ft_putstr_fd("the file needs six identifiers\n", 2);
+		ft_putstr_fd("the file just needs six identifiers\n", 2);
 		exit(1);
 	}
-	close(fd);
 	return (0);
 }
 
@@ -120,7 +119,7 @@ int	check_file(char *str)
 	int	len;
 	int	fd;
 
-	len = ft_strlen(str);
+	len = (int)ft_strlen(str);
 	if (ft_strncmp(&str[len - 4], ".cub", 3))
 		return (ft_putstr_fd("it's not a valid map\n", 2), 1);
 	fd = open(str, O_RDONLY);

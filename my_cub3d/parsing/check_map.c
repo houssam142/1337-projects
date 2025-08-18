@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 06:02:49 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:03:11 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**ft_return_map_game(char *str)
 	int		fd;
 	int		i;
 
-	arr = malloc(sizeof(char *) * line_count(str) + 1);
+	arr = malloc(sizeof(char *) * (line_count(str) + 1));
 	fd = check_file(str);
 	i = 0;
 	line = get_next_line(fd);
