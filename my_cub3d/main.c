@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 05:59:31 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/18 06:18:30 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	struct_free(t_parse *data)
 {
+	ft_free(data->map);
 	free(data->path_e);
 	free(data->path_n);
 	free(data->path_s);

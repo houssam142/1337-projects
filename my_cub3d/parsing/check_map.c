@@ -6,20 +6,11 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 05:58:50 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/18 06:02:49 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-static void	ft_join(char **arr, char *line, int i)
-{
-	char	*tmp;
-
-	tmp = ft_strjoin(arr[i], line);
-	free(arr[i]);
-	arr[i] = tmp;
-}
 
 static int	line_count(char *str)
 {
