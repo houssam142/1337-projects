@@ -39,17 +39,17 @@ static int	line_count(char *str)
 	return (i);
 }
 
-char    **ft_return_map_game(char *str)
+char	**ft_return_map_game(char *str)
 {
-    char    *line;
-    char    **arr;
+	char	*line;
+	char	**arr;
 	int		fd;
 	int		i;
 
-    arr = malloc(sizeof(char *)* line_count(str) + 1);
+	arr = malloc(sizeof(char *) * line_count(str) + 1);
 	fd = check_file(str);
 	i = 0;
-    line = get_next_line(fd);
+	line = get_next_line(fd);
 	if (!line)
 		exit((close(fd), 1));
 	while (line)
