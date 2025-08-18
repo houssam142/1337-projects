@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/17 17:46:52 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/17 22:51:19 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_parse
 	char	*celing_color;
 	int		fd;
 	int		count_identifiers;
+	char	**map;
 }			t_parse;
 
 int			check_file(char *str, t_parse *data);
@@ -41,7 +42,7 @@ int			check_map(t_parse *data);
 void		ft_putstr_fd(char *s, int fd);
 char		*get_next_line(int fd);
 char		**ft_free(char **tab);
-void	    ft_alloc_str(t_parse *data, int k, char c);
+void		ft_alloc_str(t_parse *data, int k, char c);
 char		**ft_split(char const *s, char c);
 int			ft_isspace(char c);
 int			ft_atoi(const char *str);

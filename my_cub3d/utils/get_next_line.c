@@ -117,4 +117,3 @@ char	*get_next_line(int fd)
 	temp = keep_rest(temp, start_next);
 	return (line);
 }
-

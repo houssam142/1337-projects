@@ -50,9 +50,9 @@ static int	count_words(char const *str, char c)
 
 static char	*get_word(const char *s1, int *index, char c)
 {
-	char		*copy;
-	size_t		word_len;
-	size_t		i;
+	char	*copy;
+	size_t	word_len;
+	size_t	i;
 
 	word_len = 0;
 	while (s1[*index] == c)
@@ -89,7 +89,7 @@ char	**ft_split(char const *s, char c)
 	if (!tab)
 		return (NULL);
 	while (j < count)
-	{	
+	{
 		tab[j] = get_word(s, &index, c);
 		if (!tab[j])
 			return (ft_free(tab));

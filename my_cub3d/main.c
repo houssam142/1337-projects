@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
+/*   Updated: 2025/08/18 02:59:49 by hounejja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include/cub3d.h"
 
 static void	struct_free(t_parse *data)
@@ -20,6 +32,7 @@ static void	init_parse(t_parse *data)
 	data->path_w = NULL;
 	data->celing_color = NULL;
 	data->floor_color = NULL;
+	data->map = NULL;
 }
 
 int	parse_args(char **av, t_parse *data)

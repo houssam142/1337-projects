@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_file.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
+/*   Updated: 2025/08/18 02:59:38 by hounejja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/cub3d.h"
 
 static void	copy_rgb(char *line, int *i, t_parse *data, char c)
@@ -50,7 +62,7 @@ static void	textures_path(char *line, int *i, t_parse *data, char direction)
 	*i += j;
 }
 
-void	check_identifiers(char *line, t_parse *data)
+int	check_identifiers(char *line, t_parse *data)
 {
 	int	i;
 	int	len;
@@ -75,22 +87,28 @@ void	check_identifiers(char *line, t_parse *data)
 			copy_rgb(&line[i + 1], &i, data, 'C');
 		i++;
 	}
+	return (data->count_identifiers);
 }
 
 int	check_map(t_parse *data)
 {
 	char	*line;
+	int		count;
 
 	line = get_next_line(data->fd);
 	if (!line)
 		exit((close(data->fd), 1));
 	while (line)
 	{
-		check_identifiers(line, data);
+		count = check_identifiers(line, data);
 		free(line);
 		line = get_next_line(data->fd);
 	}
-	printf("%d\n", data->count_identifiers);
+	if (count < 6)
+	{
+		ft_putstr_fd("the file needs six identifiers\n", 2);
+		exit(1);
+	}
 	return (0);
 }
 
@@ -102,16 +120,7 @@ int	check_file(char *str, t_parse *data)
 	len = ft_strlen(str);
 	if (ft_strncmp(&str[len - 4], ".cub", 3))
 		return (ft_putstr_fd("it's not a valid map\n", 2), 1);
-	if (errno == ENOTDIR)
-	{
-		printf("here\n");
-		fd = open(str, O_RDONLY);
-	}
-	else if (errno == EISDIR)
-	{
-		ft_putstr_fd("It's a directory\n", 2);
-		exit(1);
-	}
+	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
 		ft_putstr_fd("file doesn't exist\n", 2);
