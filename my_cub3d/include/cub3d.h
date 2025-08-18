@@ -46,6 +46,6 @@ char		**ft_split(char const *s, char c);
 int			ft_isspace(char c);
 int			ft_atoi(const char *str);
 char		**arr_to_2darray(char *map);
-char    	**ft_return_map_game(char *str);
+char		**ft_return_map_game(char *str);
 
 #endif

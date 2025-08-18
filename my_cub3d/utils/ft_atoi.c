@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:03:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 03:57:26 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/18 06:00:18 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ int	ft_atoi(const char *str)
 		return (1);
 	return ((res * sign));
 }
-
