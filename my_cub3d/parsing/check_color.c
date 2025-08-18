@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 09:57:31 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/18 17:47:11 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/18 21:10:21 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ void	check_colors_two(char *line)
 		if (line[i] == ',' && ft_isdigit(line[i + 1]))
 			count++;
 		else if (!ft_isdigit(line[i]))
-		{
-			ft_putstr_fd("\033[1;31mError: invalid color format\n", 2);
-			exit(1);
-		}
+			print_error(COLOR);
 		i++;
 	}
 	if (!line[i])

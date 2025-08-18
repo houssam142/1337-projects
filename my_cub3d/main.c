@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 17:01:06 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/18 21:21:00 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3d.h"
 
-static void	struct_free(t_parse *data)
+void	struct_free(t_parse *data)
 {
 	free(data->path_e);
 	free(data->path_n);
@@ -41,11 +41,7 @@ int	parse_args(char **av, t_parse *data)
 	check_extensions(av[1], data);
 	data->map = ft_return_map_game(av[1]);
 	if (!data->map)
-	{
-		ft_putstr_fd("Error: Map parsing failed\n", 2);
-		return (1);
-	}
-	check_colors(data);
+		print_error(MAP);
 	return (0);
 }
 

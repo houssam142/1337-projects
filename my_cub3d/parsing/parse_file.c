@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 17:40:21 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/18 21:21:21 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	check_extensions(char *str, t_parse *data)
 	fd = check_file(str);
 	line = get_next_line(fd);
 	if (!line)
-		exit((close(fd), 1));
+		exit((close(fd),print_error(EMPTY), 1));
 	while (line)
 	{
 		count = check_identifiers(line, data);
@@ -108,9 +108,11 @@ int	check_extensions(char *str, t_parse *data)
 	}
 	if (count != 6)
 	{
-		ft_putstr_fd("the file just needs six identifiers\n", 2);
-		exit(1);
+		struct_free(data);
+		print_error(FILE1);
 	}
+	check_texture_syntax(data);
+	check_colors(data);
 	return (0);
 }
 

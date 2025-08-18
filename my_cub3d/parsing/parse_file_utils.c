@@ -1,0 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_file_utils.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/18 20:43:19 by hounejja          #+#    #+#             */
+/*   Updated: 2025/08/18 21:04:10 by hounejja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/cub3d.h"
+
+void	check_texture_syntax(t_parse *data)
+{
+	int (len_1), (len_2), (len_3), (len_4);
+	if (data->path_e)
+	{
+		len_1 = (int)ft_strlen(data->path_e);
+		if (ft_strncmp(&data->path_e[len_1 - 4], ".xpm", 3))
+			print_error(TEXTURE);
+	}
+	if (data->path_w)
+	{
+		len_2 = (int)ft_strlen(data->path_w);
+		if (ft_strncmp(&data->path_w[len_2 - 4], ".xpm", 3))
+			print_error(TEXTURE);
+	}
+	if (data->path_s)
+	{
+		len_3 = (int)ft_strlen(data->path_s);
+		if (ft_strncmp(&data->path_s[len_3 - 4], ".xpm", 3))
+			print_error(TEXTURE);
+	}
+	if (data->path_n)
+	{
+		len_4 = (int)ft_strlen(data->path_n);
+		if (ft_strncmp(&data->path_n[len_4 - 4], ".xpm", 3))
+			print_error(TEXTURE);
+	}
+}
