@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 02:59:38 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/18 04:05:03 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,29 +90,32 @@ int	check_identifiers(char *line, t_parse *data)
 	return (data->count_identifiers);
 }
 
-int	check_map(t_parse *data)
+int	check_extensions(char *str, t_parse *data)
 {
 	char	*line;
 	int		count;
+	int		fd;
 
-	line = get_next_line(data->fd);
+	fd = check_file(str);
+	line = get_next_line(fd);
 	if (!line)
-		exit((close(data->fd), 1));
+		exit((close(fd), 1));
 	while (line)
 	{
 		count = check_identifiers(line, data);
 		free(line);
-		line = get_next_line(data->fd);
+		line = get_next_line(fd);
 	}
 	if (count < 6)
 	{
 		ft_putstr_fd("the file needs six identifiers\n", 2);
 		exit(1);
 	}
+	close(fd);
 	return (0);
 }
 
-int	check_file(char *str, t_parse *data)
+int	check_file(char *str)
 {
 	int	len;
 	int	fd;
@@ -126,6 +129,5 @@ int	check_file(char *str, t_parse *data)
 		ft_putstr_fd("file doesn't exist\n", 2);
 		exit(1);
 	}
-	data->fd = fd;
-	return (0);
+	return (fd);
 }

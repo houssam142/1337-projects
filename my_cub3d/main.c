@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 02:59:49 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/18 05:59:31 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	struct_free(t_parse *data)
 
 static void	init_parse(t_parse *data)
 {
-	data->fd = -1;
 	data->count_identifiers = 0;
 	data->path_e = NULL;
 	data->path_n = NULL;
@@ -37,9 +36,9 @@ static void	init_parse(t_parse *data)
 
 int	parse_args(char **av, t_parse *data)
 {
-	if (check_file(av[1], data))
-		return (1);
-	check_map(data);
+	check_file(av[1]);
+	check_extensions(av[1], data);
+	data->map = ft_return_map_game(av[1]);
 	return (0);
 }
 

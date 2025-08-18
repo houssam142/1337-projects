@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:03:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/17 22:55:55 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/18 03:57:26 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_isspace(char c)
 {
-	return (c == '\t' || c == '\r' || c == '\f' || c == '\v' || c == ' '
-		|| c == '\n');
+	return (c == '\t' || c == '\r' || c == '\f'
+		|| c == '\v' || c == ' ' || c == '\n');
 }
 
 int	ft_atoi(const char *str)
@@ -38,5 +38,7 @@ int	ft_atoi(const char *str)
 	while (str[x] >= '0' && str[x] <= '9')
 		res = (res * 10) + (str[x++] - 48);
 	if (res * sign < 0)
-		return ((res * sign));
+		return (1);
+	return ((res * sign));
 }
+
