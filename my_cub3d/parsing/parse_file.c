@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/19 06:15:03 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/19 21:53:47 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	textures_path(char *line, int *i, t_parse *data, char direction)
 		(*i)++;
 	j = *i;
 	k = 0;
-	while (line[j] && line[j] != '\n')
+	while (line[j] && !ft_isspace(line[j]))
 	{
 		j++;
 		k++;
@@ -60,6 +60,7 @@ static void	textures_path(char *line, int *i, t_parse *data, char direction)
 		ft_strlcpy(data->path_w, &line[*i], k + 1);
 	data->count_identifiers++;
 	*i += j;
+	
 }
 
 int	check_identifiers(char *line, t_parse *data)

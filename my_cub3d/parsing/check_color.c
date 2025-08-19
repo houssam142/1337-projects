@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 09:57:31 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/18 21:10:21 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/19 21:50:03 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,14 @@ void	check_colors_two(char *line)
 	count = 0;
 	while (line[i])
 	{
-		if (line[i] == ',' && ft_isdigit(line[i + 1]))
-			count++;
+		if (line[i] == ',')
+		{
+			i++;
+			while (ft_isspace(line[i]))
+				i++;
+			if (ft_isdigit(line[i]))
+				count++;
+		}
 		else if (!ft_isdigit(line[i]))
 			print_error(COLOR);
 		i++;
