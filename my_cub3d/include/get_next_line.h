@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:31:19 by hounejja          #+#    #+#             */
-/*   Updated: 2024/11/27 20:59:40 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/19 04:17:57 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "cub3d.h"
 
-# if defined(BUFFER_SIZE) && (BUFFER_SIZE > INT_MAX - 1)
-#  undef BUFFER_SIZE
+# ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 2147483646
 # endif
 

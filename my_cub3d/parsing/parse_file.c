@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 21:21:21 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/19 06:15:03 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	check_identifiers(char *line, t_parse *data)
 	{
 		while (line[i] && ft_isspace(line[i]))
 			i++;
+		if ((line[i] == '1' || line[i] == '0') && data->count_identifiers != 6)
+			print_error(ORDER);
 		if (!ft_strncmp(&line[i], "NO", 2))
 			textures_path(&line[i + 2], &i, data, 'N');
 		else if (!ft_strncmp(&line[i], "SO", 2))
@@ -99,7 +101,7 @@ int	check_extensions(char *str, t_parse *data)
 	fd = check_file(str);
 	line = get_next_line(fd);
 	if (!line)
-		exit((close(fd),print_error(EMPTY), 1));
+		exit((close(fd), print_error(EMPTY), 1));
 	while (line)
 	{
 		count = check_identifiers(line, data);
@@ -118,17 +120,26 @@ int	check_extensions(char *str, t_parse *data)
 
 int	check_file(char *str)
 {
-	int	len;
-	int	fd;
+	int		len;
+	int		fd;
+	char	*buff;
 
 	len = (int)ft_strlen(str);
 	if (ft_strncmp(&str[len - 4], ".cub", 3))
-		return (ft_putstr_fd("it's not a valid map\n", 2), 1);
+		print_error(EXTENSION);
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
 		ft_putstr_fd("file doesn't exist\n", 2);
 		exit(1);
+	}
+	else
+	{
+		if (read(fd, &buff, 0) == -1 && errno == EISDIR)
+		{
+			ft_putstr_fd("it's a directory, not a file\n", 2);
+			exit((close(fd), 1));
+		}
 	}
 	return (fd);
 }

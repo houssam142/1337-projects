@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 21:21:00 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/19 21:02:04 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	struct_free(t_parse *data)
 	free(data->path_w);
 	free(data->celing_color);
 	free(data->floor_color);
-	// ft_free(data->map);
+	ft_free(data->map);
 }
 
 static void	init_parse(t_parse *data)
@@ -37,11 +37,19 @@ static void	init_parse(t_parse *data)
 
 int	parse_args(char **av, t_parse *data)
 {
-	check_file(av[1]);
+	int	i;
+
 	check_extensions(av[1], data);
 	data->map = ft_return_map_game(av[1]);
+	check_map(data);
 	if (!data->map)
 		print_error(MAP);
+	i = 0;
+	while (data->map[i] != NULL)
+	{
+		printf("%s", data->map[i]);
+		i++;
+	}
 	return (0);
 }
 
@@ -50,7 +58,7 @@ int	main(int ac, char **av)
 	t_parse	data;
 
 	if (ac != 2)
-		return (ft_putstr_fd("Invalid arguments\n", 2), 1);
+		return (ft_putstr_fd("Error: invalid arguments\n", 2), 1);
 	init_parse(&data);
 	if (parse_args(av, &data))
 		return (1);

@@ -5,36 +5,54 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/19 05:05:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/19 21:07:51 by houssam          ###   ########.fr       */
+/*   Created: 2025/08/18 02:59:30 by hounejja          #+#    #+#             */
+/*   Updated: 2025/08/19 04:46:32 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	check_map(t_parse *data)
+static int	line_count(char *str)
 {
-	int	i;
-	int	j;
-	int	count;
+	int		i;
+	int		fd;
+	char	*line;
 
 	i = 0;
-	j = 0;
-	count = 0;
-	while (data->map[i])
+	fd = check_file(str);
+	line = get_next_line(fd);
+	while (line)
 	{
-		while (data->map[i][j])
-		{
-			while (ft_isspace(data->map[i][j]) && data->map[i][j])
-				j++;
-			if (data->map[i][j] == 'C' || data->map[i][j] == 'F')
-				i++;
-			else if (data->map[i][j] == '1' || data->map[i][j] == '0')
-				count++;
-			j++;
-		}
 		i++;
+		free(line);
+		line = get_next_line(fd);
 	}
-	if (count == 0)
-		print_error(EMPTY);
+	return (i);
+}
+
+char	**ft_return_map_game(char *str)
+{
+	char	*line;
+	char	**arr;
+	int		fd;
+	int		i;
+
+	arr = malloc(sizeof(char *) * (line_count(str) + 1));
+	fd = check_file(str);
+	i = 0;
+	line = get_next_line(fd);
+	if (!line)
+		exit((close(fd), 1));
+	while (line)
+	{
+		arr[i] = ft_strdup(line);
+		if (!arr[i])
+			exit((close(fd), 1));
+		free(line);
+		i++;
+		line = get_next_line(fd);
+	}
+	arr[i] = NULL;
+	close(fd);
+	return (arr);
 }

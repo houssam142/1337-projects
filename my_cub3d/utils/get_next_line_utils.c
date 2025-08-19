@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/17 15:17:38 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/19 04:33:43 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,14 @@ char	*ft_strdup(const char *str)
 	copy = malloc(sizeof(char) * l);
 	i = 0;
 	if (copy == NULL)
-	{
 		return (NULL);
-	}
 	while (str[i] != '\0')
 	{
 		copy[i] = str[i];
 		i++;
 	}
 	copy[i] = '\0';
-	return ((char *)copy);
+	return (copy);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)

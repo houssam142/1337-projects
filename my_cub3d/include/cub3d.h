@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/18 21:21:07 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/19 21:06:37 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <string.h>
 # include <unistd.h>
 
-enum parsing
+enum		e_parsing
 {
 	COLOR,
 	TEXTURE,
@@ -30,6 +30,8 @@ enum parsing
 	MAP,
 	FILE1,
 	EMPTY,
+	EXTENSION,
+	ORDER,
 };
 
 typedef struct s_parse
@@ -54,8 +56,9 @@ char		*get_next_line(int fd);
 void		check_texture_syntax(t_parse *data);
 char		**ft_free(char **tab);
 void		ft_alloc_str(t_parse *data, int k, char c);
+void	    check_map(t_parse *data);
 char		**ft_split(char const *s, char c);
-void	    print_error(enum parsing type);
+void		print_error(enum e_parsing type);
 void		check_colors(t_parse *data);
 int			ft_isspace(char c);
 int			ft_isdigit(int c);
