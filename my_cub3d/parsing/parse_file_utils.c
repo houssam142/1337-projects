@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:43:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/19 06:13:26 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:00:28 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	check_order(char *line, t_parse *data)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(line) - 1;
+	while (line[i])
+	{
+		if (line[i] == '1' && line[len - 1] == '1' && data->count_identifiers != 6)
+			data->flag = 1;
+		i++;
+	}
+}
 
 void	check_texture_syntax(t_parse *data)
 {

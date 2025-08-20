@@ -1,40 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/19 05:05:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/20 15:06:47 by hounejja         ###   ########.fr       */
+/*   Created: 2024/10/24 12:33:13 by hounejja          #+#    #+#             */
+/*   Updated: 2025/08/20 10:04:00 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	check_map(t_parse *data)
+static int	search(char const *s2, char c)
 {
-	int	i;
-	int	j;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (data->map[i])
+	while (*s2 && c != *s2)
 	{
-		j = 0;
-		while (data->map[i][j])
-		{
-			while (ft_isspace(data->map[i][j]) && data->map[i][j])
-				j++;
-			if (data->map[i][j] == 'C' || data->map[i][j] == 'F')
-				i++;
-			else if (data->map[i][j] == '1' || data->map[i][j] == '0')
-				count++;
-			j++;
-		}
+		s2++;
+	}
+	return (c == *s2);
+}
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	size_t	i;
+	size_t	len;
+
+	if (!s1)
+		return (NULL);
+	len = ft_strlen(s1);
+	i = 0;
+	while (search(set, s1[i]))
+	{
 		i++;
 	}
-	if (count == 0)
-		print_error(EMPTY);
+	if (i == len)
+	{
+		return (ft_strdup(""));
+	}
+	while (search(set, s1[len - 1]))
+	{
+		len--;
+	}
+	return (ft_substr(s1, i, len - i));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/19 21:06:37 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/20 15:59:56 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct s_parse
 	char	*floor_color;
 	char	*celing_color;
 	int		count_identifiers;
+	int		flag;
 	char	**map;
 }			t_parse;
 
@@ -62,6 +63,8 @@ void		print_error(enum e_parsing type);
 void		check_colors(t_parse *data);
 int			ft_isspace(char c);
 int			ft_isdigit(int c);
+void		check_order(char *line, t_parse *data);
+char		*ft_strtrim(char const *s1, char const *set);
 int			ft_atoi(const char *str);
 char		**ft_return_map_game(char *str);
 

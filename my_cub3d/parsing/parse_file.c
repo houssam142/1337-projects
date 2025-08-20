@@ -6,61 +6,68 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/19 21:53:47 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/20 16:01:26 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static void	copy_rgb(char *line, int *i, t_parse *data, char c)
+static void	copy_rgb(char *line, t_parse *data, char c)
 {
-	int	j;
-	int	k;
+	char	**arr;
+	char	*tmp;
+	int		i;
 
-	while (ft_isspace(line[*i]))
-		(*i)++;
-	j = *i;
-	k = 0;
-	while (line[j] && line[j] != '\n')
-	{
-		j++;
-		k++;
-	}
-	ft_alloc_str(data, k, c);
+	i = 0;
+	tmp = ft_strdup("");
+	line = ft_strtrim(line, " ");
 	if (c == 'F')
-		ft_strlcpy(data->floor_color, &line[*i], k);
+	{
+		arr = ft_split(line, ' ');
+		while (arr[i] != NULL)
+			tmp = ft_strjoin(tmp, arr[i++]);
+		data->floor_color = ft_strtrim(tmp, "\n");
+		ft_free(arr);
+		free(tmp);
+	}
 	else if (c == 'C')
-		ft_strlcpy(data->celing_color, &line[*i], k);
+	{
+		arr = ft_split(line, ' ');
+		while (arr[i])
+			tmp = ft_strjoin(tmp, arr[i++]);
+		data->celing_color = ft_strtrim(tmp, "\n");
+		ft_free(arr);
+		free(tmp);
+	}
 	data->count_identifiers++;
-	*i += j;
 }
 
 static void	textures_path(char *line, int *i, t_parse *data, char direction)
 {
 	int	j;
 	int	k;
+	int	h;
 
-	while (ft_isspace(line[*i]))
-		(*i)++;
-	j = *i;
+	j = 0;
+	line = ft_strtrim(line, " ");
 	k = 0;
-	while (line[j] && !ft_isspace(line[j]))
+	h = 0;
+	while (line[h] && !ft_isspace(line[h]))
 	{
-		j++;
+		h++;
 		k++;
 	}
 	ft_alloc_str(data, k, direction);
 	if (direction == 'N')
-		ft_strlcpy(data->path_n, &line[*i], k + 1);
+		ft_strlcpy(data->path_n, line, k + 1);
 	else if (direction == 'S')
-		ft_strlcpy(data->path_s, &line[*i], k + 1);
+		ft_strlcpy(data->path_s, line, k + 1);
 	else if (direction == 'E')
-		ft_strlcpy(data->path_e, &line[*i], k + 1);
+		ft_strlcpy(data->path_e, line, k + 1);
 	else if (direction == 'W')
-		ft_strlcpy(data->path_w, &line[*i], k + 1);
+		ft_strlcpy(data->path_w, line, k + 1);
 	data->count_identifiers++;
 	*i += j;
-	
 }
 
 int	check_identifiers(char *line, t_parse *data)
@@ -74,8 +81,7 @@ int	check_identifiers(char *line, t_parse *data)
 	{
 		while (line[i] && ft_isspace(line[i]))
 			i++;
-		if ((line[i] == '1' || line[i] == '0') && data->count_identifiers != 6)
-			print_error(ORDER);
+		check_order(&line[i], data);
 		if (!ft_strncmp(&line[i], "NO", 2))
 			textures_path(&line[i + 2], &i, data, 'N');
 		else if (!ft_strncmp(&line[i], "SO", 2))
@@ -85,9 +91,9 @@ int	check_identifiers(char *line, t_parse *data)
 		else if (!ft_strncmp(&line[i], "WE", 2))
 			textures_path(&line[i + 2], &i, data, 'W');
 		else if (line[i] == 'F')
-			copy_rgb(&line[i + 1], &i, data, 'F');
+			copy_rgb(&line[i + 1], data, 'F');
 		else if (line[i] == 'C')
-			copy_rgb(&line[i + 1], &i, data, 'C');
+			copy_rgb(&line[i + 1], data, 'C');
 		i++;
 	}
 	return (data->count_identifiers);
@@ -109,6 +115,10 @@ int	check_extensions(char *str, t_parse *data)
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (!data->flag)
+		print_error(EMPTY);
+	else if (data->flag)
+		print_error(ORDER);
 	if (count != 6)
 	{
 		struct_free(data);

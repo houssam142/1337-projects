@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/19 21:02:04 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/20 16:00:04 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	struct_free(t_parse *data)
 static void	init_parse(t_parse *data)
 {
 	data->count_identifiers = 0;
+	data->flag = 0;
 	data->path_e = NULL;
 	data->path_n = NULL;
 	data->path_s = NULL;
