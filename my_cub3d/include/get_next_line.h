@@ -17,12 +17,12 @@
 #  define BUFFER_SIZE 1024
 # endif
 
+# include "cub3d.h"
 # include <fcntl.h>
 # include <limits.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "cub3d.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 2147483646

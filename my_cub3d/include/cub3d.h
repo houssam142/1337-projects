@@ -57,7 +57,7 @@ char		*get_next_line(int fd);
 void		check_texture_syntax(t_parse *data);
 char		**ft_free(char **tab);
 void		ft_alloc_str(t_parse *data, int k, char c);
-void	    check_map(t_parse *data);
+void		check_map(t_parse *data);
 char		**ft_split(char const *s, char c);
 void		print_error(enum e_parsing type);
 void		check_colors(t_parse *data);

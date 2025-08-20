@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:43:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/20 16:00:28 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/20 16:44:01 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	check_order(char *line, t_parse *data)
 	len = ft_strlen(line) - 1;
 	while (line[i])
 	{
-		if (line[i] == '1' && line[len - 1] == '1' && data->count_identifiers != 6)
+		if (line[i] == '1' && line[len - 1] == '1'
+			&& data->count_identifiers != 6)
 			data->flag = 1;
 		i++;
 	}
