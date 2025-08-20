@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/20 16:01:26 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:22:27 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,11 @@ static void	copy_rgb(char *line, t_parse *data, char c)
 	data->count_identifiers++;
 }
 
-static void	textures_path(char *line, int *i, t_parse *data, char direction)
+static void	textures_path(char *line, t_parse *data, char direction)
 {
-	int	j;
 	int	k;
 	int	h;
 
-	j = 0;
 	line = ft_strtrim(line, " ");
 	k = 0;
 	h = 0;
@@ -67,7 +65,6 @@ static void	textures_path(char *line, int *i, t_parse *data, char direction)
 	else if (direction == 'W')
 		ft_strlcpy(data->path_w, line, k + 1);
 	data->count_identifiers++;
-	*i += j;
 }
 
 int	check_identifiers(char *line, t_parse *data)
@@ -83,13 +80,13 @@ int	check_identifiers(char *line, t_parse *data)
 			i++;
 		check_order(&line[i], data);
 		if (!ft_strncmp(&line[i], "NO", 2))
-			textures_path(&line[i + 2], &i, data, 'N');
+			textures_path(&line[i + 2], data, 'N');
 		else if (!ft_strncmp(&line[i], "SO", 2))
-			textures_path(&line[i + 2], &i, data, 'S');
+			textures_path(&line[i + 2], data, 'S');
 		else if (!ft_strncmp(&line[i], "EA", 2))
-			textures_path(&line[i + 2], &i, data, 'E');
+			textures_path(&line[i + 2], data, 'E');
 		else if (!ft_strncmp(&line[i], "WE", 2))
-			textures_path(&line[i + 2], &i, data, 'W');
+			textures_path(&line[i + 2], data, 'W');
 		else if (line[i] == 'F')
 			copy_rgb(&line[i + 1], data, 'F');
 		else if (line[i] == 'C')
@@ -108,7 +105,7 @@ int	check_extensions(char *str, t_parse *data)
 	fd = check_file(str);
 	line = get_next_line(fd);
 	if (!line)
-		exit((close(fd), print_error(EMPTY), 1));
+		exit((close(fd), print_error(EMPTY, data), 1));
 	while (line)
 	{
 		count = check_identifiers(line, data);
@@ -116,14 +113,11 @@ int	check_extensions(char *str, t_parse *data)
 		line = get_next_line(fd);
 	}
 	if (!data->flag)
-		print_error(EMPTY);
-	else if (data->flag)
-		print_error(ORDER);
+		print_error(EMPTY, data);
+	else if (data->flag == 1)
+		print_error(ORDER, data);
 	if (count != 6)
-	{
-		struct_free(data);
-		print_error(FILE1);
-	}
+		print_error(FILE1, data);
 	check_texture_syntax(data);
 	check_colors(data);
 	return (0);
@@ -137,7 +131,7 @@ int	check_file(char *str)
 
 	len = (int)ft_strlen(str);
 	if (ft_strncmp(&str[len - 4], ".cub", 3))
-		print_error(EXTENSION);
+		print_error(EXTENSION, NULL);
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{

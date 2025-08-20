@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/20 15:59:56 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:20:54 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char		**ft_free(char **tab);
 void		ft_alloc_str(t_parse *data, int k, char c);
 void		check_map(t_parse *data);
 char		**ft_split(char const *s, char c);
-void		print_error(enum e_parsing type);
+void		print_error(enum e_parsing type, t_parse *data);
 void		check_colors(t_parse *data);
 int			ft_isspace(char c);
 int			ft_isdigit(int c);

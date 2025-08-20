@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/20 16:00:04 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:21:43 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	struct_free(t_parse *data)
 static void	init_parse(t_parse *data)
 {
 	data->count_identifiers = 0;
-	data->flag = 0;
+	data->flag = 2;
 	data->path_e = NULL;
 	data->path_n = NULL;
 	data->path_s = NULL;
@@ -44,7 +44,7 @@ int	parse_args(char **av, t_parse *data)
 	data->map = ft_return_map_game(av[1]);
 	check_map(data);
 	if (!data->map)
-		print_error(MAP);
+		print_error(MAP, data);
 	i = 0;
 	while (data->map[i] != NULL)
 	{

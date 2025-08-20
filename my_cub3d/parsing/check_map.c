@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 05:05:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/20 15:06:47 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:43:32 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ void	check_map(t_parse *data)
 		i++;
 	}
 	if (count == 0)
-		print_error(EMPTY);
+		print_error(EMPTY, data);
 }

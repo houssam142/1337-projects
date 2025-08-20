@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 09:57:31 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/19 21:50:03 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:41:55 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	check_colors_two(char *line)
+void	check_colors_two(char *line, t_parse *data)
 {
 	int	i;
 	int	count;
@@ -30,7 +30,7 @@ void	check_colors_two(char *line)
 				count++;
 		}
 		else if (!ft_isdigit(line[i]))
-			print_error(COLOR);
+			print_error(COLOR, data);
 		i++;
 	}
 	if (!line[i])
@@ -44,6 +44,6 @@ void	check_colors_two(char *line)
 
 void	check_colors(t_parse *data)
 {
-	check_colors_two(data->celing_color);
-	check_colors_two(data->floor_color);
+	check_colors_two(data->celing_color, data);
+	check_colors_two(data->floor_color, data);
 }
