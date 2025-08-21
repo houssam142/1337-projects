@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 12:33:13 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/20 10:04:00 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/21 08:23:19 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,16 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	len;
 
 	if (!s1)
-		return (NULL);
+		exit(1);
 	len = ft_strlen(s1);
 	i = 0;
-	while (search(set, s1[i]))
-	{
+	while (i < len && search(set, s1[i]))
 		i++;
-	}
 	if (i == len)
 	{
 		return (ft_strdup(""));
 	}
-	while (search(set, s1[len - 1]))
+	while (len > i && search(set, s1[len - 1]))
 	{
 		len--;
 	}

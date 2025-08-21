@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:51:38 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/20 22:42:44 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/21 07:58:08 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	print_error(enum e_parsing type, t_parse *data)
 		exit((ft_putstr_fd("\033[1;31mthe file just needs six identifiers\n",
 					2), struct_free(data), 1));
 	else if (type == MAP)
-		exit((ft_putstr_fd("\033[1;31mError: Map parsing failed\n", 2), 1));
+		exit((ft_putstr_fd("\033[1;31mError: Map parsing failed\n", 2), struct_free(data), 1));
 	else if (type == EMPTY)
-		exit((ft_putstr_fd("\033[1;31mError: empty map\n", 2), 1));
+		exit((ft_putstr_fd("\033[1;31mError: empty map\n", 2), struct_free(data), 1));
 	else if (type == EXTENSION)
 		exit((ft_putstr_fd("\033[1;31mError: file extension must be .cub\n", 2),
-				1));
+				struct_free(data), 1));
 	else if (type == ORDER)
-		exit((ft_putstr_fd("\033[1;31mError: wrong order\n", 2), 1));
+		exit((ft_putstr_fd("\033[1;31mError: wrong order\n", 2), struct_free(data), 1));
 }

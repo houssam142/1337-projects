@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:43:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/20 22:43:20 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/21 06:23:59 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ void	check_order(char *line, t_parse *data)
 	if (line[0] == '1' && line[len - 2] == '1'
 		&& data->count_identifiers != 6)
 		data->flag = 1;
-	else if (line[0] != '1' && line[len - 2] != '1'
-		&& data->count_identifiers != 6)
-		data->flag = 0;
 }
 
 void	check_texture_syntax(t_parse *data)

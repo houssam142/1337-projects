@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/20 22:22:27 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/21 08:29:35 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ static void	copy_rgb(char *line, t_parse *data, char c)
 	i = 0;
 	tmp = ft_strdup("");
 	line = ft_strtrim(line, " ");
+	arr = NULL;
 	if (c == 'F')
 	{
 		arr = ft_split(line, ' ');
 		while (arr[i] != NULL)
 			tmp = ft_strjoin(tmp, arr[i++]);
 		data->floor_color = ft_strtrim(tmp, "\n");
-		ft_free(arr);
-		free(tmp);
 	}
 	else if (c == 'C')
 	{
@@ -36,10 +35,11 @@ static void	copy_rgb(char *line, t_parse *data, char c)
 		while (arr[i])
 			tmp = ft_strjoin(tmp, arr[i++]);
 		data->celing_color = ft_strtrim(tmp, "\n");
-		ft_free(arr);
-		free(tmp);
 	}
 	data->count_identifiers++;
+	ft_free(arr);
+	free(line);
+	free(tmp);
 }
 
 static void	textures_path(char *line, t_parse *data, char direction)
@@ -65,6 +65,7 @@ static void	textures_path(char *line, t_parse *data, char direction)
 	else if (direction == 'W')
 		ft_strlcpy(data->path_w, line, k + 1);
 	data->count_identifiers++;
+	free(line);
 }
 
 int	check_identifiers(char *line, t_parse *data)
@@ -112,12 +113,11 @@ int	check_extensions(char *str, t_parse *data)
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (!data->flag)
-		print_error(EMPTY, data);
-	else if (data->flag == 1)
-		print_error(ORDER, data);
+	close(fd);
 	if (count != 6)
 		print_error(FILE1, data);
+	if (data->flag == 1)
+		print_error(ORDER, data);
 	check_texture_syntax(data);
 	check_colors(data);
 	return (0);

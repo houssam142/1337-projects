@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/19 04:33:43 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/21 08:05:10 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		j;
 
 	if (!s1 || !s2)
-		return (NULL);
+		exit(1);
 	i = 0;
 	j = 0;
 	len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	res = malloc(len);
 	if (!res)
-		return (NULL);
+		exit(1);
 	while (s1[i])
 	{
 		res[i] = s1[i];
@@ -63,7 +63,7 @@ char	*ft_strdup(const char *str)
 	copy = malloc(sizeof(char) * l);
 	i = 0;
 	if (copy == NULL)
-		return (NULL);
+		exit(1);
 	while (str[i] != '\0')
 	{
 		copy[i] = str[i];
@@ -96,7 +96,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*str;
 
 	if (!s)
-		return (NULL);
+		exit(1);
 	if (start >= ft_strlen(s))
 	{
 		return (ft_strdup(""));
@@ -107,9 +107,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	str = malloc(sizeof(char) * (len + 1));
 	if (str == NULL)
-	{
-		return (NULL);
-	}
+		exit(1);
 	ft_strlcpy(str, start + s, len + 1);
 	return (str);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/20 22:20:54 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/21 06:34:32 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ int			ft_isdigit(int c);
 void		check_order(char *line, t_parse *data);
 char		*ft_strtrim(char const *s1, char const *set);
 int			ft_atoi(const char *str);
-char		**ft_return_map_game(char *str);
+char		**ft_return_map_game(char *str, t_parse *data);
 
 #endif
