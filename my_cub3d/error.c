@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:51:38 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/21 07:58:08 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/22 13:45:18 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	print_error(enum e_parsing type, t_parse *data)
 		exit((ft_putstr_fd("\033[1;31mError: empty map\n", 2), struct_free(data), 1));
 	else if (type == EXTENSION)
 		exit((ft_putstr_fd("\033[1;31mError: file extension must be .cub\n", 2),
-				struct_free(data), 1));
+					 1));
 	else if (type == ORDER)
 		exit((ft_putstr_fd("\033[1;31mError: wrong order\n", 2), struct_free(data), 1));
 }

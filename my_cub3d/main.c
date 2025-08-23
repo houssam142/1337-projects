@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/21 08:28:55 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/22 14:07:17 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	parse_args(char **av, t_parse *data)
 {
 	check_extensions(av[1], data);
 	data->map = ft_return_map_game(av[1], data);
-	// check_map(data);
+	check_map(data);
 	if (!data->map)
 		print_error(MAP, data);
 	return (0);
