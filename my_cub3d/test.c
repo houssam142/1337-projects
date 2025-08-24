@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/23 15:53:14 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/23 20:10:14 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/24 06:13:42 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int main()
         exit(1);
     w.player_img = mlx_xpm_file_to_image(w.mlx, "walkDown_01.xpm", &img_w, &img_h);
 	x = 800 / 2;
-	y = 800 / 2;x
+	y = 800 / 2;
 	draw_player(&w);
 	mlx_put_image_to_window(w.mlx, w.win, w.player_img, 100, 100);
     mlx_hook(w.win, 2, 1L << 0, press, &w);
