@@ -6,7 +6,7 @@
 /*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/22 13:09:13 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/28 11:28:04 by houssam          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include "get_next_line.h"
+# include "/usr/include/minilibx-linux/mlx.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
@@ -21,6 +22,9 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+
+#define WIDTH 800
+#define HEIGHT 800
 
 enum		e_parsing
 {
@@ -47,18 +51,41 @@ typedef struct s_parse
 	char	**map;
 }			t_parse;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		endian;
+	int		bpp;
+	int		line_size;
+}t_img;
+
+
+typedef struct s_data
+{
+	void	*mlx;
+	void	*win;
+	t_img	img;
+	double	pla_x;
+	double	pla_y;
+	
+}t_data;
+
+
 int			check_file(char *str);
 void		struct_free(t_parse *data);
+char	    **only_2d_map(char **map);
 int			line_all_ones(char *line, char one);
+void		check_map(char **map, t_parse *data);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t		ft_strlen(const char *str);
 int			check_extensions(char *str, t_parse *data);
 void		ft_putstr_fd(char *s, int fd);
 char		*get_next_line(int fd);
 void		check_texture_syntax(t_parse *data);
+void	    start_game(t_data *data);
 char		**ft_free(char **tab);
 void		ft_alloc_str(t_parse *data, int k, char c);
-void		check_map(t_parse *data);
 char		**ft_split(char const *s, char c);
 void		print_error(enum e_parsing type, t_parse *data);
 void		check_colors(t_parse *data);
