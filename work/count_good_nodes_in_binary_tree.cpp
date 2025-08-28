@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   invert_tree.cpp                                    :+:      :+:    :+:   */
+/*   count_good_nodes_in_binary_tree.cpp                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 21:06:21 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/26 08:22:50 by hounejja         ###   ########.fr       */
+/*   Created: 2025/08/26 12:59:39 by hounejja          #+#    #+#             */
+/*   Updated: 2025/08/26 14:02:33 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <deque>
 #include <iostream>
-#include <stdlib.h>
+#include <vector>
 
 using namespace	std;
 
@@ -32,18 +33,22 @@ struct			TreeNode
 	}
 };
 
-TreeNode	*invertTree(TreeNode *root)
+int	count_nodes(TreeNode *root, int max_so_far)
 {
-	TreeNode	*tmp;
+	int	count;
 
 	if (!root)
-		return (nullptr);
-	tmp = root->left;
-	root->left = root->right;
-	root->right = tmp;
-	invertTree(root->left);
-	invertTree(root->right);
-	return (root);
+		return (0);
+	count = (root->val >= max_so_far) ? 1 : 0;
+	max_so_far = max(max_so_far, root->val);
+	count += count_nodes(root->left, max_so_far);
+	count += count_nodes(root->right, max_so_far);
+	return (count);
+}
+
+int	goodNodes(TreeNode *root)
+{
+	return (count_nodes(root, root->val));
 }
 
 TreeNode	*new_node(int val)
@@ -59,22 +64,16 @@ TreeNode	*new_node(int val)
 	return (node);
 }
 
-void	print(TreeNode *node)
-{
-	if (!node)
-		return ;
-	print(node->right);
-	print(node->left);
-	cout << node->val << "\n";
-}
-
 int	main(void)
 {
-	TreeNode *root = new_node(1);
-	root->left = new_node(2);
-	root->right = nullptr;
-	root->left->left = new_node(35);
-	// TreeNode *after = invertTree(root);
-	print(root);
-	// cout << root->left->left->val << endl;
+	TreeNode	*root;
+	int			count;
+
+	root = new_node(3);
+	root->left = new_node(3);
+	root->left->left = new_node(4);
+	root->left->right = new_node(2);
+	count = goodNodes(root);
+	cout << count << endl;
+	return (0);
 }

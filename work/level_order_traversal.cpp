@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   invert_tree.cpp                                    :+:      :+:    :+:   */
+/*   level_order_traversal.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 21:06:21 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/26 08:22:50 by hounejja         ###   ########.fr       */
+/*   Created: 2025/08/26 08:15:33 by hounejja          #+#    #+#             */
+/*   Updated: 2025/08/26 08:51:23 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <stdlib.h>
+#include <vector>
 
 using namespace	std;
 
@@ -32,18 +32,24 @@ struct			TreeNode
 	}
 };
 
-TreeNode	*invertTree(TreeNode *root)
+void	levelOrder_1(TreeNode *root, int level, vector<vector<int>> &arr)
 {
-	TreeNode	*tmp;
-
 	if (!root)
-		return (nullptr);
-	tmp = root->left;
-	root->left = root->right;
-	root->right = tmp;
-	invertTree(root->left);
-	invertTree(root->right);
-	return (root);
+		return ;
+	if (level >= arr.size())
+		arr.push_back({});
+	arr[level].push_back(root->val);
+	levelOrder_1(root->left, level + 1, arr);
+	levelOrder_1(root->right, level + 1, arr);
+}
+vector<vector<int>> levelOrder(TreeNode *root)
+{
+	vector<vector<int>> arr;
+	if (!root)
+		return (arr);
+	arr.push_back({});
+	levelOrder_1(root, 0, arr);
+	return (arr);
 }
 
 TreeNode	*new_node(int val)
@@ -70,11 +76,27 @@ void	print(TreeNode *node)
 
 int	main(void)
 {
-	TreeNode *root = new_node(1);
+	TreeNode	*root;
+
+	vector<vector<int>> after;
+	root = new_node(1);
 	root->left = new_node(2);
-	root->right = nullptr;
-	root->left->left = new_node(35);
-	// TreeNode *after = invertTree(root);
-	print(root);
-	// cout << root->left->left->val << endl;
+	root->right = new_node(3);
+	root->left->left = new_node(4);
+	root->left->right = new_node(5);
+	root->right->left = new_node(6);
+	root->right->right = new_node(7);
+	after = levelOrder(root);
+	for (vector<int> word : after)
+	{
+		cout << "[";
+		for (int i = 0; i < word.size(); i++)
+		{
+			cout << word[i];
+			if (i < word.size() - 1)
+				cout << ", ";
+		}
+		cout << "] ";
+	}
+	return (0);
 }

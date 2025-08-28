@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   invert_tree.cpp                                    :+:      :+:    :+:   */
+/*   is_valid_binary_tree.cpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 21:06:21 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/26 08:22:50 by hounejja         ###   ########.fr       */
+/*   Created: 2025/08/26 14:01:52 by hounejja          #+#    #+#             */
+/*   Updated: 2025/08/26 15:10:14 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <stdlib.h>
 
 using namespace	std;
 
@@ -32,18 +31,34 @@ struct			TreeNode
 	}
 };
 
-TreeNode	*invertTree(TreeNode *root)
+bool	pwd(TreeNode *root)
 {
-	TreeNode	*tmp;
+	
+}
 
+bool	helper(TreeNode *root, int root_val)
+{
+	bool flag;
+
+	if (root->val > root_val)
+		flag = 
+	helper(root->left, root_val);
+	return flag;
+}
+
+bool	func(TreeNode *root, int max_so_far)
+{
+	bool flag_left;
 	if (!root)
-		return (nullptr);
-	tmp = root->left;
-	root->left = root->right;
-	root->right = tmp;
-	invertTree(root->left);
-	invertTree(root->right);
-	return (root);
+		return false;
+	flag_left = helper(root, max_so_far);
+	bool flag_right = pwd(root);
+	return (true);
+}
+
+bool	isValidBST(TreeNode *root)
+{
+	return (func(root, root->val));
 }
 
 TreeNode	*new_node(int val)
@@ -59,22 +74,18 @@ TreeNode	*new_node(int val)
 	return (node);
 }
 
-void	print(TreeNode *node)
-{
-	if (!node)
-		return ;
-	print(node->right);
-	print(node->left);
-	cout << node->val << "\n";
-}
-
 int	main(void)
 {
-	TreeNode *root = new_node(1);
-	root->left = new_node(2);
-	root->right = nullptr;
-	root->left->left = new_node(35);
-	// TreeNode *after = invertTree(root);
-	print(root);
-	// cout << root->left->left->val << endl;
+	TreeNode	*root;
+	bool		flag;
+
+	root = new_node(2);
+	root->left = new_node(1);
+	root->right = new_node(3);
+	flag = isValidBST(root);
+	if (!flag)
+		cout << "false" << endl;
+	else
+		cout << "true" << endl;
+	return (0);
 }

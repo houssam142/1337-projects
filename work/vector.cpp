@@ -13,13 +13,12 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
+using namespace	std;
 
-int main()
+int	main(void)
 {
-    vector<vector<int>>words = {{2, 3, 9}};
-
-    for (vector<int> word : words)
-        cout << word[0] << "\n";
-    cout << endl;
+	vector<vector<int>> words = {{2, 3, 9}};
+	for (vector<int> word : words)
+		cout << word[0] << "\n";
+	cout << endl;
 }
