@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/28 11:28:04 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/28 15:04:03 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "get_next_line.h"
-# include "/usr/include/minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
@@ -51,29 +51,33 @@ typedef struct s_parse
 	char	**map;
 }			t_parse;
 
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		endian;
-	int		bpp;
-	int		line_size;
-}t_img;
+// typedef struct s_img
+// {
+// 	void	*img;
+// 	char	*addr;
+// 	int		endian;
+// 	int		bpp;
+// 	int		line_size;
+// }t_img;
 
 
 typedef struct s_data
 {
 	void	*mlx;
 	void	*win;
-	t_img	img;
+	void	*img;
+	char	*addr;
 	double	pla_x;
 	double	pla_y;
-	
+	int		endian;
+	int		bpp;
+	int		line_size;
 }t_data;
 
 
 int			check_file(char *str);
 void		struct_free(t_parse *data);
+int			close_win(t_data *data);
 char	    **only_2d_map(char **map);
 int			line_all_ones(char *line, char one);
 void		check_map(char **map, t_parse *data);

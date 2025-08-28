@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/28 11:29:41 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/28 15:04:17 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,12 @@ void	struct_free(t_parse *data)
 	ft_free(data->map);
 }
 
-static void	init_data(t_data *data)
-{
-	data->mlx = NULL;
-	data->win = NULL;
-	data->img.img = NULL;
-	data->img.img = NULL;
-}
+// static void	init_data(t_data *data)
+// {
+// 	data->mlx = NULL;
+// 	data->win = NULL;
+// 	data->img = NULL;
+// }
 
 static void	init_parse(t_parse *data)
 {
@@ -54,10 +53,6 @@ int	parse_args(char **av, t_parse *data)
 	data->map = only_2d_map(map);
 	if (!data->map)
 		print_error(MAP, data);
-	for (int i = 0; data->map[i]; i++)
-	{
-		printf("%s", data->map[i]);
-	}
 	return (0);
 }
 
@@ -69,10 +64,12 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_putstr_fd("Error: invalid arguments\n", 2), 1);
 	init_parse(&arg);
-	init_data(&data);
+	// init_data(&data);
 	if (parse_args(av, &arg))
 		return (1);
 	start_game(&data);
+	mlx_hook(data.win, 17, 0, close_win, &data);
+	mlx_loop(data.mlx);
 	struct_free(&arg);
 	return (0);
 }

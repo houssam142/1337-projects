@@ -16,7 +16,7 @@ OTHER_SRCS = parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd.c \
 
 OTHER_OBJS = $(OTHER_SRCS:.c=.o)
 
-MINILIBX_DIR = /usr/include/minilibx-linux
+MINILIBX_DIR = minilibx-linux
 
 OBJ = $(SRC:.c=.o)
 
