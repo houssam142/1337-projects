@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 09:57:31 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/21 07:58:51 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/30 19:00:59 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,8 @@ void	check_colors_two(char *line, t_parse *data)
 	if (!line[i])
 		count++;
 	if (count != 3)
-	{
-		ft_putstr_fd("\033[1;31mThere are not more than 3 colors\n", 2);
-		struct_free(data);
-		exit(1);
-	}
+		exit((ft_putstr_fd("\033[1;31mThere are not more than 3 colors\n", 2),
+				struct_free(data), 1));
 }
 
 void	check_colors(t_parse *data)

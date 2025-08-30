@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/21 08:25:28 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:34:51 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	line_all_ones(char *line, char one)
 	i = 0;
 	line = ft_strtrim(line, "\n");
 	if (!line[0])
-		return (0);
+		return (free(line), 0);
 	while (line[i])
 	{
 		if (line[i] != one)
@@ -32,16 +32,18 @@ int	line_all_ones(char *line, char one)
 
 static int	check_if_map_empty(char **arr)
 {
-	int	i;
-	int	flag;
+	int		i;
+	int		flag;
+	char	*line;
 
 	i = 0;
 	flag = 0;
 	while (arr[i])
 	{
-		arr[i] = ft_strtrim(arr[i], " ");
-		if (line_all_ones(arr[i], '1'))
+		line = ft_strtrim(arr[i], " ");
+		if (line_all_ones(line, '1'))
 			flag = 1;
+		free(line);
 		i++;
 	}
 	if (!flag)

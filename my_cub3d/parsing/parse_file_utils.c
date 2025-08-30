@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:43:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/21 06:23:59 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/30 19:12:44 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+char	*split_and_join(char **arr, char *tmp, char *tmp2)
+{
+	int	i;
+
+	i = 1;
+	if (!tmp2)
+		tmp2 = ft_strjoin(tmp, arr[0]);
+	while (arr[i] != NULL)
+		tmp2 = ft_strjoin(tmp2, arr[i++]);
+	return (tmp2);
+}
 
 void	check_order(char *line, t_parse *data)
 {

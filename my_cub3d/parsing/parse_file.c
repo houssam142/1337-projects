@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/21 08:29:35 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/30 19:12:58 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,26 @@ static void	copy_rgb(char *line, t_parse *data, char c)
 {
 	char	**arr;
 	char	*tmp;
-	int		i;
+	char	*tmp2;
 
-	i = 0;
 	tmp = ft_strdup("");
 	line = ft_strtrim(line, " ");
 	arr = NULL;
+	tmp2 = NULL;
 	if (c == 'F')
 	{
 		arr = ft_split(line, ' ');
-		while (arr[i] != NULL)
-			tmp = ft_strjoin(tmp, arr[i++]);
-		data->floor_color = ft_strtrim(tmp, "\n");
+		tmp2 = split_and_join(arr, tmp, tmp2);
+		data->floor_color = ft_strtrim(tmp2, "\n");
 	}
 	else if (c == 'C')
 	{
 		arr = ft_split(line, ' ');
-		while (arr[i])
-			tmp = ft_strjoin(tmp, arr[i++]);
-		data->celing_color = ft_strtrim(tmp, "\n");
+		tmp2 = split_and_join(arr, tmp, tmp2);
+		data->celing_color = ft_strtrim(tmp2, "\n");
 	}
 	data->count_identifiers++;
-	ft_free(arr);
-	free(line);
-	free(tmp);
+	parse_free(arr, tmp, tmp2, line);
 }
 
 static void	textures_path(char *line, t_parse *data, char direction)

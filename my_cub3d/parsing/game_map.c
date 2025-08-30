@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/28 15:05:32 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/30 18:32:10 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	map_len(char **map)
 			count++;
 		if (count == 2)
 			break ;
-		i++;	
+		i++;
 	}
 	return (i);
 }
@@ -38,20 +38,17 @@ static int	len_till_first_line(char **map)
 	while (map[i])
 	{
 		if (line_all_ones(map[i], '1'))
-			return (i);
+			return (i + 1);
 		i++;
 	}
 	return (i);
 }
 
-char    **only_2d_map(char **map)
+char	**only_2d_map(char **map)
 {
 	char	**arr;
-	int		i;
-	int		j;
-	int		count;
-	int		len;
 
+	int (i), (len), (count), (j);
 	i = len_till_first_line(map);
 	len = map_len(&map[i]);
 	arr = malloc(sizeof(char *) * (len + 1));
@@ -59,7 +56,7 @@ char    **only_2d_map(char **map)
 		print_error(MAP, NULL);
 	j = 0;
 	count = 0;
-	while (map[i])
+	while (j < len - 1)
 	{
 		arr[j] = ft_strdup(map[i]);
 		if (line_all_ones(map[i], '1'))
@@ -70,5 +67,6 @@ char    **only_2d_map(char **map)
 		i++;
 	}
 	arr[j] = NULL;
-	return arr;
+	ft_free(map);
+	return (arr);
 }

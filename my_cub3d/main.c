@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/28 15:04:17 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/30 16:54:12 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,15 @@ void	struct_free(t_parse *data)
 	free(data->path_w);
 	free(data->celing_color);
 	free(data->floor_color);
-	ft_free(data->map);
 }
 
-// static void	init_data(t_data *data)
-// {
-// 	data->mlx = NULL;
-// 	data->win = NULL;
-// 	data->img = NULL;
-// }
-
-static void	init_parse(t_parse *data)
+static void	init_data(t_data *data, t_parse *arg, t_img *img)
 {
-	data->count_identifiers = 0;
-	data->flag = 0;
-	data->path_e = NULL;
-	data->path_n = NULL;
-	data->path_s = NULL;
-	data->path_w = NULL;
-	data->celing_color = NULL;
-	data->floor_color = NULL;
-	data->map = NULL;
+	data->mlx = NULL;
+	data->win = NULL;
+	data->img = NULL;
+	data->parse = arg;
+	data->img = img;
 }
 
 int	parse_args(char **av, t_parse *data)
@@ -60,16 +48,18 @@ int	main(int ac, char **av)
 {
 	t_parse	arg;
 	t_data	data;
+	t_img	img;
 
 	if (ac != 2)
 		return (ft_putstr_fd("Error: invalid arguments\n", 2), 1);
-	init_parse(&arg);
-	// init_data(&data);
+	bzero(&arg, sizeof(t_parse));
+	bzero(&img, sizeof(t_img));
 	if (parse_args(av, &arg))
 		return (1);
-	start_game(&data);
-	mlx_hook(data.win, 17, 0, close_win, &data);
-	mlx_loop(data.mlx);
-	struct_free(&arg);
+	init_data(&data, &arg, &img);
+	get_player_pos(&data);
+	get_map_dimension(&data);
+	start_game(&data, &arg);
+	ft_free(arg.map);
 	return (0);
 }

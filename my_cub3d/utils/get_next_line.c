@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houssam <houssam@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 20:21:05 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/17 16:09:03 by houssam          ###   ########.fr       */
+/*   Updated: 2025/08/28 20:34:15 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/get_next_line.h"
 
-static char	*ft_strchr(const char *str, int search_str)
+char	*ft_strchr(const char *str, int search_str)
 {
 	size_t	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == (unsigned char)search_str)
+		if (str[i] == search_str)
 			break ;
 		i++;
 	}
-	if (str[i] == (unsigned char)search_str)
+	if (str[i] == search_str)
 	{
 		return ((char *)str + i);
 	}

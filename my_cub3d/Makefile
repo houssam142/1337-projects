@@ -12,11 +12,13 @@ OTHER_SRCS = parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd.c \
 	     parsing/map_game.c utils/get_next_line_utils.c utils/get_next_line.c \
 		 utils/ft_atoi.c utils/ft_split.c utils/alloc.c parsing/check_color.c \
 		 utils/ft_isdigit.c parsing/parse_file_utils.c error.c parsing/check_map.c \
-		 utils/ft_strtrim.c mandatory/game_start.c parsing/game_map.c
+		 utils/ft_strtrim.c mandatory/game_start.c parsing/game_map.c mandatory/player_position.c \
+		 mandatory/vector.c mandatory/draw.c mandatory/raycasting.c mandatory/init_player_pos_and_ore.c \
+		 mandatory/color.c cleaning/parse_free.c mandatory/dda.c mandatory/raycasting_utils.c
 
 OTHER_OBJS = $(OTHER_SRCS:.c=.o)
 
-MINILIBX_DIR = minilibx-linux
+MINILIBX_DIR = /usr/include/minilibx-linux
 
 OBJ = $(SRC:.c=.o)
 
