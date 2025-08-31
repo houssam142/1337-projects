@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:42:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 18:37:38 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 23:21:17 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	close_win(t_data *data)
 		mlx_destroy_image(data->mlx, data->imgs->tex_img_s);
 	if (data->imgs->tex_img_w)
 		mlx_destroy_image(data->mlx, data->imgs->tex_img_w);
+	if (data->img)
+		mlx_destroy_image(data->mlx, data->img);
 	if (data->win)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx)
@@ -29,7 +31,7 @@ int	close_win(t_data *data)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	ft_free(data->parse->map);
+	free_grabage();
 	exit(0);
 }
 
@@ -90,5 +92,4 @@ void	start_game(t_data *data, t_parse *parse)
 	mlx_hook(data->win, 3, 1L << 1, key_release, data);
 	mlx_loop_hook(data->mlx, game_loop, data);
 	mlx_loop(data->mlx);
-	struct_free(parse);
 }

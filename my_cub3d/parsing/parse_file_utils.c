@@ -6,17 +6,19 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:43:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/30 19:12:44 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 21:25:14 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-char	*split_and_join(char **arr, char *tmp, char *tmp2)
+char	*split_and_join(char **arr, char *tmp2)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
 	i = 1;
+	tmp = ft_strdup("");
 	if (!tmp2)
 		tmp2 = ft_strjoin(tmp, arr[0]);
 	while (arr[i] != NULL)

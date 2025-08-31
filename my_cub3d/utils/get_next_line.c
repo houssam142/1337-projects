@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 20:21:05 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/28 20:34:15 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 21:39:45 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,8 @@ static char	*keep_rest(char *temp, int start)
 
 	len = ft_strlen(temp) - start;
 	if (len <= 0)
-	{
-		free(temp);
 		return (NULL);
-	}
 	rest = ft_substr(temp, start, len);
-	free(temp);
 	return (rest);
 }
 
@@ -79,15 +75,11 @@ static char	*new_line(int fd, char *buffer, char *temp)
 		if (read_bytes <= 0)
 		{
 			if (read_bytes < 0 || *temp == '\0')
-			{
-				free(temp);
 				return (NULL);
-			}
 			return (temp);
 		}
 		buffer[read_bytes] = '\0';
 		new_temp = ft_strjoin(temp, buffer);
-		free(temp);
 		temp = new_temp;
 	}
 	return (temp);
@@ -104,11 +96,10 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (temp == NULL)
 		temp = ft_strdup("");
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buffer = ft_malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
 	temp = new_line(fd, buffer, temp);
-	free(buffer);
 	if (!temp)
 		return (NULL);
 	line = extract_line(temp, &start_next);

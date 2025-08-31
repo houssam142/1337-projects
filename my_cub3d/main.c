@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 18:45:17 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 22:10:54 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int ac, char **av)
 	t_img	img;
 
 	if (ac != 2)
-		return (ft_putstr_fd("Error: invalid arguments\n", 2), 1);
+		return (ft_putstr_fd("Error\ninvalid arguments\n", 2), 1);
 	bzero(&arg, sizeof(t_parse));
 	bzero(&img, sizeof(t_img));
 	if (parse_args(av, &arg))
@@ -79,6 +79,5 @@ int	main(int ac, char **av)
 	get_player_pos(&data);
 	get_map_dimension(&data);
 	start_game(&data, &arg);
-	ft_free(arg.map);
 	return (0);
 }

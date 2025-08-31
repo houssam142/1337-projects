@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/30 19:12:58 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 21:25:28 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,24 @@
 static void	copy_rgb(char *line, t_parse *data, char c)
 {
 	char	**arr;
-	char	*tmp;
 	char	*tmp2;
 
-	tmp = ft_strdup("");
 	line = ft_strtrim(line, " ");
 	arr = NULL;
 	tmp2 = NULL;
 	if (c == 'F')
 	{
 		arr = ft_split(line, ' ');
-		tmp2 = split_and_join(arr, tmp, tmp2);
+		tmp2 = split_and_join(arr, tmp2);
 		data->floor_color = ft_strtrim(tmp2, "\n");
 	}
 	else if (c == 'C')
 	{
 		arr = ft_split(line, ' ');
-		tmp2 = split_and_join(arr, tmp, tmp2);
+		tmp2 = split_and_join(arr, tmp2);
 		data->celing_color = ft_strtrim(tmp2, "\n");
 	}
 	data->count_identifiers++;
-	parse_free(arr, tmp, tmp2, line);
 }
 
 static void	textures_path(char *line, t_parse *data, char direction)
@@ -61,7 +58,6 @@ static void	textures_path(char *line, t_parse *data, char direction)
 	else if (direction == 'W')
 		ft_strlcpy(data->path_w, line, k + 1);
 	data->count_identifiers++;
-	free(line);
 }
 
 int	check_identifiers(char *line, t_parse *data)
@@ -106,7 +102,6 @@ int	check_extensions(char *str, t_parse *data)
 	while (line)
 	{
 		count = check_identifiers(line, data);
-		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);

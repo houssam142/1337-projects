@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 20:26:44 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/28 18:24:34 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 22:01:07 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static char	*get_word(const char *s1, int *index, char c)
 		word_len++;
 		i++;
 	}
-	copy = malloc(sizeof(char) * (word_len + 1));
+	copy = ft_malloc(sizeof(char) * (word_len + 1));
 	if (!copy)
 		return (NULL);
 	i = 0;
@@ -85,7 +85,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	count = count_words(s, c);
-	tab = malloc(sizeof(char *) * (count + 1));
+	tab = ft_malloc(sizeof(char *) * (count + 1));
 	if (!tab)
 		return (NULL);
 	while (j < count)

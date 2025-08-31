@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 18:36:57 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 18:37:21 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 23:18:39 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_window(t_data *data, t_parse *parse)
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "./cub3D");
 	if (!data->win)
 		exit(1);
-	data->imgs = malloc(sizeof(t_img));
+	data->imgs = ft_malloc(sizeof(t_img));
 	if (!data->imgs)
 		exit(1);
 	load_all_textures(data, parse);
