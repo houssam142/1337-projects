@@ -6,52 +6,11 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:42:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 15:04:00 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:31:14 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
-
-void	load_texture(void *mlx, void **img_ptr, char **addr_ptr, int *width,
-		int *height, int *bpp, int *line_size, int *endian, char *path)
-{
-	*img_ptr = mlx_xpm_file_to_image(mlx, path, width, height);
-	if (!*img_ptr)
-	{
-		ft_putstr_fd("Failed to load texture: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd("\n", 2);
-		exit(1);
-	}
-	*addr_ptr = mlx_get_data_addr(*img_ptr, bpp, line_size, endian);
-	if (!*addr_ptr)
-	{
-		ft_putstr_fd("Failed to get texture data address: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd("\n", 2);
-		exit(1);
-	}
-}
-
-void	load_all_textures(t_data *data, t_parse *parse)
-{
-	load_texture(data->mlx, (void **)&data->imgs->tex_img_n,
-		&data->imgs->tex_addr_n, &data->imgs->tex_width_n,
-		&data->imgs->tex_height_n, &data->imgs->tex_bpp_n,
-		&data->imgs->tex_line_size_n, &data->imgs->tex_endian_n, parse->path_n);
-	load_texture(data->mlx, (void **)&data->imgs->tex_img_s,
-		&data->imgs->tex_addr_s, &data->imgs->tex_width_s,
-		&data->imgs->tex_height_s, &data->imgs->tex_bpp_s,
-		&data->imgs->tex_line_size_s, &data->imgs->tex_endian_s, parse->path_s);
-	load_texture(data->mlx, (void **)&data->imgs->tex_img_e,
-		&data->imgs->tex_addr_e, &data->imgs->tex_width_e,
-		&data->imgs->tex_height_e, &data->imgs->tex_bpp_e,
-		&data->imgs->tex_line_size_e, &data->imgs->tex_endian_e, parse->path_e);
-	load_texture(data->mlx, (void **)&data->imgs->tex_img_w,
-		&data->imgs->tex_addr_w, &data->imgs->tex_width_w,
-		&data->imgs->tex_height_w, &data->imgs->tex_bpp_w,
-		&data->imgs->tex_line_size_w, &data->imgs->tex_endian_w, parse->path_w);
-}
 
 int	close_win(t_data *data)
 {
@@ -77,19 +36,7 @@ int	close_win(t_data *data)
 int	key_press(int key, t_data *data)
 {
 	if (key == 0xff1b)
-	{
-		if (data->img)
-			mlx_destroy_image(data->mlx, data->img);
-		if (data->win)
-			mlx_destroy_window(data->mlx, data->win);
-		if (data->mlx)
-		{
-			mlx_destroy_display(data->mlx);
-			free(data->mlx);
-		}
-		ft_free(data->parse->map);
-		exit(0);
-	}
+		close_win(data);
 	if (key == W_KEY)
 		data->move_forward = 1;
 	if (key == S_KEY)
@@ -168,4 +115,3 @@ void	start_game(t_data *data, t_parse *parse)
 	mlx_loop(data->mlx);
 	struct_free(parse);
 }
-

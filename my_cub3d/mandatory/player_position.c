@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:23:05 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 15:04:39 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 16:58:01 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,7 @@ void	set_player_direction(t_data *data, char orientation)
 
 void	get_player_pos(t_data *data)
 {
-	int	i;
-	int	j;
-	int	count;
-
+	int (i), (j), (count);
 	i = 0;
 	count = 0;
 	while (data->parse->map[i])

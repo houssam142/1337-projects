@@ -26,9 +26,9 @@ int	perform_dda(t_data *data, int *pos_x, int *pos_y, int *side)
 		*pos_y += data->step_y;
 		*side = 1;
 	}
-	if (*pos_x < 0 || *pos_x >= data->map_width || 
-        *pos_y < 0 || *pos_y >= data->map_height)
-        return (1);
+	if (*pos_x < 0 || *pos_x >= data->map_width || *pos_y < 0
+		|| *pos_y >= data->map_height)
+		return (1);
 	if (data->parse->map[*pos_y][*pos_x] == '1')
 		return (1);
 	return (0);

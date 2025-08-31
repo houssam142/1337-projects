@@ -6,11 +6,18 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 18:40:39 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 14:42:58 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 16:56:03 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	calculate_raydir_fow(t_data *data, int i)
+{
+	data->camera_x = 2.0 * i / (double)WIDTH - 1.0;
+	data->ray_dir_x = data->dir_x + data->plane_x * data->camera_x;
+	data->ray_dir_y = data->dir_y + data->plane_y * data->camera_x;
+}
 
 void	calculate_perp_and_drawing(t_data *data, int pos_x, int pos_y, int side)
 {

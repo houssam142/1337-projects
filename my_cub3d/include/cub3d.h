@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/31 12:19:49 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:25:15 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,10 @@ void		ft_putstr_fd(char *s, int fd);
 char		*get_next_line(int fd);
 void		check_texture_syntax(t_parse *data);
 void		compute_camera_x(t_data *data);
+void		calculate_raydir_fow(t_data *data, int i);
+void		load_texture_img(void **img_ptr, t_data *data, char *path, int dir);
+void		load_all_textures(t_data *data, t_parse *parse);
+void		get_texture_addr(void *img, char **addr_ptr, t_data *data, int direction);
 char		**ft_free(char **tab);
 void		ft_alloc_str(t_parse *data, int k, char c);
 char		**ft_split(char const *s, char c);

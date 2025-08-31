@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:24:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 14:52:21 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 16:57:00 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,12 @@ void	calculate_tex_coor(t_data *data, int side)
 
 void	compute_camera_x(t_data *data)
 {
-	int (i), (side), (pos_x), (pos_y), (hit);
-	i = 0;
-	while (i < WIDTH)
+	int (side), (pos_x), (pos_y), (hit), (i) = -1;
+	while (++i < WIDTH)
 	{
 		side = 0;
 		hit = 0;
-		data->camera_x = 2.0 * i / (double)WIDTH - 1.0;
-		data->ray_dir_x = data->dir_x + data->plane_x * data->camera_x;
-		data->ray_dir_y = data->dir_y + data->plane_y * data->camera_x;
+		calculate_raydir_fow(data, i);
 		pos_x = (int)data->x_player;
 		pos_y = (int)data->y_player;
 		compute_distance(data, pos_x, pos_y);
@@ -77,7 +74,7 @@ void	compute_camera_x(t_data *data)
 			if (perform_dda(data, &pos_x, &pos_y, &side))
 			{
 				hit = 1;
-				break ;	
+				break ;
 			}
 			if (data->parse->map[pos_y][pos_x] == '1')
 				hit = 1;
@@ -87,6 +84,5 @@ void	compute_camera_x(t_data *data)
 		pick_texture(data, side);
 		calculate_tex_coor(data, side);
 		ft_draw(data, i, side);
-		i++;
 	}
 }
