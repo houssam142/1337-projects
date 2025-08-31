@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 18:40:39 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/30 18:47:11 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 14:42:58 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,19 @@
 void	calculate_perp_and_drawing(t_data *data, int pos_x, int pos_y, int side)
 {
 	if (!side)
+	{
 		data->perp_dist = fabs((pos_x - data->x_player + (1 - data->step_x)
 					/ 2.0) / data->ray_dir_x);
+	}
 	else
+	{
 		data->perp_dist = fabs((pos_y - data->y_player + (1 - data->step_y)
 					/ 2.0) / data->ray_dir_y);
-	if (data->perp_dist < 1e-6)
-		data->perp_dist = 1e-6;
+	}
+	if (data->perp_dist < 0)
+		data->perp_dist = -data->perp_dist;
+	if (data->perp_dist < 0.001)
+		data->perp_dist = 0.001;
 	data->line_height = (int)(HEIGHT / data->perp_dist);
 	data->draw_start = -data->line_height / 2 + HEIGHT / 2;
 	data->draw_end = data->line_height / 2 + HEIGHT / 2;

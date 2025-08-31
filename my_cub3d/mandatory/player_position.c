@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:23:05 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/30 15:30:29 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 15:04:39 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,32 @@ void	get_map_dimension(t_data *data)
 	data->map_width = map_width;
 }
 
+void	set_player_direction(t_data *data, char orientation)
+{
+	if (orientation == 'N')
+	{
+		data->dir_x = 0;
+		data->dir_y = -1;
+	}
+	else if (orientation == 'S')
+	{
+		data->dir_x = 0;
+		data->dir_y = 1;
+	}
+	else if (orientation == 'E')
+	{
+		data->dir_x = 1;
+		data->dir_y = 0;
+	}
+	else if (orientation == 'W')
+	{
+		data->dir_x = -1;
+		data->dir_y = 0;
+	}
+	data->plane_x = -data->dir_y * 0.66;
+	data->plane_y = data->dir_x * 0.66;
+}
+
 void	get_player_pos(t_data *data)
 {
 	int	i;
@@ -50,6 +76,8 @@ void	get_player_pos(t_data *data)
 			{
 				data->x_player = j + 0.5;
 				data->y_player = i + 0.5;
+				set_player_direction(data, data->parse->map[i][j]);
+				data->parse->map[i][j] = '0';
 				count++;
 			}
 			else if (ft_strchr("NSWE", data->parse->map[i][j]) && count)

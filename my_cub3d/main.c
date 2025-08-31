@@ -6,11 +6,21 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/30 16:54:12 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 15:02:34 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/cub3d.h"
+
+void	adjust_starting_cell(t_data *data)
+{
+	int y = (int)data->y_player;
+	int x = (int)data->x_player;
+
+	if (data->parse->map[y][x] == 'N' || data->parse->map[y][x] == 'S' ||
+		data->parse->map[y][x] == 'E' || data->parse->map[y][x] == 'W')
+		data->parse->map[y][x] = '0';
+}
 
 void	struct_free(t_parse *data)
 {
@@ -28,6 +38,12 @@ static void	init_data(t_data *data, t_parse *arg, t_img *img)
 	data->win = NULL;
 	data->img = NULL;
 	data->parse = arg;
+	data->move_forward = -1;
+	data->move_right = -1;
+	data->move_left = -1;
+	data->move_backward = -1;
+	data->rotate_left = -1;
+	data->rotate_right = -1;
 	data->img = img;
 }
 

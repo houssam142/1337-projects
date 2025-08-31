@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/30 19:13:44 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 12:19:49 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@
 # define HEIGHT 800
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
+# define W_KEY 119
+# define S_KEY 0x73
+# define A_KEY 0x61
+# define D_KEY 0x64
+# define LEFT_ARROW 65361
+# define RIGHT_ARROW 65363
 
 enum		e_parsing
 {
@@ -99,14 +105,14 @@ typedef struct s_data
 	char	*tex_addr;
 	double	x_player;
 	double	y_player;
-	int		dir_x;
+	double	dir_x;
 	double	delta_dist_x;
 	double	delta_dist_y;
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
 	double	perp_dist;
-	int		dir_y;
+	double	dir_y;
 	double	plane_x;
 	double	plane_y;
 	double	ray_dir_x;
@@ -125,19 +131,29 @@ typedef struct s_data
 	int		map_width;
 	int		map_height;
 	int		ceiling_color;
+	int		move_forward;
+	int		move_backward;
+	int		move_left;
+	int		move_right;
+	int		rotate_right;
+	int		rotate_left;
 	int		floor_color;
 	t_parse	*parse;
 	t_img	*imgs;
 }			t_data;
 
 int			check_file(char *str);
+void		rotate_l_or_r(t_data *data);
+void		adjust_starting_cell(t_data *data);
 void		parse_free(char **arr, char *tmp, char *tmp2, char *line);
 void		get_map_dimension(t_data *data);
 void		ft_draw(t_data *data, int x, int side);
-void		perform_dda(t_data *data, int *pos_x, int *pos_y, int *side);
+int			perform_dda(t_data *data, int *pos_x, int *pos_y, int *side);
 void		init_play_pos_and_oreat(t_data *data);
-void		calculate_perp_and_drawing(t_data *data, int pos_x,
-				int pos_y, int side);
+void		ft_move_wasd(t_data *data);
+int			game_loop(void *arg);
+void		calculate_perp_and_drawing(t_data *data, int pos_x, int pos_y,
+				int side);
 char		*split_and_join(char **arr, char *tmp, char *tmp2);
 void		calculate_side_dist(t_data *data, int pos_x, int pos_y);
 int			key_press(int key, t_data *data);
