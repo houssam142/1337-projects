@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 18:29:55 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 18:51:29 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 19:16:48 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,33 @@ void	load_texture_img(void **img_ptr, t_data *data, char *path, int dir)
 	store_texture_dim(data, dir, width, height);
 }
 
-void	get_texture_addr(void *img, char **addr_ptr, t_data *data,
-		int direction)
+void	store_texture_params(t_data *data, int direction, int bpp,
+		int line_size)
+{
+	if (direction == 0)
+	{
+		data->imgs->tex_bpp_n = bpp;
+		data->imgs->tex_line_size_n = line_size;
+	}
+	else if (direction == 1)
+	{
+		data->imgs->tex_bpp_s = bpp;
+		data->imgs->tex_line_size_s = line_size;
+	}
+	else if (direction == 2)
+	{
+		data->imgs->tex_bpp_e = bpp;
+		data->imgs->tex_line_size_e = line_size;
+	}
+	else if (direction == 3)
+	{
+		data->imgs->tex_bpp_w = bpp;
+		data->imgs->tex_line_size_w = line_size;
+	}
+}
+
+void	get_texture_addr(void *img, char **addr_ptr, int *bpp_ptr,
+	int *line_size_ptr)
 {
 	char	*addr;
 	int		bpp;
@@ -67,28 +92,6 @@ void	get_texture_addr(void *img, char **addr_ptr, t_data *data,
 		exit(1);
 	}
 	*addr_ptr = addr;
-	if (direction == 0)
-	{
-		data->imgs->tex_bpp_n = bpp;
-		data->imgs->tex_line_size_n = line_size;
-		data->imgs->tex_endian_n = endian;
-	}
-	else if (direction == 1)
-	{
-		data->imgs->tex_bpp_s = bpp;
-		data->imgs->tex_line_size_s = line_size;
-		data->imgs->tex_endian_s = endian;
-	}
-	else if (direction == 2)
-	{
-		data->imgs->tex_bpp_e = bpp;
-		data->imgs->tex_line_size_e = line_size;
-		data->imgs->tex_endian_e = endian;
-	}
-	else if (direction == 3)
-	{
-		data->imgs->tex_bpp_w = bpp;
-		data->imgs->tex_line_size_w = line_size;
-		data->imgs->tex_endian_w = endian;
-	}
+	*bpp_ptr = bpp;
+	*line_size_ptr = line_size;
 }

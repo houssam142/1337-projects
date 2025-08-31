@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/31 18:45:06 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 19:09:01 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ typedef struct s_data
 }			t_data;
 
 int			check_file(char *str);
+void		store_texture_params(t_data *data, int direction, int bpp,
+				int line_size);
 void		rotate_l_or_r(t_data *data);
 void		adjust_starting_cell(t_data *data);
 void		parse_free(char **arr, char *tmp, char *tmp2, char *line);
@@ -178,8 +180,8 @@ void		calculate_raydir_fow(t_data *data, int i);
 void		init_window(t_data *data, t_parse *parse);
 void		load_texture_img(void **img_ptr, t_data *data, char *path, int dir);
 void		load_all_textures(t_data *data, t_parse *parse);
-void		get_texture_addr(void *img, char **addr_ptr, t_data *data,
-				int direction);
+void		get_texture_addr(void *img, char **addr_ptr, int *bpp,
+				int *line_size);
 char		**ft_free(char **tab);
 void		ft_alloc_str(t_parse *data, int k, char c);
 char		**ft_split(char const *s, char c);
