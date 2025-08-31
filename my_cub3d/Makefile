@@ -27,6 +27,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(OTHER_OBJS)
 	$(CC) $(CFLAGS) $(OBJ) $(OTHER_OBJS) $(MLX_FLAGS) -o $(NAME)
+	@clear
 
 .o:.c
 	$(CC) $(CFLAGS) $(MLX_FLAGS) -c $< -o $@

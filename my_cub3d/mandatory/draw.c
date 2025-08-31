@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 16:02:08 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 17:04:01 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 20:10:24 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,24 @@ char	*get_tex_addr(t_data *data, int side, int *tex_bpp, int *tex_line_size)
 	if (side == 0)
 	{
 		if (data->ray_dir_x > 0)
-		{
-			*tex_bpp = data->imgs->tex_bpp_e;
-			*tex_line_size = data->imgs->tex_line_size_e;
-			return (data->imgs->tex_addr_e);
-		}
+			return (*tex_bpp = data->imgs->tex_bpp_e,
+				*tex_line_size = data->imgs->tex_line_size_e,
+				data->imgs->tex_addr_e);
 		else
-		{
-			*tex_bpp = data->imgs->tex_bpp_w;
-			*tex_line_size = data->imgs->tex_line_size_w;
-			return (data->imgs->tex_addr_w);
-		}
+			return (*tex_bpp = data->imgs->tex_bpp_w,
+				*tex_line_size = data->imgs->tex_line_size_w,
+				data->imgs->tex_addr_w);
 	}
 	else
 	{
 		if (data->ray_dir_y > 0)
-		{
-			*tex_bpp = data->imgs->tex_bpp_s;
-			*tex_line_size = data->imgs->tex_line_size_s;
-			return (data->imgs->tex_addr_s);
-		}
+			return (*tex_bpp = data->imgs->tex_bpp_s,
+				*tex_line_size = data->imgs->tex_line_size_s,
+				data->imgs->tex_addr_s);
 		else
-		{
-			*tex_bpp = data->imgs->tex_bpp_n;
-			*tex_line_size = data->imgs->tex_line_size_n;
-			return (data->imgs->tex_addr_n);
-		}
+			return (*tex_bpp = data->imgs->tex_bpp_n,
+				*tex_line_size = data->imgs->tex_line_size_n,
+				data->imgs->tex_addr_n);
 	}
 }
 
