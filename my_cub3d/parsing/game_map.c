@@ -6,11 +6,24 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 21:25:44 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 23:51:42 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+static void	replace_space_with_void(char *line, char c)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == c)
+			line[i] = '0';
+		i++;
+	}
+}
 
 static int	map_len(char **map)
 {
@@ -59,6 +72,7 @@ char	**only_2d_map(char **map)
 	while (j < len - 1)
 	{
 		arr[j] = ft_strdup(map[i]);
+		replace_space_with_void(arr[j], ' ');
 		if (line_all_ones(map[i], '1'))
 			count++;
 		j++;
