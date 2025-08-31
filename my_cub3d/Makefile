@@ -15,7 +15,7 @@ OTHER_SRCS = parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd.c \
 		 utils/ft_strtrim.c mandatory/game_start.c parsing/game_map.c mandatory/player_position.c \
 		 mandatory/vector.c mandatory/draw.c mandatory/raycasting.c mandatory/init_player_pos_and_ore.c \
 		 mandatory/color.c cleaning/parse_free.c mandatory/dda.c mandatory/raycasting_utils.c \
-		 movement/movement.c movement/rotate.c mandatory/render.c mandatory/textures.c
+		 movement/movement.c movement/rotate.c mandatory/render.c mandatory/textures.c mandatory/init_window.c
 
 OTHER_OBJS = $(OTHER_SRCS:.c=.o)
 

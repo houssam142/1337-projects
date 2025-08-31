@@ -6,25 +6,14 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 18:29:55 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 18:30:14 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:51:29 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	load_texture_img(void **img_ptr, t_data *data, char *path, int dir)
+void	store_texture_dim(t_data *data, int dir, int width, int height)
 {
-	int	width;
-	int	height;
-
-	*img_ptr = mlx_xpm_file_to_image(data->mlx, path, &width, &height);
-	if (!*img_ptr)
-	{
-		ft_putstr_fd("Failed to load texture: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd("\n", 2);
-		exit(1);
-	}
 	if (dir == 0)
 	{
 		data->imgs->tex_width_n = width;
@@ -47,7 +36,24 @@ void	load_texture_img(void **img_ptr, t_data *data, char *path, int dir)
 	}
 }
 
-void	get_texture_addr(void *img, char **addr_ptr, t_data *data, int direction)
+void	load_texture_img(void **img_ptr, t_data *data, char *path, int dir)
+{
+	int	width;
+	int	height;
+
+	*img_ptr = mlx_xpm_file_to_image(data->mlx, path, &width, &height);
+	if (!*img_ptr)
+	{
+		ft_putstr_fd("Failed to load texture: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
+	}
+	store_texture_dim(data, dir, width, height);
+}
+
+void	get_texture_addr(void *img, char **addr_ptr, t_data *data,
+		int direction)
 {
 	char	*addr;
 	int		bpp;

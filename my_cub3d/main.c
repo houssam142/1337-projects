@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 15:02:34 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:45:17 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 void	adjust_starting_cell(t_data *data)
 {
-	int y = (int)data->y_player;
-	int x = (int)data->x_player;
+	int	y;
+	int	x;
 
+	y = (int)data->y_player;
+	x = (int)data->x_player;
 	if (data->parse->map[y][x] == 'N' || data->parse->map[y][x] == 'S' ||
 		data->parse->map[y][x] == 'E' || data->parse->map[y][x] == 'W')
 		data->parse->map[y][x] = '0';
@@ -44,6 +46,7 @@ static void	init_data(t_data *data, t_parse *arg, t_img *img)
 	data->move_backward = -1;
 	data->rotate_left = -1;
 	data->rotate_right = -1;
+	data->direction = -1;
 	data->img = img;
 }
 

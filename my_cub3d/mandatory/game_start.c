@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:42:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 18:31:14 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/08/31 18:37:38 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,30 +83,7 @@ int	game_loop(void *arg)
 
 void	start_game(t_data *data, t_parse *parse)
 {
-	data->mlx = mlx_init();
-	if (!data->mlx)
-	{
-		ft_putstr_fd("Error\nthe connection has failed\n", 2);
-		ft_free(data->parse->map);
-		exit(1);
-	}
-	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "./cub3D");
-	if (!data->win)
-		exit(1);
-	data->imgs = malloc(sizeof(t_img));
-	if (!data->imgs)
-		exit(1);
-	load_all_textures(data, parse);
-	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
-	if (!data->img)
-	{
-		ft_putstr_fd("Error\nthe image can't be created", 2);
-		exit(1);
-	}
-	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_size,
-			&data->endian);
-	if (!data->addr)
-		exit(1);
+	init_window(data, parse);
 	init_play_pos_and_oreat(data);
 	mlx_hook(data->win, 17, 0, close_win, data);
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
