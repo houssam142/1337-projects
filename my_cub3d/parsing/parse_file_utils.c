@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:43:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 21:25:14 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 09:46:03 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,24 @@ void	check_texture_syntax(t_parse *data)
 	{
 		len_1 = (int)ft_strlen(data->path_e);
 		if (ft_strncmp(&data->path_e[len_1 - 4], ".xpm", 3))
-			print_error(TEXTURE, data);
+			print_error(TEXTURE);
 	}
 	if (data->path_w)
 	{
 		len_2 = (int)ft_strlen(data->path_w);
 		if (ft_strncmp(&data->path_w[len_2 - 4], ".xpm", 3))
-			print_error(TEXTURE, data);
+			print_error(TEXTURE);
 	}
 	if (data->path_s)
 	{
 		len_3 = (int)ft_strlen(data->path_s);
 		if (ft_strncmp(&data->path_s[len_3 - 4], ".xpm", 3))
-			print_error(TEXTURE, data);
+			print_error(TEXTURE);
 	}
 	if (data->path_n)
 	{
 		len_4 = (int)ft_strlen(data->path_n);
 		if (ft_strncmp(&data->path_n[len_4 - 4], ".xpm", 3))
-			print_error(TEXTURE, data);
+			print_error(TEXTURE);
 	}
 }

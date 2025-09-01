@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 23:51:42 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 09:45:04 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	**only_2d_map(char **map)
 	len = map_len(&map[i]);
 	arr = ft_malloc(sizeof(char *) * (len + 1));
 	if (!arr)
-		print_error(MAP, NULL);
+		print_error(MAP);
 	j = 0;
 	count = 0;
 	while (j < len - 1)

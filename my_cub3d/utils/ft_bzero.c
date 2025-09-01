@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/19 05:05:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/01 09:51:02 by hounejja         ###   ########.fr       */
+/*   Created: 2024/10/22 14:25:15 by hounejja          #+#    #+#             */
+/*   Updated: 2025/09/01 09:25:10 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	check_map(char **map)
+void	ft_bzero(void *s, size_t len)
 {
-	int	i;
-	int	len;
-	int	count;
+	size_t	i;
+	char	*ptr;
 
+	ptr = (char *)s;
 	i = 0;
-	count = 0;
-	while (map[i])
+	while (i < len)
 	{
-		map[i] = ft_strtrim(map[i], " ");
-		len = ft_strlen(map[i]);
-		if (map[i][0] == '1' && map[i][len - 2] == '1')
-		{
-			if (line_all_ones(map[i], '1'))
-				break ;
-			count++;
-		}
+		ptr[i] = 0;
 		i++;
-	}
-	if (count > 0)
-		print_error(EMPTY);
-	if (!line_all_ones(map[i], '1'))
-		print_error(MAP);
+	}	
 }

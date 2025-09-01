@@ -6,20 +6,19 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 09:57:31 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/30 19:00:59 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 09:54:02 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	check_colors_two(char *line, t_parse *data)
+void	check_colors_two(char *line)
 {
-	int	i;
-	int	count;
-
+	int (i), (count), (len);
 	i = 0;
 	count = 0;
-	while (line[i])
+	len = ft_strlen(line);
+	while (i < len)
 	{
 		if (line[i] == ',')
 		{
@@ -30,18 +29,18 @@ void	check_colors_two(char *line, t_parse *data)
 				count++;
 		}
 		else if (!ft_isdigit(line[i]))
-			print_error(COLOR, data);
+			print_error(COLOR);
 		i++;
 	}
-	if (!line[i])
+	if (i == len)
 		count++;
 	if (count != 3)
 		exit((ft_putstr_fd("\033[1;31mThere are not more than 3 colors\n", 2),
-				struct_free(data), 1));
+				free_grabage(), 1));
 }
 
 void	check_colors(t_parse *data)
 {
-	check_colors_two(data->celing_color, data);
-	check_colors_two(data->floor_color, data);
+	check_colors_two(data->celing_color);
+	check_colors_two(data->floor_color);
 }

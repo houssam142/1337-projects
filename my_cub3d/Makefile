@@ -16,7 +16,7 @@ OTHER_SRCS = parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd.c \
 		 mandatory/vector.c mandatory/draw.c mandatory/raycasting.c mandatory/init_player_pos_and_ore.c \
 		 mandatory/color.c mandatory/dda.c mandatory/raycasting_utils.c \
 		 movement/movement.c movement/rotate.c mandatory/render.c mandatory/textures.c mandatory/init_window.c \
-		 cleaning/clean_all.c
+		 cleaning/clean_all.c utils/ft_bzero.c
 
 OTHER_OBJS = $(OTHER_SRCS:.c=.o)
 

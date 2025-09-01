@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:23:05 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 20:29:17 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 09:51:44 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,11 @@ void	get_player_pos(t_data *data)
 				count++;
 			}
 			else if (ft_strchr("NSWE", data->parse->map[i][j]) && count)
-				print_error(PLAYER, data->parse);
+				print_error(PLAYER);
 			j++;
 		}
 		i++;
 	}
 	if (!data->parse->map[i] && !count)
-		print_error(MAP, data->parse);
+		print_error(MAP);
 }

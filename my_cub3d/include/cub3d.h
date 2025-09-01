@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/08/31 22:13:15 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 09:51:20 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,11 +168,10 @@ int				key_press(int key, t_data *data);
 int				rgb_string_to_int(t_data *data, char c);
 void			player_dir_setup(t_data *data);
 void			ft_mlx_put_pixel(t_data *data, int x, int y, int color);
-void			struct_free(t_parse *data);
 void			start_game(t_data *data, t_parse *parse);
 char			**only_2d_map(char **map);
 int				line_all_ones(char *line, char one);
-void			check_map(char **map, t_parse *data);
+void			check_map(char **map);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t			ft_strlen(const char *str);
 void			get_player_pos(t_data *data);
@@ -191,13 +190,14 @@ void			get_texture_addr(void *img, char **addr_ptr, int *bpp,
 char			**ft_free(char **tab);
 void			ft_alloc_str(t_parse *data, int k, char c);
 char			**ft_split(char const *s, char c);
-void			print_error(enum e_parsing type, t_parse *data);
+void			print_error(enum e_parsing type);
 void			check_colors(t_parse *data);
 int				ft_isspace(char c);
 int				ft_isdigit(int c);
+void			ft_bzero(void *s, size_t len);
 void			check_order(char *line, t_parse *data);
 char			*ft_strtrim(char const *s1, char const *set);
 int				ft_atoi(const char *str);
-char			**ft_return_map_game(char *str, t_parse *data);
+char			**ft_return_map_game(char *str);
 
 #endif

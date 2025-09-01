@@ -6,13 +6,13 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 21:25:28 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 09:49:43 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-static void	copy_rgb(char *line, t_parse *data, char c)
+static void	copy_rgb(char *line, char c, t_parse *data)
 {
 	char	**arr;
 	char	*tmp2;
@@ -35,7 +35,7 @@ static void	copy_rgb(char *line, t_parse *data, char c)
 	data->count_identifiers++;
 }
 
-static void	textures_path(char *line, t_parse *data, char direction)
+static void	textures_path(char *line, char direction, t_parse *data)
 {
 	int	k;
 	int	h;
@@ -73,17 +73,17 @@ int	check_identifiers(char *line, t_parse *data)
 			i++;
 		check_order(&line[i], data);
 		if (!ft_strncmp(&line[i], "NO", 2))
-			textures_path(&line[i + 2], data, 'N');
+			textures_path(&line[i + 2], 'N', data);
 		else if (!ft_strncmp(&line[i], "SO", 2))
-			textures_path(&line[i + 2], data, 'S');
+			textures_path(&line[i + 2], 'S', data);
 		else if (!ft_strncmp(&line[i], "EA", 2))
-			textures_path(&line[i + 2], data, 'E');
+			textures_path(&line[i + 2], 'E', data);
 		else if (!ft_strncmp(&line[i], "WE", 2))
-			textures_path(&line[i + 2], data, 'W');
+			textures_path(&line[i + 2], 'W', data);
 		else if (line[i] == 'F')
-			copy_rgb(&line[i + 1], data, 'F');
+			copy_rgb(&line[i + 1], 'F', data);
 		else if (line[i] == 'C')
-			copy_rgb(&line[i + 1], data, 'C');
+			copy_rgb(&line[i + 1], 'C', data);
 		i++;
 	}
 	return (data->count_identifiers);
@@ -98,7 +98,7 @@ int	check_extensions(char *str, t_parse *data)
 	fd = check_file(str);
 	line = get_next_line(fd);
 	if (!line)
-		exit((close(fd), print_error(EMPTY, data), 1));
+		exit((close(fd), print_error(EMPTY), 1));
 	while (line)
 	{
 		count = check_identifiers(line, data);
@@ -106,9 +106,9 @@ int	check_extensions(char *str, t_parse *data)
 	}
 	close(fd);
 	if (count != 6)
-		print_error(FILE1, data);
+		print_error(FILE1);
 	if (data->flag == 1)
-		print_error(ORDER, data);
+		print_error(ORDER);
 	check_texture_syntax(data);
 	check_colors(data);
 	return (0);
@@ -122,7 +122,7 @@ int	check_file(char *str)
 
 	len = (int)ft_strlen(str);
 	if (ft_strncmp(&str[len - 4], ".cub", 3))
-		print_error(EXTENSION, NULL);
+		print_error(EXTENSION);
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{

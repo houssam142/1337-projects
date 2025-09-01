@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 22:00:41 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 09:49:56 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	line_count(char *str)
 	return (i);
 }
 
-char	**ft_return_map_game(char *str, t_parse *data)
+char	**ft_return_map_game(char *str)
 {
 	char	*line;
 	char	**arr;
@@ -91,6 +91,6 @@ char	**ft_return_map_game(char *str, t_parse *data)
 	arr[i] = NULL;
 	close(fd);
 	if (!check_if_map_empty(arr))
-		print_error(EMPTY, data);
+		print_error(EMPTY);
 	return (arr);
 }

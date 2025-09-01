@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 16:09:44 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/30 18:24:48 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:00:41 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,15 @@ void	init_play_pos_and_oreat(t_data *data)
 {
 	int		row;
 	int		col;
+	int		len;
 	char	c;
 
 	row = 0;
 	while (row < data->map_height)
 	{
 		col = 0;
-		while (col < data->map_width)
+		len = ft_strlen(data->parse->map[row]);
+		while (col < data->map_width && col < len)
 		{
 			c = data->parse->map[row][col];
 			init_dir_and_fov(data, col, row, c);
