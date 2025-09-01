@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 11:57:41 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:22:59 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	**ft_return_map_game(char *str)
 	line = get_next_line(fd);
 	while (line)
 	{
+		if (line[0] == '\n')
+			line = ft_strtrim(line, "\n");
 		arr[i] = ft_strdup(line);
 		if (!arr[i])
 			exit((close(fd), 1));

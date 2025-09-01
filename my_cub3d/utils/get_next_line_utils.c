@@ -6,15 +6,15 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 21:31:35 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:48:42 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/get_next_line.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -55,9 +55,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*ft_strdup(const char *str)
 {
-	size_t	i;
+	int		i;
 	char	*copy;
-	size_t	l;
+	int		l;
 
 	l = ft_strlen(str) + 1;
 	copy = ft_malloc(sizeof(char) * l);
@@ -73,10 +73,10 @@ char	*ft_strdup(const char *str)
 	return (copy);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+int	ft_strlcpy(char *dst, const char *src, int size)
 {
-	size_t	i;
-	size_t	src_len;
+	int	i;
+	int	src_len;
 
 	src_len = ft_strlen(src);
 	if (size == 0)
@@ -91,7 +91,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (src_len);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, int start, int len)
 {
 	char	*str;
 

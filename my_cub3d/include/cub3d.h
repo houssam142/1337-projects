@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/01 11:50:42 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 22:18:09 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define D_KEY 0x64
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
+# define COLOR_S "\033[1;31mError\ninvalid color format\n\033[0m"
+# define PARSING_S "\033[1;31mError\nMap parsing failed\n\033[0m"
+# define EXT_S "\033[1;31mError\nfile extension must be .cub\n\033[0m"
 
 enum			e_parsing
 {
@@ -45,6 +48,7 @@ enum			e_parsing
 	ORDER,
 	PLAYER,
 	WALL,
+	SMALL,
 };
 
 typedef struct s_parse
@@ -172,7 +176,6 @@ char			**only_2d_map(char **map);
 int				line_all_ones(char *line, char one);
 void			check_map(char **map);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
-size_t			ft_strlen(const char *str);
 void			get_player_pos(t_data *data);
 int				check_extensions(char *str, t_parse *data);
 void			ft_putstr_fd(char *s, int fd);

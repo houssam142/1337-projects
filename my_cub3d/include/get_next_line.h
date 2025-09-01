@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 17:31:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/28 20:33:55 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:26:17 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ char	*get_next_line(int fd);
 char	*ft_strdup(const char *str);
 char	*ft_strchr(const char *str, int search_str);
 char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen(const char *str);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+int		ft_strlen(const char *str);
+char	*ft_substr(char const *s, int start, int len);
+int		ft_strlcpy(char *dst, const char *src, int size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 12:03:12 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 21:48:59 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,24 @@ static int	map_len(char **map)
 	count = 0;
 	while (map[i])
 	{
-		if (line_all_ones(map[i], '1'))
+		map[i] = ft_strtrim(map[i], " ");
+		if (map[i][0] != '\n')
 			count++;
-		if (count == 2)
-		{
-			i++;
-			break ;
-		}
 		i++;
 	}
-	return (i);
+	return (count);
 }
 
 static int	len_till_first_line(char **map)
 {
-	int	i;
+	int		i;
+	char	*line;
 
 	i = 0;
 	while (map[i])
 	{
-		if (line_all_ones(map[i], '1'))
+		line = ft_strtrim(map[i], " ");
+		if (line[0] == '1' || line[0] == '0')
 			return (i);
 		i++;
 	}
@@ -76,27 +74,20 @@ char	**only_2d_map(char **map)
 {
 	char	**arr;
 
-	int (i), (len), (count), (j);
+	int (i), (len), (j);
 	i = len_till_first_line(map);
 	len = map_len(&map[i]);
 	arr = ft_malloc(sizeof(char *) * (len + 1));
 	j = 0;
-	count = 0;
 	while (j < len)
 	{
 		arr[j] = ft_strdup(map[i]);
 		replace_space_with_void(arr[j], ' ');
-		if (line_all_ones(map[i], '1'))
-			count++;
-		if (!first_and_last(arr[j]))
-			print_error(WALL);
-		j++;
-		if (count == 2)
+		if (map[i][0] == '\0')
 			break ;
+		j++;
 		i++;
 	}
-	if (count != 2)
-		print_error(WALL);
 	arr[j] = NULL;
 	return (arr);
 }

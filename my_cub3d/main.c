@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 10:56:08 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 19:31:34 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	parse_args(char **av, t_parse *data)
 
 	check_extensions(av[1], data);
 	map = ft_return_map_game(av[1]);
-	check_map(map);
 	data->map = only_2d_map(map);
+	check_map(data->map);
 	if (!data->map)
 		print_error(MAP);
 	return (0);
