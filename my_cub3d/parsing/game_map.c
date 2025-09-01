@@ -6,11 +6,23 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 09:45:04 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 12:03:12 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+int	first_and_last(char *str)
+{
+	int	first;
+	int	last;
+
+	first = str[0];
+	last = str[ft_strlen(str) - 2];
+	if (first == '1' && last == '1')
+		return (1);
+	return (0);
+}
 
 static void	replace_space_with_void(char *line, char c)
 {
@@ -37,7 +49,10 @@ static int	map_len(char **map)
 		if (line_all_ones(map[i], '1'))
 			count++;
 		if (count == 2)
+		{
+			i++;
 			break ;
+		}
 		i++;
 	}
 	return (i);
@@ -51,7 +66,7 @@ static int	len_till_first_line(char **map)
 	while (map[i])
 	{
 		if (line_all_ones(map[i], '1'))
-			return (i + 1);
+			return (i);
 		i++;
 	}
 	return (i);
@@ -65,21 +80,23 @@ char	**only_2d_map(char **map)
 	i = len_till_first_line(map);
 	len = map_len(&map[i]);
 	arr = ft_malloc(sizeof(char *) * (len + 1));
-	if (!arr)
-		print_error(MAP);
 	j = 0;
 	count = 0;
-	while (j < len - 1)
+	while (j < len)
 	{
 		arr[j] = ft_strdup(map[i]);
 		replace_space_with_void(arr[j], ' ');
 		if (line_all_ones(map[i], '1'))
 			count++;
+		if (!first_and_last(arr[j]))
+			print_error(WALL);
 		j++;
 		if (count == 2)
 			break ;
 		i++;
 	}
+	if (count != 2)
+		print_error(WALL);
 	arr[j] = NULL;
 	return (arr);
 }

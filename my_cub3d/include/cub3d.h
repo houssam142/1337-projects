@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/01 09:51:20 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:50:42 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,11 @@
 # include "get_next_line.h"
 # include <errno.h>
 # include <fcntl.h>
-# include <limits.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-
 # define WIDTH 800
 # define HEIGHT 800
 # define TEX_WIDTH 64
@@ -46,6 +44,7 @@ enum			e_parsing
 	EXTENSION,
 	ORDER,
 	PLAYER,
+	WALL,
 };
 
 typedef struct s_parse
@@ -194,7 +193,7 @@ void			print_error(enum e_parsing type);
 void			check_colors(t_parse *data);
 int				ft_isspace(char c);
 int				ft_isdigit(int c);
-void			ft_bzero(void *s, size_t len);
+void			ft_bzero(void *s, int len);
 void			check_order(char *line, t_parse *data);
 char			*ft_strtrim(char const *s1, char const *set);
 int				ft_atoi(const char *str);

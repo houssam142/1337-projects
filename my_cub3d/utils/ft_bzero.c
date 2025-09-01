@@ -6,15 +6,15 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:25:15 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 09:25:10 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:49:11 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	ft_bzero(void *s, size_t len)
+void	ft_bzero(void *s, int len)
 {
-	size_t	i;
+	int		i;
 	char	*ptr;
 
 	ptr = (char *)s;
@@ -23,5 +23,5 @@ void	ft_bzero(void *s, size_t len)
 	{
 		ptr[i] = 0;
 		i++;
-	}	
+	}
 }

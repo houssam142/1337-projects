@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 09:49:56 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:57:41 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ static int	check_if_map_empty(char **arr)
 			flag = 1;
 		i++;
 	}
-	if (!flag)
-		ft_free(arr);
 	return (flag);
 }
 
