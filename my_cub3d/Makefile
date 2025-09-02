@@ -1,8 +1,22 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/09/02 17:59:55 by hounejja          #+#    #+#              #
+#    Updated: 2025/09/02 20:09:25 by hounejja         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = cub3D
+
+BONUS = 0
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 
 MLX_FLAGS = -L$(MINILIBX_DIR) -lmlx -lXext -lX11 -lm
 
@@ -27,11 +41,14 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(OTHER_OBJS)
-	$(CC) $(CFLAGS) $(OBJ) $(OTHER_OBJS) $(MLX_FLAGS) -o $(NAME)
+	@clear
+	$(CC) $(CFLAGS) -DBONUS=$(BONUS) $(OBJ) $(OTHER_OBJS) $(MLX_FLAGS) -o $(NAME)
 	@clear
 
-.o:.c
-	$(CC) $(CFLAGS) $(MLX_FLAGS) -c $< -o $@
+bonus:
+	@$(MAKE) all BONUS=1
+
+CFLAGS += -DBONUS=$(BONUS)
 
 clean:
 	rm -rf $(OBJ) $(OTHER_OBJS)
@@ -41,4 +58,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean
+.PHONY: all clean fclean bonus re
+

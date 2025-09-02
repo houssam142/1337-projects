@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 16:57:43 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/02 16:57:58 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/02 22:59:08 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,12 @@ int	mouse_motion(int x, int y, t_data *data)
 	if (x < old_x)
 	{
 		data->rotate_left = 1;
-		data->rotate_right = 0;
 		rotate_l_or_r(data);
 		data->rotate_left = 0;
 	}
 	else if (x > old_x)
 	{
 		data->rotate_right = 1;
-		data->rotate_left = 0;
 		rotate_l_or_r(data);
 		data->rotate_right = 0;
 	}
