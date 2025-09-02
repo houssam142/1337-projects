@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/01 22:18:09 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:58:08 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,9 @@ typedef struct s_data
 	int			rotate_left;
 	int			direction;
 	int			floor_color;
+	int			mouse_init;
+	int			mouse_last_x;
+	double		mouse_dx;
 	t_parse		*parse;
 	t_img		*imgs;
 }				t_data;
@@ -150,6 +153,7 @@ typedef struct s_gc
 }				t_gc;
 
 int				check_file(char *str);
+int				mouse_motion(int x, int y, t_data *data);
 void			*ft_malloc(size_t size);
 void			free_grabage(void);
 void			store_texture_params(t_data *data, int direction, int bpp,
