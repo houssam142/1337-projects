@@ -6,7 +6,7 @@
 #    By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/02 17:59:55 by hounejja          #+#    #+#              #
-#    Updated: 2025/09/02 20:09:25 by hounejja         ###   ########.fr        #
+#    Updated: 2025/09/02 23:09:36 by hounejja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,12 +41,11 @@ OBJ = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) $(OTHER_OBJS)
-	@clear
 	$(CC) $(CFLAGS) -DBONUS=$(BONUS) $(OBJ) $(OTHER_OBJS) $(MLX_FLAGS) -o $(NAME)
 	@clear
 
 bonus:
-	@$(MAKE) all BONUS=1
+	@$(MAKE) BONUS=1
 
 CFLAGS += -DBONUS=$(BONUS)
 
@@ -58,5 +57,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean bonus re
+.PHONY: all clean fclean re
 

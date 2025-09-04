@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/02 18:59:35 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:33:25 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@
 # include <string.h>
 # include <unistd.h>
 
-#ifndef BONUS
 # define BONUS 1
-#endif
-
 # define WIDTH 800
 # define HEIGHT 800
 # define TEX_WIDTH 64

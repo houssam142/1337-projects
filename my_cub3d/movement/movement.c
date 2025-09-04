@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 19:17:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 20:15:13 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/04 17:16:05 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_movewasd_2(t_data *data)
 	double	new_x;
 	double	new_y;
 
-	strafe_speed = 0.04;
+	strafe_speed = 0.05;
 	if (data->move_right == 1)
 	{
 		new_x = data->x_player + data->plane_x * strafe_speed;
@@ -58,7 +58,7 @@ void	ft_move_wasd(t_data *data)
 	double	new_x;
 	double	new_y;
 
-	move_speed = 0.04;
+	move_speed = 0.05;
 	if (data->move_forward == 1)
 	{
 		new_x = data->x_player + data->dir_x * move_speed;
