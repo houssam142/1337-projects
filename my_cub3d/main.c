@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/02 15:27:24 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/05 13:18:19 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static void	init_data(t_data *data, t_parse *arg, t_img *img)
 	data->move_backward = -1;
 	data->rotate_left = -1;
 	data->rotate_right = -1;
+	data->scale_x = 0.0;
+	data->scale_y = 0.0;
 	data->direction = -1;
-	data->mouse_init = 0;
-	data->mouse_last_x = 0;
-	data->mouse_dx = 0.0;
+	data->mouse_x = 0;
 	data->img = img;
 }
 

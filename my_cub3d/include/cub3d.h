@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/04 17:40:28 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/05 13:17:03 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # endif
 
 # define WIDTH 800
+# define MM_TILE 8
 # define HEIGHT 800
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
@@ -144,9 +145,9 @@ typedef struct s_data
 	int			rotate_left;
 	int			direction;
 	int			floor_color;
-	int			mouse_init;
-	int			mouse_last_x;
-	double		mouse_dx;
+	int			mouse_x;
+	double		scale_x;
+	double		scale_y;
 	t_parse		*parse;
 	t_img		*imgs;
 }				t_data;
@@ -158,6 +159,7 @@ typedef struct s_gc
 }				t_gc;
 
 int				check_file(char *str);
+void			draw_minimap(t_data *data);
 int				mouse_motion(int x, int y, t_data *data);
 void			*ft_malloc(size_t size);
 void			free_grabage(void);

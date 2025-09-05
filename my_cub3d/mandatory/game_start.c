@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:42:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/02 18:09:44 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/05 01:18:17 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	game_loop(void *arg)
 	rotate_l_or_r(data);
 	compute_camera_x(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	if (BONUS)
+		draw_minimap(data);
 	return (0);
 }
 
