@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 23:15:11 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/05 13:37:10 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/07 13:26:15 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_player(t_data *data)
 	int	y;
 	int	size;
 
-	size = 6;
+	size = 10;
 	px = (int)(data->x_player * data->scale_x) - size / 2;
 	py = (int)(data->y_player * data->scale_y) - size / 2;
 	y = 0;
@@ -69,8 +69,8 @@ void	draw_minimap(t_data *data)
 	int	i;
 	int	j;
 
-	data->scale_x = (double)150 / (data->map_width - 1);
-	data->scale_y = (double)150 / (data->map_height - 1);
+	data->scale_x = (double)200 / (data->map_width - 1);
+	data->scale_y = (double)200 / (data->map_height - 1);
 	i = 0;
 	while (i < data->map_height)
 	{
