@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:03:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/18 06:00:18 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/12 16:12:37 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int	ft_atoi(const char *str)
 	}
 	while (str[x] >= '0' && str[x] <= '9')
 		res = (res * 10) + (str[x++] - 48);
-	if (res * sign < 0)
-		return (1);
+	if (res * sign < 0 || res * sign > 255)
+	{
+		ft_putstr_fd("Error\nrange must be [0, 255]\n", 2);
+		exit(1);
+	}
 	return ((res * sign));
 }
