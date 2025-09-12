@@ -46,7 +46,7 @@ OTHER_OBJS = $(OTHER_SRCS:.c=.o)
 
 OTHER_OBJS_B = $(OTHER_SRCS_B:.c=.o)
 
-MINILIBX_DIR = /usr/include/minilibx-linux
+MINILIBX_DIR = ./minilibx-linux
 
 
 all: $(NAME)

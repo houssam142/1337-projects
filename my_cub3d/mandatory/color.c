@@ -14,12 +14,13 @@
 
 int	rgb_string_to_int(t_data *data, char c)
 {
-	int		r;
 	char	**arr;
-	int		g;
-	int		b;
-
+	
+	int (r), (g), (b);
 	arr = NULL;
+	g = 0;
+	b = 0;
+	r = 0;
 	if (c == 'C')
 	{
 		arr = ft_split(data->parse->celing_color, ',');

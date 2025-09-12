@@ -13,7 +13,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "/usr/include/minilibx-linux/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "get_next_line.h"
 # include <errno.h>
 # include <fcntl.h>
