@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 21:48:59 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/12 13:23:22 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	replace_space_with_void(char *line, char c)
 	while (line[i])
 	{
 		if (line[i] == c)
-			line[i] = '0';
+			line[i] = '1';
 		i++;
 	}
 }

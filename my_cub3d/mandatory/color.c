@@ -15,7 +15,7 @@
 int	rgb_string_to_int(t_data *data, char c)
 {
 	char	**arr;
-	
+
 	int (r), (g), (b);
 	arr = NULL;
 	g = 0;
