@@ -20,16 +20,16 @@ void	draw_player(t_data *data)
 	int	y;
 	int	size;
 
-	size = 10;
-	px = (int)(data->x_player * data->scale_x) - size / 2;
-	py = (int)(data->y_player * data->scale_y) - size / 2;
+	size = 9;
+	px = (int)(data->x_player * data->scale_x) - size - 1;
+	py = (int)(data->y_player * data->scale_y) - size - 1;
 	y = 0;
 	while (y < size)
 	{
 		x = 0;
 		while (x < size)
 		{
-			ft_mlx_put_pixel(data, px + x, py + y, 0xFF0000);
+			ft_mlx_put_pixel(data, px + y, py + x, 0xFF0000);
 			x++;
 		}
 		y++;
@@ -69,8 +69,8 @@ void	draw_minimap(t_data *data)
 	int	i;
 	int	j;
 
-	data->scale_x = (double)200 / (data->map_width - 1);
-	data->scale_y = (double)200 / (data->map_height - 1);
+	data->scale_x = (double)170 / (data->map_width + 1);
+	data->scale_y = (double)170 / (data->map_height + 1);
 	i = 0;
 	while (i < data->map_height)
 	{

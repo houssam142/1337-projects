@@ -52,10 +52,12 @@ MINILIBX_DIR = ./minilibx-linux
 all: $(NAME)
 
 $(NAME): $(OTHER_OBJS)
+	@make -C minilibx-linux
 	$(CC) $(CFLAGS) -DBONUS=$(BONUS) $(OBJ) $(OTHER_OBJS) $(MLX_FLAGS) -o $(NAME)
 	@clear
 
 $(NAME_1): $(OTHER_OBJS_B)
+	@make -C minilibx-linux
 	$(CC) $(CFLAGS) -DBONUS=$(BONUS) $(OBJ) $(OTHER_OBJS_B) $(MLX_FLAGS) -o $(NAME_1)
 
 bonus:
