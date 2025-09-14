@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 05:05:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/01 19:30:56 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/14 15:12:10 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ static int	arr_len(char **map)
 
 void	check_map(char **map)
 {
-	int	i;
-	int	len;
-	int	size;
+	int		i;
+	int		len;
+	int		size;
+	char	*line;
 
 	i = 0;
 	size = arr_len(map);
@@ -34,10 +35,13 @@ void	check_map(char **map)
 		print_error(WALL);
 	while (map[i])
 	{
-		map[i] = ft_strtrim(map[i], " ");
-		len = ft_strlen(map[i]);
-		if (map[i][0] != '1' || map[i][len - 2] != '1')
-			print_error(WALL);
+		line = map[i];
+		line = ft_strtrim(line, " \n");
+		len = ft_strlen(line);
+		if (line[0] != '1' && line[len - 1] != '1')
+			break ;
 		i++;
 	}
+	if (i < size)
+		print_error(WALL);
 }

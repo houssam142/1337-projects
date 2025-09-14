@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/12 13:23:22 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/14 15:03:12 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ static void	replace_space_with_void(char *line, char c)
 
 static int	map_len(char **map)
 {
-	int	i;
-	int	count;
+	int		i;
+	int		count;
+	char	*line;
 
 	i = 0;
 	count = 0;
 	while (map[i])
 	{
-		map[i] = ft_strtrim(map[i], " ");
-		if (map[i][0] != '\n')
-			count++;
+		line = map[i];
+		line = ft_strtrim(line, " ");
 		i++;
 	}
-	return (count);
+	return (i);
 }
 
 static int	len_till_first_line(char **map)
@@ -62,7 +62,8 @@ static int	len_till_first_line(char **map)
 	i = 0;
 	while (map[i])
 	{
-		line = ft_strtrim(map[i], " ");
+		line = map[i];
+		line = ft_strtrim(line, " ");
 		if (line[0] == '1' || line[0] == '0')
 			return (i);
 		i++;

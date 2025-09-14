@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 23:15:11 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/07 13:26:15 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/13 11:08:19 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,29 @@ void	draw_player(t_data *data)
 	int	x;
 	int	y;
 	int	size;
+	int	max_x;
+	int	max_y;
 
-	size = 9;
-	px = (int)(data->x_player * data->scale_x) - size - 1;
-	py = (int)(data->y_player * data->scale_y) - size - 1;
+	size = 6;
+	max_x = (int)(data->map_width * data->scale_x) - 1;
+	max_y = (int)(data->map_height * data->scale_y) - 1;
+	px = (int)(data->x_player * data->scale_x) - size / 2;
+	py = (int)(data->y_player * data->scale_y) - size / 2;
+	if (px < 0)
+		px = 0;
+	if (px + size > max_x)
+		px = max_x - size;
+	if (py < 0)
+		py = 0;
+	if (py + size > max_y)
+		py = max_y - size;
 	y = 0;
 	while (y < size)
 	{
 		x = 0;
 		while (x < size)
 		{
-			ft_mlx_put_pixel(data, px + y, py + x, 0xFF0000);
+			ft_mlx_put_pixel(data, px + x, py + y, 0xFF0000);
 			x++;
 		}
 		y++;
@@ -44,7 +56,8 @@ static void	draw_tile(t_data *data, int i, int j)
 	int	tile_height;
 	int	color;
 
-	if (data->parse->map[i][j] == '1')
+	if (((i > 0 && i < data->map_height) || (j > 0 && j < data->map_width))
+		&& data->parse->map[i][j] == '1')
 		color = 0xFFFFFF;
 	else
 		color = 0x000000;
@@ -69,8 +82,8 @@ void	draw_minimap(t_data *data)
 	int	i;
 	int	j;
 
-	data->scale_x = (double)170 / (data->map_width + 1);
-	data->scale_y = (double)170 / (data->map_height + 1);
+	data->scale_x = (double)250 / (double)data->map_width;
+	data->scale_y = (double)250 / (double)data->map_height;
 	i = 0;
 	while (i < data->map_height)
 	{

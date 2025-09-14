@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 15:25:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 21:48:42 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/13 19:25:33 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ char	*ft_strdup(const char *str)
 	l = ft_strlen(str) + 1;
 	copy = ft_malloc(sizeof(char) * l);
 	i = 0;
-	if (copy == NULL)
-		exit(1);
 	while (str[i] != '\0')
 	{
 		copy[i] = str[i];

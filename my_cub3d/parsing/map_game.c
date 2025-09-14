@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 15:22:59 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/14 16:41:28 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static int	check_if_map_empty(char **arr)
 	flag = 0;
 	while (arr[i])
 	{
-		line = ft_strtrim(arr[i], " ");
+		line = arr[i];
+		line = ft_strtrim(line, " ");
 		if (line_all_ones(line, '1'))
 			flag = 1;
 		i++;
@@ -80,8 +81,6 @@ char	**ft_return_map_game(char *str)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (line[0] == '\n')
-			line = ft_strtrim(line, "\n");
 		arr[i] = ft_strdup(line);
 		if (!arr[i])
 			exit((close(fd), 1));

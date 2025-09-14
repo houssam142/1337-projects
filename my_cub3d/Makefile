@@ -6,7 +6,7 @@
 #    By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/02 17:59:55 by hounejja          #+#    #+#              #
-#    Updated: 2025/09/07 15:02:55 by hounejja         ###   ########.fr        #
+#    Updated: 2025/09/13 10:41:31 by hounejja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ $(NAME_1): $(OTHER_OBJS_B)
 
 bonus:
 	@make $(NAME_1) BONUS=1
+	@clear
 
 CFLAGS += -DBONUS=$(BONUS)
 
