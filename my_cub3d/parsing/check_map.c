@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 05:05:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/14 15:12:10 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/16 17:16:58 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,53 @@ static int	arr_len(char **map)
 	return (i);
 }
 
-void	check_map(char **map)
+static int	arr_len_till_char(char **map)
 {
 	int		i;
-	int		len;
-	int		size;
 	char	*line;
 
 	i = 0;
-	size = arr_len(map);
+	line = ft_strtrim(map[i], " ");
+	while (line)
+	{
+		line = ft_strtrim(map[i], " ");
+		if (line[0] != '1')
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+static void	check_after_eo_map(char **map)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = arr_len(map);
+	while (i < len)
+	{
+		map[i] = ft_strtrim(map[i], " \n");
+		if (map[i][0])
+			print_error(WALL);
+		i++;
+	}
+}
+
+void	check_map(char **map)
+{
+	int		i;
+	int		size;
+
+	i = 0;
+	size = arr_len_till_char(map);
 	if (!line_all_ones(map[0], '1') || !line_all_ones(map[size - 1], '1'))
 		print_error(WALL);
 	while (map[i])
 	{
-		line = map[i];
-		line = ft_strtrim(line, " \n");
-		len = ft_strlen(line);
-		if (line[0] != '1' && line[len - 1] != '1')
-			break ;
+		replace_space_with_void(map[i], ' ');
+		if (map[i][0] != '1')
+			check_after_eo_map(&map[i]);
 		i++;
 	}
 	if (i < size)

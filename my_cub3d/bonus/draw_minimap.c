@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 23:15:11 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/13 11:08:19 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/16 15:24:23 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,83 +14,76 @@
 
 void	draw_player(t_data *data)
 {
-	int	px;
-	int	py;
 	int	x;
 	int	y;
 	int	size;
-	int	max_x;
-	int	max_y;
 
 	size = 6;
-	max_x = (int)(data->map_width * data->scale_x) - 1;
-	max_y = (int)(data->map_height * data->scale_y) - 1;
-	px = (int)(data->x_player * data->scale_x) - size / 2;
-	py = (int)(data->y_player * data->scale_y) - size / 2;
-	if (px < 0)
-		px = 0;
-	if (px + size > max_x)
-		px = max_x - size;
-	if (py < 0)
-		py = 0;
-	if (py + size > max_y)
-		py = max_y - size;
-	y = 0;
-	while (y < size)
+	y = -size / 2;
+	while (y < size / 2)
 	{
-		x = 0;
-		while (x < size)
+		x = -size / 2;
+		while (x < size / 2)
 		{
-			ft_mlx_put_pixel(data, px + x, py + y, 0xFF0000);
+			ft_mlx_put_pixel(data, data->center_x + x, data->center_y + y, 0xFF0000);
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	draw_tile(t_data *data, int i, int j)
+static void	draw_tile(t_data *data, int i, int j, int offset_x, int offset_y)
 {
 	int	x;
 	int	y;
-	int	tile_width;
-	int	tile_height;
 	int	color;
+	int	screen_x;
+	int	screen_y;
 
-	if (((i > 0 && i < data->map_height) || (j > 0 && j < data->map_width))
+	if (((i >= 0 && i < data->map_height) || (j >= 0 && j < data->map_width))
 		&& data->parse->map[i][j] == '1')
 		color = 0xFFFFFF;
 	else
 		color = 0x000000;
-	tile_width = (int)data->scale_x;
-	tile_height = (int)data->scale_y;
-	y = 0;
-	while (y < tile_height)
+	y = -1;
+	while (++y < MM_TILE)
 	{
-		x = 0;
-		while (x < tile_width)
+		x = -1;
+		while (++x < MM_TILE)
 		{
-			ft_mlx_put_pixel(data, j * tile_width + x, i * tile_height + y,
-				color);
-			x++;
+			screen_x = offset_x + x;
+			screen_y = offset_y + y;
+			if (screen_x >= 0 && screen_x < MM_SIZE
+				&& screen_y >= 0 && screen_y < MM_SIZE)
+				ft_mlx_put_pixel(data, screen_x, screen_y, color);
 		}
-		y++;
 	}
 }
 
 void	draw_minimap(t_data *data)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	double	offset_x;
+	double	offset_y;
+	int		screen_x;
+	int		screen_y;
 
-	data->scale_x = (double)250 / (double)data->map_width;
-	data->scale_y = (double)250 / (double)data->map_height;
+	data->center_x = MM_SIZE / 2;
+	data->center_y = MM_SIZE / 2;
+	offset_x = data->x_player * MM_TILE - data->center_x;
+	offset_y = data->y_player * MM_TILE - data->center_y;
 	i = 0;
-	while (i < data->map_height)
+	while (i < data->map_height - 1)
 	{
 		j = 0;
-		while (j < data->map_width)
+		while (j < data->map_width - 1)
 		{
-			draw_tile(data, i, j);
+			screen_x = j * MM_TILE - offset_x;
+			screen_y = i * MM_TILE - offset_y;
+			if (screen_x + MM_TILE >= 0 && screen_x < MM_SIZE
+				&& screen_y + MM_TILE >= 0 && screen_y < MM_SIZE)
+				draw_tile(data, i, j, screen_x, screen_y);
 			j++;
 		}
 		i++;

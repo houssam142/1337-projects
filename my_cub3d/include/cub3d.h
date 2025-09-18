@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/05 13:17:03 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:50:03 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@
 #  define BONUS 1
 # endif
 
-# define WIDTH 800
+# define PI 3.14159265359
+# define WIDTH 1000
+# define HEIGHT 1000
 # define MM_TILE 8
-# define HEIGHT 800
+# define MM_SIZE 250
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define W_KEY 119
@@ -145,6 +147,8 @@ typedef struct s_data
 	int			rotate_left;
 	int			direction;
 	int			floor_color;
+	int			center_x;
+	int			center_y;
 	int			mouse_x;
 	double		scale_x;
 	double		scale_y;
@@ -192,7 +196,11 @@ int				check_extensions(char *str, t_parse *data);
 void			ft_putstr_fd(char *s, int fd);
 char			*get_next_line(int fd);
 void			check_texture_syntax(t_parse *data);
+char			**final_map(char **map);
+int				map_len(char **map);
+int				len_till_first_line(char **map);
 void			compute_camera_x(t_data *data);
+void			replace_space_with_void(char *line, char c);
 void			calculate_raydir_fow(t_data *data, int i);
 void			init_window(t_data *data, t_parse *parse);
 void			load_texture_img(void **img_ptr, t_data *data, char *path,

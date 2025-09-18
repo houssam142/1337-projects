@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 18:40:39 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 16:56:03 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/18 18:12:12 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	calculate_perp_and_drawing(t_data *data, int pos_x, int pos_y, int side)
 {
 	if (!side)
 	{
-		data->perp_dist = fabs((pos_x - data->x_player + (1 - data->step_x)
+		data->perp_dist = fabs(((double)pos_x - data->x_player + (1 - data->step_x)
 					/ 2.0) / data->ray_dir_x);
 	}
 	else
 	{
-		data->perp_dist = fabs((pos_y - data->y_player + (1 - data->step_y)
+		data->perp_dist = fabs(((double)pos_y - data->y_player + (1 - data->step_y)
 					/ 2.0) / data->ray_dir_y);
 	}
 	if (data->perp_dist < 0)

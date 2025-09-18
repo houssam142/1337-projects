@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/14 16:41:28 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/16 17:17:32 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ int	line_all_ones(char *line, char one)
 		return (0);
 	while (line[i])
 	{
-		if (line[i] != one)
+		if (line[i] == 32)
+			line[i] = ' ';
+		else if (line[i] != one)
 			return (0);
 		i++;
 	}

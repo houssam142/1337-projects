@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/14 16:40:45 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/16 17:17:49 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,15 @@ static void	init_data(t_data *data, t_parse *arg, t_img *img)
 int	parse_args(char **av, t_parse *data)
 {
 	char	**map;
+	char	**sec_map;
+	int		i;
 
+	i = 0;
 	check_extensions(av[1], data);
 	map = ft_return_map_game(av[1]);
-	data->map = only_2d_map(map);
-	check_map(data->map);
+	sec_map = only_2d_map(map);
+	check_map(sec_map);
+	data->map = only_2d_map(sec_map);
 	if (!data->map)
 		print_error(MAP);
 	return (0);

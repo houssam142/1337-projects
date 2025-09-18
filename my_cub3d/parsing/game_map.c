@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/14 15:03:12 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/16 16:59:34 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	first_and_last(char *str)
 	return (0);
 }
 
-static void	replace_space_with_void(char *line, char c)
+void	replace_space_with_void(char *line, char c)
 {
 	int	i;
 
@@ -37,7 +37,7 @@ static void	replace_space_with_void(char *line, char c)
 	}
 }
 
-static int	map_len(char **map)
+int	map_len(char **map)
 {
 	int		i;
 	int		count;
@@ -54,7 +54,7 @@ static int	map_len(char **map)
 	return (i);
 }
 
-static int	len_till_first_line(char **map)
+int	len_till_first_line(char **map)
 {
 	int		i;
 	char	*line;
@@ -83,7 +83,7 @@ char	**only_2d_map(char **map)
 	while (j < len)
 	{
 		arr[j] = ft_strdup(map[i]);
-		replace_space_with_void(arr[j], ' ');
+		replace_space_with_void(arr[j], '1');
 		if (map[i][0] == '\0')
 			break ;
 		j++;
