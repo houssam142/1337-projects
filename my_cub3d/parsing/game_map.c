@@ -40,11 +40,9 @@ void	replace_space_with_void(char *line, char c)
 int	map_len(char **map)
 {
 	int		i;
-	int		count;
 	char	*line;
 
 	i = 0;
-	count = 0;
 	while (map[i])
 	{
 		line = map[i];

@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/16 16:50:03 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/19 09:51:28 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,6 @@ typedef struct s_data
 	int			center_x;
 	int			center_y;
 	int			mouse_x;
-	double		scale_x;
-	double		scale_y;
 	t_parse		*parse;
 	t_img		*imgs;
 }				t_data;
