@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   right_side_view.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 08:56:57 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/26 12:07:32 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/14 09:18:06 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,6 @@
 #include <vector>
 
 using namespace	std;
-
-// struct			TreeNode
-// {
-// 	int			val;
-// 	TreeNode	*left;
-// 	TreeNode	*right;
-// 	TreeNode() : val(0), left(nullptr), right(nullptr)
-// 	{
-// 	}
-// 	TreeNode(int x) : val(x), left(nullptr), right(nullptr)
-// 	{
-// 	}
-// 	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
-// 		right(right)
-// 	{
-// 	}
-// };
 
 void	func(TreeNode *root, vector<int> &arr, int start, int &max_level)
 {

@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:51:38 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/15 09:59:15 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/19 18:44:33 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_error(enum e_parsing type)
 		exit((ft_putstr_fd(PARSING_S, 2), 1));
 	else if (type == EMPTY)
 		exit((ft_putstr_fd("\033[1;31mError\nempty map\n\033[0m", 2), 1));
-	else if (type == EXTENSION)	
+	else if (type == EXTENSION)
 		exit((ft_putstr_fd(EXT_S, 2), 1));
 	else if (type == ORDER)
 		exit((ft_putstr_fd("\033[1;31mError\nwrong order\n\033[0m", 2), 1));

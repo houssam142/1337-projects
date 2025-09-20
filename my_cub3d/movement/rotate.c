@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 09:30:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/16 18:37:49 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/19 18:04:53 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	rotate_l_or_r(t_data *data)
 	double	old_plane_x;
 	double	old_plane_y;
 
-	rot_speed = 0.025;
+	rot_speed = 0.031;
 	if (data->rotate_left == 1)
 		rot_speed *= -1;
 	else if (data->rotate_right == 1)

@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 16:09:44 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 11:00:41 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/19 18:07:12 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@ static void	function_helper(t_data *data, char c)
 	{
 		data->dir_x = 1;
 		data->dir_y = 0;
-		data->plane_x = 0;
-		data->plane_y = 0.66;
+		data->plane_x = 0.66;
+		data->plane_y = 0;
 	}
 	else if (c == 'W')
 	{
 		data->dir_x = -1;
 		data->dir_y = 0;
-		data->plane_x = 0;
-		data->plane_y = -0.66;
+		data->plane_x = -0.66;
+		data->plane_y = 0;
 	}
 }
 
@@ -40,15 +40,15 @@ void	init_dir_and_fov(t_data *data, int col, int row, char c)
 		{
 			data->dir_x = 0;
 			data->dir_y = -1;
-			data->plane_x = 0.66;
-			data->plane_y = 0;
+			data->plane_x = 0;
+			data->plane_y = -0.66;
 		}
 		else if (c == 'S')
 		{
 			data->dir_x = 0;
 			data->dir_y = 1;
-			data->plane_x = -0.66;
-			data->plane_y = 0;
+			data->plane_x = 0;
+			data->plane_y = 0.66;
 		}
 		else if (c == 'E')
 			function_helper(data, 'E');
