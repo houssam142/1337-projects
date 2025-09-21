@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/21 20:16:05 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/21 20:59:42 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@
 # define COLOR_S "\033[1;31mError\ninvalid color format\n\033[0m"
 # define PARSING_S "\033[1;31mError\nMap parsing failed\n\033[0m"
 # define EXT_S "\033[1;31mError\nfile extension must be .cub\n\033[0m"
+# define PLAYER_E "\033[1;31mError\ninvalid player position\n\033[0m"
+# define WALL_E "\033[1;31mError\nMap is not closed by walls\n\033[0m"
 
 enum			e_parsing
 {
@@ -57,6 +59,7 @@ enum			e_parsing
 	PLAYER,
 	WALL,
 	SMALL,
+	ERROR
 };
 
 typedef struct s_parse
