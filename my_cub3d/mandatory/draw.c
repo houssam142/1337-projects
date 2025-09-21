@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 16:02:08 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/14 16:41:02 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/21 17:54:55 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,6 @@ void	ft_draw(t_data *data, int x, int side)
 	while (y < data->draw_end)
 	{
 		tex_y = (int)tex_pos;
-		if (tex_y >= TEX_HEIGHT)
-			tex_y = TEX_HEIGHT - 1;
 		color = get_texture_pixel(data, tex_y, side);
 		ft_mlx_put_pixel(data, x, y, color);
 		tex_pos += step;

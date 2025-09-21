@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 16:33:52 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/12 16:10:15 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/21 15:40:56 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	rgb_string_to_int(t_data *data, char c)
 {
 	char	**arr;
 
-	int (r), (g), (b);
+	int (r), (g), (b), (num);
 	arr = NULL;
 	g = 0;
 	b = 0;
@@ -35,5 +35,8 @@ int	rgb_string_to_int(t_data *data, char c)
 		g = ft_atoi(arr[1]);
 		b = ft_atoi(arr[2]);
 	}
-	return ((r << 16) | (g << 8) | b);
+	r *= (int)pow(2, 16);
+	g *= (int)pow(2, 8);
+	num = r + g + b;
+	return (num);
 }

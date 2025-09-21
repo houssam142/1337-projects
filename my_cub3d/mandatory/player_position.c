@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:23:05 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/19 18:54:37 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/20 11:52:28 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	get_player_pos(t_data *data)
 		{
 			if (ft_strchr("NSWE", data->parse->map[i][j]) && !count)
 			{
-				data->x_player = j + 0.5;
-				data->y_player = i + 0.5;
+				data->x_player = (double)j + 0.1;
+				data->y_player = (double)i + 0.1;
 				set_player_direction(data, data->parse->map[i][j]);
 				data->parse->map[i][j] = '0';
 				count++;

@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 16:09:44 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/19 18:07:12 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/21 13:32:54 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	init_dir_and_fov(t_data *data, int col, int row, char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
-		data->x_player = col + 0.5;
-		data->y_player = row + 0.5;
+		data->x_player = col + 0.1;
+		data->y_player = row + 0.1;
 		if (c == 'N')
 		{
 			data->dir_x = 0;
