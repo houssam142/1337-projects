@@ -6,13 +6,13 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 16:02:08 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/21 17:54:55 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/24 10:22:30 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	ft_mlx_put_pixel(t_data *data, int x, int y, int color)
+void	ft_mlx_put_pixel(t_data *data, int x, int y, unsigned int color)
 {
 	char	*dst;
 
@@ -57,14 +57,6 @@ int	get_texture_pixel(t_data *data, int tex_y, int side)
 	int		tex_line_size;
 
 	tex_addr = get_tex_addr(data, side, &tex_bpp, &tex_line_size);
-	if (data->tex_x < 0)
-		data->tex_x = 0;
-	if (data->tex_x >= TEX_WIDTH)
-		data->tex_x = TEX_WIDTH - 1;
-	if (tex_y < 0)
-		tex_y = 0;
-	if (tex_y >= TEX_HEIGHT)
-		tex_y = TEX_HEIGHT - 1;
 	pixel = tex_addr + (tex_y * tex_line_size + data->tex_x * (tex_bpp / 8));
 	color = *(unsigned int *)pixel;
 	return (color);
@@ -72,7 +64,9 @@ int	get_texture_pixel(t_data *data, int tex_y, int side)
 
 void	ft_draw(t_data *data, int x, int side)
 {
-	int (tex_y), (color), (y) = -1;
+	unsigned int	color;
+
+	int (tex_y), (y) = -1;
 	double (step), (tex_pos);
 	data->ceiling_color = rgb_string_to_int(data, 'C');
 	step = (double)TEX_HEIGHT / data->line_height;

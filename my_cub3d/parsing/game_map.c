@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/16 16:59:34 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/23 10:11:44 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	**only_2d_map(char **map)
 	j = 0;
 	while (j < len)
 	{
-		arr[j] = ft_strdup(map[i]);
+		arr[j] = ft_strtrim(map[i], "\n");
 		replace_space_with_void(arr[j], '1');
 		if (map[i][0] == '\0')
 			break ;

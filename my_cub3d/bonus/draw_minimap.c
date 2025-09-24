@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 23:15:11 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/21 20:16:54 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/23 10:10:18 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ static void	draw_tile(t_data *data, int offset_x, int offset_y, int color)
 void	draw_minimap(t_data *data)
 {
 	int (i), (screen_x), (screen_y), (color), (j);
-	data->offset_x = data->x_player * (double)MM_TILE - (double)data->center_x;
-	data->offset_y = data->y_player * (double)MM_TILE - (double)data->center_y;
+	data->offset_x = (data->x_player) * (double)MM_TILE - data->center_x;
+	data->offset_y = (data->y_player) * (double)MM_TILE - data->center_y;
 	i = -1;
 	while (++i < data->map_height)
 	{
 		j = -1;
-		while (++j < data->map_width - 1)
+		while (++j < data->map_width)
 		{
 			screen_x = j * MM_TILE - data->offset_x;
 			screen_y = i * MM_TILE - data->offset_y;

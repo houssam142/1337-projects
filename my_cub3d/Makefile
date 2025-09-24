@@ -6,7 +6,7 @@
 #    By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/02 17:59:55 by hounejja          #+#    #+#              #
-#    Updated: 2025/09/21 18:37:19 by hounejja         ###   ########.fr        #
+#    Updated: 2025/09/23 11:49:42 by hounejja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ BONUS = 0
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
 MLX_FLAGS = -L$(MINILIBX_DIR) -lmlx -lXext -lX11 -lm
 

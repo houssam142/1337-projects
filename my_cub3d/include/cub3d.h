@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/21 20:59:42 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/24 09:36:45 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +189,8 @@ void			calculate_side_dist(t_data *data, int pos_x, int pos_y);
 int				key_press(int key, t_data *data);
 int				rgb_string_to_int(t_data *data, char c);
 void			player_dir_setup(t_data *data);
-void			ft_mlx_put_pixel(t_data *data, int x, int y, int color);
+void			ft_mlx_put_pixel(t_data *data, int x, int y,
+					unsigned int color);
 void			start_game(t_data *data, t_parse *parse);
 char			**only_2d_map(char **map);
 int				line_all_ones(char *line, char one);

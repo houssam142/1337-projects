@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 18:36:57 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/21 21:08:10 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/21 21:24:10 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	init_window(t_data *data, t_parse *parse)
 		print_error(ERROR);
 	data->addr = mlx_get_data_addr(data->img, &data->bpp, &data->line_size,
 			&data->endian);
-	printf("%d\n", data->line_size);
-	exit(1);
 	if (!data->addr)
 		print_error(ERROR);
 }

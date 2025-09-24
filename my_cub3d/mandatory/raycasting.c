@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:24:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/20 11:25:24 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/22 17:14:21 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,8 @@
 
 void	compute_distance(t_data *data, int pos_x, int pos_y)
 {
-	if (data->ray_dir_x == 0)
-		data->delta_dist_x = INFINITY;
-	else
-		data->delta_dist_x = fabs(1.0 / data->ray_dir_x);
-	if (data->ray_dir_y == 0)
-		data->delta_dist_y = INFINITY;
-	else
-		data->delta_dist_y = fabs(1.0 / data->ray_dir_y);
+	data->delta_dist_x = fabs(1.0 / data->ray_dir_x);
+	data->delta_dist_y = fabs(1.0 / data->ray_dir_y);
 	calculate_side_dist(data, pos_x, pos_y);
 }
 
