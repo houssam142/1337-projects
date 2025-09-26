@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 10:24:22 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/20 10:34:16 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/20 11:36:32 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void    tribonacci(vector<int> &arr, int length)
 int main()
 {
     vector<int> arr = {10, 20, 30};
-    tribonacci(arr, 2);
+    tribonacci(arr, 5);
     cout << "[";
     for (int i = 0; i < arr.size(); i++)
     {
