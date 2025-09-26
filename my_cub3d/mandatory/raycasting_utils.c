@@ -21,16 +21,12 @@ void	calculate_raydir_fow(t_data *data, int i)
 
 void	calculate_perp_and_drawing(t_data *data, int pos_x, int pos_y, int side)
 {
+  (void)pos_y;
+  (void)pos_x;
 	if (!side)
-	{
-		data->perp_dist = fabs(((double)pos_x - data->x_player + \
-					(1 - data->step_x) / 2.0) / data->ray_dir_x);
-	}
+		data->perp_dist = data->side_dist_x - data->delta_dist_x;
 	else
-  {
-		data->perp_dist = fabs(((double)pos_y - data->y_player + \
-					(1 - data->step_y) / 2.0) / data->ray_dir_y);
-	}
+		data->perp_dist = data->side_dist_y - data->delta_dist_y;
 	data->line_height = (int)(HEIGHT / data->perp_dist);
 	data->draw_start = -data->line_height / 2 + HEIGHT / 2;
 	data->draw_end = data->line_height / 2 + HEIGHT / 2;
