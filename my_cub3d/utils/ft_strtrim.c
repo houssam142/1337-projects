@@ -27,7 +27,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int	len;
 
 	if (!s1)
-		exit(1);
+    return (NULL);
 	len = ft_strlen(s1);
 	i = 0;
 	while (i < len && search(set, s1[i]))

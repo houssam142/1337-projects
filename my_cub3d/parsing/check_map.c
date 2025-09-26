@@ -32,7 +32,7 @@ static int	arr_len_till_char(char **map)
 	while (line)
 	{
 		line = ft_strtrim(map[i], " ");
-		if (line[0] != '1')
+		if (!line || line[0] != '1')
 			return (i);
 		i++;
 	}
