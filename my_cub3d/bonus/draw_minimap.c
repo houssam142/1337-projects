@@ -19,11 +19,11 @@ void	draw_player(t_data *data)
 	int	size;
 
 	size = 6;
-	y = -size / 2;
-	while (y < size / 2)
+	y = 0;
+	while (y < size)
 	{
-		x = -size / 2;
-		while (x < size / 2)
+		x = 0;
+		while (x < size)
 		{
 			ft_mlx_put_pixel(data, data->center_x + x, data->center_y + y,
 				0xFF0000);

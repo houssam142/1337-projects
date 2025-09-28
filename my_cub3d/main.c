@@ -43,6 +43,7 @@ static void	init_data(t_data *data, t_parse *arg, t_img *img)
 	data->center_x = MM_SIZE / 2;
 	data->center_y = MM_SIZE / 2;
 	data->img = img;
+  data->frames = 0;
 }
 
 int	parse_args(char **av, t_parse *data)

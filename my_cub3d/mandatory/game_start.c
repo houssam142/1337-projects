@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:42:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/25 18:43:37 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:54:39 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	game_loop(void *arg)
 	rotate_l_or_r(data);
 	compute_camera_x(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	get_fps(data);
 	if (BONUS)
 	{
 		draw_minimap(data);
@@ -96,6 +97,7 @@ void	start_game(t_data *data, t_parse *parse)
 		mlx_hook(data->win, 6, 1L << 6, mouse_motion, data);
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 1L << 1, key_release, data);
+	data->last_time = get_time();
 	mlx_loop_hook(data->mlx, game_loop, data);
 	mlx_loop(data->mlx);
 }

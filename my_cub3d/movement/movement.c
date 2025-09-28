@@ -31,7 +31,7 @@ void	ft_movewasd_2(t_data *data)
 	double	new_x;
 	double	new_y;
 
-	strafe_speed = 0.03;
+	strafe_speed = 0.025;
 	if (data->move_right == 1)
 	{
 		new_x = data->x_player + data->plane_x * strafe_speed;
@@ -58,7 +58,7 @@ void	ft_move_wasd(t_data *data)
 	double	new_x;
 	double	new_y;
 
-	move_speed = 0.03;
+	move_speed = 0.025;
 	if (data->move_forward == 1)
 	{
 		new_x = data->x_player + data->dir_x * move_speed;

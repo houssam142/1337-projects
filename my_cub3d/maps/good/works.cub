@@ -1,11 +1,11 @@
-   WE                            textures/wolfenstein/grey_stone.xpm
-NO      text/Walls/wall_cracked_1.xpm
+   WE                            textures/wolfenstein/red_brick.xpm
+NO      textures/wolfenstein/red_brick.xpm
 
 
 
 SO textures/wolfenstein/red_brick.xpm
 
-F      17,    38,     64
+F      17,    38,     75
 
 EA textures/wolfenstein/wood.xpm
 

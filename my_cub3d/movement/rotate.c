@@ -20,7 +20,7 @@ void	rotate_l_or_r(t_data *data)
 	double	old_plane_x;
 	double	old_plane_y;
 
-	rot_speed = 0.03;
+	rot_speed = 0.025;
 	if (data->rotate_left == 1)
 		rot_speed *= -1;
 	else if (data->rotate_right == 1)

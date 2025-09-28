@@ -31,13 +31,13 @@ static void	wall_pos(t_data *data, int side)
 	data->wall_x = wall_x;
 }
 
-static void	pick_texture(t_data *data)
+static void	pick_texture(t_data *data, int side)
 {
-	if (data->step_x > -1)
+	if (side && data->step_x > -1)
 		data->tex_addr = data->imgs->tex_addr_e;
-	else if (data->step_x < -1)
+	else if (!side && data->step_x < -1)
 		data->tex_addr = data->imgs->tex_addr_w;
-	else if (data->step_y > -1)
+	else if (!side && data->step_y > -1)
 		data->tex_addr = data->imgs->tex_addr_s;
 	else
 		data->tex_addr = data->imgs->tex_addr_n;
@@ -71,9 +71,9 @@ void	compute_camera_x(t_data *data)
 			if (data->parse->map[pos_y][pos_x] == '1')
 				hit = 1;
 		}
-		calculate_perp_and_drawing(data, pos_x, pos_y, side);
+		calculate_perp_and_drawing(data, side);
 		wall_pos(data, side);
-		pick_texture(data);
+		pick_texture(data, side);
 		calculate_tex_coor(data, side);
 		ft_draw(data, i, side);
 	}

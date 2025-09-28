@@ -19,10 +19,8 @@ void	calculate_raydir_fow(t_data *data, int i)
 	data->ray_dir_y = data->dir_y + data->plane_y * data->camera_x;
 }
 
-void	calculate_perp_and_drawing(t_data *data, int pos_x, int pos_y, int side)
+void	calculate_perp_and_drawing(t_data *data, int side)
 {
-  (void)pos_y;
-  (void)pos_x;
 	if (!side)
 		data->perp_dist = data->side_dist_x - data->delta_dist_x;
 	else

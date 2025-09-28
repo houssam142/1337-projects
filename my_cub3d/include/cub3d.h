@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/24 09:36:45 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/28 21:01:13 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <sys/time.h>
 
 # ifndef BONUS
 #  define BONUS 1
@@ -155,6 +156,8 @@ typedef struct s_data
 	int			mouse_x;
 	double		offset_x;
 	double		offset_y;
+  int       frames;
+  double    last_time;
 	t_parse		*parse;
 	t_img		*imgs;
 }				t_data;
@@ -166,6 +169,8 @@ typedef struct s_gc
 }				t_gc;
 
 int				check_file(char *str);
+double    get_time(void);
+void      get_fps(t_data *data);
 void			draw_player(t_data *data);
 void			draw_minimap(t_data *data);
 int				mouse_motion(int x, int y, t_data *data);
@@ -182,8 +187,7 @@ int				perform_dda(t_data *data, int *pos_x, int *pos_y, int *side);
 void			init_play_pos_and_oreat(t_data *data);
 void			ft_move_wasd(t_data *data);
 int				game_loop(void *arg);
-void			calculate_perp_and_drawing(t_data *data, int pos_x, int pos_y,
-					int side);
+void			calculate_perp_and_drawing(t_data *data, int side);
 char			*split_and_join(char **arr, char *tmp2);
 void			calculate_side_dist(t_data *data, int pos_x, int pos_y);
 int				key_press(int key, t_data *data);
