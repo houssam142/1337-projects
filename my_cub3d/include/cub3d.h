@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/28 21:01:13 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/01 18:38:01 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,8 @@ typedef struct s_data
 	int			mouse_x;
 	double		offset_x;
 	double		offset_y;
-  int       frames;
-  double    last_time;
+  	int       	frames;
+  	double    	last_time;
 	t_parse		*parse;
 	t_img		*imgs;
 }				t_data;
@@ -169,22 +169,23 @@ typedef struct s_gc
 }				t_gc;
 
 int				check_file(char *str);
-double    get_time(void);
-void      get_fps(t_data *data);
+int       		find_longest_line(char **map);
+void			fill_lines_w_spaces(char **map, int max_len);
+double    		get_time(void);
+char	    	*ft_itoa(int n);
+void      		get_fps(t_data *data);
 void			draw_player(t_data *data);
 void			draw_minimap(t_data *data);
 int				mouse_motion(int x, int y, t_data *data);
 void			*ft_malloc(size_t size);
-void			free_grabage(void);
+void			free_garbage(void);
 void			store_texture_params(t_data *data, int direction, int bpp,
 					int line_size);
 void			rotate_l_or_r(t_data *data);
 void			adjust_starting_cell(t_data *data);
-void			parse_free(char **arr, char *tmp2, char *line);
 void			get_map_dimension(t_data *data);
 void			ft_draw(t_data *data, int x, int side);
 int				perform_dda(t_data *data, int *pos_x, int *pos_y, int *side);
-void			init_play_pos_and_oreat(t_data *data);
 void			ft_move_wasd(t_data *data);
 int				game_loop(void *arg);
 void			calculate_perp_and_drawing(t_data *data, int side);
@@ -205,7 +206,6 @@ int				check_extensions(char *str, t_parse *data);
 void			ft_putstr_fd(char *s, int fd);
 char			*get_next_line(int fd);
 void			check_texture_syntax(t_parse *data);
-char			**final_map(char **map);
 int				map_len(char **map);
 int				len_till_first_line(char **map);
 void			compute_camera_x(t_data *data);

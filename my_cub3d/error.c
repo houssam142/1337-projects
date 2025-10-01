@@ -14,7 +14,7 @@
 
 void	print_error(enum e_parsing type)
 {
-	free_grabage();
+	free_garbage();
 	if (type == TEXTURE)
 		exit((ft_putstr_fd("\033[1;31mThere is an error in texture path's"
 					" syntax\n", 2), 1));

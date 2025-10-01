@@ -47,6 +47,7 @@ void	load_texture_img(void **img_ptr, t_data *data, char *path, int dir)
 		ft_putstr_fd("Failed to load texture: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd("\n", 2);
+    free_garbage();
 		exit(1);
 	}
 	store_texture_dim(data, dir, width, height);
@@ -89,6 +90,7 @@ void	get_texture_addr(void *img, char **addr_ptr, int *bpp_ptr,
 	if (!addr)
 	{
 		ft_putstr_fd("Failed to get texture data address\n", 2);
+    free_garbage();
 		exit(1);
 	}
 	*addr_ptr = addr;

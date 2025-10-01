@@ -6,11 +6,61 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:43:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 09:46:03 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/01 18:46:47 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	fill_lines_w_spaces(char **map, int max_len)
+{
+	char	*new_line;
+	int		len;
+	int		i;
+
+	i = 0;
+	if (!map[i][0])
+		return ;
+	while (map[i])
+	{
+		len = ft_strlen(map[i]);
+		if (len < max_len)
+		{
+			new_line = ft_malloc(sizeof(char) * (max_len + 1));
+			strcpy(new_line, map[i]);
+			while (len < max_len)
+			{
+				new_line[len - 1] = '1';
+				len++;
+			}
+			new_line[len] = '\0';
+			free(map[i]);
+			map[i] = new_line;
+		}
+		i++;
+	}
+}
+
+int  find_longest_line(char **map)
+{
+	int		max_len;
+	int		i;
+	int		len;
+	char	*line;
+
+	max_len = 0;
+	i = 0;
+	len = 0;
+	while (map[i])
+	{
+		line = ft_strtrim(map[i], "\n");
+		len = ft_strlen(line);
+		if (max_len < len)
+			max_len = len;
+		i++;
+	}
+	return (max_len);
+}
 
 char	*split_and_join(char **arr, char *tmp2)
 {

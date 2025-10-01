@@ -31,7 +31,7 @@ int	close_win(t_data *data)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	free_grabage();
+	free_garbage();
 	exit(0);
 }
 

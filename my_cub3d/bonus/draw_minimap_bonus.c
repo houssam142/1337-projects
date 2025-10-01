@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_minimap.c                                     :+:      :+:    :+:   */
+/*   draw_minimap_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/04 23:15:11 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/23 10:10:18 by hounejja         ###   ########.fr       */
+/*   Created: 2025/10/01 18:40:09 by hounejja          #+#    #+#             */
+/*   Updated: 2025/10/01 18:40:13 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ void	draw_minimap(t_data *data)
 				else
 					color = 0x000000;
 			}
-			else
-				color = 0x000000;
 			if (screen_x + MM_TILE >= 0 && screen_x < MM_SIZE
 				&& screen_y + MM_TILE >= 0 && screen_y < MM_SIZE)
 				draw_tile(data, screen_x, screen_y, color);

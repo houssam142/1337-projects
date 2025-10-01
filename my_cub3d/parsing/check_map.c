@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 05:05:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/16 17:16:58 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/09/30 18:45:45 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,19 @@ void	check_map(char **map)
 		if (map[i][0] != '1')
 			check_after_eo_map(&map[i]);
 		i++;
+	}
+	int j = 0;
+	int len = arr_len(map);
+	while (j < len)
+	{
+		if (map[j][0] == '1' && map[j][ft_strlen(map[j]) - 1] == '1')
+		{
+			j++;
+			continue ;
+		}
+		else if (map[j][0])
+			print_error(WALL);
+		j++;
 	}
 	if (i < size)
 		print_error(WALL);

@@ -36,7 +36,7 @@ void	check_colors_two(char *line)
 		count++;
 	if (count != 3)
 		exit((ft_putstr_fd("\033[1;31mThere are not more than 3 colors\n", 2),
-				free_grabage(), 1));
+				free_garbage(), 1));
 }
 
 void	check_colors(t_parse *data)

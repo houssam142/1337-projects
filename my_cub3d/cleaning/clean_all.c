@@ -46,14 +46,14 @@ void	*ft_malloc(size_t size)
 	if (!ptr)
 	{
 		perror("Minishell: Memory allocation failed!");
-		free_grabage();
+		free_garbage();
 		exit(2);
 	}
 	get_garbage_collector(ptr);
 	return (ptr);
 }
 
-void	free_grabage(void)
+void	free_garbage(void)
 {
 	t_gc	*gc;
 	t_gc	*tmp;
