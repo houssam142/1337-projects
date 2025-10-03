@@ -6,38 +6,15 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 18:29:55 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/21 21:26:04 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/03 11:11:38 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 
-void	store_texture_dim(t_data *data, int dir, int width, int height)
-{
-	if (dir == 0)
-	{
-		data->imgs->tex_width_n = width;
-		data->imgs->tex_height_n = height;
-	}
-	else if (dir == 1)
-	{
-		data->imgs->tex_width_s = width;
-		data->imgs->tex_height_s = height;
-	}
-	else if (dir == 2)
-	{
-		data->imgs->tex_width_e = width;
-		data->imgs->tex_height_e = height;
-	}
-	else if (dir == 3)
-	{
-		data->imgs->tex_width_w = width;
-		data->imgs->tex_height_w = height;
-	}
-}
-
 void	load_texture_img(void **img_ptr, t_data *data, char *path, int dir)
 {
+	(void)dir;
 	int	width;
 	int	height;
 
@@ -47,10 +24,9 @@ void	load_texture_img(void **img_ptr, t_data *data, char *path, int dir)
 		ft_putstr_fd("Failed to load texture: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd("\n", 2);
-    free_garbage();
+    	free_garbage();
 		exit(1);
 	}
-	store_texture_dim(data, dir, width, height);
 }
 
 void	store_texture_params(t_data *data, int direction, int bpp,
@@ -90,7 +66,7 @@ void	get_texture_addr(void *img, char **addr_ptr, int *bpp_ptr,
 	if (!addr)
 	{
 		ft_putstr_fd("Failed to get texture data address\n", 2);
-    free_garbage();
+		free_garbage();
 		exit(1);
 	}
 	*addr_ptr = addr;

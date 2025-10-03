@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:40:09 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/01 18:40:13 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/02 08:59:05 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	draw_player(t_data *data)
 	int	size;
 
 	size = 6;
-	y = 0;
-	while (y < size)
+	y = -size / 2;
+	while (y < size / 2)
 	{
-		x = 0;
-		while (x < size)
+		x = -size / 2;
+		while (x < size / 2)
 		{
 			ft_mlx_put_pixel(data, data->center_x + x, data->center_y + y,
 				0xFF0000);

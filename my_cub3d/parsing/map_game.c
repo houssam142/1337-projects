@@ -6,11 +6,45 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/16 17:17:32 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/03 11:34:20 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+char	**final_map(char **map)
+{
+    char    **arr;
+    int     i;
+    int     j;
+    int     max_len;
+    int     real_lines;
+    int     start;
+
+    start = len_till_first_line(map);
+    i = start;
+    real_lines = 0;
+    while (map[i])
+    {
+        if (map[i][0] && map[i][0] != '\n')
+            real_lines++;
+        i++;
+    }
+    arr = ft_malloc(sizeof(char *) * (real_lines + 1));
+    max_len = find_longest_line(&map[start]);
+    i = start;
+    j = 0;
+    while (map[i] && j < real_lines)
+    {
+        if (map[i][0] != '\0' && map[i][0] != '\n')
+            fill_lines_w_spaces(&map[i], max_len);
+        arr[j] = ft_strdup(map[i]);
+        j++;
+        i++;
+    }
+    arr[j] = NULL;
+    return (arr);
+}
 
 int	line_all_ones(char *line, char one)
 {

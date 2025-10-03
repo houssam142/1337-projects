@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:43:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/01 18:46:47 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/02 09:09:37 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 void	fill_lines_w_spaces(char **map, int max_len)
 {
 	char	*new_line;
-	int		len;
 	int		i;
+	int		len;
+	int		j;
 
 	i = 0;
-	if (!map[i][0])
-		return ;
 	while (map[i])
 	{
 		len = ft_strlen(map[i]);
-		if (len < max_len)
+		if (map[i][len - 1] == '\n')
+			map[i][--len] = '\0';
+		new_line = ft_malloc(sizeof(char) * (max_len + 1));
+		j = 0;
+		while (j < max_len)
 		{
-			new_line = ft_malloc(sizeof(char) * (max_len + 1));
-			strcpy(new_line, map[i]);
-			while (len < max_len)
-			{
-				new_line[len - 1] = '1';
-				len++;
-			}
-			new_line[len] = '\0';
-			free(map[i]);
-			map[i] = new_line;
+			if (j < len)
+				new_line[j] = map[i][j];
+			else
+				new_line[j] = '1';
+			j++;
 		}
+		new_line[max_len] = '\0';
+		map[i] = new_line;
 		i++;
 	}
 }

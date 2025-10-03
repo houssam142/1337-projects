@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/10/01 18:38:01 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/03 11:34:48 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,7 @@ void			ft_bzero(void *s, int len);
 void			check_order(char *line, t_parse *data);
 char			*ft_strtrim(char const *s1, char const *set);
 int				ft_atoi(const char *str);
+char			**final_map(char **map);
 char			**ft_return_map_game(char *str);
 
 #endif

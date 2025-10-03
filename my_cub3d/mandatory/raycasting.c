@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:24:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/01 18:19:11 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/03 11:17:59 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,6 @@ static void	pick_texture(t_data *data, int side)
 		data->tex_addr = data->imgs->tex_addr_n;
 }
 
-void	calculate_tex_coor(t_data *data, int side)
-{
-	data->tex_x = (int)(data->wall_x * TEX_WIDTH);
-	if ((!side && data->ray_dir_x < 0) || (side == 1 && data->ray_dir_y > 0))
-		data->tex_x = TEX_WIDTH - data->tex_x - 1;
-}
-
 void	compute_camera_x(t_data *data)
 {
 	int (side), (pos_x), (pos_y), (hit), (i) = -1;
@@ -74,7 +67,7 @@ void	compute_camera_x(t_data *data)
 		calculate_perp_and_drawing(data, side);
 		wall_pos(data, side);
 		pick_texture(data, side);
-		calculate_tex_coor(data, side);
+		data->tex_x = (int)(data->wall_x * TEX_WIDTH);
 		ft_draw(data, i, side);
 	}
 }

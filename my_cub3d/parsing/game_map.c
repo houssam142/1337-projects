@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/01 18:45:26 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/03 11:36:39 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,14 @@ char	**only_2d_map(char **map)
 {
 	char	**arr;
 
-	int (i), (len), (j), (max_len);
+	int (i), (len), (j);
 	i = len_till_first_line(map);
 	len = map_len(&map[i]);
 	arr = ft_malloc(sizeof(char *) * (len + 1));
 	j = 0;
 	while (j < len)
 	{
-		if (map[i][0] == '\n')
-			map[i] = ft_strtrim(map[i], "\n");
-		max_len = find_longest_line(&map[i]);
-		fill_lines_w_spaces(&map[i], max_len);
-		arr[j] = ft_strdup(map[i]);
+		arr[j] = ft_strtrim(map[i], "\n");
 		if (map[i][0] == '\0')
 			break ;
 		j++;
