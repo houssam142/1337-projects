@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/03 11:36:47 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/03 11:40:50 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ int	parse_args(char **av, t_parse *data)
 	data->map = final_map(sec_map);
 	if (!data->map)
 		print_error(MAP);
+	for (int i = 0; data->map[i]; i++)
+		printf("%s\n", data->map[i]);
+	// exit(1);
 	return (0);
 }
 
