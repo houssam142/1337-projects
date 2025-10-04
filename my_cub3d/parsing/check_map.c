@@ -6,11 +6,24 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 05:05:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/30 18:45:45 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/04 17:56:51 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	find_real_lines(char **map, int *real_lines)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (map[i][0] && map[i][0] != '\n')
+			(*real_lines)++;
+		i++;
+	}
+}
 
 static int	arr_len(char **map)
 {
@@ -70,19 +83,6 @@ void	check_map(char **map)
 		if (map[i][0] != '1')
 			check_after_eo_map(&map[i]);
 		i++;
-	}
-	int j = 0;
-	int len = arr_len(map);
-	while (j < len)
-	{
-		if (map[j][0] == '1' && map[j][ft_strlen(map[j]) - 1] == '1')
-		{
-			j++;
-			continue ;
-		}
-		else if (map[j][0])
-			print_error(WALL);
-		j++;
 	}
 	if (i < size)
 		print_error(WALL);

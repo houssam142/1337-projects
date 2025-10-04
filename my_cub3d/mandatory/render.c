@@ -26,7 +26,6 @@ static void	load_north_texture(t_data *data, t_parse *parse)
 
 static void	load_south_texture(t_data *data, t_parse *parse)
 {
-	
 	char	*addr;
 	int		bpp;
 	int		line_size;
@@ -38,7 +37,7 @@ static void	load_south_texture(t_data *data, t_parse *parse)
 }
 
 static void	load_east_texture(t_data *data, t_parse *parse)
-{	
+{
 	char	*addr;
 	int		bpp;
 	int		line_size;
@@ -55,7 +54,6 @@ static void	load_west_texture(t_data *data, t_parse *parse)
 	int		bpp;
 	int		line_size;
 
-	
 	load_texture_img((void **)&data->imgs->tex_img_w, data, parse->path_w, 3);
 	get_texture_addr(data->imgs->tex_img_w, &addr, &bpp, &line_size);
 	data->imgs->tex_addr_w = addr;

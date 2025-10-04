@@ -12,29 +12,30 @@
 
 #include "../include/cub3d.h"
 
-double  get_time(void)
+double	get_time(void)
 {
-	struct timeval time_frame;
+	struct timeval	time_frame;
 
 	gettimeofday(&time_frame, NULL);
 	return (time_frame.tv_sec + time_frame.tv_usec / 1000000.0);
 }
 
-void get_fps(t_data *data)
+void	get_fps(t_data *data)
 {
-	double curr_time;
-    double elapsed;
-    static int fps_display = 0;
-    
+	double		curr_time;
+	double		elapsed;
+	static int	fps_display = 0;
+
 	curr_time = get_time();
 	elapsed = curr_time - data->last_time;
-    data->frames++;
+	data->frames++;
 	if (elapsed >= 0.15)
-    {
-        fps_display = (data->frames / elapsed);
-        data->frames = 0;
-        data->last_time = curr_time;
-    }
-    mlx_string_put(data->mlx, data->win, 10, 10, 0xFFFFFF, "FPS: ");
-    mlx_string_put(data->mlx, data->win, 36, 10, 0xFFFFFF, ft_itoa(fps_display));
+	{
+		fps_display = (data->frames / elapsed);
+		data->frames = 0;
+		data->last_time = curr_time;
+	}
+	mlx_string_put(data->mlx, data->win, 10, 10, 0xFFFFFF, "FPS: ");
+	mlx_string_put(data->mlx, data->win, 36, 10, 0xFFFFFF,
+		ft_itoa(fps_display));
 }

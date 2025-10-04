@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/10/03 11:34:48 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/04 17:55:16 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <unistd.h>
 # include <sys/time.h>
+# include <unistd.h>
 
 # ifndef BONUS
 #  define BONUS 1
@@ -41,11 +41,11 @@
 # define D_KEY 0x64
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
-# define COLOR_S "\033[1;31mError\ninvalid color format\n\033[0m"
-# define PARSING_S "\033[1;31mError\nMap parsing failed\n\033[0m"
-# define EXT_S "\033[1;31mError\nfile extension must be .cub\n\033[0m"
-# define PLAYER_E "\033[1;31mError\ninvalid player position\n\033[0m"
-# define WALL_E "\033[1;31mError\nMap is not closed by walls\n\033[0m"
+# define COLOR_S "Error\ninvalid color format\n"
+# define PARSING_S "Error\nMap parsing failed\n"
+# define EXT_S "Error\nfile extension must be .cub\n"
+# define PLAYER_E "Error\ninvalid player position\n"
+# define WALL_E "Error\nMap is not closed by walls\n"
 
 enum			e_parsing
 {
@@ -156,8 +156,8 @@ typedef struct s_data
 	int			mouse_x;
 	double		offset_x;
 	double		offset_y;
-  	int       	frames;
-  	double    	last_time;
+	int			frames;
+	double		last_time;
 	t_parse		*parse;
 	t_img		*imgs;
 }				t_data;
@@ -169,11 +169,12 @@ typedef struct s_gc
 }				t_gc;
 
 int				check_file(char *str);
-int       		find_longest_line(char **map);
+int				find_longest_line(char **map);
 void			fill_lines_w_spaces(char **map, int max_len);
-double    		get_time(void);
-char	    	*ft_itoa(int n);
-void      		get_fps(t_data *data);
+double			get_time(void);
+char			*ft_itoa(int n);
+void			find_real_lines(char **map, int *real_lines);
+void			get_fps(t_data *data);
 void			draw_player(t_data *data);
 void			draw_minimap(t_data *data);
 int				mouse_motion(int x, int y, t_data *data);

@@ -14,17 +14,17 @@
 
 void	load_texture_img(void **img_ptr, t_data *data, char *path, int dir)
 {
-	(void)dir;
 	int	width;
 	int	height;
 
+	(void)dir;
 	*img_ptr = mlx_xpm_file_to_image(data->mlx, path, &width, &height);
 	if (!*img_ptr)
 	{
 		ft_putstr_fd("Failed to load texture: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd("\n", 2);
-    	free_garbage();
+		free_garbage();
 		exit(1);
 	}
 }
@@ -55,7 +55,7 @@ void	store_texture_params(t_data *data, int direction, int bpp,
 }
 
 void	get_texture_addr(void *img, char **addr_ptr, int *bpp_ptr,
-	int *line_size_ptr)
+		int *line_size_ptr)
 {
 	char	*addr;
 	int		bpp;

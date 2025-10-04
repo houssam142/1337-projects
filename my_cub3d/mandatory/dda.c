@@ -33,4 +33,3 @@ int	perform_dda(t_data *data, int *pos_x, int *pos_y, int *side)
 		return (1);
 	return (0);
 }
-

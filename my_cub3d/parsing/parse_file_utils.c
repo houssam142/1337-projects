@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:43:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/03 17:05:09 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/04 17:57:05 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	fill_lines_w_spaces(char **map, int max_len)
 	}
 }
 
-int  find_longest_line(char **map)
+int	find_longest_line(char **map)
 {
 	int		max_len;
 	int		i;
