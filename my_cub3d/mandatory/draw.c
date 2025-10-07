@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 16:02:08 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/02 22:10:26 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/06 15:50:14 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,21 +72,18 @@ void	ft_draw(t_data *data, int x, int side)
 	step = (double)TEX_HEIGHT / data->line_height;
 	tex_pos = (data->draw_start - HEIGHT / 2 + data->line_height / 2) * step;
 	data->floor_color = rgb_string_to_int(data, 'F');
-	while (++y < data->draw_start)
-		ft_mlx_put_pixel(data, x, y, data->ceiling_color);
-	y = data->draw_start;
-	while (y < data->draw_end)
+	while (++y < HEIGHT)
 	{
 		tex_y = (int)tex_pos;
-		color = get_texture_pixel(data, tex_y, side);
-		ft_mlx_put_pixel(data, x, y, color);
-		tex_pos += step;
-		y++;
-	}
-	y = data->draw_end;
-	while (y < HEIGHT)
-	{
-		ft_mlx_put_pixel(data, x, y, data->floor_color);
-		y++;
+		if (y < data->draw_start)
+			ft_mlx_put_pixel(data, x, y, data->ceiling_color);
+		if (y > data->draw_start && y < data->draw_end)
+		{
+			color = get_texture_pixel(data, tex_y, side);
+			ft_mlx_put_pixel(data, x, y, color);
+			tex_pos += step;
+		}
+		if (y > data->draw_end)
+			ft_mlx_put_pixel(data, x, y, data->floor_color);
 	}
 }

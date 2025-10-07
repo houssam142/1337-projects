@@ -30,7 +30,7 @@ OTHER_SRCS = main.c parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd.c
 		 mandatory/vector.c mandatory/draw.c mandatory/raycasting.c \
 		 mandatory/color.c mandatory/dda.c mandatory/raycasting_utils.c \
 		 movement/movement.c movement/rotate.c mandatory/render.c mandatory/textures.c mandatory/init_window.c \
-		 cleaning/clean_all.c utils/ft_bzero.c mandatory/time_frame.c utils/ft_itoa.c
+		 cleaning/clean_all.c utils/ft_bzero.c mandatory/time_frame.c utils/ft_itoa.c bonus/draw_minimap_bonus.c
 
 OTHER_SRCS_B = main.c parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd.c \
 	     parsing/map_game.c utils/get_next_line_utils.c utils/get_next_line.c \

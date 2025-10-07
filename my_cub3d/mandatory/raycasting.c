@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 21:24:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/03 11:17:59 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:43:59 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void	wall_pos(t_data *data, int side)
 {
 	double	wall_x;
 
-	if (!side)
-		wall_x = data->y_player + data->perp_dist * data->ray_dir_y;
-	else
+	if (side)
 		wall_x = data->x_player + data->perp_dist * data->ray_dir_x;
+	else
+		wall_x = data->y_player + data->perp_dist * data->ray_dir_y;
 	wall_x -= floor(wall_x);
 	data->wall_x = wall_x;
 }
@@ -69,5 +69,5 @@ void	compute_camera_x(t_data *data)
 		pick_texture(data, side);
 		data->tex_x = (int)(data->wall_x * TEX_WIDTH);
 		ft_draw(data, i, side);
-	}
+	}	
 }

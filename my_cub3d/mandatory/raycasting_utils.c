@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 18:40:39 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/03 17:16:00 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/04 18:03:10 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	calculate_side_dist(t_data *data, int pos_x, int pos_y)
 	else
 	{
 		data->step_x = 1;
-		data->side_dist_x = (pos_x + 1.0 - data->x_player) * data->delta_dist_x;
+		data->side_dist_x = (pos_x + 1 - data->x_player) * data->delta_dist_x;
 	}
 	if (data->ray_dir_y < 0)
 	{
@@ -54,6 +54,6 @@ void	calculate_side_dist(t_data *data, int pos_x, int pos_y)
 	else
 	{
 		data->step_y = 1;
-		data->side_dist_y = (pos_y + 1.0 - data->y_player) * data->delta_dist_y;
+		data->side_dist_y = (pos_y + 1 - data->y_player) * data->delta_dist_y;
 	}
 }

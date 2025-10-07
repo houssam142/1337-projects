@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/10/04 17:55:16 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/05 16:43:50 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,6 @@ typedef struct s_data
 	int			step_y;
 	int			endian;
 	int			bpp;
-	char		*tex;
 	int			line_size;
 	int			map_width;
 	int			map_height;
@@ -176,6 +175,7 @@ char			*ft_itoa(int n);
 void			find_real_lines(char **map, int *real_lines);
 void			get_fps(t_data *data);
 void			draw_player(t_data *data);
+int				close_win(t_data *data);
 void			draw_minimap(t_data *data);
 int				mouse_motion(int x, int y, t_data *data);
 void			*ft_malloc(size_t size);
@@ -213,8 +213,7 @@ void			compute_camera_x(t_data *data);
 void			replace_space_with_void(char *line, char c);
 void			calculate_raydir_fow(t_data *data, int i);
 void			init_window(t_data *data, t_parse *parse);
-void			load_texture_img(void **img_ptr, t_data *data, char *path,
-					int dir);
+void			load_texture_img(void **img_ptr, t_data *data, char *path);
 void			load_all_textures(t_data *data, t_parse *parse);
 void			get_texture_addr(void *img, char **addr_ptr, int *bpp,
 					int *line_size);
