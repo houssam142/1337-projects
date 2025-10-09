@@ -1,0 +1,104 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Accounts.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/09 14:30:40 by hounejja          #+#    #+#             */
+/*   Updated: 2025/10/09 18:54:52 by hounejja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "Account.hpp"
+
+int Account::_nbAccounts = 0;
+int Account::_totalAmount = 0;
+int Account::_totalNbDeposits = 0;
+int Account::_totalNbWithdrawals = 0;
+
+int	Account::getNbAccounts(void)
+{
+	return Account::_nbAccounts;
+}
+
+int	Account::getTotalAmount(void)
+{
+	return Account::_totalAmount;
+}
+
+int	Account::getNbDeposits(void)
+{
+	return Account::_totalNbDeposits;
+}
+
+int Account::getNbWithdrawals(void)
+{
+	return Account::_totalNbWithdrawals;
+}
+
+void	Account::makeDeposit(int deposit)
+{
+	_totalNbDeposits++;
+	_totalAmount += deposit;
+}
+
+bool	Account::makeWithdrawal(int withdrawal)
+{
+	_totalNbWithdrawals++;
+	_totalAmount -= withdrawal;
+	return true;
+}
+
+int		Account::checkAmount() const
+{
+	return this->_amount;
+}
+
+void	Account::displayStatus() const
+{
+	std::cout;
+}
+
+void	Account::displayAccountsInfos()
+{
+	std::cout ;
+}
+
+void Account::_displayTimestamp()
+{
+	std::time_t	time_stamp = time(NULL);
+	std::tm *lcm= localtime(&time_stamp);
+	std::cout << "["
+			  << (lcm->tm_year + 1900)
+			  << std::setfill('0') << std::setw(2) << lcm->tm_mon + 1
+			  << std::setfill('0') << std::setw(2) << lcm->tm_mday
+			  << "_"
+			  << std::setfill('0') << std::setw(2) << lcm->tm_hour
+			  << std::setfill('0') << std::setw(2) << lcm->tm_min
+			  << std::setfill('0') << std::setw(2) << lcm->tm_sec
+			  << "]";
+}
+
+Account::Account(int initial_depo)
+{
+	this->_accountIndex = _nbAccounts;
+	this->_amount = initial_depo;
+	this->_nbDeposits = 0;
+	this->_nbWithdrawals = 0;
+
+	_nbAccounts++;
+	_totalAmount += initial_depo;
+	_displayTimestamp();
+	std::cout << "index:" << this->_accountIndex
+			  << ";amount:" << this->_amount
+			  << ";created" << std::endl;
+}
+
+Account::~Account(void)
+{
+	_displayTimestamp();
+	std::cout << "index:" << this->_accountIndex
+			  << ";amount:" << this->_amount
+			  << ";closed" << std::endl;
+}
