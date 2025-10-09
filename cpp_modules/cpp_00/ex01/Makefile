@@ -6,17 +6,20 @@ NAME = phonebook
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 SRC = phonebook.cpp
 
-$(NAME): $(SRC)
-	@$(CC) $(CFLAGS) $(SRC) -o $(NAME)
+OBJ = $(SRC:.cpp=.o)
+
+$(NAME): $(OBJ)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 
 all: $(NAME)
 	@echo "It's compiled successfully!!"
 
 clean:
-	@rm -rf $(NAME)
+	@rm -rf $(OBJ)
 
 fclean: clean
+	@rm -rf $(NAME)
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 17:32:32 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/08 17:32:33 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/09 21:57:02 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,40 @@
 
 #include <iostream>
 #include <iomanip>
-#include <cstdlib>
 
 
 class Contact
 {
-  public:
+  private:
     std::string  first_name;
     std::string  last_name;
     std::string  nickname;
     std::string  phoneNumber;
     std::string  darkestsecret;
   public:
-    std::string return_first_name()
+    void  SetFirstName(std::string f)
+    {
+      first_name = f;
+    }
+    std::string GetFirstName()
     {
 	    return (first_name);
     }
-    std::string return_last_name()
+    std::string getLastName()
     {
 		  return (last_name);
     }
-    std::string return_nickname()
+    std::string GetNickname()
     {
 		  return (nickname);
     }
-    std::string return_darkestSecret()
+    std::string GetDarkestSecret()
     {
 		  return (darkestsecret);
+    }
+    std::string GetPhoneNumber()
+    {
+      return phoneNumber;
     }
 };
 
@@ -69,7 +76,7 @@ class PhoneBook
 			  total_contacts++;
       std::cout << "it's been added to your contacts\n";
 	}
-    void  search_contact()
+    void  search_contacts()
     {
       if (!total_contacts)
       {
@@ -82,9 +89,9 @@ class PhoneBook
                 << std::setw(10) << "Nickname" << "\n";
       for (int i = 0; i < total_contacts; i++)
       {
-        std::string first_name = contacts[i].return_first_name();
-        std::string last_name = contacts[i].return_last_name();
-        std::string nickname = contacts[i].return_nickname();
+        std::string first_name = contacts[i].GetFirstName();
+        std::string last_name = contacts[i].getLastName();
+        std::string nickname = contacts[i].GetNickname();
         std::cout << std::setw(10) << i + 1 << "|"
                   << std::setw(10) << format_column(first_name) << "|"
                   << std::setw(10) << format_column(last_name) << "|"
