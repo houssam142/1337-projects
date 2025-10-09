@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 16:02:08 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/06 15:50:14 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/07 11:04:43 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_mlx_put_pixel(t_data *data, int x, int y, unsigned int color)
 {
 	char	*dst;
 
-	if (x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT)
+	if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT)
 		return ;
 	dst = data->addr + (y * data->line_size + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;

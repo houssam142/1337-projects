@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/10/05 16:43:50 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/09 10:21:51 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,7 +183,6 @@ void			free_garbage(void);
 void			store_texture_params(t_data *data, int direction, int bpp,
 					int line_size);
 void			rotate_l_or_r(t_data *data);
-void			adjust_starting_cell(t_data *data);
 void			get_map_dimension(t_data *data);
 void			ft_draw(t_data *data, int x, int side);
 int				perform_dda(t_data *data, int *pos_x, int *pos_y, int *side);
