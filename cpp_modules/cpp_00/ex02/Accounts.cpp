@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 14:30:40 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/10 19:59:23 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/10 20:39:01 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ bool	Account::makeWithdrawal(int withdrawal)
 		this->_nbWithdrawals++;
 		_totalNbWithdrawals++;
 		_totalAmount -= withdrawal;
+		this->_amount -= withdrawal;
 		std::cout << ";withdrawal:" << withdrawal
-		<< ";amount:" << this->_amount - withdrawal 
+		<< ";amount:" << this->_amount  
 		<< ";nb_withdrawals:" << this->_nbWithdrawals << std::endl;
 	}
 	return false;
