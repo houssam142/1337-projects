@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 14:30:40 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/09 18:54:52 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/10 14:19:03 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	Account::getNbDeposits(void)
 
 int Account::getNbWithdrawals(void)
 {
-	return Account::_totalNbWithdrawals;
+	return _totalNbWithdrawals;
 }
 
 void	Account::makeDeposit(int deposit)
@@ -57,12 +57,26 @@ int		Account::checkAmount() const
 
 void	Account::displayStatus() const
 {
-	std::cout;
+	_displayTimestamp();
+	std::cout << "index:" << this->_accountIndex
+			  << ";amount:" << this->_amount
+			  << ";deposits:" << this->_nbDeposits
+			  << ";withdrawals:" << this->_nbWithdrawals << std::endl;
+	// _displayTimestamp();
+	// std::cout << "index:" << this->_accountIndex
+	// 		  << ";p_amount:" << this->_amount
+	// 		  << ";deposit:" << this->_nbDeposits
+	// 		  << ";amount:" << this->_amount + this->_nbDeposits 
+	// 		  << ";nb_deposits:" << this->_nbDeposits << std::endl;
 }
 
 void	Account::displayAccountsInfos()
 {
-	std::cout ;
+	_displayTimestamp();
+	std::cout << "accounts:" << _nbAccounts
+			  << ";total:" << _totalAmount
+			  << ";deposits:" << _totalNbDeposits
+			  << ";withdrawals:" << _totalNbWithdrawals << std::endl;
 }
 
 void Account::_displayTimestamp()
@@ -77,7 +91,7 @@ void Account::_displayTimestamp()
 			  << std::setfill('0') << std::setw(2) << lcm->tm_hour
 			  << std::setfill('0') << std::setw(2) << lcm->tm_min
 			  << std::setfill('0') << std::setw(2) << lcm->tm_sec
-			  << "]";
+			  << "] ";
 }
 
 Account::Account(int initial_depo)

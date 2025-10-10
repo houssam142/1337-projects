@@ -12,7 +12,7 @@
 
 SRC = tests.cpp Accounts.cpp
 
-CC = g++
+CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98 -g3
 
@@ -22,6 +22,9 @@ OBJ = $(SRC:.cpp=.o)
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
+
+%.o: %.cpp
+	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
 	@echo "It's been compiled successfully"
