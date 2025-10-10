@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/08 17:32:32 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/09 21:57:02 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/10 10:08:52 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <iostream>
 #include <iomanip>
+#include <cstdlib>
+#include <string>
 
 
 class Contact
@@ -29,6 +31,22 @@ class Contact
     void  SetFirstName(std::string f)
     {
       first_name = f;
+    }
+    void  SetLastName(std::string l)
+    {
+      last_name = l;
+    }
+    void  SetPhoneNumber(std::string num)
+    {
+      phoneNumber = num;
+    }
+    void  SetNickName(std::string name)
+    {
+      nickname = name;
+    }
+    void  SetDarkestSecret(std::string secret)
+    {
+      darkestsecret = secret;
     }
     std::string GetFirstName()
     {
@@ -70,6 +88,8 @@ class PhoneBook
 	void	store()
 	{
 			Contact c = add_contact();
+      if (c.GetDarkestSecret().empty())
+        return ;
 			contacts[next_index] = c;
       next_index = (next_index + 1) % 8;
       if (total_contacts < 8)
@@ -78,25 +98,48 @@ class PhoneBook
 	}
     void  search_contacts()
     {
+      std::string s;
       if (!total_contacts)
       {
         std::cout << "PhoneBook is empty" << '\n';
         return ;
       }
-      std::cout << std::setw(10) << "Index" << "|"
+      while (1)
+      {
+        std::cout << "Choose an index: ";
+        getline(std::cin, s);
+        if (std::cin.eof())
+          break;
+        if (s.empty())
+          continue;
+        if (s.size() > 1)
+        {
+          std::cout << "the index must be single digit between 1 and 8" << std::endl;
+          continue;
+        }
+        if (!isdigit(s[0]))
+        {
+          std::cout << "the index must be a digit" << std::endl;
+          continue;
+        }
+        int num = s[0] - '0';
+        if (num > total_contacts)
+        {
+          std::cout << "The index is invalid" << std::endl;
+          continue;
+        }
+        else
+        {
+          std::cout << std::setw(10) << "Index" << "|"
                 << std::setw(10) << "First Name" << "|"
                 << std::setw(10) << "Last Name" << "|"
                 << std::setw(10) << "Nickname" << "\n";
-      for (int i = 0; i < total_contacts; i++)
-      {
-        std::string first_name = contacts[i].GetFirstName();
-        std::string last_name = contacts[i].getLastName();
-        std::string nickname = contacts[i].GetNickname();
-        std::cout << std::setw(10) << i + 1 << "|"
-                  << std::setw(10) << format_column(first_name) << "|"
-                  << std::setw(10) << format_column(last_name) << "|"
-                  << std::setw(10) << format_column(nickname) << "\n";
-      }
+          std::cout << std::setw(10) << num << "|"
+                    << std::setw(10) << format_column(contacts[num - 1].GetFirstName()) << "|"
+                    << std::setw(10) << format_column(contacts[num - 1].getLastName()) << "|"
+                    << std::setw(10) << format_column(contacts[num - 1].GetNickname()) << "\n";
+        }
+      }      
     }
 };
 

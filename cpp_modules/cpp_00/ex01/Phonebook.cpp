@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phonebook.cpp                                      :+:      :+:    :+:   */
+/*   Phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/09 21:47:36 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/09 22:03:05 by hounejja         ###   ########.fr       */
+/*   Created: 2025/10/10 08:06:46 by hounejja          #+#    #+#             */
+/*   Updated: 2025/10/10 10:04:38 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,65 +14,70 @@
 
 Contact add_contact()
 {
+    std::string input;
     Contact c;
-    std::string s;
     while (1)
     {
         std::cout << "enter your first name: ";
-        s = c.GetFirstName();
-        getline(std::cin, s);
+        getline(std::cin, input);
         if (std::cin.eof())
-            break;
-        if (c.GetFirstName().empty())
-            break;
+            return c;
+        if (input.empty())
+            continue ;
+        c.SetFirstName(input);
+        break;
     }
     while (1)
     {
         std::cout << "enter your last name: ";
-        s = c.getLastName();
-        getline(std::cin, s);
+        getline(std::cin, input);
         if (std::cin.eof())
-            break;
-        if (c.GetFirstName().empty())
-            break;
+            return c;
+        if (input.empty())
+            continue;
+        c.SetLastName(input);
+        break;
     }
     while (1)
     {
         std::cout << "Enter your phone number: ";
-        s = c.GetPhoneNumber();
-        getline(std::cin, s);
+        getline(std::cin, input);
         if (std::cin.eof())
-            break;
-        if (s.empty())
-            break;
-        for (int i = 0; i < s.size(); i++)
+            return c;
+        for (int i = 0; i < static_cast<int>(input.size()); i++)
         {
-            if (!isdigit(s[i]))
+            if (!isdigit(input[i]))
             {
                 std::cout << "Invalid phone number" << std::endl;
                 exit(1);
             }
         }
+        if (input.empty())
+            continue;
+        c.SetPhoneNumber(input);
+        break;
     }
     while (1)
     {
         std::cout << "Enter your nickname: ";
-        s = c.GetNickname();
-        getline(std::cin, s);
+        getline(std::cin, input);
         if (std::cin.eof())
             break;
-        if (c.GetNickname().empty())
-            break;
+        if (input.empty())
+            continue;
+        c.SetNickName(input);
+        break;
     }
     while (true)
     {
         std::cout << "Enter your Darkest secret: ";
-        s = c.GetDarkestSecret();
-        getline(std::cin, s);
+        getline(std::cin, input);
         if (std::cin.eof())
             break;
-        if (c.GetDarkestSecret().empty())
-            break;
+        if (input.empty())
+            continue;
+        c.SetDarkestSecret(input);
+        break;
     }
     return c;
 }
