@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 14:30:40 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/10 14:19:03 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/10 19:59:23 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,34 @@ int Account::getNbWithdrawals(void)
 
 void	Account::makeDeposit(int deposit)
 {
+	this->_nbDeposits++;
 	_totalNbDeposits++;
 	_totalAmount += deposit;
+	this->_amount += deposit;
+	_displayTimestamp();
+	std::cout << "index:" << this->_accountIndex
+			  << ";p_amount:" << this->_amount
+			  << ";deposit:" << deposit
+			  << ";amount:" << this->_amount
+			  << ";nb_deposits:" << this->_nbDeposits << std::endl;
 }
 
 bool	Account::makeWithdrawal(int withdrawal)
 {
-	_totalNbWithdrawals++;
-	_totalAmount -= withdrawal;
-	return true;
+	_displayTimestamp();
+	std::cout << "index:" << this->_accountIndex
+			  << ";p_amount:" << this->_amount;
+	if (withdrawal > this->_amount) std::cout << ";withdrawal:" << "refused" << std::endl;
+	else
+	{
+		this->_nbWithdrawals++;
+		_totalNbWithdrawals++;
+		_totalAmount -= withdrawal;
+		std::cout << ";withdrawal:" << withdrawal
+		<< ";amount:" << this->_amount - withdrawal 
+		<< ";nb_withdrawals:" << this->_nbWithdrawals << std::endl;
+	}
+	return false;
 }
 
 int		Account::checkAmount() const
@@ -62,12 +81,6 @@ void	Account::displayStatus() const
 			  << ";amount:" << this->_amount
 			  << ";deposits:" << this->_nbDeposits
 			  << ";withdrawals:" << this->_nbWithdrawals << std::endl;
-	// _displayTimestamp();
-	// std::cout << "index:" << this->_accountIndex
-	// 		  << ";p_amount:" << this->_amount
-	// 		  << ";deposit:" << this->_nbDeposits
-	// 		  << ";amount:" << this->_amount + this->_nbDeposits 
-	// 		  << ";nb_deposits:" << this->_nbDeposits << std::endl;
 }
 
 void	Account::displayAccountsInfos()

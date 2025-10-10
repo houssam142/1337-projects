@@ -6,7 +6,7 @@
 #    By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/08 17:33:59 by hounejja          #+#    #+#              #
-#    Updated: 2025/10/09 17:12:18 by hounejja         ###   ########.fr        #
+#    Updated: 2025/10/10 20:00:12 by hounejja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRC = tests.cpp Accounts.cpp
 
 CC = c++
 
-FLAGS = -Wall -Wextra -Werror -std=c++98 -g3
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = account
 
