@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 14:30:40 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/10 20:39:01 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/10 20:41:01 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	Account::makeDeposit(int deposit)
 	this->_nbDeposits++;
 	_totalNbDeposits++;
 	_totalAmount += deposit;
-	this->_amount += deposit;
 	_displayTimestamp();
 	std::cout << "index:" << this->_accountIndex
-			  << ";p_amount:" << this->_amount
-			  << ";deposit:" << deposit
-			  << ";amount:" << this->_amount
-			  << ";nb_deposits:" << this->_nbDeposits << std::endl;
+			<< ";p_amount:" << this->_amount
+			<< ";deposit:" << deposit
+			<< ";amount:" << this->_amount + deposit
+			<< ";nb_deposits:" << this->_nbDeposits << std::endl;
+	this->_amount += deposit;
 }
 
 bool	Account::makeWithdrawal(int withdrawal)
