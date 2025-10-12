@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   randomChump.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 20:05:39 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/11 19:51:31 by hounejja         ###   ########.fr       */
+/*   Created: 2025/10/11 18:23:41 by hounejja          #+#    #+#             */
+/*   Updated: 2025/10/11 18:47:05 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-void	Zombie::announce()
+void	randomChump(std::string name)
 {
-	std::cout << this->name << " BraiiiiiiinnnzzzZ..." << std::endl;
+	Zombie* stackZombie = newZombie(name);
+	stackZombie->announce();
+	delete stackZombie;
 }
