@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/12 11:11:13 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/12 13:27:22 by hounejja         ###   ########.fr       */
+/*   Created: 2025/10/12 13:30:53 by hounejja          #+#    #+#             */
+/*   Updated: 2025/10/12 15:32:58 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef WEAPON_HPP
+#define WEAPON_HPP
 
-int main()
+#include <iostream>
+#include <string>
+
+class Weapon
 {
-	std::string name = "HI THIS IS BRAIN";
-	std::string* ptr = &name;
-	std::string& ref = name;
-	
-	std::cout << &name << std::endl;
-	std::cout << ptr << std::endl;
-	std::cout << &ref << std::endl;
-	std::cout << name << std::endl;
-	std::cout << *ptr << std::endl;
-	std::cout << ref << std::endl;
-}
+	private:
+		std::string type;
+	public:
+	Weapon(std::string tp);
+	const std::string&	getType() const;
+	void	setType(std::string t);
+};
+
+
+#endif

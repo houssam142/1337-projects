@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   HumanB.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/12 11:11:13 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/12 13:27:22 by hounejja         ###   ########.fr       */
+/*   Created: 2025/10/12 14:51:06 by hounejja          #+#    #+#             */
+/*   Updated: 2025/10/12 15:33:23 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef HUMANB_HPP
+#define HUMANB_HPP
 
-int main()
+#include <iostream>
+#include "Weapon.hpp"
+
+class HumanB
 {
-	std::string name = "HI THIS IS BRAIN";
-	std::string* ptr = &name;
-	std::string& ref = name;
-	
-	std::cout << &name << std::endl;
-	std::cout << ptr << std::endl;
-	std::cout << &ref << std::endl;
-	std::cout << name << std::endl;
-	std::cout << *ptr << std::endl;
-	std::cout << ref << std::endl;
-}
+	private:
+		Weapon* WeaponType;
+		std::string name;
+	public:
+	void attack() const;
+	void	setWeapon(Weapon* weapon);
+	HumanB(std::string n);
+};
+
+#endif
