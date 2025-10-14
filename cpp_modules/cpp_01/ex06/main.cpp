@@ -5,31 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/12 13:30:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/13 09:55:10 by hounejja         ###   ########.fr       */
+/*   Created: 2025/10/14 07:59:30 by hounejja          #+#    #+#             */
+/*   Updated: 2025/10/14 08:12:45 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "HumanB.hpp"
+#include "Harl.hpp"
 
-int main()
+int main(int ac, char **av)
 {
+	if (ac != 2)
 	{
-		Weapon club = Weapon("crude spiked club");
-		HumanA bob("Bob", club);
-		bob.attack();
-		club.setType("some other type of club");
-		bob.attack();
+		std::cout << "Take just one paramter" << std::endl;
+		return 1;
 	}
-	{
-		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(NULL);
-		jim.attack();
-		jim.setWeapon(&club);
-		club.setType("some other type of club");
-		jim.attack();
-	}
-	return 0;
+	std::string level = static_cast<std::string>(av[1]);
+	Harl harl;
+	harl.complain(level);
 }

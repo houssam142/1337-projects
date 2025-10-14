@@ -1,6 +1,5 @@
 
 #include <iostream>
-
 #include <fstream>
 
 int main(int argc, char **argv)
@@ -10,6 +9,7 @@ int main(int argc, char **argv)
       std::cout << "there is an invalid number of arguments" << std::endl;
       return 1;
   }
+  std::string intendedStr = argv[2];
   std::string outfile = argv[1];
   outfile.append(".replace");
   std::string fileName = argv[1];
@@ -20,14 +20,16 @@ int main(int argc, char **argv)
     return 1;
   }
   std::string input;
-  while (input.empty())
+  while ((std::getline(inputFile, input)))
   {
-    std::getline(inputFile, input);
-    if (inputFile.eof())
+    size_t  pos = input.find(intendedStr);
+    while (pos != std::string::npos)
     {
-      std::cout << "the file wasn't read from" << std::endl;
-      return 1;
+      input.erase(pos, intendedStr.length());
+      input.insert(pos, argv[3]);
+      pos = input.find(intendedStr);
     }
+    std::cout << input << std::endl;
   }
   return 0;
 }
