@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 14:51:06 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/12 15:33:23 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/26 14:33:05 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ class HumanB
 		Weapon* WeaponType;
 		std::string name;
 	public:
-	void attack() const;
-	void	setWeapon(Weapon* weapon);
-	HumanB(std::string n);
+		HumanB();
+		void attack();
+		HumanB(std::string n);
+		void setWeapon(Weapon& weapon);
+		void setName(const std::string newName);
+		~HumanB();
 };
 
 #endif

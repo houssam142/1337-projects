@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 20:02:55 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/11 18:46:43 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/27 21:09:31 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int main()
 	Zombie* heapZombie = newZombie("HeapZombie:");
 	heapZombie->announce();
 	
-	delete heapZombie;
 	randomChump("stackZombie:");
+	delete heapZombie;
 	return 0;
 }

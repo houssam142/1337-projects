@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/27 21:35:59 by hounejja          #+#    #+#             */
+/*   Updated: 2025/10/27 21:36:00 by hounejja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef HARL_HPP
 #define HARL_HPP
 
@@ -6,25 +18,12 @@
 class Harl
 {
 	private:
-	void debug( void )
-	{
-		std::cout << "I love having extra bacon for my 7XL-double-cheese-triple-pickle-special-ketchup burger. I really do!" << std::endl;
-	}
-	void info(void)
-	{
-		std::cout << "I cannot believe adding extra bacon costs more money. You didn't put enough bacon in my burger! If you did, I wouldn't be asking for more!" << std::endl;
-	}
-	void warning(void)
-	{
-		std::cout << "I think I deserve to have some extra bacon for free. I've been coming for years whereas you started working here last month." << std::endl;
-	}
-	void error(void)
-	{
-		std::cout << "This is unacceptable! I want to speak to the manager now." << std::endl;
-	}
+		void debug( void );
+		void info(void);
+		void warning(void);
+		void error(void);
 	public:
-	void complain(std::string level);
-
+		void complain(std::string level);
 };
 
 #endif

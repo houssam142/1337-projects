@@ -6,11 +6,14 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/09 14:30:40 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/10 20:41:01 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/22 18:44:26 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Account.hpp"
+#include <iostream>
+#include <ctime>
+#include <iomanip>
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
@@ -70,7 +73,7 @@ bool	Account::makeWithdrawal(int withdrawal)
 	return false;
 }
 
-int		Account::checkAmount() const
+int	Account::checkAmount() const
 {
 	return this->_amount;
 }

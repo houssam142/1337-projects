@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,7 +7,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 13:30:24 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/13 09:55:10 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/24 20:54:35 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +25,11 @@ int main()
 	}
 	{
 		Weapon club = Weapon("crude spiked club");
-		HumanB jim("Jim");
-		jim.setWeapon(NULL);
+		HumanB jim;
+		jim.setWeapon(club);
+		jim.setName("Jim");
 		jim.attack();
-		jim.setWeapon(&club);
+		jim.setWeapon(club);
 		club.setType("some other type of club");
 		jim.attack();
 	}

@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:52:56 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/12 11:04:14 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/27 21:18:16 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 int main()
 {
-  Zombie* horde = zombieHorde(2, "houssam");
-  
-  for (int i = 0; i < 2 ; i++)
+  int N = 3;
+  Zombie* horde = zombieHorde(N, "houssam");
+  if (!horde)
+    return 1;
+  for (int i = 0; i < N ; i++)
     horde[i].announce();
-
   delete[] horde;
   return 0;
 }

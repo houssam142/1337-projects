@@ -1,18 +1,18 @@
-CC = c++
+CPP = c++
 
 NAME = phonebook
 
-SRC = Phonebook.cpp
+SRC = Phonebook.cpp Contact.cpp
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 
 OBJ = $(SRC:.cpp=.o)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CPP) $(CFLAGS) $(OBJ) -o $(NAME)
 
 %.o: %.cpp
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CPP) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)
 	@echo "It compiled successfully!"

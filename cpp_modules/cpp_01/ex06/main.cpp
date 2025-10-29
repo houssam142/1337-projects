@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 07:59:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/14 08:12:45 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/27 20:57:19 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ int main(int ac, char **av)
 	std::string level = static_cast<std::string>(av[1]);
 	Harl harl;
 	harl.complain(level);
+	return 0;
 }

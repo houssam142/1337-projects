@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 19:53:07 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/12 10:57:50 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/27 21:11:31 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ class Zombie
 		Zombie();
 		~Zombie();
 	void	announce(void);
-	void	setName(std::string n)
-	{
-		name = n;
-	}
+	void	setName(std::string n);
 };
 
 Zombie* zombieHorde(int N, std::string name);

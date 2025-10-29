@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 09:39:05 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/13 16:44:38 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/27 21:33:17 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int main()
     harl.complain("INFO");
     harl.complain("INFO");
     harl.complain("ERROR");
-
     return 0;
 }
 

@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/03 11:36:39 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/24 10:43:26 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ void	replace_space_with_void(char *line, char c)
 int	map_len(char **map)
 {
 	int		i;
-	int		count;
 	char	*line;
 
 	i = 0;
-	count = 0;
 	while (map[i])
 	{
 		line = map[i];

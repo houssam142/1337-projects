@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/11 18:23:41 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/11 18:47:05 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/27 21:10:56 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	randomChump(std::string name)
 {
-	Zombie* stackZombie = newZombie(name);
-	stackZombie->announce();
-	delete stackZombie;
+	Zombie stackZombie(name);
+	stackZombie.announce();
 }

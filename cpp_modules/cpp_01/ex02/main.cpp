@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 11:11:13 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/12 13:27:22 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/24 20:14:58 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,5 @@ int main()
 	std::cout << name << std::endl;
 	std::cout << *ptr << std::endl;
 	std::cout << ref << std::endl;
+	return 0;
 }

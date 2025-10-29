@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/10/09 10:21:51 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/26 00:03:52 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define PI 3.14159265359
 # define WIDTH 1000
 # define HEIGHT 1000
-# define MM_TILE 8
-# define MM_SIZE 250
+# define MM_TILE 6
+# define MM_SIZE 230
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define W_KEY 119
@@ -170,6 +170,7 @@ typedef struct s_gc
 int				check_file(char *str);
 int				find_longest_line(char **map);
 void			fill_lines_w_spaces(char **map, int max_len);
+void			draw_circle(t_data *data);
 double			get_time(void);
 char			*ft_itoa(int n);
 void			find_real_lines(char **map, int *real_lines);

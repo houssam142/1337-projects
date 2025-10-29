@@ -6,11 +6,47 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 18:40:09 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/02 08:59:05 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/28 10:38:14 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+void	draw_circle(t_data *data)
+{
+	int cx;
+	int cy;
+	int x;
+	int y;
+	int radius;
+	int d;
+
+	x = 0;
+	radius = data->map_width + 10 + TEX_WIDTH;
+	y = radius;
+	cx = data->center_x;
+	cy = data->center_y;
+	d = 1 - radius;
+	while (x <= y)
+	{
+		ft_mlx_put_pixel(data, cx - x, cy + y, 0xFFFFFF);
+        ft_mlx_put_pixel(data, cx + x, cy + y, 0xFFFFFF);
+        ft_mlx_put_pixel(data, cx + x, cy - y, 0xFFFFFF);
+        ft_mlx_put_pixel(data, cx - x, cy - y, 0xFFFFFF);
+        ft_mlx_put_pixel(data, cx + y, cy + x, 0xFFFFFF);
+        ft_mlx_put_pixel(data, cx - y, cy + x, 0xFFFFFF);
+        ft_mlx_put_pixel(data, cx + y, cy - x, 0xFFFFFF);
+        ft_mlx_put_pixel(data, cx - y, cy - x, 0xFFFFFF);
+		x++;
+		if (d < 0)
+			d += 2 * x;
+		else
+		{
+			y--;
+			d += 2 * (x - y) + 1;
+		}
+	}
+}
 
 void	draw_player(t_data *data)
 {
@@ -76,7 +112,7 @@ void	draw_minimap(t_data *data)
 					color = 0x000000;
 			}
 			if (screen_x + MM_TILE >= 0 && screen_x < MM_SIZE
-				&& screen_y + MM_TILE >= 0 && screen_y < MM_SIZE)
+				 && screen_y + MM_TILE >= 0 && screen_y < MM_SIZE)
 				draw_tile(data, screen_x, screen_y, color);
 		}
 	}

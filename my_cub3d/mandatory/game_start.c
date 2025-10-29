@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:42:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/28 21:54:39 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/26 00:03:07 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	game_loop(void *arg)
 	get_fps(data);
 	if (BONUS)
 	{
+		draw_circle(data);
 		draw_minimap(data);
 		draw_player(data);
 	}

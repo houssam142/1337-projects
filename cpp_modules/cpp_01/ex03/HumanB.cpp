@@ -6,24 +6,33 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 15:26:10 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/13 09:55:34 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/27 21:20:13 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
 
+HumanB::HumanB() {std::cout << "HumanB default constructor called\n";}
+
 HumanB::HumanB(std::string n) : name(n) {}
 
-void HumanB::attack() const
+void HumanB::setName(const std::string newName)
 {
-	if (WeaponType)
-		std::cout << name << " attacks with their " << WeaponType->getType() << std::endl;
-	else
-		std::cout << name << " has no weapons to attack with" << std::endl;
+	this->name = newName;
 }
 
-void HumanB::setWeapon(Weapon* weapon)
+void HumanB::attack()
 {
-	WeaponType = weapon;	
+	if (WeaponType)
+		std::cout << name << " attacks with their " << WeaponType->getType() << '\n';
+	else
+		std::cout << name << " has no weapons to attack with" << '\n';
 }
+
+void HumanB::setWeapon(Weapon& weapon)
+{
+	WeaponType = &weapon;	
+}
+
+HumanB::~HumanB() {std::cout << "HumanB destructor called\n";}
 
