@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_position.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zael-mou <zael-mou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:23:05 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/20 11:52:28 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/27 16:16:22 by zael-mou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	set_player_direction(t_data *data, char orientation)
 		data->dir_x = -1.0;
 		data->dir_y = 0.0;
 	}
-	data->plane_x = -data->dir_y * 0.66;
-	data->plane_y = data->dir_x * 0.66;
+	data->plane_x = -data->dir_y * 0.90;
+	data->plane_y = data->dir_x * 0.90;
 }
 
 void	get_player_pos(t_data *data)

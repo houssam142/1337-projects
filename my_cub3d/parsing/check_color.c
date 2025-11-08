@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zael-mou <zael-mou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 09:57:31 by houssam           #+#    #+#             */
-/*   Updated: 2025/09/01 09:54:02 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/08 21:33:38 by zael-mou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,20 @@ void	check_colors(t_parse *data)
 {
 	check_colors_two(data->celing_color);
 	check_colors_two(data->floor_color);
+}
+
+void	validate_identifiers(t_parse *data)
+{
+	if (data->count_no > 1 || data->count_so > 1 || data->count_ea > 1
+		|| data->count_we > 1 || data->count_f > 1 || data->count_c > 1)
+	{
+		free_garbage();
+		exit((ft_putstr_fd("Error\nDuplicate identifier found\n", 2), 1));
+	}
+	if (data->count_no != 1 || data->count_so != 1 || data->count_ea != 1
+		|| data->count_we != 1 || data->count_f != 1 || data->count_c != 1)
+	{
+		free_garbage();
+		exit((ft_putstr_fd("Error\nMissing identifier\n", 2), 1));
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zael-mou <zael-mou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/01 09:49:43 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/08 21:34:09 by zael-mou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ static void	copy_rgb(char *line, char c, t_parse *data)
 		arr = ft_split(line, ' ');
 		tmp2 = split_and_join(arr, tmp2);
 		data->floor_color = ft_strtrim(tmp2, "\n");
+		data->count_f++;
 	}
 	else if (c == 'C')
 	{
 		arr = ft_split(line, ' ');
 		tmp2 = split_and_join(arr, tmp2);
 		data->celing_color = ft_strtrim(tmp2, "\n");
+		data->count_c++;
 	}
 	data->count_identifiers++;
 }
@@ -49,13 +51,13 @@ static void	textures_path(char *line, char direction, t_parse *data)
 		k++;
 	}
 	ft_alloc_str(data, k, direction);
-	if (direction == 'N')
+	if (direction == 'N' && ++data->count_no)
 		ft_strlcpy(data->path_n, line, k + 1);
-	else if (direction == 'S')
+	else if (direction == 'S' && ++data->count_so)
 		ft_strlcpy(data->path_s, line, k + 1);
-	else if (direction == 'E')
+	else if (direction == 'E' && ++data->count_ea)
 		ft_strlcpy(data->path_e, line, k + 1);
-	else if (direction == 'W')
+	else if (direction == 'W' && ++data->count_we)
 		ft_strlcpy(data->path_w, line, k + 1);
 	data->count_identifiers++;
 }
@@ -109,6 +111,7 @@ int	check_extensions(char *str, t_parse *data)
 		print_error(FILE1);
 	if (data->flag == 1)
 		print_error(ORDER);
+	validate_identifiers(data);
 	check_texture_syntax(data);
 	check_colors(data);
 	return (0);

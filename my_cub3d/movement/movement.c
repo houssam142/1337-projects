@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: zael-mou <zael-mou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 19:17:17 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/16 11:48:09 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/10/27 18:22:24 by zael-mou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_move_wasd(t_data *data)
 	double	new_x;
 	double	new_y;
 
-	move_speed = 0.026;
+	move_speed = 0.03;
 	if (data->move_forward == 1)
 	{
 		new_x = data->x_player + data->dir_x * move_speed;

@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/10/26 00:03:52 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/08 21:52:25 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,11 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# ifndef BONUS
-#  define BONUS 1
-# endif
-
 # define PI 3.14159265359
-# define WIDTH 1000
-# define HEIGHT 1000
-# define MM_TILE 6
-# define MM_SIZE 230
+# define WIDTH 1920
+# define HEIGHT 1080
+# define MM_TILE 8
+# define MM_SIZE 250
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define W_KEY 119
@@ -60,7 +56,9 @@ enum			e_parsing
 	PLAYER,
 	WALL,
 	SMALL,
-	ERROR
+	ERROR,
+	DUPLICATE,
+	MISSING
 };
 
 typedef struct s_parse
@@ -72,6 +70,12 @@ typedef struct s_parse
 	char		*floor_color;
 	char		*celing_color;
 	int			count_identifiers;
+	int			count_no;
+	int			count_so;
+	int			count_ea;
+	int			count_we;
+	int			count_f;
+	int			count_c;
 	int			flag;
 	char		**map;
 }				t_parse;
@@ -155,8 +159,6 @@ typedef struct s_data
 	int			mouse_x;
 	double		offset_x;
 	double		offset_y;
-	int			frames;
-	double		last_time;
 	t_parse		*parse;
 	t_img		*imgs;
 }				t_data;
@@ -167,14 +169,11 @@ typedef struct s_gc
 	struct s_gc	*next;
 }				t_gc;
 
+void			validate_identifiers(t_parse *data);
 int				check_file(char *str);
 int				find_longest_line(char **map);
 void			fill_lines_w_spaces(char **map, int max_len);
-void			draw_circle(t_data *data);
-double			get_time(void);
-char			*ft_itoa(int n);
 void			find_real_lines(char **map, int *real_lines);
-void			get_fps(t_data *data);
 void			draw_player(t_data *data);
 int				close_win(t_data *data);
 void			draw_minimap(t_data *data);
