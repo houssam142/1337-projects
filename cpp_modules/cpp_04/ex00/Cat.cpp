@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 09:29:41 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/03 13:29:14 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/07 17:19:53 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/08 10:53:21 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "Cat.hpp"
 
-int main()
+Cat::Cat() {std::cout << "Cat constructor called\n";}
+
+Cat::Cat(const Cat& c): Animal(c) {}
+
+void Cat::makeSound() const
 {
-	ClapTrap clap;
-	ClapTrap t;
-
-	clap.setName("Houssam");
-	clap.attack(t.getName());
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.takeDamage(5);
-	clap.beRepaired(2);
-	return 0;
+	std::cout << this->getType() << " is meowing\n";
 }
+
+Cat& Cat::operator=(const Cat& c)
+{
+	(void)c;
+	return *this;
+}
+
+Cat::~Cat() {std::cout << "Cat destructor called\n";}

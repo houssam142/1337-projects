@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 09:29:41 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/03 13:29:14 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/07 17:20:38 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/08 10:57:04 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "Dog.hpp"
 
-int main()
+Dog::Dog() {std::cout << "Dog constructor called\n";}
+
+Dog::Dog(const Dog& w): Animal(w) {}
+
+void Dog::makeSound() const
 {
-	ClapTrap clap;
-	ClapTrap t;
-
-	clap.setName("Houssam");
-	clap.attack(t.getName());
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.takeDamage(5);
-	clap.beRepaired(2);
-	return 0;
+	std::cout << this->getType() << " is barking\n";
 }
+
+Dog& Dog::operator=(const Dog& d)
+{
+	(void)d;
+	return *this;
+}
+
+Dog::~Dog() {std::cout << "Dog destructor called\n";}

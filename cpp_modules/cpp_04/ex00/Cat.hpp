@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 09:29:41 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/03 13:29:14 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/07 17:19:55 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/07 17:28:22 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#ifndef CAT_HPP
+#define CAT_HPP
 
-int main()
+#include "Animal.hpp"
+
+class Cat: public Animal
 {
-	ClapTrap clap;
-	ClapTrap t;
+	public:
+		Cat();
+		Cat(const Cat& c);
+		void makeSound() const;
+		Cat& operator=(const Cat& w);
+		~Cat();
+};
 
-	clap.setName("Houssam");
-	clap.attack(t.getName());
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.takeDamage(5);
-	clap.beRepaired(2);
-	return 0;
-}
+#endif

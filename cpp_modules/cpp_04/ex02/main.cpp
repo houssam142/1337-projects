@@ -5,24 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 09:29:41 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/03 13:29:14 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/07 17:19:58 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/08 15:27:37 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
 
 int main()
 {
-	ClapTrap clap;
-	ClapTrap t;
+	const Cat* w = new Cat();
+	const Dog* q = new Dog();
 
-	clap.setName("Houssam");
-	clap.attack(t.getName());
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.takeDamage(5);
-	clap.beRepaired(2);
+	w->makeSound();
+	q->makeSound();
+	delete w;
+	delete q;
 	return 0;
 }

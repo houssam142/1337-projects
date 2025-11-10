@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 09:29:41 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/03 13:29:14 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/08 11:09:19 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/08 11:18:06 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#ifndef WRONGANIMAL_HPP
+#define WRONGANIMAL_HPP
 
-int main()
+#include <iostream>
+
+class WrongAnimal
 {
-	ClapTrap clap;
-	ClapTrap t;
+	private:
+		std::string type;
+	public:
+		WrongAnimal();
+		WrongAnimal(const WrongAnimal& other);
+		std::string getType() const;
+		WrongAnimal& operator=(const WrongAnimal& other);
+		void makeSound() const;
+		~WrongAnimal();
+};
 
-	clap.setName("Houssam");
-	clap.attack(t.getName());
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.takeDamage(5);
-	clap.beRepaired(2);
-	return 0;
-}
+#endif

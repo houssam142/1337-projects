@@ -18,6 +18,7 @@ class ClapTrap
 		void beRepaired(unsigned int amount);
 		void setName(const std::string& name);
 		unsigned int getAttackDmg() const;
+		std::string getName();
 		unsigned int gethitPoints() const;
 		~ClapTrap();
 };

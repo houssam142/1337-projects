@@ -5,24 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 09:29:41 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/03 13:29:14 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/07 17:19:58 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/08 13:46:11 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "Dog.hpp"
+#include "Cat.hpp"
 
 int main()
 {
-	ClapTrap clap;
-	ClapTrap t;
-
-	clap.setName("Houssam");
-	clap.attack(t.getName());
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.takeDamage(5);
-	clap.beRepaired(2);
+	const int size = 10;
+	const Animal* a[size];
+	for (int i = 0; i < size / 2; i++)
+		a[i] = new Cat();
+	for (int i = size / 2; i < size; i++)
+		a[i] = new Dog();
+	for (int i = 0; i < size; i++)
+		a[i]->makeSound();
+	for (int i = 0; i < size; i++)
+		std::cout << a[i] << '\n';
+	for (int i = 0; i < size; i++)
+		delete a[i];
 	return 0;
 }

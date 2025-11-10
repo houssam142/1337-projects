@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 09:30:58 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/23 10:08:48 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/03 13:30:07 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ ClapTrap::ClapTrap(): hitPoints(10), energyPoints(10), attackDmg(0) {std::cout <
 void ClapTrap::setName(const std::string& name)
 {
 	this->name = name;
+}
+
+std::string ClapTrap::getName()
+{
+	return this->name;
 }
 
 unsigned int ClapTrap::getAttackDmg() const

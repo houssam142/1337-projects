@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 09:29:41 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/03 13:29:14 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/08 11:13:23 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/08 11:17:46 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "WrongCat.hpp"
 
-int main()
+WrongCat::WrongCat() {std::cout << "WrongCat constructor called\n";}
+
+WrongCat::WrongCat(const WrongCat& o): WrongAnimal(o) {}
+
+void WrongCat::makeSound() const
 {
-	ClapTrap clap;
-	ClapTrap t;
-
-	clap.setName("Houssam");
-	clap.attack(t.getName());
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.takeDamage(5);
-	clap.beRepaired(2);
-	return 0;
+	std::cout << this->getType() << " is meowing\n";
 }
+
+WrongCat& WrongCat::operator=(const WrongCat& other)
+{
+	(void)other;
+	return *this;
+}
+
+WrongCat::~WrongCat() {std::cout << "WrongCat destructor called\n";}

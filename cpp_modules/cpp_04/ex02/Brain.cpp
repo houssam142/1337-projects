@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 09:29:41 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/03 13:29:14 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/08 11:26:28 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/08 11:30:20 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "Brain.hpp"
 
-int main()
+Brain::Brain() {std::cout << "Brain constructor called\n";}
+
+Brain& Brain::operator=(const Brain& o)
 {
-	ClapTrap clap;
-	ClapTrap t;
-
-	clap.setName("Houssam");
-	clap.attack(t.getName());
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.attack("an enemy");
-	clap.takeDamage(5);
-	clap.beRepaired(2);
-	return 0;
+	if (this != &o)
+	{
+		for (unsigned int i = 0; i < o.ideas->size(); i++)
+		{
+			this->ideas[i] = o.ideas[i];
+		}
+	}
+	return *this;
 }
+
+Brain::Brain(const Brain& b): ideas(b.ideas) {}
+
+Brain::~Brain() {std::cout << "Brain destructor called\n";}
