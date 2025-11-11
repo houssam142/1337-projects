@@ -6,15 +6,29 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:36:12 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/16 13:46:44 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/09 22:35:32 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
+Fixed::Fixed() : fixedPoint(0) {std::cout << "Fixed constructor called\n";}
+
+Fixed::Fixed(const int fixedPt)
+{
+	fixedPoint = fixedPt << fractionalBits;
+}
+
 Fixed& Fixed::min(Fixed &a, Fixed &b)
 {
 	return (a.fixedPoint < b.fixedPoint) ? a : b;	
+}
+
+Fixed::Fixed(const Fixed &other) : fixedPoint(other.fixedPoint) {}
+
+Fixed::Fixed(const float floatingPt)
+{
+	this->fixedPoint = roundf(floatingPt * (1 << fractionalBits));
 }
 
 const Fixed& Fixed::min(Fixed const &a, Fixed const &b)
@@ -94,6 +108,20 @@ Fixed& Fixed::operator++()
 	return *this;
 }
 
+Fixed Fixed::operator--(int postDecrement)
+{
+	(void)postDecrement;
+	Fixed res = *this;
+	this->fixedPoint -= 1;
+	return res;
+}
+
+Fixed& Fixed::operator--()
+{
+	this->fixedPoint -= 1;
+	return *this;
+}
+
 Fixed& Fixed::max(Fixed &a, Fixed &b)
 {
 	return (a.getRawBits() > b.getRawBits()) ? a : b;
@@ -124,3 +152,5 @@ int Fixed::getRawBits(void) const
 {
 	return this->fixedPoint;
 }
+
+Fixed::~Fixed() {std::cout << "Fixed destructor called\n";}

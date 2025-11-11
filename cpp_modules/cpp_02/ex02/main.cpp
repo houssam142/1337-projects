@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:35:36 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/15 18:24:59 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/09 20:23:49 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int main( void )
 {
 	Fixed a;
-	Fixed const b( Fixed( 5.05f ) + Fixed( 2 ) );
+	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
 	std::cout << a << std::endl;
 	std::cout << ++a << std::endl;
 	std::cout << a << std::endl;

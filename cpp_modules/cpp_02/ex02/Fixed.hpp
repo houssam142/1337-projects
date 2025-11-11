@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:35:56 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/15 18:25:38 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/09 22:31:23 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,8 @@ class Fixed
 		static const int fractionalBits = 8;
 	public:
 		Fixed() : fixedPoint(0) {}
-		Fixed(const int fixedPt)
-		{
-			fixedPoint = fixedPt << fractionalBits;
-		}
-		Fixed(const float floatingPt)
-		{
-			fixedPoint = roundf(floatingPt * (1 << fractionalBits));
-		}
+		Fixed(const int fixedPt);
+		Fixed(const float floatingPt);
 		Fixed(const Fixed &other) : fixedPoint(other.fixedPoint) {}
 		~Fixed() {}
 		int getRawBits(void) const;
@@ -48,6 +42,8 @@ class Fixed
 		Fixed	operator/(const Fixed &other);
 		Fixed operator++(int postIncrement);
 		Fixed& operator++();
+		Fixed operator--(int postDecrement);
+		Fixed& operator--();
 		static Fixed& max(Fixed &a, Fixed &b);
 		static Fixed& min(Fixed &a, Fixed &b);
 		static Fixed const& min(Fixed const& a, Fixed const& b);

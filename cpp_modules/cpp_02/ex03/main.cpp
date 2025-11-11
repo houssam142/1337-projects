@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 18:35:27 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/16 13:53:27 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/08 20:06:53 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,16 @@
 
 int main()
 {
-	Fixed a( 7.06f );
+	Point a(0, 0);
+	Point b(10, 0);
+	Point c(0, 10);
 
-	Point p1;
-	Point p2(10.2f, 2.5f);
-	std::cout << p1 << std::endl;
+	Point inside(3, 3);
+	Point edge(5, 0);
+	Point outside(10, 10);
+	bool flag = bsp(a, b, c, inside);
+	std::cout << ((flag == 0) ? "False\n" : "True\n");
+	flag = bsp(a, b, c, edge);
+	std::cout << ((flag == 0) ? "False\n" : "True\n");
 	return 0;
 }

@@ -6,11 +6,21 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/15 15:36:12 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/06 15:51:40 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/09 22:38:34 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+
+Fixed::Fixed(const int fixedPt)
+{
+	fixedPoint = fixedPt << fractionalBits;
+}
+
+Fixed::Fixed(const float floatingPt)
+{
+	fixedPoint = roundf(floatingPt * (1 << fractionalBits));
+}
 
 Fixed& Fixed::min(Fixed &a, Fixed &b)
 {
@@ -76,7 +86,7 @@ Fixed Fixed::operator-(const Fixed &other)
 Fixed Fixed::operator/(const Fixed &other)
 {
 	Fixed res;
-	res.fixedPoint = (this->fixedPoint / other.getRawBits()) >> fractionalBits;
+	res.fixedPoint = (this->fixedPoint << fractionalBits) / other.getRawBits();
 	return res;
 }
 
@@ -94,6 +104,20 @@ Fixed& Fixed::operator++()
 	return *this;
 }
 
+Fixed Fixed::operator--(int postDecrement)
+{
+	(void)postDecrement;
+	Fixed res = *this;
+	this->fixedPoint -= 1;
+	return res;
+}
+
+Fixed& Fixed::operator--()
+{
+	this->fixedPoint -= 1;
+	return *this;
+}
+
 Fixed& Fixed::max(Fixed &a, Fixed &b)
 {
 	return (a.getRawBits() > b.getRawBits()) ? a : b;
@@ -106,7 +130,7 @@ Fixed const& Fixed::max(Fixed const& a, Fixed const& b)
 
 float Fixed::toFloat() const
 {
-	return static_cast<float>(fixedPoint) / static_cast<float>(1 << fractionalBits);
+	return (float)(fixedPoint) / (1 << fractionalBits);
 }
 
 int Fixed::toInt() const
@@ -116,7 +140,7 @@ int Fixed::toInt() const
 
 std::ostream &operator<<(std::ostream &out, const Fixed &a)
 {
-	out << "floating point: " << a.toFloat();
+	out << a.toFloat();
 	return out;
 }
 
