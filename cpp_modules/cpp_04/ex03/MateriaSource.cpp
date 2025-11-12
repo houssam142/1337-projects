@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   MateriaSource.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 14:58:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/12 07:53:33 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/11 11:15:47 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/11 12:03:22 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_HPP
-#define ICE_HPP
+#include "MateriaSource.hpp"
 
-#include "AMateria.hpp"
-
-class Ice: public AMateria
+void MateriaSource::learnMateria(AMateria* m)
 {
-	public:
-		Ice();
-		Ice(const Ice& o);
-		Ice& operator=(const Ice& w);
-		AMateria* clone() const;
-		~Ice();
-};
+	m->use();
+}
 
-#endif
+AMateria* MateriaSource::createMateria(std::string const & newType)
+{
+	return new AMateria(newType);
+}

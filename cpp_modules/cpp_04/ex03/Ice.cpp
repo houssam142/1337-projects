@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   Ice.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 14:58:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/12 07:53:33 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/10 18:54:45 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/12 07:55:52 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_HPP
-#define ICE_HPP
+#include "Ice.hpp"
 
-#include "AMateria.hpp"
+Ice::Ice() {}
 
-class Ice: public AMateria
+Ice::Ice(const Ice& o): AMateria(o) {}
+
+AMateria* Ice::clone() const
 {
-	public:
-		Ice();
-		Ice(const Ice& o);
-		Ice& operator=(const Ice& w);
-		AMateria* clone() const;
-		~Ice();
-};
+	return new Ice(*this);
+}
 
-#endif
+Ice& Ice::operator(const Ice& w)
+{
+	if (this != &w)
+	{
+		this = new Ice(w);
+	}
+	return *this;
+}
+
+Ice::~Ice() {}

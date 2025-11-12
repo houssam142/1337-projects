@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   AMateria.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 14:58:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/12 07:53:33 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/10 18:27:35 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/10 18:47:24 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_HPP
-#define ICE_HPP
-
 #include "AMateria.hpp"
 
-class Ice: public AMateria
-{
-	public:
-		Ice();
-		Ice(const Ice& o);
-		Ice& operator=(const Ice& w);
-		AMateria* clone() const;
-		~Ice();
-};
+AMateria::AMateria(std::string const & newType): type(newType) {}
 
-#endif
+std::string const & AMateria::getType() const
+{
+	return this->type;
+}
+
+void AMateria::use(ICharacter& target)
+{
+	if (this->type == "ice")
+		std::cout << "* shoots an ice bolt at " << this->type << " *\n";
+	else if (this->type == "cure")
+		std::cout << "* heals " << this->type << "'s wounds *\n";
+}

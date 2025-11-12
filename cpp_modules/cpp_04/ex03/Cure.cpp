@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/11 14:58:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/12 07:53:33 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/10 20:48:45 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/12 07:53:05 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_HPP
-#define ICE_HPP
+#include "Cure.hpp"
 
-#include "AMateria.hpp"
+Cure::Cure() {}
 
-class Ice: public AMateria
+Cure::Cure(const Cure& o): AMateria(o) {}
+
+AMateria* Cure::clone() const
 {
-	public:
-		Ice();
-		Ice(const Ice& o);
-		Ice& operator=(const Ice& w);
-		AMateria* clone() const;
-		~Ice();
-};
+	return new Cure(*this);
+}
 
-#endif
+
+Cure::~Cure() {std::cout << "Cure destructor called\n";}

@@ -1,4 +1,4 @@
-SRCS = main.cpp
+SRCS = main.cpp Character.cpp Ice.cpp Cure.cpp MateriaSource.cpp
 
 CPP = c++
 
@@ -13,6 +13,9 @@ $(NAME): $(OBJS)
 
 all: $(NAME)
 	@echo "It's been compiled successfully!!"
+
+%.o: %.cpp
+	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 clean:
 	rm -rf $(OBJS)
