@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:55:42 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/11 15:04:22 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/12 08:11:03 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ICharacter::~ICharacter() {}
 
-Character::Character(const std::string& newName): name(newName) {}
+Character::Character(const std::string& newName): name(newName), slot(0) {}
 
 Character::Character(const Character& oChar): ICharacter(oChar)
 {
@@ -23,7 +23,11 @@ Character::Character(const Character& oChar): ICharacter(oChar)
 
 void Character::equip(AMateria* m)
 {
-	
+	if (m)
+	{
+		this->slots[slot] = *m;
+		slot++;
+	}
 }
 
 void Character::unequip(int idx)
@@ -33,7 +37,7 @@ void Character::unequip(int idx)
 
 void Character::use(int index, ICharacter& target)
 {
-	
+	this->slots[index].use(target);
 }
 
 std::string const & Character::getName() const

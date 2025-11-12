@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:18:11 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/11 15:03:57 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/12 08:01:37 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ class Character: public ICharacter
 {
 	private:
 		std::string name;
+		AMateria slots[4];
 		unsigned int slot;
 	public:
 		Character(const std::string& newName);
