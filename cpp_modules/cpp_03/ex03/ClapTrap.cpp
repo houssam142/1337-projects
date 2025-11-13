@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 09:30:58 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/13 02:52:26 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/13 02:45:07 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ClapTrap::ClapTrap(): hitPoints(10), energyPoints(10), attackDmg(0) {std::cout << "ClapTrap constructor called\n";}
 
-ClapTrap::ClapTrap(const std::string& newName): name(newName) {}
+ClapTrap::ClapTrap(const std::string& newName): name(newName + "_clap_name") {}
 
 ClapTrap::ClapTrap(const ClapTrap& o): name(o.name) {}
 
@@ -34,7 +34,7 @@ void ClapTrap::attack(const std::string& target)
 {
 	if (this->energyPoints)
 	{
-		std::cout << "ClapTrap " << this->name << " attacks " << target << " causing " << this->attackDmg << " points of damage!\n";
+		std::cout << this->name << " attacks " << target << " causing " << this->attackDmg << " points of damage!\n";
 		this->energyPoints--;
 	}
 	else
@@ -49,6 +49,11 @@ void ClapTrap::takeDamage(unsigned int amount)
 		std::cout << "it has no hit points left\n";
 }
 
+unsigned int ClapTrap::getEnergyPoints() const
+{
+	return this->energyPoints;
+}
+
 unsigned int ClapTrap::gethitPoints() const
 {
 	return this->hitPoints;
@@ -58,7 +63,6 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (this->energyPoints > 0)
 	{
-		std::cout << this->hitPoints + amount << '\n';
 		if (this->hitPoints + amount < 100)
 		{
 			this->hitPoints += amount;

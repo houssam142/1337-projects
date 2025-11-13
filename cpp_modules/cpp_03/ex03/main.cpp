@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/23 09:48:43 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/13 01:43:15 by hounejja         ###   ########.fr       */
+/*   Created: 2025/10/23 09:48:25 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/13 03:08:11 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-#define SCAVTRAP_HPP
+#include "DiamondTrap.hpp"
 
-#include "ClapTrap.hpp"
-
-class ScavTrap: public ClapTrap
+int main()
 {
-	public:
-		ScavTrap();
-		ScavTrap(const std::string& newName);
-		ScavTrap(const ScavTrap& o);
-		ScavTrap& operator=(const ScavTrap& o);
-		void attack(const std::string& target);
-		void guardGate();
-		~ScavTrap();
-};
+	DiamondTrap d("Diamond");
 
-#endif
+	d.attack("a hostile target");
+	d.whoAmI();
+	return 0;
+}

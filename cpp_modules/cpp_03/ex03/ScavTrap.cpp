@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 09:51:02 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/13 02:52:42 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/13 01:44:14 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ ScavTrap::ScavTrap(const ScavTrap& o): ClapTrap(o) {}
 ScavTrap& ScavTrap::operator=(const ScavTrap& eq)
 {
 	if (this != &eq)
+	{
 		this->name = eq.name;
+	}
 	return *this;
 }
 
@@ -42,7 +44,7 @@ void ScavTrap::attack(const std::string& target)
 {
 	if (this->energyPoints)
 	{
-		std::cout << "ScavTrap" << this->name << " attacks " << target << " causing " << this->attackDmg << " points of damage!\n";
+		std::cout << this->name << " attacks " << target << " causing " << this->attackDmg << " points of damage!\n";
 		this->energyPoints--;
 	}
 	else

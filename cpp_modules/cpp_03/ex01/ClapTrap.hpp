@@ -13,12 +13,15 @@ class ClapTrap
 		unsigned int attackDmg;
 	public:
 		ClapTrap();
+		ClapTrap(const std::string& newName);
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
-		void setName(const std::string& name);
+		ClapTrap(const ClapTrap& o);
+		ClapTrap& operator=(const ClapTrap& eq);
 		unsigned int getAttackDmg() const;
 		unsigned int gethitPoints() const;
+		unsigned int getEnergyPoints() const;
 		~ClapTrap();
 };
 
