@@ -6,15 +6,17 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:55:42 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/12 08:13:20 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/14 21:48:56 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
-ICharacter::~ICharacter() {}
-
-Character::Character(const std::string& newName): name(newName), slot(0) {}
+Character::Character(const std::string& newName): name(newName)
+{
+	for (int i = 0; i < invSize; i++)
+		this->_slots[i] = 0;
+}
 
 Character::Character(const Character& oChar): ICharacter(oChar)
 {
@@ -23,25 +25,33 @@ Character::Character(const Character& oChar): ICharacter(oChar)
 
 void Character::equip(AMateria* m)
 {
-	if (m)
+	for (int i = 0; i < invSize; i++)
 	{
-		this->slots[slot] = *m;
-		slot++;
+		if (!this->_slots[i])
+			this->_slots[i] = m;
 	}
 }
 
 void Character::unequip(int idx)
 {
-	
+	if (idx > 0 && idx < 4)
+	{
+		if (this->_slots[idx])
+			this->_slots[idx] = 0;
+	}
 }
 
 void Character::use(int index, ICharacter& target)
 {
-	if (index < 4)
-		this->slots[index].use(target);
+	if (index > 0 && index < 4)
+	{
+		this->_slots[index]->use(target);
+	}
 }
 
 std::string const & Character::getName() const
 {
 	return this->name;
 }
+
+Character::~Character() {std::cout << "Character destructor called\n";}

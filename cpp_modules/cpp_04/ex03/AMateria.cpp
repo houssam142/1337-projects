@@ -6,11 +6,13 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:27:35 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/12 08:00:04 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/14 21:55:25 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AMateria.hpp"
+#include "Character.hpp"
+
+AMateria::AMateria() {std::cout << "AMateria constructor called\n";}
 
 AMateria::AMateria(std::string const & newType): type(newType) {}
 
@@ -21,8 +23,7 @@ std::string const & AMateria::getType() const
 
 void AMateria::use(ICharacter& target)
 {
-	if (this->type == "ice")
-		std::cout << "* shoots an ice bolt at " << target.getName() << " *\n";
-	else if (this->type == "cure")
 		std::cout << "* heals " << target.getName() << "'s wounds *\n";
 }
+
+AMateria::~AMateria() {std::cout << "AMateria destructor called\n";}

@@ -1,4 +1,4 @@
-SRCS = main.cpp Character.cpp Ice.cpp Cure.cpp MateriaSource.cpp
+SRCS = main.cpp Character.cpp Ice.cpp Cure.cpp MateriaSource.cpp AMateria.cpp
 
 CPP = c++
 

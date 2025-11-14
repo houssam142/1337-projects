@@ -6,31 +6,22 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:18:11 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/12 08:01:37 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/14 21:38:22 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include "AMateria.hpp"
-
-class ICharacter
-{
-	public:
-	virtual ~ICharacter() {}
-	virtual std::string const & getName() const = 0;
-	virtual void equip(AMateria* m) = 0;
-	virtual void unequip(int idx) = 0;
-	virtual void use(int idx, ICharacter& target) = 0;
-};
+#include "ICharacter.hpp"
 
 class Character: public ICharacter
 {
 	private:
 		std::string name;
-		AMateria slots[4];
-		unsigned int slot;
+		AMateria* _slots[3];
+		static const int invSize = 4;
+		AMateria* UMateria;
 	public:
 		Character(const std::string& newName);
 		Character(const Character& oCharacter);
