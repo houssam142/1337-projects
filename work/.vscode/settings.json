@@ -1,23 +1,6 @@
 {
-    "files.associations": {
-        "cub3d.h": "c",
-        "get_next_line.h": "c"
-    },
-    "background.enabled": true,
-    "background.useDefault": false,
-    "background.customImages": [
-        "/home/hounejja/Pictures/1375557-final.jpg"
-    ],
-    "background.style": {
-        "opacity": 0.12,
-        "position": "center",
-        "size": "cover",
-        "repeat": "no-repeat",
-        "z-index": "0"
-    },
-    "workbench.colorCustomizations": {
-        "editor.background": "#00000000",
-        "sideBar.background": "#1e1e1eCC",
-        "activityBar.background": "#333333CC"
-    }
+	"files.associations": {
+		"chrono": "cpp",
+		"variant": "cpp"
+	}
 }
