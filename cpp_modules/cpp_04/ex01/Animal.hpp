@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 17:16:59 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/08 11:03:11 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:09:58 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class Animal
 {
-	private:
+	protected:
 		std::string type;
 	public:
 		Animal();

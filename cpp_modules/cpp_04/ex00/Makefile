@@ -8,7 +8,7 @@ OBJS = $(SRCS:.cpp=.o)
 
 NAME = Animal
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) ./Animal.hpp ./Cat.hpp ./Dog.hpp ./WrongAnimal.hpp ./WrongCat.hpp
 	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 all: $(NAME)

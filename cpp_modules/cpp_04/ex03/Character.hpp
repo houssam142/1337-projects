@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:18:11 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/14 21:38:22 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/19 04:02:52 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ class Character: public ICharacter
 {
 	private:
 		std::string name;
-		AMateria* _slots[3];
+		AMateria* _slots[4];
 		static const int invSize = 4;
-		AMateria* UMateria;
 	public:
 		Character(const std::string& newName);
 		Character(const Character& oCharacter);
@@ -32,4 +31,6 @@ class Character: public ICharacter
 		void use(int idx, ICharacter& target);
 		~Character();
 };
+
+
 #endif

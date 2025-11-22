@@ -6,13 +6,16 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:54:45 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/14 21:56:25 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/19 03:12:16 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
 
-Ice::Ice(): AMateria() {std::cout << "Ice constructor called\n";}
+Ice::Ice()
+{
+	this->type = "ice";
+}
 
 Ice::Ice(const Ice& o): AMateria(o) {}
 
@@ -28,7 +31,10 @@ void Ice::use(ICharacter& target)
 
 Ice& Ice::operator=(const Ice& w)
 {
-	(void)w;
+	if (this != &w)
+	{
+		AMateria::operator=(w);
+	}
 	return *this;
 }
 

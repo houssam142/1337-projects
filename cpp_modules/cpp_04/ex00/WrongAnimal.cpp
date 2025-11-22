@@ -6,13 +6,13 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:09:06 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/08 11:20:18 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:57:32 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "WrongAnimal.hpp"
 
-WrongAnimal::WrongAnimal() {std::cout << "WrongAnimal constructor called\n";}
+WrongAnimal::WrongAnimal() {this->type = ""; std::cout << "WrongAnimal constructor called\n";}
 
 void WrongAnimal::makeSound() const
 {

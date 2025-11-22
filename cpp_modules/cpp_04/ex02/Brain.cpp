@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:26:28 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/08 11:30:20 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:27:35 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ Brain& Brain::operator=(const Brain& o)
 {
 	if (this != &o)
 	{
-		for (unsigned int i = 0; i < o.ideas->size(); i++)
-		{
+		for (int i = 0; i < 100; i++)
 			this->ideas[i] = o.ideas[i];
-		}
 	}
 	return *this;
 }
 
-Brain::Brain(const Brain& b): ideas(b.ideas) {}
+Brain::Brain(const Brain& b)
+{
+	for (int i = 0; i < 100; i++)
+		this->ideas[i] = b.ideas[i];
+}
 
 Brain::~Brain() {std::cout << "Brain destructor called\n";}

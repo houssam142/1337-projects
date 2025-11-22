@@ -8,7 +8,7 @@ OBJS = $(SRCS:.cpp=.o)
 
 NAME = Abstract
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) ./Animal.hpp ./Cat.hpp ./Dog.hpp ./Brain.hpp
 	$(CPP) $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 all: $(NAME)

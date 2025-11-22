@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.cpp                                       :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/08 11:13:23 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/08 11:17:46 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/21 18:32:54 by hounejja          #+#    #+#             */
+/*   Updated: 2025/11/21 18:33:22 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongCat.hpp"
+#ifndef IMATERIASOURCE_HPP
+#define IMATERIASOURCE_HPP
 
-WrongCat::WrongCat() {std::cout << "WrongCat constructor called\n";}
+#include "AMateria.hpp"
 
-WrongCat::WrongCat(const WrongCat& o): WrongAnimal(o) {}
-
-void WrongCat::makeSound() const
+class IMateriaSource
 {
-	std::cout << this->getType() << " is meowing\n";
-}
+	public:
+	virtual ~IMateriaSource() {}
+	virtual void learnMateria(AMateria*) = 0;
+	virtual AMateria* createMateria(std::string const & type) = 0;
+};
 
-WrongCat& WrongCat::operator=(const WrongCat& other)
-{
-	(void)other;
-	return *this;
-}
-
-WrongCat::~WrongCat() {std::cout << "WrongCat destructor called\n";}
+#endif

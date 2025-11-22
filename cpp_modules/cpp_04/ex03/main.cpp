@@ -6,10 +6,12 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:15:29 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/14 21:38:43 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/19 04:01:56 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "AMateria.hpp"
+#include "ICharacter.hpp"
 #include "Character.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"

@@ -12,7 +12,9 @@ std::string Animal::getType() const
 Animal& Animal::operator=(const Animal& a)
 {
 	if (this != &a)
+	{
 		this->type = a.type;
+	}
 	return *this;
 }
 

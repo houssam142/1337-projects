@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 11:09:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/08 11:18:06 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/21 18:12:09 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class WrongAnimal
 {
-	private:
+	protected:
 		std::string type;
 	public:
 		WrongAnimal();

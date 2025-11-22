@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 21:34:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/14 21:47:24 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/19 04:02:29 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,9 @@
 #define ICHARACTER_HPP
 
 #include <iostream>
+#include "AMateria.hpp"
 
-class ICharacter;
-
-class AMateria
-{
-	protected:
-		std::string type;	
-	public:
-		AMateria();
-		AMateria(std::string const & type);
-		std::string const & getType() const;
-		virtual AMateria* clone() const = 0;
-		virtual void use(ICharacter& target);
-		virtual ~AMateria();
-};
+class AMateria;
 
 class ICharacter
 {

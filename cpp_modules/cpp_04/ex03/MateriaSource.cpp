@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 11:15:47 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/14 21:45:24 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/19 04:00:32 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,56 @@
 
 MateriaSource::MateriaSource()
 {
-	std::cout << "MateriaSource constructor called\n";
 	for (int i = 0; i < _iventorySize; i++)
 		this->_materias[i] = 0;
 }
 
-void MateriaSource::learnMateria(AMateria* m)
+MateriaSource::MateriaSource(const MateriaSource& copy)
 {
 	for (int i = 0; i < _iventorySize; i++)
 	{
-		if (!this->_materias[i])
+		this->_materias[i] = copy._materias[i] ? copy._materias[i]->clone() : 0;
+	}
+}
+
+MateriaSource& MateriaSource::operator=(const MateriaSource& eq)
+{
+	if (this != &eq)
+	{
+		for (int i = 0; i < _iventorySize; i++)
+		{
+			if (this->_materias[i])
+				delete this->_materias[i];
+		}
+		for (int i = 0; i < _iventorySize; i++)
+		{
+			this->_materias[i] = eq._materias[i] ? eq._materias[i]->clone() : 0;
+		}
+	}
+	return *this;
+}
+
+void MateriaSource::learnMateria(AMateria* m)
+{
+	if (!m)
+		return ;
+	for (int i = 0; i < _iventorySize; i++)
+	{
+		if (this->_materias[i] == 0)
+		{
 			this->_materias[i] = m->clone();
-	}	
+			delete m;
+			return ;
+		}
+	}
+	delete m;
 }
 
 AMateria* MateriaSource::createMateria(std::string const & type)
 {
 	for (int i = 0; i < _iventorySize; i++)
 	{
-		if (this->_materias[i]->getType() == type)
+		if (this->_materias[i] && this->_materias[i]->getType() == type)
 			return this->_materias[i]->clone();
 	}
 	return 0;
@@ -40,7 +71,6 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 
 MateriaSource::~MateriaSource()
 {
-	std::cout << "MateriaSource destructor called\n";
 	for (int i = 0; i < _iventorySize; i++)
 	{
 		if (this->_materias[i])

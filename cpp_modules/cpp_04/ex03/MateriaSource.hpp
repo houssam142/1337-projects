@@ -13,23 +13,17 @@
 #ifndef MATERIASOURCE_HPP
 #define MATERIASOURCE_HPP
 
-#include "Character.hpp"
-
-class IMateriaSource
-{
-	public:
-	virtual ~IMateriaSource() {}
-	virtual void learnMateria(AMateria*) = 0;
-	virtual AMateria* createMateria(std::string const & type) = 0;
-};
+#include "IMateriaSource.hpp"
 
 class MateriaSource: public IMateriaSource
 {
 	private:
-		AMateria* _materias[3];
+		AMateria* _materias[4];
 		static const int _iventorySize = 4;
 	public:
 		MateriaSource();
+		MateriaSource(const MateriaSource& copy);
+		MateriaSource& operator=(const MateriaSource& eq);
 		void learnMateria(AMateria* Material);
 		AMateria* createMateria(std::string const & type);
 		virtual ~MateriaSource();

@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/10 18:20:50 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/14 21:55:44 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/16 21:46:36 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Cure: public AMateria
 		Cure& operator=(const Cure& w);
 		AMateria* clone() const;
 		void use(ICharacter& target);
-		virtual ~Cure();
+		~Cure();
 };
 
 #endif
