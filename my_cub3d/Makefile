@@ -6,7 +6,7 @@
 #    By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/02 17:59:55 by hounejja          #+#    #+#              #
-#    Updated: 2025/11/08 21:58:59 by hounejja         ###   ########.fr        #
+#    Updated: 2025/11/27 23:08:31 by hounejja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OTHER_SRCS = main.c parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd.c
 		 mandatory/vector.c mandatory/draw.c mandatory/raycasting.c \
 		 mandatory/color.c mandatory/dda.c mandatory/raycasting_utils.c \
 		 movement/movement.c movement/rotate.c mandatory/render.c mandatory/textures.c mandatory/init_window.c \
-		 cleaning/clean_all.c utils/ft_bzero.c
+		 cleaning/clean_all.c utils/ft_bzero.c movement/movement_utils.c
 
 OTHER_SRCS_B = main.c parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd.c \
 	     parsing/map_game.c utils/get_next_line_utils.c utils/get_next_line.c \
@@ -38,24 +38,24 @@ OTHER_SRCS_B = main.c parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd
 		 mandatory/vector.c mandatory/draw.c mandatory/raycasting.c \
 		 mandatory/color.c mandatory/dda.c mandatory/raycasting_utils.c \
 		 movement/movement.c movement/rotate.c mandatory/render.c mandatory/textures.c mandatory/init_window.c \
-		 cleaning/clean_all.c utils/ft_bzero.c bonus/mouse_mo_bonus.c bonus/draw_minimap_bonus.c \
+		 cleaning/clean_all.c utils/ft_bzero.c bonus/mouse_mo_bonus.c bonus/draw_minimap_bonus.c movement/movement_utils.c \
 
 OTHER_OBJS = $(OTHER_SRCS:.c=.o)
 
 OTHER_OBJS_B = $(OTHER_SRCS_B:.c=.o)
 
-MINILIBX_DIR = ./usr/include/minilibx-linux
+MINILIBX_DIR = /usr/include/minilibx-linux
 
 
 all: $(NAME)
 
 $(NAME): $(OTHER_OBJS)
-	@make -C $(MINILIBX_DIR)
+	@sudo make -C $(MINILIBX_DIR)
 	$(CC) $(CFLAGS) $(OBJ) $(OTHER_OBJS) $(MLX_FLAGS) -o $(NAME)
 	@clear
 
 $(NAME_1): $(OTHER_OBJS_B)
-	@make -C $(MINILIBX_DIR)
+	@sudo make -C $(MINILIBX_DIR)
 	$(CC) $(CFLAGS) $(OBJ) $(OTHER_OBJS_B) $(MLX_FLAGS) -o $(NAME_1)
 
 bonus:

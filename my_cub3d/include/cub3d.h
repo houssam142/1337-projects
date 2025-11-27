@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/11/08 21:52:25 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/27 23:09:40 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include <unistd.h>
 
 # define PI 3.14159265359
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 800
+# define HEIGHT 800
 # define MM_TILE 8
 # define MM_SIZE 250
 # define TEX_WIDTH 64
@@ -180,6 +180,14 @@ void			draw_minimap(t_data *data);
 int				mouse_motion(int x, int y, t_data *data);
 void			*ft_malloc(size_t size);
 void			free_garbage(void);
+double			get_check_pos(double pos, double dir, double buffer);
+int				is_passable(t_data *data, double x, double y);
+void			move_forward(t_data *data, double move_speed, double buffer);
+void			move_strafe_left(t_data *data, double strafe_speed,
+					double buffer);
+void			move_strafe_right(t_data *data, double strafe_speed,
+					double buffer);
+void			move_backward(t_data *data, double move_speed, double buffer);
 void			store_texture_params(t_data *data, int direction, int bpp,
 					int line_size);
 void			rotate_l_or_r(t_data *data);

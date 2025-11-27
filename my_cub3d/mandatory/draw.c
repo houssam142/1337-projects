@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 16:02:08 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/07 11:04:43 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/27 22:30:47 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_tex_addr(t_data *data, int side, int *tex_bpp, int *tex_line_size)
 {
 	if (side == 0)
 	{
-		if (data->ray_dir_x > 0)
+		if (data->step_x > 0)
 			return (*tex_bpp = data->imgs->tex_bpp_e,
 				*tex_line_size = data->imgs->tex_line_size_e,
 				data->imgs->tex_addr_e);
@@ -37,7 +37,7 @@ char	*get_tex_addr(t_data *data, int side, int *tex_bpp, int *tex_line_size)
 	}
 	else
 	{
-		if (data->ray_dir_y > 0)
+		if (data->step_y > 0)
 			return (*tex_bpp = data->imgs->tex_bpp_s,
 				*tex_line_size = data->imgs->tex_line_size_s,
 				data->imgs->tex_addr_s);
