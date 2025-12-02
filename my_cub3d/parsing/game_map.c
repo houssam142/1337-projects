@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zael-mou <zael-mou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/08 21:33:53 by zael-mou         ###   ########.fr       */
+/*   Updated: 2025/12/01 20:36:22 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,24 @@ int	first_and_last(char *str)
 
 void	replace_space_with_void(char *line, char c)
 {
-	int	i;
+	int		i;
+	char	left_cell;
+	char	right_cell;
 
+	ensure_line_closed(line, c);
 	i = 0;
 	while (line[i])
 	{
+		if (!is_allowed_char(line[i], c))
+			print_error(MAP);
+		if (line[i] == c)
+		{
+			left_cell = find_prev_map_cell(line, i - 1, c);
+			right_cell = find_next_map_cell(line, i + 1, c);
+			if ((left_cell && is_map_cell(left_cell, 0))
+				|| (right_cell && is_map_cell(right_cell, 0)))
+				print_error(WALL);
+		}
 		if (line[i] == c)
 			line[i] = '1';
 		i++;

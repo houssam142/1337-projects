@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zael-mou <zael-mou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:37 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/08 21:34:09 by zael-mou         ###   ########.fr       */
+/*   Updated: 2025/12/01 21:20:40 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static void	copy_rgb(char *line, char c, t_parse *data)
 	{
 		arr = ft_split(line, ' ');
 		tmp2 = split_and_join(arr, tmp2);
+		if (!tmp2)
+			print_error(MAP);
 		data->celing_color = ft_strtrim(tmp2, "\n");
 		data->count_c++;
 	}
@@ -73,7 +75,6 @@ int	check_identifiers(char *line, t_parse *data)
 	{
 		while (line[i] && ft_isspace(line[i]))
 			i++;
-		check_order(&line[i], data);
 		if (!ft_strncmp(&line[i], "NO", 2))
 			textures_path(&line[i + 2], 'N', data);
 		else if (!ft_strncmp(&line[i], "SO", 2))
@@ -109,9 +110,7 @@ int	check_extensions(char *str, t_parse *data)
 	close(fd);
 	if (count != 6)
 		print_error(FILE1);
-	if (data->flag == 1)
-		print_error(ORDER);
-	validate_identifiers(data);
+	validate_identifiers(data, 1);
 	check_texture_syntax(data);
 	check_colors(data);
 	return (0);
@@ -129,14 +128,14 @@ int	check_file(char *str)
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
 	{
-		ft_putstr_fd("file doesn't exist\n", 2);
+		ft_putstr_fd("Error\nfile doesn't exist\n", 2);
 		exit(1);
 	}
 	else
 	{
 		if (read(fd, &buff, 0) == -1 && errno == EISDIR)
 		{
-			ft_putstr_fd("it's a directory, not a file\n", 2);
+			ft_putstr_fd("Error\nit's a directory, not a file\n", 2);
 			exit((close(fd), 1));
 		}
 	}

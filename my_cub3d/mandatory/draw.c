@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 16:02:08 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/27 22:30:47 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:17:04 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	ft_mlx_put_pixel(t_data *data, int x, int y, unsigned int color)
 	*(unsigned int *)dst = color;
 }
 
-char	*get_tex_addr(t_data *data, int side, int *tex_bpp, int *tex_line_size)
+static char	*get_tex_addr(t_data *data, int side, int *tex_bpp,
+		int *tex_line_size)
 {
 	if (side == 0)
 	{
@@ -48,7 +49,7 @@ char	*get_tex_addr(t_data *data, int side, int *tex_bpp, int *tex_line_size)
 	}
 }
 
-int	get_texture_pixel(t_data *data, int tex_y, int side)
+static int	get_texture_pixel(t_data *data, int tex_y, int side)
 {
 	char	*tex_addr;
 	char	*pixel;

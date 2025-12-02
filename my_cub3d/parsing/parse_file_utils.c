@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zael-mou <zael-mou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 20:43:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/08 21:34:02 by zael-mou         ###   ########.fr       */
+/*   Updated: 2025/12/01 21:12:31 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,11 @@ char	*split_and_join(char **arr, char *tmp2)
 	tmp = ft_strdup("");
 	if (!tmp2)
 		tmp2 = ft_strjoin(tmp, arr[0]);
+	if (!tmp2)
+		return (NULL);
 	while (arr[i] != NULL)
 		tmp2 = ft_strjoin(tmp2, arr[i++]);
 	return (tmp2);
-}
-
-void	check_order(char *line, t_parse *data)
-{
-	int	len;
-
-	len = (int)ft_strlen(line);
-	if (line[0] == '1' && line[len - 2] == '1'
-		&& data->count_identifiers != 6)
-		data->flag = 1;
 }
 
 void	check_texture_syntax(t_parse *data)

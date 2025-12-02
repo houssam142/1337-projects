@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 18:03:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/09/12 16:12:37 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/26 11:17:36 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_isspace(char c)
 		|| c == '\v' || c == ' ' || c == '\n');
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(const char *str, t_data *data)
 {
 	int	x;
 	int	sign;
@@ -40,6 +40,7 @@ int	ft_atoi(const char *str)
 	if (res * sign < 0 || res * sign > 255)
 	{
 		ft_putstr_fd("Error\nrange must be [0, 255]\n", 2);
+		close_win(data);
 		exit(1);
 	}
 	return ((res * sign));

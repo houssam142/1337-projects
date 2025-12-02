@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/16 19:24:52 by houssam           #+#    #+#             */
-/*   Updated: 2025/11/27 23:09:40 by hounejja         ###   ########.fr       */
+/*   Created: 2025/11/29 08:27:03 by hounejja          #+#    #+#             */
+/*   Updated: 2025/12/01 21:42:44 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define PI 3.14159265359
 # define WIDTH 800
 # define HEIGHT 800
 # define MM_TILE 8
@@ -42,6 +41,8 @@
 # define EXT_S "Error\nfile extension must be .cub\n"
 # define PLAYER_E "Error\ninvalid player position\n"
 # define WALL_E "Error\nMap is not closed by walls\n"
+# define FILE_E "Error\nthe file just needs six identifiers\n"
+# define TEX_E "Error\nThere is an error in texture path's syntax\n"
 
 enum			e_parsing
 {
@@ -76,7 +77,6 @@ typedef struct s_parse
 	int			count_we;
 	int			count_f;
 	int			count_c;
-	int			flag;
 	char		**map;
 }				t_parse;
 
@@ -152,11 +152,9 @@ typedef struct s_data
 	int			move_right;
 	int			rotate_right;
 	int			rotate_left;
-	int			direction;
 	int			floor_color;
 	int			center_x;
 	int			center_y;
-	int			mouse_x;
 	double		offset_x;
 	double		offset_y;
 	t_parse		*parse;
@@ -169,10 +167,19 @@ typedef struct s_gc
 	struct s_gc	*next;
 }				t_gc;
 
-void			validate_identifiers(t_parse *data);
+void			validate_identifiers(t_parse *data, int flag);
 int				check_file(char *str);
 int				find_longest_line(char **map);
+void			move_backward(t_data *data, double move_speed, double buffer);
+void			move_strafe_left(t_data *data, double strafe_speed,
+					double buffer);
+void			move_strafe_right(t_data *data, double strafe_speed,
+					double buffer);
+void			move_forward(t_data *data, double move_speed, double buffer);
+int				is_passable(t_data *data, double x, double y);
+double			get_check_pos(double pos, double dir, double buffer);
 void			fill_lines_w_spaces(char **map, int max_len);
+char			*ft_itoa(int n);
 void			find_real_lines(char **map, int *real_lines);
 void			draw_player(t_data *data);
 int				close_win(t_data *data);
@@ -180,14 +187,6 @@ void			draw_minimap(t_data *data);
 int				mouse_motion(int x, int y, t_data *data);
 void			*ft_malloc(size_t size);
 void			free_garbage(void);
-double			get_check_pos(double pos, double dir, double buffer);
-int				is_passable(t_data *data, double x, double y);
-void			move_forward(t_data *data, double move_speed, double buffer);
-void			move_strafe_left(t_data *data, double strafe_speed,
-					double buffer);
-void			move_strafe_right(t_data *data, double strafe_speed,
-					double buffer);
-void			move_backward(t_data *data, double move_speed, double buffer);
 void			store_texture_params(t_data *data, int direction, int bpp,
 					int line_size);
 void			rotate_l_or_r(t_data *data);
@@ -201,7 +200,6 @@ char			*split_and_join(char **arr, char *tmp2);
 void			calculate_side_dist(t_data *data, int pos_x, int pos_y);
 int				key_press(int key, t_data *data);
 int				rgb_string_to_int(t_data *data, char c);
-void			player_dir_setup(t_data *data);
 void			ft_mlx_put_pixel(t_data *data, int x, int y,
 					unsigned int color);
 void			start_game(t_data *data, t_parse *parse);
@@ -232,10 +230,14 @@ void			check_colors(t_parse *data);
 int				ft_isspace(char c);
 int				ft_isdigit(int c);
 void			ft_bzero(void *s, int len);
-void			check_order(char *line, t_parse *data);
 char			*ft_strtrim(char const *s1, char const *set);
-int				ft_atoi(const char *str);
+int				ft_atoi(const char *str, t_data *data);
 char			**final_map(char **map);
 char			**ft_return_map_game(char *str);
+int				is_map_cell(char c, int flag);
+int				is_allowed_char(char c, char filler);
+char			find_prev_map_cell(char *line, int idx, char filler);
+char			find_next_map_cell(char *line, int idx, char filler);
+void			ensure_line_closed(char *line, char filler);
 
 #endif

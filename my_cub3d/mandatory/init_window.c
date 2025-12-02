@@ -21,6 +21,7 @@ void	init_window(t_data *data, t_parse *parse)
 	if (!data->win)
 		print_error(ERROR);
 	data->imgs = ft_malloc(sizeof(t_img));
+	ft_bzero(data->imgs, sizeof(t_img));
 	data->img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	load_all_textures(data, parse);
 	if (!data->img)

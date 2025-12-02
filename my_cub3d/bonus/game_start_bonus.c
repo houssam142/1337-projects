@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:42:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/08 21:51:20 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/29 08:24:02 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	start_game(t_data *data, t_parse *parse)
 {
 	init_window(data, parse);
 	mlx_hook(data->win, 17, 0, close_win, data);
-	mlx_hook(data->win, 6, 64, mouse_motion, data);
+	mlx_hook(data->win, 6, 1L << 6, mouse_motion, data);
 	mlx_hook(data->win, 2, 1, key_press, data);
 	mlx_hook(data->win, 3, 2, key_release, data);
 	mlx_loop_hook(data->mlx, game_loop, data);

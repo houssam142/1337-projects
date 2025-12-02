@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 20:42:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/08 21:48:53 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/29 08:23:14 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	key_press(int key, t_data *data)
 	return (0);
 }
 
-int	key_release(int key, t_data *data)
+static int	key_release(int key, t_data *data)
 {
 	if (key == W_KEY)
 		data->move_forward = 0;
@@ -87,8 +87,8 @@ void	start_game(t_data *data, t_parse *parse)
 {
 	init_window(data, parse);
 	mlx_hook(data->win, 17, 0, close_win, data);
-	mlx_hook(data->win, 2, 1L << 0, key_press, data);
-	mlx_hook(data->win, 3, 1L << 1, key_release, data);
+	mlx_hook(data->win, 2, 1, key_press, data);
+	mlx_hook(data->win, 3, 2, key_release, data);
 	mlx_loop_hook(data->mlx, game_loop, data);
 	mlx_loop(data->mlx);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_color.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zael-mou <zael-mou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 09:57:31 by houssam           #+#    #+#             */
-/*   Updated: 2025/11/08 21:33:38 by zael-mou         ###   ########.fr       */
+/*   Updated: 2025/12/01 20:55:36 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	check_colors_two(char *line)
 	if (i == len)
 		count++;
 	if (count != 3)
-		exit((ft_putstr_fd("\033[1;31mThere are not more than 3 colors\n", 2),
+		exit((ft_putstr_fd("Error\nThere are no more than 3 colors\n", 2),
 				free_garbage(), 1));
 }
 
@@ -45,7 +45,7 @@ void	check_colors(t_parse *data)
 	check_colors_two(data->floor_color);
 }
 
-void	validate_identifiers(t_parse *data)
+void	validate_identifiers(t_parse *data, int flag)
 {
 	if (data->count_no > 1 || data->count_so > 1 || data->count_ea > 1
 		|| data->count_we > 1 || data->count_f > 1 || data->count_c > 1)
@@ -53,10 +53,13 @@ void	validate_identifiers(t_parse *data)
 		free_garbage();
 		exit((ft_putstr_fd("Error\nDuplicate identifier found\n", 2), 1));
 	}
-	if (data->count_no != 1 || data->count_so != 1 || data->count_ea != 1
-		|| data->count_we != 1 || data->count_f != 1 || data->count_c != 1)
+	if (flag)
 	{
-		free_garbage();
-		exit((ft_putstr_fd("Error\nMissing identifier\n", 2), 1));
+		if (data->count_no != 1 || data->count_so != 1 || data->count_ea != 1
+			|| data->count_we != 1 || data->count_f != 1 || data->count_c != 1)
+		{
+			free_garbage();
+			exit((ft_putstr_fd("Error\nMissing identifier\n", 2), 1));
+		}
 	}
 }

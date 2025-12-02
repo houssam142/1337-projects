@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zael-mou <zael-mou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 09:30:19 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/26 14:14:54 by zael-mou         ###   ########.fr       */
+/*   Updated: 2025/12/01 21:37:47 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	rotate_l_or_r(t_data *data)
 	double	old_plane_x;
 	double	old_plane_y;
 
-	rot_speed = 0.025;
+	rot_speed = 0.015;
 	if (data->rotate_left == 1)
 		rot_speed *= -1;
 	else if (data->rotate_right == 1)

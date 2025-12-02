@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 21:19:43 by hounejja          #+#    #+#             */
-/*   Updated: 2025/08/31 23:16:32 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:18:24 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	*ft_malloc(size_t size)
 	ptr = malloc(size);
 	if (!ptr)
 	{
-		perror("Minishell: Memory allocation failed!");
+		perror("Error\nMemory allocation failed!");
 		free_garbage();
 		exit(2);
 	}

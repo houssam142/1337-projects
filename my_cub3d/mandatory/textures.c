@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 18:29:55 by hounejja          #+#    #+#             */
-/*   Updated: 2025/10/05 11:39:03 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/11/29 20:18:12 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	load_texture_img(void **img_ptr, t_data *data, char *path)
 	*img_ptr = mlx_xpm_file_to_image(data->mlx, path, &width, &height);
 	if (!*img_ptr)
 	{
-		ft_putstr_fd("Failed to load texture: ", 2);
+		ft_putstr_fd("Error\nFailed to load texture: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd("\n", 2);
 		close_win(data);
@@ -63,7 +63,7 @@ void	get_texture_addr(void *img, char **addr_ptr, int *bpp_ptr,
 	addr = mlx_get_data_addr(img, &bpp, &line_size, &endian);
 	if (!addr)
 	{
-		ft_putstr_fd("Failed to get texture data address\n", 2);
+		ft_putstr_fd("Error\nFailed to get texture data address\n", 2);
 		free_garbage();
 		exit(1);
 	}

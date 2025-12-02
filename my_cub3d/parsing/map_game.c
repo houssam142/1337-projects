@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zael-mou <zael-mou@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:30 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/08 21:33:58 by zael-mou         ###   ########.fr       */
+/*   Updated: 2025/11/26 12:15:07 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	line_all_ones(char *line, char one)
 	while (line[i])
 	{
 		if (line[i] == 32)
-			line[i] = ' ';
+			;
 		else if (line[i] != one)
 			return (0);
 		i++;
