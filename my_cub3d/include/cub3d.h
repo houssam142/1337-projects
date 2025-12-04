@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:27:03 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/01 21:42:44 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/04 20:46:29 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ void			check_texture_syntax(t_parse *data);
 int				map_len(char **map);
 int				len_till_first_line(char **map);
 void			compute_camera_x(t_data *data);
-void			replace_space_with_void(char *line, char c);
+void			replace_space_with_void(char **line, char c);
 void			calculate_raydir_fow(t_data *data, int i);
 void			init_window(t_data *data, t_parse *parse);
 void			load_texture_img(void **img_ptr, t_data *data, char *path);
@@ -228,6 +228,7 @@ char			**ft_split(char const *s, char c);
 void			print_error(enum e_parsing type);
 void			check_colors(t_parse *data);
 int				ft_isspace(char c);
+int				arr_len(char **map);
 int				ft_isdigit(int c);
 void			ft_bzero(void *s, int len);
 char			*ft_strtrim(char const *s1, char const *set);
@@ -239,5 +240,7 @@ int				is_allowed_char(char c, char filler);
 char			find_prev_map_cell(char *line, int idx, char filler);
 char			find_next_map_cell(char *line, int idx, char filler);
 void			ensure_line_closed(char *line, char filler);
+char			find_top_map_cell(char *line, int i, int idx, char filler);
+char			find_down_map_cell(char *line, int idx, char filler);
 
 #endif

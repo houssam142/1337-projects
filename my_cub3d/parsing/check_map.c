@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 05:05:20 by houssam           #+#    #+#             */
-/*   Updated: 2025/12/01 20:37:19 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/04 20:46:19 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	find_real_lines(char **map, int *real_lines)
 	}
 }
 
-static int	arr_len(char **map)
+int	arr_len(char **map)
 {
 	int	i;
 
@@ -77,9 +77,9 @@ void	check_map(char **map)
 	size = arr_len_till_char(map);
 	if (!line_all_ones(map[0], '1') || !line_all_ones(map[size - 1], '1'))
 		print_error(WALL);
+	replace_space_with_void(map, ' ');
 	while (map[i])
 	{
-		replace_space_with_void(map[i], ' ');
 		if (map[i][0] != '1')
 			check_after_eo_map(&map[i]);
 		i++;

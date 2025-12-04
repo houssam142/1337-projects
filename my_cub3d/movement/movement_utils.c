@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 18:55:14 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/01 21:37:33 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/02 08:39:13 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	ft_move_wasd(t_data *data)
 	double	buffer;
 
 	move_speed = 0.02;
-	buffer = 0.01;
+	buffer = 0.04;
 	if (data->move_forward == 1)
 		move_forward(data, move_speed, buffer);
 	if (data->move_backward == 1)
