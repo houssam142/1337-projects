@@ -6,7 +6,7 @@
 #    By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/02 17:59:55 by hounejja          #+#    #+#              #
-#    Updated: 2025/12/04 20:05:33 by hounejja         ###   ########.fr        #
+#    Updated: 2025/12/05 11:30:13 by hounejja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ OTHER_SRCS = main.c parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd.c
 		 mandatory/color.c mandatory/dda.c mandatory/raycasting_utils.c \
 		 movement/movement.c movement/rotate.c mandatory/render.c mandatory/textures.c mandatory/init_window.c \
 		 cleaning/clean_all.c utils/ft_bzero.c utils/ft_itoa.c movement/movement_utils.c parsing/game_map_utils.c \
-		 parsing/game_utils2.c
+		 parsing/game_map_utils2.c
 
 OTHER_SRCS_B = main.c parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd.c \
 	     parsing/map_game.c utils/get_next_line_utils.c utils/get_next_line.c \
@@ -45,7 +45,7 @@ OTHER_SRCS_B = main.c parsing/parse_file.c utils/ft_strncmp.c utils/ft_putstr_fd
 		 movement/movement.c movement/rotate.c mandatory/render.c mandatory/textures.c mandatory/init_window.c \
 		 cleaning/clean_all.c utils/ft_bzero.c bonus/draw_minimap_bonus.c \
 		 utils/ft_itoa.c bonus/game_start_bonus.c bonus/mouse_mo_bonus.c movement/movement_utils.c \
-		 parsing/game_map_utils.c
+		 parsing/game_map_utils2.c parsing/game_map_utils.c
 
 OTHER_OBJS = $(OTHER_SRCS:.c=.o)
 

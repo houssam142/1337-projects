@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/04 20:53:10 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/05 11:31:25 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,28 @@ int	first_and_last(char *str)
 
 void	replace_space_with_void(char **line, char c)
 {
-	int		i;
-	char	left_cell;
-	int		j;
-	char	right_cell;
-	char	up_cell;
-	char	down_cell;
+	int	i;
+	int	j;
+	int	size;
+	int	len;
 
-	int size = arr_len(line);
+	size = arr_len(line);
 	i = 0;
 	while (i < size)
 	{
 		ensure_line_closed(line[i], c);
-		j = -1;
-		int len = ft_strlen(line[i]);
-		while (++j < len)
+		j = 0;
+		len = ft_strlen(line[i]);
+		while (j < len)
 		{
 			if (!is_allowed_char(line[i][j], c))
 				print_error(MAP);
 			if (line[i][j] == c)
 			{
-				left_cell = find_prev_map_cell(line[i], j - 1, c);
-				right_cell = find_next_map_cell(line[i], j + 1, c);
-				up_cell = find_top_map_cell(line[i - 1], i, j, c);
-				down_cell = find_down_map_cell(line[i + 1], j, c);
-				if ((left_cell && is_map_cell(left_cell, 0))
-					|| (right_cell && is_map_cell(right_cell, 0))
-					|| (up_cell && is_map_cell(up_cell, 0))
-					|| (down_cell && is_map_cell(down_cell, 0)))
-					print_error(WALL);
-			}
-			if (line[i][j] == c)
+				check_wall_boundaries(line, i, j);
 				line[i][j] = '1';
+			}
+			j++;
 		}
 		i++;
 	}
