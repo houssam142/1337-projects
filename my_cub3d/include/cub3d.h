@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:27:03 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/05 11:29:27 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/05 12:08:05 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,8 +237,6 @@ char			**final_map(char **map);
 char			**ft_return_map_game(char *str);
 int				is_map_cell(char c, int flag);
 int				is_allowed_char(char c, char filler);
-char			find_prev_map_cell(char *line, int idx, char filler);
-char			find_next_map_cell(char *line, int idx, char filler);
 void			ensure_line_closed(char *line, char filler);
 void			check_wall_boundaries(char **line, int i, int j);
 

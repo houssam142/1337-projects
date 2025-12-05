@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 20:24:00 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/04 18:53:43 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/05 12:07:54 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,6 @@ int	is_map_cell(char c, int flag)
 int	is_allowed_char(char c, char filler)
 {
 	return (c == filler || c == '\n' || is_map_cell(c, 1));
-}
-
-char	find_prev_map_cell(char *line, int idx, char filler)
-{
-	while (idx >= 0)
-	{
-		if (line[idx] == '\n')
-			return ('\0');
-		if (line[idx] != filler && is_map_cell(line[idx], 1))
-			return (line[idx]);
-		idx--;
-	}
-	return ('\0');
-}
-
-char	find_next_map_cell(char *line, int idx, char filler)
-{
-	while (line[idx])
-	{
-		if (line[idx] == '\n')
-			return ('\0');
-		if (line[idx] != filler && is_map_cell(line[idx], 1))
-			return (line[idx]);
-		idx++;
-	}
-	return ('\0');
 }
 
 void	ensure_line_closed(char *line, char filler)
