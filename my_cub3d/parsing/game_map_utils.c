@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 20:24:00 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/05 12:07:54 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/05 19:32:02 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ int	is_map_cell(char c, int flag)
 int	is_allowed_char(char c, char filler)
 {
 	return (c == filler || c == '\n' || is_map_cell(c, 1));
+}
+
+void	check_wall_boundaries(char **map, int i, int j)
+{
+	if (i > 0 && j < ft_strlen(map[i - 1])
+		&& is_map_cell(map[i - 1][j], 0))
+		print_error(WALL);
+	if (i + 1 < arr_len(map) && j < ft_strlen(map[i + 1])
+		&& is_map_cell(map[i + 1][j], 0))
+		print_error(WALL);
+	if (j - 1 > 0 && is_map_cell(map[i][j - 1], 0))
+		print_error(WALL);
+	if (j + 1 < ft_strlen(map[i]) && is_map_cell(map[i][j + 1], 0))
+		print_error(WALL);
 }
 
 void	ensure_line_closed(char *line, char filler)

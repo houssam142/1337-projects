@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/18 02:59:26 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/05 11:31:25 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/05 19:32:33 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,17 @@ void	replace_space_with_void(char **line, char c)
 {
 	int	i;
 	int	j;
-	int	size;
 	int	len;
+	int	size;
 
 	size = arr_len(line);
 	i = 0;
 	while (i < size)
 	{
 		ensure_line_closed(line[i], c);
-		j = 0;
+		j = -1;
 		len = ft_strlen(line[i]);
-		while (j < len)
+		while (++j < len)
 		{
 			if (!is_allowed_char(line[i][j], c))
 				print_error(MAP);
@@ -47,7 +47,6 @@ void	replace_space_with_void(char **line, char c)
 				check_wall_boundaries(line, i, j);
 				line[i][j] = '1';
 			}
-			j++;
 		}
 		i++;
 	}
