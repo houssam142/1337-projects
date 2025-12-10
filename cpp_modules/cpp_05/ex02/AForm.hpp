@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 01:57:23 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/10 06:47:07 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/10 10:12:16 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,18 @@ class AForm
         AForm(const AForm& copy);
         void execute(Bureaucrat const & executor) const;
         AForm& operator=(const AForm& f);
-        virtual void execute() = 0;
+        void execute(Bureaucrat const& executor);
+        virtual void executeAction() = 0;
         bool getSigned() const;
         int getSignedGrade() const;
         int getExecGrade() const;
         void beSigned(Bureaucrat& b);
         ~AForm();
+        class FormNotSignedException: public std::exception
+        {
+            public:
+                const char* what() const throw();  
+        };
 };
 
 std::ostream& operator<<(std::ostream& out, const AForm& f);
