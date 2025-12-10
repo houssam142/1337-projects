@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:29:21 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/10 22:25:22 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/10 22:49:41 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int main()
 {
-    ShrubberyCreationForm op;
+    ShrubberyCreationForm op("S");
 
     op.executeAction();
     return 0;
