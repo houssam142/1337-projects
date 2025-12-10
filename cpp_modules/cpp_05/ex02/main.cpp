@@ -6,13 +6,18 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:29:21 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/08 20:29:30 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/10 22:25:22 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main()
 {
+    ShrubberyCreationForm op;
+
+    op.executeAction();
     return 0;
 }

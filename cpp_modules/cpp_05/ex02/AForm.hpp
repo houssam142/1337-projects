@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 01:57:23 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/10 10:12:16 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/10 21:24:56 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class AForm
         void execute(Bureaucrat const & executor) const;
         AForm& operator=(const AForm& f);
         void execute(Bureaucrat const& executor);
-        virtual void executeAction() = 0;
+        virtual void executeAction() const = 0;
         bool getSigned() const;
         int getSignedGrade() const;
         int getExecGrade() const;
