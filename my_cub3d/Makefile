@@ -6,7 +6,7 @@
 #    By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/02 17:59:55 by hounejja          #+#    #+#              #
-#    Updated: 2025/12/05 19:18:23 by hounejja         ###   ########.fr        #
+#    Updated: 2025/12/09 07:37:01 by hounejja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,5 +79,5 @@ ra: all clean
 
 re: fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re bonus ra
 

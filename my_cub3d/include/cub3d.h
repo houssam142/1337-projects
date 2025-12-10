@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/29 08:27:03 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/06 03:40:35 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/07 20:51:30 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <sys/time.h>
 # include <unistd.h>
 
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 1000
+# define HEIGHT 1000
 # define MM_TILE 8
 # define MM_SIZE 250
 # define TEX_WIDTH 64
