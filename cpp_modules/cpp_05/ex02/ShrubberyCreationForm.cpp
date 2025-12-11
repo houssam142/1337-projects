@@ -8,10 +8,10 @@ void ShrubberyCreationForm::executeAction() const
 {
 	std::string targetStr = this->_target + "_shrubbery";
 	std::ofstream outFile(targetStr.c_str());
-	outFile << "    /\\n"
-			<< "   /  \\n"
-			<< "  /    \\n"
-			<< " /______\\n"
+	outFile << "    /\\\n"
+			<< "   /  \\\n"
+			<< "  /    \\\n"
+			<< " /______\\\n"
 			<< "    ||\n"
 			<< "    ||\n";
 	outFile.close();
