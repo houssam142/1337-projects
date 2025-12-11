@@ -14,7 +14,10 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& cop
 PresidentialPardonForm& PresidentialPardonForm::operator=(const PresidentialPardonForm& eq)
 {
 	if (this != &eq)
+	{
+		AForm::operator=(eq);
 		this->_target = eq._target;
+	}
 	return *this;
 }
 

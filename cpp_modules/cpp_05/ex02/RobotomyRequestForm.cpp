@@ -19,6 +19,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& e
 {
 	if (this != &eq)
 	{
+		AForm::operator=(eq);
 		this->_target = eq._target;
 	}
 	return *this;
