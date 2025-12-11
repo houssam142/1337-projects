@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 23:58:38 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/25 16:03:57 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/11 23:02:25 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ Bureaucrat::Bureaucrat(const Bureaucrat& copy): grade(copy.grade)
     throw Bureaucrat::GradeTooHighException();
   else if (this->grade < 1)
     throw Bureaucrat::GradeTooLowException();
+}
+
+void Bureaucrat::executeForm(AForm const & form) const
+{
+  
 }
 
 void Bureaucrat::signForm(AForm& form)
