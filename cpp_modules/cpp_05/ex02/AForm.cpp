@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 01:59:06 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/08 20:22:55 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/12 01:45:33 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ AForm::AForm(const AForm& copy): _name(copy._name), _signed(copy._signed), _sign
     if (this->_signedGrade < 1 || this->_execGrade)
         throw Bureaucrat::GradeTooHighException();
     else if (this->_signedGrade > 150 || this->_execGrade < 150)
+        throw Bureaucrat::GradeTooLowException();
+}
+
+const char* AForm::FormNotSignedException::what() const throw()
+{
+    return "the form is not signed\n";
+}
+
+void AForm::execute(Bureaucrat const & exec) const
+{
+    if (!this->_signed)
+        throw AForm::FormNotSignedException();
+    if (exec.getGrade() > this->_execGrade)
         throw Bureaucrat::GradeTooLowException();
 }
 

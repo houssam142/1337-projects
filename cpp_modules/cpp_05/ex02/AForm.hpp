@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 01:57:23 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/11 21:08:29 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/12 01:33:21 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,8 @@ class AForm
         AForm(std::string newName, int SignedGrade, int execGrade);
         const std::string getName() const;
         AForm(const AForm& copy);
-        void execute(Bureaucrat const & executor) const;
         AForm& operator=(const AForm& f);
-        void execute(Bureaucrat const& executor);
+        void execute(Bureaucrat const& executor) const;
         virtual void executeAction() const = 0;
         bool getSigned() const;
         int getSignedGrade() const;

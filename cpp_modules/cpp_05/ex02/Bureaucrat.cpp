@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 23:58:38 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/11 23:02:25 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/12 01:41:49 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,15 @@ Bureaucrat::Bureaucrat(const Bureaucrat& copy): grade(copy.grade)
 
 void Bureaucrat::executeForm(AForm const & form) const
 {
-  
+  try
+  {
+    form.execute(*this);
+    std::cout << this->name << " executed " << form.getName() << '\n';
+  }
+  catch(const std::exception& e)
+  {
+    std::cerr << this->name << " coudn't execute " << form.getName() << " because " << e.what() << '\n';
+  }
 }
 
 void Bureaucrat::signForm(AForm& form)
