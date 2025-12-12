@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:29:21 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/12 12:53:15 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/12 20:55:02 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ int main()
     mid.signForm(bender);
     mid.signForm(zaphod);
 
-    high.signForm(gardene)
+    high.signForm(garden);
+    high.signForm(bender);
+    high.signForm(zaphod);
+
+    high.executeForm(garden);
+    mid.executeForm(bender);
+    low.executeForm(zaphod);
     return 0;
 }

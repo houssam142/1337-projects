@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 23:58:38 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/12 01:41:49 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/12 20:51:34 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ void Bureaucrat::decrementGrade()
 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
-  return "Grade too high\n";  
+  return "Bureaucrat: Grade too high\n";  
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
-  return "Grade too low\n";
+  return "Bureaucrat: Grade too low\n";
 }
 
 const std::string Bureaucrat::getName() const

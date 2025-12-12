@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 01:57:23 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/12 01:33:21 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/12 20:52:43 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ class AForm
         {
             public:
                 const char* what() const throw();  
+        };
+        class GradeTooHighException: public std::exception
+        {
+            public:
+                const char* what() const throw();
+        };
+        class GradeTooLowException: public std::exception
+        {
+            public:
+                const char* what() const throw();
         };
 };
 

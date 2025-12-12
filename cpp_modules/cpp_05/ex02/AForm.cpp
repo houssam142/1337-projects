@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 01:59:06 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/12 01:45:33 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/12 20:53:56 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,24 @@ const char* AForm::FormNotSignedException::what() const throw()
     return "the form is not signed\n";
 }
 
+const char* AForm::GradeTooHighException::what() const throw()
+{
+    return "AForm: Grade too high";
+}
+
+const char* AForm::GradeTooLowException::what() const throw()
+{
+    return "AForm: Grade too low";
+}
+
 void AForm::execute(Bureaucrat const & exec) const
 {
     if (!this->_signed)
         throw AForm::FormNotSignedException();
-    if (exec.getGrade() > this->_execGrade)
-        throw Bureaucrat::GradeTooLowException();
+    else if (exec.getGrade() > this->_execGrade)
+        throw AForm::GradeTooLowException();
+    else
+        this->executeAction();
 }
 
 AForm& AForm::operator=(const AForm& f)
