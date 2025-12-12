@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:29:21 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/10 22:49:41 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/12 12:53:15 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,29 @@
 
 int main()
 {
-    ShrubberyCreationForm op("S");
+    Bureaucrat low("Low Grade", 150);
+    Bureaucrat mid("Mid grade", 75);
+    Bureaucrat high("High grade", 1);
+    ShrubberyCreationForm garden("garden");
+    RobotomyRequestForm bender("Bender");
+    PresidentialPardonForm zaphod("Zaphod");
 
-    op.executeAction();
+    std::cout << low << '\n';
+    std::cout << mid << '\n';
+    std::cout << high << '\n';
+
+    std::cout << garden << '\n';
+    std::cout << bender << '\n';
+    std::cout << zaphod << '\n';
+
+    low.signForm(garden);
+    low.signForm(bender);
+    low.signForm(zaphod);
+
+    mid.signForm(garden);
+    mid.signForm(bender);
+    mid.signForm(zaphod);
+
+    high.signForm(gardene)
     return 0;
 }

@@ -2,9 +2,9 @@
 
 RobotomyRequestForm::RobotomyRequestForm() {}
 
-RobotomyRequestForm::RobotomyRequestForm(std::string const & target): AForm("Robotomy", 72, 45), _target(target) {}
+RobotomyRequestForm::RobotomyRequestForm(std::string const & target): AForm(target, 72, 45), _target(target) {}
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& copy): _target(copy._target) {}
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& copy): AForm(copy), _target(copy._target) {}
 
 void RobotomyRequestForm::executeAction() const
 {
