@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 06:02:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/25 17:58:18 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/13 08:30:12 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int main()
 	}
 	catch (std::exception & e)
 	{
-		std::cout << e.what();
+		std::cerr << e.what();
 	}
-	std::cout << b << '\n';
 	return 0;
 }

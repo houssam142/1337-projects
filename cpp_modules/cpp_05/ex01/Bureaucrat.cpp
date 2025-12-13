@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 23:58:38 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/25 16:03:57 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/13 08:29:28 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void Bureaucrat::signForm(Form& form)
   }
   catch (std::exception const& exception)
   {
-    std::cout << this->name << " couldn't sign " << form.getName() << " because " << exception.what();
+    std::cerr << this->name << " couldn't sign " << form.getName() << " because " << exception.what();
   }
 }
 
