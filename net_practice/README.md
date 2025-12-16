@@ -22,6 +22,7 @@ This project has been created as part of the 42 curriculum by hounejja
 
 # Resources
   • Networking concepts studied: TCP/IP addressing, subnet masks, default gateways, routers, switches, OSI layers.
+
   • References:
 
     	https://www.cloudflare.com/learning/network-layer/what-is-a-network-switch
