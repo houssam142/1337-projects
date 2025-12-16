@@ -26,5 +26,3 @@ This project has been created as part of the 42 curriculum by hounejja
     •  https://www.cloudflare.com/learning/network-layer/what-is-a-network-switch/
     •  https://www.cloudflare.com/learning/ddos/glossary/open-systems-interconnection-model-osi/ 
     •  https://www.cloudflare.com/learning/network-layer/internet-protocol/
-
-  • AI usage: No AI was used in the completion of this project.
