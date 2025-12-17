@@ -1,4 +1,4 @@
-SRCS = main.cpp ScalarConverter.cpp
+SRCS = main.cpp ScalarConverter.cpp convertToInt.cpp convertToFloat.cpp
 
 CPP = c++
 

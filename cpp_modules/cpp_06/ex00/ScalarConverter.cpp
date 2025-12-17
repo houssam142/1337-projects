@@ -1,25 +1,14 @@
 #include "ScalarConverter.hpp"
 
-bool	allIsDigit(const std::string s)
+bool	allIsDigitforChar(const std::string s)
 {
-	if (s.empty()) return false;
-	for (unsigned int i = 0; i < s.size(); i++)
+	unsigned int i = 0;
+	for (; i < s.size(); i++)
 	{
 		if (!std::isdigit(static_cast<char>(s[i])))
 			return false;
 	}
 	return true;
-}
-
-bool allIsAlpha(const std::string s)
-{
-	if (s.empty()) return false;
-	for (unsigned int i = 0; i < s.size(); i++)
-	{
-		if (std::isalpha(static_cast<char>(s[i])))
-			return true;
-	}
-	return false;
 }
 
 bool	isFloat(std::string str)
@@ -82,7 +71,7 @@ void	fromFloattoChar(std::string str)
 	else
 	{
 		unsigned char c = static_cast<unsigned char>(num);
-		std::cout << ((isprint(c)) ? "\'" + std::string(1, c) + "\'" : "Non displayable\n");
+		std::cout << ((isprint(c)) ? "\'" + std::string(1, c) + "\'\n" : "Non displayable\n");
 	}
 }
 
@@ -96,7 +85,7 @@ void	fromDoubletochar(std::string s)
 	else
 	{
 		unsigned char c = static_cast<unsigned char>(d);
-		std::cout << ((isprint(c)) ? "\'" + std::string(1, c) + "\'" : "Non displayable\n");
+		std::cout << ((isprint(c)) ? "\'" + std::string(1, c) + "\'\n" : "Non displayable\n");
 	}
 }
 
@@ -106,20 +95,14 @@ void	convertToChar(const std::string literal)
 	if (literal.size() == 1 && !std::isdigit(static_cast<unsigned char>(literal[0])))
 	{
 		unsigned char c = static_cast<char>(literal[0]);
-		if (std::isprint(c))
-			std::cout << '\'' << c << '\'' << '\n';
-		else
-			std::cout << "Non displayable\n";
+		std::cout << ((isprint(c)) ? "\'" + std::string(1, c) + "\'\n" : "Non displayable\n");
 	}
-	else if (allIsDigit(literal))
+	else if (allIsDigitforChar(literal))
 	{
 		int i = atoi(literal.c_str());
 		unsigned char c = static_cast<unsigned char>(i);
-		if (isprint(c))
-			std::cout << '\'' << c << '\'' << '\n';
-		else
-			std::cout << "Non displayable\n";
-		return ;
+		std::cout << ((isprint(c)) ? "\'" + std::string(1, c) + "\'\n" : "Non displayable\n");
+
 	}
 	else if (isFloat(literal))
 		fromFloattoChar(literal);
@@ -132,4 +115,6 @@ void	convertToChar(const std::string literal)
 void ScalarConverter::convert(const std::string literal)
 {
 	convertToChar(literal);
+	convertToInt(literal);
+	converttoFloat(literal);
 }

@@ -17,3 +17,9 @@ class ScalarConverter
 	public:
 		static void convert(const std::string literal);
 };
+
+void    convertToInt(std::string arg);
+bool	isFloat(std::string str);
+bool	isDouble(std::string s);
+void    converttoFloat(std::string arg);
+bool	allIsDigitforInt(const std::string s);
