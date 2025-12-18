@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 01:57:23 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/12 20:52:43 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/17 18:24:03 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ class AForm
         int getSignedGrade() const;
         int getExecGrade() const;
         void beSigned(Bureaucrat& b);
-        ~AForm();
+        virtual ~AForm();
         class FormNotSignedException: public std::exception
         {
             public:

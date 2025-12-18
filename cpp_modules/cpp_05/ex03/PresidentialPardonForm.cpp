@@ -2,7 +2,7 @@
 
 PresidentialPardonForm::PresidentialPardonForm() {}
 
-PresidentialPardonForm::PresidentialPardonForm(std::string const& target): AForm("Presidential Pardon Form", 25, 5), _target(target) {}
+PresidentialPardonForm::PresidentialPardonForm(std::string const& target): AForm(target, 25, 5), _target(target) {}
 
 void PresidentialPardonForm::	executeAction() const
 {

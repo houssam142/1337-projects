@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 05:56:48 by hounejja          #+#    #+#             */
-/*   Updated: 2025/11/25 17:55:40 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/16 13:59:43 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ const std::string Bureaucrat::getName() const
 std::ostream& operator<<(std::ostream& out, const Bureaucrat& b)
 {
 	out << b.getName() << ", bureaucrat grade " << b.getGrade();
-	return out;	
+	return out;
 }
 
 Bureaucrat::~Bureaucrat() {}

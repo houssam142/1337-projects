@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/25 06:02:04 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/13 08:30:12 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/16 13:58:22 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int main()
 {
-	Bureaucrat b("Bureaucrat", 1);
 	try
 	{
+		Bureaucrat b("Bureaucrat", 0);
 		for (int i = b.getGrade(); i < 100; i++)
 			b.gradeDecrement();
 	}

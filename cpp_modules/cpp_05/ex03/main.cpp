@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 20:29:21 by hounejja          #+#    #+#             */
-/*   Updated: 2025/12/13 09:24:42 by hounejja         ###   ########.fr       */
+/*   Updated: 2025/12/16 18:07:12 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int main()
         AForm* rrf;
         rrf = someRandomIntern.makeForm("robotomy request", "Bender");
         std::cout << *rrf << '\n';
+        delete rrf;
     }
     catch (std::exception & e)
     {

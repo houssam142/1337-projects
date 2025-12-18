@@ -2,7 +2,7 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm() {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string const & _target): AForm("Shrubbery Creation form", 145, 137), _target(_target) {}
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const & _target): AForm(_target, 145, 137), _target(_target) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy): AForm(copy), _target(copy._target) {}
 
