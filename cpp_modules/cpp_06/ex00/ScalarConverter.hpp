@@ -23,3 +23,4 @@ bool	isFloat(std::string str);
 bool	isDouble(std::string s);
 void    converttoFloat(std::string arg);
 bool	allIsDigitforInt(const std::string s);
+void	convertToDouble(std::string arg);

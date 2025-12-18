@@ -117,4 +117,5 @@ void ScalarConverter::convert(const std::string literal)
 	convertToChar(literal);
 	convertToInt(literal);
 	converttoFloat(literal);
+	convertToDouble(literal);
 }
