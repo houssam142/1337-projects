@@ -4,7 +4,7 @@ void	fromFloattoDouble(std::string s)
 {
 	std::string sub = s.substr(0, s.size() - 1);
 	char *leftOver = NULL;
-	double d = std::strtod(sub.c_str(), &leftOver);
+	double d = strtod(sub.c_str(), &leftOver);
 	if (d > std::numeric_limits<double>::max() || d < std::numeric_limits<double>::min()
 		|| *leftOver != '\0' || leftOver == sub.c_str() || std::isnan(d))
 		std::cout << (sub[0] == '+' ? sub.substr(1, sub.size()) + "\n" : sub + "\n");
@@ -16,7 +16,7 @@ void	fromFloattoDouble(std::string s)
 void	fromInttoDouble(std::string s)
 {
 	char *end = NULL;
-	double d = std::strtod(s.c_str(), &end);
+	double d = strtod(s.c_str(), &end);
 	if (d > std::numeric_limits<double>::max() || d < std::numeric_limits<double>::min()
 		|| *end != '\0' || end == s.c_str() || std::isnan(d) || std::isinf(d))
 		std::cout << (s[0] == '+' ? s.substr(1, s.size()) + "\n" : s + "\n");
@@ -45,7 +45,7 @@ void	convertToDouble(std::string arg)
 	else if (isDouble(arg))
 	{
 		char *end = NULL;
-		double w = std::strtod(arg.c_str(), &end);
+		double w = strtod(arg.c_str(), &end);
 		if (w > std::numeric_limits<double>::max() || w < std::numeric_limits<double>::min()
 			|| *end || end == arg.c_str() || std::isnan(w) || std::isinf(w))
             std::cout << (arg[0] == '+' ? arg.substr(1, arg.size()) + "\n" : arg + "\n");

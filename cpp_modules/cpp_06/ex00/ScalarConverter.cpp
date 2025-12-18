@@ -64,7 +64,7 @@ void	fromFloattoChar(std::string str)
 {
 	std::string tmp = str.substr(0, str.size() - 1);
 	char *end = NULL;
-	double num = std::strtod(tmp.c_str(), &end);
+	double num = strtod(tmp.c_str(), &end);
 	if (num > std::numeric_limits<char>::max() || std::isnan(num) || num < std::numeric_limits<char>::min()
 			|| end == str.c_str() || *end != '\0')
 		std::cout << "impossible\n";
@@ -78,7 +78,7 @@ void	fromFloattoChar(std::string str)
 void	fromDoubletochar(std::string s)
 {
 	char *end = 0;
-	double d = std::strtod(s.c_str(), &end);
+	double d = strtod(s.c_str(), &end);
 	if (d < std::numeric_limits<char>::min() || d > std::numeric_limits<char>::max() || std::isnan(d)
 			|| end == s.c_str() || *end != '\0')
 		std::cout << "impossible\n";
@@ -99,8 +99,12 @@ void	convertToChar(const std::string literal)
 	}
 	else if (allIsDigitforChar(literal))
 	{
-		int i = atoi(literal.c_str());
-		unsigned char c = static_cast<unsigned char>(i);
+		char *end = NULL;
+		double d = strtod(literal.c_str(), &end);
+		if (d > std::numeric_limits<char>::max() || d < std::numeric_limits<char>::min()
+			|| std::isnan(d) || std::isinf(d) || end || end == literal.c_str())
+			std::cout << "impossible\n";
+		unsigned char c = static_cast<unsigned char>(d);
 		std::cout << ((isprint(c)) ? "\'" + std::string(1, c) + "\'\n" : "Non displayable\n");
 
 	}

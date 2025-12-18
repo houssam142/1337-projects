@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Data.hpp"
+#include <stdint.h>
 
 class Serializer
 {
