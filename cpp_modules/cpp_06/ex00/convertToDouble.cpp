@@ -18,7 +18,7 @@ void	fromInttoDouble(std::string s)
 	double d = std::strtod(s.c_str(), &end);
 	if (d > std::numeric_limits<double>::max() || d < std::numeric_limits<double>::min()
 		|| *end != '\0' || end == s.c_str() || std::isnan(d))
-		std::cout << "impossible\n";
+		std::cout << (s[0] == '+' ? s.substr(1, s.size()) + "\n" : s + "\n");
 	else
 	{
 		std::cout << d;

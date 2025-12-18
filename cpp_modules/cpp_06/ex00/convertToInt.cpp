@@ -3,6 +3,8 @@
 bool	allIsDigitforInt(const std::string s)
 {
 	unsigned int i = 0;
+	if (s == "inf" || s == "+inf" || s == "-inf")
+		return true;
 	if (s[i] == '+' || s[i] == '-')
 		++i;
 	for (; i < s.size(); i++)
@@ -55,7 +57,7 @@ void    convertToInt(std::string arg)
         char *leftOver = NULL;
         double d = strtod(arg.c_str(), &leftOver);
         if (d > std::numeric_limits<int>::max() || d < std::numeric_limits<int>::min() || std::isnan(d)
-            || *leftOver != '\0' || leftOver == arg.c_str())
+            || *leftOver != '\0' || leftOver == arg.c_str() || std::isinf(d))
                 std::cout << "impossible\n";
         else
         {

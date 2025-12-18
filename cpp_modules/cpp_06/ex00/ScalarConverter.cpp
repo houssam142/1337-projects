@@ -14,7 +14,7 @@ bool	allIsDigitforChar(const std::string s)
 bool	isFloat(std::string str)
 {
 	size_t i = 0;
-	if (str == "nanf" || str == "+inff" || str == "-inff")
+	if (str == "nanf" || str == "inff" || str == "+inff" || str == "-inff")
         return true;
 	if (str.size() < 2 || str[str.size() - 1] != 'f')
 		return false;
@@ -64,7 +64,7 @@ void	fromFloattoChar(std::string str)
 {
 	std::string tmp = str.substr(0, str.size() - 1);
 	char *end = NULL;
-	float num = std::strtod(tmp.c_str(), &end);
+	double num = std::strtod(tmp.c_str(), &end);
 	if (num > std::numeric_limits<char>::max() || std::isnan(num) || num < std::numeric_limits<char>::min()
 			|| end == str.c_str() || *end != '\0')
 		std::cout << "impossible\n";
