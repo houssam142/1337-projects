@@ -92,9 +92,9 @@ void	fromDoubletochar(std::string s)
 void	convertToChar(const std::string literal)
 {
 	std::cout << "char: ";
-	if (literal.size() == 1 && !std::isdigit(static_cast<unsigned char>(literal[0])))
+	if ((literal.size() == 1 && !std::isdigit(static_cast<unsigned char>(literal[0]))))
 	{
-		unsigned char c = static_cast<char>(literal[0]);
+		unsigned char c = static_cast<unsigned char>(literal[0]);
 		std::cout << ((isprint(c)) ? "\'" + std::string(1, c) + "\'\n" : "Non displayable\n");
 	}
 	else if (allIsDigitforChar(literal))

@@ -10,12 +10,21 @@
 class ScalarConverter
 {
 	private:
+		std::string a; // offset 8
+		int q; 
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter& copy);
 		ScalarConverter& operator=(const ScalarConverter& eq);
 		~ScalarConverter();
 	public:
 		static void convert(const std::string literal);
+};
+
+
+class f: public ScalarConverter
+{
+	private:
+		int a; // offset ?
 };
 
 void    convertToInt(std::string arg);

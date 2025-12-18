@@ -23,7 +23,7 @@ void    fromDoubletoFloat(std::string s)
     double d = std::strtod(s.c_str(), &end);
     if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min()
         || *end || end == s.c_str() || std::isnan(d))
-        std::cout << "impossible\n";
+        std::cout << "nanf\n";
     else
     {
         float fp = static_cast<float>(d);
@@ -51,7 +51,7 @@ void    converttoFloat(std::string arg)
         double d = std::strtod(substr.c_str(), &end);
         if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min()
             || *end || end == substr.c_str() || std::isnan(d))
-            std::cout << "impossible\n";
+            std::cout << "nanf\n";
         else
         {
             float fp = static_cast<float>(d);

@@ -45,7 +45,7 @@ void    formDoubletoInt(std::string p)
 void    convertToInt(std::string arg)
 {
     std::cout << "int: ";
-    if (arg.size() == 1 && !std::isdigit(static_cast<unsigned char>(arg[0])))
+    if ((arg.size() == 1 && !std::isdigit(static_cast<unsigned char>(arg[0]))))
     {
         int num = static_cast<int>(arg[0]);
         std::cout << num << '\n';

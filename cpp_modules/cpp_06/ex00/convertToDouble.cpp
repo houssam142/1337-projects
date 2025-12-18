@@ -46,8 +46,8 @@ void	convertToDouble(std::string arg)
 		char *end = NULL;
 		double w = std::strtod(arg.c_str(), &end);
 		if (w > std::numeric_limits<double>::max() || w < std::numeric_limits<double>::min()
-			|| *end || end == arg.c_str() || std::isnan(w))
-			std::cout << "impossible\n";
+			|| *end || end == arg.c_str() || std::isnan(w) || std::isinf(w))
+			std::cout << "nan\n";
 		else
 			std::cout << w << '\n';
 	}
