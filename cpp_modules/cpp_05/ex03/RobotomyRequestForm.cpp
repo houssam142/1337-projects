@@ -9,6 +9,7 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& copy): AForm
 void RobotomyRequestForm::executeAction() const
 {
 	std::cout << "* Drilling noises *\n";
+	srand(time(NULL));
 	if (std::rand() % 2 == 0)
 		std::cout << this->_target << " has been robotomized successfully\n";
 	else
