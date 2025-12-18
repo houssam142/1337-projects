@@ -6,7 +6,7 @@ void	fromFloattoDouble(std::string s)
 	char *leftOver = NULL;
 	double d = std::strtod(sub.c_str(), &leftOver);
 	if (d > std::numeric_limits<double>::max() || d < std::numeric_limits<double>::min()
-		|| *leftOver != '\0' || leftOver == sub.c_str())
+		|| *leftOver != '\0' || leftOver == sub.c_str() || std::isnan(d))
 		std::cout << "impossible\n";
 	else
 		std::cout << d << '\n';
@@ -41,6 +41,16 @@ void	convertToDouble(std::string arg)
 		fromInttoDouble(arg);
 	else if (isFloat(arg))
 		fromFloattoDouble(arg);
+	else if (isDouble(arg))
+	{
+		char *end = NULL;
+		double w = std::strtod(arg.c_str(), &end);
+		if (w > std::numeric_limits<double>::max() || w < std::numeric_limits<double>::min()
+			|| *end || end == arg.c_str() || std::isnan(w))
+			std::cout << "impossible\n";
+		else
+			std::cout << w << '\n';
+	}
 	else
 		std::cout << "impossible\n";
 }
