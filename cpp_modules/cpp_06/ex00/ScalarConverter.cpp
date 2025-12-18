@@ -14,7 +14,7 @@ bool	allIsDigitforChar(const std::string s)
 bool	isFloat(std::string str)
 {
 	size_t i = 0;
-	if (str == "nanf" || str == "inff" || str == "+inff" || str == "-inff")
+	if (str == "nanf" || str == "inff" || str == "+inff" || str == "-inff" || str == "-nanf" || str == "+nanf")
         return true;
 	if (str.size() < 2 || str[str.size() - 1] != 'f')
 		return false;
@@ -39,7 +39,7 @@ bool	isFloat(std::string str)
 bool	isDouble(std::string s)
 {
 	size_t i = 0;
-	if (s == "nan" || s == "+inf" || s == "-inf")
+	if (s == "nan" || s == "+inf" || s == "-inf" || s == "-nan" || s == "+nan")
         return true;
 	if (s.size() < 2)
 		return false;

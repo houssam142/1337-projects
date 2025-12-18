@@ -23,7 +23,7 @@ void    fromDoubletoFloat(std::string s)
     double d = std::strtod(s.c_str(), &end);
     if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min()
         || *end || end == s.c_str() || std::isnan(d))
-        std::cout << (s[0] == '+' ? s.substr(1, s.size()) + "\n" : s + "\n");
+        std::cout << (s[0] == '+' ? s.substr(1, s.size()) + "f\n" : s + "f\n");
     else
     {
         float fp = static_cast<float>(d);
@@ -51,7 +51,7 @@ void    converttoFloat(std::string arg)
         double d = std::strtod(substr.c_str(), &end);
         if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min()
             || *end || end == substr.c_str() || std::isnan(d) || std::isinf(d))
-            std::cout << (arg[0] == '-' ? arg : arg.substr(1, arg.size()));
+            std::cout << (arg[0] == '+' ? arg.substr(1, arg.size()) + '\n': arg + '\n');
         else
         {
             float fp = static_cast<float>(d);
