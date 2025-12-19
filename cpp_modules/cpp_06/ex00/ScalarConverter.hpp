@@ -5,13 +5,12 @@
 #include <cstdlib>
 #include <string>
 #include <cmath>
+#include <iomanip>
 
 
 class ScalarConverter
 {
 	private:
-		std::string a; // offset 8
-		int q; 
 		ScalarConverter();
 		ScalarConverter(const ScalarConverter& copy);
 		ScalarConverter& operator=(const ScalarConverter& eq);
@@ -21,13 +20,8 @@ class ScalarConverter
 };
 
 
-class f: public ScalarConverter
-{
-	private:
-		int a; // offset ?
-};
-
 void    convertToInt(std::string arg);
+int	countDigitsAfterDot(std::string str);
 bool	isFloat(std::string str);
 bool	isDouble(std::string s);
 void    converttoFloat(std::string arg);

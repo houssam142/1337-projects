@@ -17,14 +17,11 @@ void	fromInttoDouble(std::string s)
 {
 	char *end = NULL;
 	double d = strtod(s.c_str(), &end);
-	if (d > std::numeric_limits<double>::max() || d < std::numeric_limits<double>::min()
-		|| *end != '\0' || end == s.c_str() || std::isnan(d) || std::isinf(d))
+	if (*end != '\0' || end == s.c_str() || std::isnan(d) || std::isinf(d))
 		std::cout << (s[0] == '+' ? s.substr(1, s.size()) + "\n" : s + "\n");
 	else
 	{
-		std::cout << d;
-		if (d - static_cast<int>(d) == 0)
-			std::cout << ".0\n";
+		std::cout << d << "\n";
 	}
 }
 
@@ -50,7 +47,7 @@ void	convertToDouble(std::string arg)
 			|| *end || end == arg.c_str() || std::isnan(w) || std::isinf(w))
             std::cout << (arg[0] == '+' ? arg.substr(1, arg.size()) + "\n" : arg + "\n");
 		else
-			std::cout << w << '\n';
+			std::cout << std::fixed << std::setprecision(1) << w << '\n';
 	}
 	else
 		std::cout << "impossible\n";

@@ -4,16 +4,12 @@ void    fromInttoFloat(std::string s)
 {
     char *end = NULL;
     double d = strtod(s.c_str(), &end);
-    if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min()
-        || *end || end == s.c_str())
-        std::cout << (s[0] == '+' ? s.substr(1, s.size()) + "f\n" : s + "f\n");
+    if (*end || end == s.c_str())
+        std::cout << "impossible\n";
     else
     {
         float fp = static_cast<float>(d);
-        std::cout << fp;
-        if (fp - static_cast<int>(fp) == 0)
-            std::cout << ".0";
-        std::cout << "f\n";
+        std::cout << std::fixed << std::setprecision(1) << fp << "f\n";
     }
 }
 
@@ -25,10 +21,7 @@ void    fromDoubletoFloat(std::string s)
         || *end || end == s.c_str() || std::isnan(d))
         std::cout << (s[0] == '+' ? s.substr(1, s.size()) + "f\n" : s + "f\n");
     else
-    {
-        float fp = static_cast<float>(d);
-        std::cout << fp << "f\n";
-    }
+        std::cout << std::fixed << std::setprecision(1) << d << "f\n";
 }
 
 void    converttoFloat(std::string arg)
@@ -49,17 +42,17 @@ void    converttoFloat(std::string arg)
         char *end = NULL;
         std::string substr = arg.substr(0, arg.size() - 1);
         double d = strtod(substr.c_str(), &end);
-        if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min()
-            || *end || end == substr.c_str() || std::isnan(d) || std::isinf(d))
-            std::cout << (arg[0] == '+' ? arg.substr(1, arg.size()) + '\n': arg + '\n');
-        else
+        int count = countDigitsAfterDot(arg);
+        if (*end || end == substr.c_str())
         {
-            float fp = static_cast<float>(d);
-            std::cout << fp;
-            if (fp - static_cast<int>(fp) == 0)
-                std::cout << ".0";
-            std::cout << "f\n";
+            std::cout << "impossible\n";
+            return ;
         }
+        if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min()
+            || std::isnan(d) || std::isinf(d))
+            std::cout << (arg[0] == '+' ? arg.substr(1, arg.size()) + "w\n": arg + '\n');
+        else
+            std::cout << std::fixed << std::setprecision(count) << d << "f\n";
     }
     else if (isDouble(arg))
         fromDoubletoFloat(arg);

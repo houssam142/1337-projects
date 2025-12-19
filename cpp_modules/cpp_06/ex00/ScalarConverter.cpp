@@ -1,5 +1,18 @@
 #include "ScalarConverter.hpp"
 
+int	countDigitsAfterDot(std::string str)
+{
+	size_t i = 0;
+	int count = 0;
+	size_t pos = str.find('.');
+	for (i = pos; i < str.size(); i++)
+	{
+		if (isdigit(str[i]))
+			count++;
+	}
+	return count;
+}
+
 bool	allIsDigitforChar(const std::string s)
 {
 	unsigned int i = 0;
@@ -15,8 +28,10 @@ bool	isFloat(std::string str)
 {
 	size_t i = 0;
 	if (str == "nanf" || str == "inff" || str == "+inff" || str == "-inff" || str == "-nanf" || str == "+nanf")
-        return true;
+	return true;
 	if (str.size() < 2 || str[str.size() - 1] != 'f')
+	return false;
+	if (!isdigit(str[str.size() - 2]))
 		return false;
 	std::string subStr = str.substr(0, str.size() - 1);
 	if (subStr[i] == '+' || subStr[i] == '-')
@@ -28,7 +43,7 @@ bool	isFloat(std::string str)
 		char c = static_cast<unsigned char>(subStr[i]);
 		if (std::isdigit(c))
 			hasDigit = true;
-		else if (subStr[i] == '.' && !hasDot)
+		else if (subStr[i] == '.' && !hasDot && hasDigit)
 			hasDot = true;
 		else
 			return false;
@@ -39,6 +54,8 @@ bool	isFloat(std::string str)
 bool	isDouble(std::string s)
 {
 	size_t i = 0;
+	if (!isdigit(s[s.size() - 1]))
+		return false;
 	if (s == "nan" || s == "+inf" || s == "-inf" || s == "-nan" || s == "+nan")
         return true;
 	if (s.size() < 2)
@@ -104,9 +121,11 @@ void	convertToChar(const std::string literal)
 		if (d > std::numeric_limits<char>::max() || d < std::numeric_limits<char>::min()
 			|| std::isnan(d) || std::isinf(d) || end || end == literal.c_str())
 			std::cout << "impossible\n";
-		unsigned char c = static_cast<unsigned char>(d);
-		std::cout << ((isprint(c)) ? "\'" + std::string(1, c) + "\'\n" : "Non displayable\n");
-
+		else
+		{
+			unsigned char c = static_cast<unsigned char>(d);
+			std::cout << ((isprint(c)) ? "\'" + std::string(1, c) + "\'\n" : "Non displayable\n");
+		}
 	}
 	else if (isFloat(literal))
 		fromFloattoChar(literal);
