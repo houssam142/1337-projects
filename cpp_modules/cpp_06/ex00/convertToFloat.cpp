@@ -50,7 +50,7 @@ void    converttoFloat(std::string arg)
         }
         if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min()
             || std::isnan(d) || std::isinf(d))
-            std::cout << (arg[0] == '+' ? arg.substr(1, arg.size()) + "w\n": arg + '\n');
+            std::cout << (arg[0] == '+' ? arg.substr(1, arg.size()) + "\n": arg + '\n');
         else
             std::cout << std::fixed << std::setprecision(count) << d << "f\n";
     }
