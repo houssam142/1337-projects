@@ -2,5 +2,6 @@
 
 #include <iostream>
 
-template <typename T> void iter()
+template <typename T, typename F>
+void iter(T* array, size_t len, F func)
 {}
