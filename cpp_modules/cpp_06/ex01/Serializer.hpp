@@ -2,6 +2,7 @@
 
 #include "Data.hpp"
 #include <stdint.h>
+#include <iomanip>
 
 class Serializer
 {
