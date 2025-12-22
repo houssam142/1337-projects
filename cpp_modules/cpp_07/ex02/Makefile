@@ -1,6 +1,5 @@
-#pragma once
 
-SRCS = main.cpp Array.cpp
+SRCS = main.cpp
 
 CPP = c++
 
