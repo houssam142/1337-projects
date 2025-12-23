@@ -10,14 +10,12 @@ class MutantStack: public std::stack<T>
 {
 	public:
 		MutantStack() {}
-		MutantStack(const MutantStack& copy)
-		{
-
-		}
+		MutantStack(const MutantStack& copy): std::stack<T>(copy) {}
 		MutantStack& operator=(const MutantStack& eq)
 		{
+			std::stack<T>::operator=(eq);
 			return *this;
-		}
+		}x
 		~MutantStack() {}
 		typedef typename std::stack<T>::container_type::iterator iterator;
 		typedef typename std::stack<T>::container_type::const_iterator const_iterator;
