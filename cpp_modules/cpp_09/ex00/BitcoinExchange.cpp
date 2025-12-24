@@ -39,7 +39,7 @@ bool	checkFormat(int year, int month, int day)
 		default:
 			return false;
 	}
-	return (day <= maxDays);
+	return (day >= 1 && day <= maxDays);
 }
 
 bool	BitcoinExchange::checkDates(std::string line)
@@ -56,19 +56,48 @@ bool	BitcoinExchange::checkDates(std::string line)
 	return true;
 }
 
+bool	allIsDigitforInt(const std::string s)
+{
+	unsigned int i = 0;
+	for (; i < s.size(); i++)
+	{
+		if (!std::isdigit(static_cast<char>(s[i])))
+			return false;
+	}
+	return true;
+}
+
+
+bool 	checkPrice(std::string price)
+{
+	std::stringstream _price(price);
+	int priceUsd;
+	if (!allIsDigitforInt(price))
+		return false;
+	if (!(_price >> priceUsd))
+		return false;
+	return true;
+}
+
 void BitcoinExchange::_extractWorth(const std::string file)
 {
+	char *end = NULL;
 	std::ifstream infile(file.c_str());
-	std::string input;
-	std::string date;
+	std::string input, date, price;
 	if (!infile.is_open())
 		throw std::runtime_error("Error: coudn't open the file");
 	std::getline(infile, input);
 	while (std::getline(infile, input))
 	{
 		date = input.substr(0, input.find(','));
+		price = input.substr(input.find(',') + 1, input.size());
 		if (!checkDates(date))
-			throw std::invalid_argument("Error: invalid dates");
+			continue;
+		if (!checkPrice(price))
+			continue;
+		double Price = std::strtod(price.c_str(), &end);
+		if (*end || end == price.c_str())
+			;
 	}
 }
 

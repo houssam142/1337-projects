@@ -10,7 +10,7 @@
 class BitcoinExchange
 {
 	private:
-		std::map<std::string, int> _rates;
+		std::map<std::string, double> _rates;
 	public:
 		BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange& copy);
