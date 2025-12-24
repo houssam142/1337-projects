@@ -2,12 +2,12 @@
 
 int main(int ac, char **av)
 {
-	(void)av;
 	try
 	{
 		if (ac != 2)
 			throw std::invalid_argument("Error");
-		BitcoinExchange bitcoin;	
+		BitcoinExchange bitcoin;
+		bitcoin._extractBitcoins(av[1]);
 	}
 	catch (const std::exception & e)
 	{

@@ -56,25 +56,13 @@ bool	BitcoinExchange::checkDates(std::string line)
 	return true;
 }
 
-bool	allIsDigitforInt(const std::string s)
-{
-	unsigned int i = 0;
-	for (; i < s.size(); i++)
-	{
-		if (!std::isdigit(static_cast<char>(s[i])))
-			return false;
-	}
-	return true;
-}
-
-
 bool 	checkPrice(std::string price)
 {
-	std::stringstream _price(price);
-	int priceUsd;
-	if (!allIsDigitforInt(price))
+	char *leftOver = NULL;
+	double priceUsd = std::strtod(price.c_str(), &leftOver);
+	if (*leftOver || leftOver == price.c_str())
 		return false;
-	if (!(_price >> priceUsd))
+	if (priceUsd < 0)
 		return false;
 	return true;
 }
@@ -97,8 +85,10 @@ void BitcoinExchange::_extractWorth(const std::string file)
 			continue;
 		double Price = std::strtod(price.c_str(), &end);
 		if (*end || end == price.c_str())
-			;
+			continue;
+		this->_rates.insert(std::make_pair(date, Price));
 	}
+	infile.close();
 }
 
 BitcoinExchange::~BitcoinExchange() {}
