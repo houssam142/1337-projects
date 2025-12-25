@@ -5,7 +5,7 @@ int main(int ac, char **av)
 	try
 	{
 		if (ac != 2)
-			throw std::invalid_argument("Error");
+			throw std::invalid_argument("Error: could not open file.");
 		BitcoinExchange bitcoin;
 		bitcoin._extractBitcoins(av[1]);
 	}
