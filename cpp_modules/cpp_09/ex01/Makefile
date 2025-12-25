@@ -4,14 +4,15 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-OBJS = $(SRCS:.cpp=.o)
-
 NAME = RPN
+
+OBJS = $(SRCS:.cpp=.o)
 
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 all: $(NAME)
+
 
 clean:
 	rm -rf $(OBJS)

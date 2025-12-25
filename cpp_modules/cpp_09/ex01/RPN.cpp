@@ -40,11 +40,10 @@ void reversePolishNotation(std::string arg)
 			s.push(arg[i] - '0');
 		if (arg[i] == ' ')
 			continue;
-		else
-		{
-			if (isArithmetic(arg[i]))
+		else if (isArithmetic(arg[i]))
 				Operations(s, arg[i]);
-		}
+		else if (!std::isdigit(arg[i]))
+			throw std::runtime_error("Error");
 	}
 	if (s.size() != 1)
 		throw std::runtime_error("Error");
