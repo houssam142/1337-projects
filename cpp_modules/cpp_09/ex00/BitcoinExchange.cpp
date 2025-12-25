@@ -8,12 +8,13 @@ BitcoinExchange::BitcoinExchange()
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& copy)
 {
-	(void)copy;
+	*this = copy;
 }
 
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& eq)
 {
-	(void)eq;
+	if (this != &eq)
+		this->_rates = eq._rates;
 	return *this;
 }
 
