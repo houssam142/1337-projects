@@ -1,5 +1,6 @@
 #include "PmergeMe.hpp"
 
+
 int main(int ac, char **av)
 {
 	std::vector<int> vec;
@@ -13,7 +14,9 @@ int main(int ac, char **av)
 		std::cout << "before: ";
 		displayVector(vec);
 		
+		std::cout << "After: ";
 		sortVector(vec);
+		displayVector(vec);
 	}
 	return 0;
 }
