@@ -16,14 +16,18 @@ void displayDeque(const std::deque<int>& d)
     std::cout << std::endl;
 }
 
-void notSorted(std::string name, std::vector<int>& vec, std::deque<int>& deq)
+bool    parseAndAddNumber(std::string name, std::vector<int>& vec, std::deque<int>& deq)
 {
     char *leftOver = NULL;
     long num = std::strtol(name.c_str(), &leftOver, 10);
-    if (*leftOver != '\0' || leftOver == name.c_str())
-        return ;
+    if (*leftOver != '\0' || leftOver == name.c_str() || num < 0)
+    {
+        std::cerr << "Error: negative number\n";
+        return false;
+    }
     vec.push_back(num);
     deq.push_back(num);
+    return true;
 }
 
 void sortVector(std::vector<int>& vec)

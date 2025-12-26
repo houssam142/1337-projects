@@ -11,7 +11,10 @@ int main(int ac, char **av)
 	else
 	{
 		for (int i = 1; i < ac; i++)
-			notSorted(av[i], vec, deq);
+		{
+			if (!parseAndAddNumber(av[i], vec, deq))
+				return 1;
+		}
 		std::cout << "before: ";
 		displayVector(vec);
 		
