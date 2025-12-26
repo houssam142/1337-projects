@@ -1,27 +1,35 @@
+#include <iomanip>
 #include "PmergeMe.hpp"
 
 int main(int ac, char **av)
 {
 	std::vector<int> vec;
 	std::deque<int> deq;
-	struct timeval mic;
+	struct timeval start, end;
 	if (ac == 1)
 		std::cerr << "Error\n";
 	else
 	{
-		for (int i = 0; i < ac; i++)
+		for (int i = 1; i < ac; i++)
 			notSorted(av[i], vec, deq);
 		std::cout << "before: ";
 		displayVector(vec);
 		
-		gettimeofday(&mic, NULL);
-		std::cout << "After: ";
-		double sVecTime = static_cast<double>(mic.tv_sec) * 1000000.0 + static_cast<double>(mic.tv_usec);
+		gettimeofday(&start, NULL);
+
 		sortVector(vec);
-		gettimeofday(&mic, NULL);
-		double eVecTime = static_cast<double>(mic.tv_sec) * 1000000.0 + static_cast<double>(mic.tv_usec);
+		gettimeofday(&end, NULL);
+		std::cout << "After: ";
 		displayVector(vec);
-		std::cout << "Time to process a range of 5 elements with std::vector: " << eVecTime - sVecTime << " us\n";
+		double vecTime = (static_cast<double>(end.tv_sec) - static_cast<double>(start.tv_sec)) * 1000000.0 + (static_cast<double>(end.tv_usec) - static_cast<double>(start.tv_usec));
+		std::cout << "Time to process a range of " << vec.size() << " elements with std::vector: " << vecTime << " us\n";
+		gettimeofday(&start, NULL);
+
+		sortDeque(deq);
+
+		gettimeofday(&end, NULL);
+		double deqTime = (static_cast<double>(end.tv_sec) - static_cast<double>(start.tv_sec)) * 1000000.0 + (static_cast<double>(end.tv_usec) - static_cast<double>(start.tv_usec));
+		std::cout << "Time to process a range of " << vec.size() << " elements with std::deque: " << deqTime << " us\n";
 	}
 	return 0;
 }
