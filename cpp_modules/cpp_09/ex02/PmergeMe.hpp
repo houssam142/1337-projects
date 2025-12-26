@@ -5,6 +5,7 @@
 #include <deque>
 #include <cstdlib>
 #include <ctime>
+#include <sys/time.h>
 
 
 void notSorted(std::string name, std::vector<int>& vec, std::deque<int>& deq);
