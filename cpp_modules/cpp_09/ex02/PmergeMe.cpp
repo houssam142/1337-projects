@@ -25,3 +25,8 @@ void notSorted(std::string name, std::vector<int>& vec, std::deque<int>& deq)
     vec.push_back(num);
     deq.push_back(num);
 }
+
+void sortVector(std::vector<int>& vec)
+{
+    
+}

@@ -14,6 +14,8 @@ int main(int ac, char **av)
 		displayVector(vec);
 		std::cout << "before: ";
 		displayDeque(deq);
+		
+		sortVector(vec);
 	}
 	return 0;
 }
