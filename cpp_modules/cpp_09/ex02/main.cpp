@@ -12,8 +12,6 @@ int main(int ac, char **av)
 			notSorted(av[i], vec, deq);
 		std::cout << "before: ";
 		displayVector(vec);
-		std::cout << "before: ";
-		displayDeque(deq);
 		
 		sortVector(vec);
 	}
