@@ -30,7 +30,7 @@ bool    parseAndAddNumber(std::string name, std::vector<int>& vec, std::deque<in
     return true;
 }
 
-unsigned int jacobSthal(unsigned int n)
+int jacobSthal(int n)
 {
     if (n == 0) return 0;
     if (n == 1) return 1;
@@ -40,19 +40,21 @@ unsigned int jacobSthal(unsigned int n)
 
 void sortVector(std::vector<int>& vec)
 {
-    std::vector<int> _winners;
-    std::vector<int> _losers;
     if (vec.size() == 1)
         return ;
+    std::vector<std::pair<int, int> > _pair;
+    std::vector<int> _winners;
+    std::vector<int> _losers;
     bool struggler = (vec.size() % 2 == 1);
-    int num = 0;
+    int num = -1;
     if (struggler)
     {
-        num = vec[vec.size() - 1];
+        num = vec.back();
         vec.pop_back();
     }
     for (unsigned int i = 0; i < vec.size(); i+=2)
     {
+        _pair.push_back(std::make_pair(vec[i], vec[i + 1]));
         if (vec[i] >= vec[i + 1])
         {
             _winners.push_back(vec[i]);
@@ -64,14 +66,28 @@ void sortVector(std::vector<int>& vec)
             _losers.push_back(vec[i]);
         }
     }
-    if (struggler)
-        _losers.push_back(num);
     sortVector(_winners);
-    for (unsigned int i = 0; i < _losers.size(); i++)
+
+    if (!_losers.empty())
+        _winners.insert(std::lower_bound(_winners.begin(), _winners.end(), _losers[0]), _losers[0]);
+    int k = 3;
+    int end = 1;
+    int size = _losers.size();
+    for (int prev = 1; prev < size; prev = end)
     {
-        std::vector<int>::iterator pos = std::lower_bound(_winners.begin(), _winners.end(), _losers[i]);
-        _winners.insert(pos, _losers[i]);
+        end = std::min(jacobSthal(k), size);
+        for (int j = end - 1; j >= prev; j--)
+        {
+            std::vector<int>::iterator limit = _winners.begin() + j + prev;
+            if (limit > _winners.end())
+                limit = _winners.end();
+            std::vector<int>::iterator pos = std::lower_bound(_winners.begin(), limit, _losers[j]);
+            _winners.insert(pos, _losers[j]);
+        }
+        k++;
     }
+    if (struggler)
+        _winners.insert(std::lower_bound(_winners.begin(), _winners.end(), num), num);
     vec = _winners;
 }
 
@@ -82,7 +98,7 @@ void sortDeque(std::deque<int>& deq)
     if (deq.size() == 1)
         return ;
     bool struggler = (deq.size() % 2 == 1);
-    int num = 0;
+    int num = -1;
     if (struggler)
     {
         num = deq[deq.size() - 1];
