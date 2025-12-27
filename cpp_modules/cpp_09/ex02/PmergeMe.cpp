@@ -93,6 +93,7 @@ void sortVector(std::vector<int>& vec)
 
 void sortDeque(std::deque<int>& deq)
 {
+    std::deque<std::pair<int, int> > _pair;
     std::deque<int> _winners;
     std::deque<int> _losers;
     if (deq.size() == 1)
@@ -106,6 +107,7 @@ void sortDeque(std::deque<int>& deq)
     }
     for (unsigned int i = 0; i < deq.size(); i+=2)
     {
+        _pair.push_back(std::make_pair(deq[i], deq[i + 1]));
         if (deq[i] >= deq[i + 1])
         {
             _winners.push_back(deq[i]);
@@ -117,13 +119,27 @@ void sortDeque(std::deque<int>& deq)
             _losers.push_back(deq[i]);
         }
     }
-    if (struggler)
-        _losers.push_back(num);
     sortDeque(_winners);
-    for (unsigned int i = 0; i < _losers.size(); i++)
+    if (!_losers.empty())
+        _winners.insert(std::lower_bound(_winners.begin(), _winners.end(), _losers[0]), _losers[0]);
+
+    int k = 3;
+    int end = 1;
+    int size = _losers.size();
+    for (int prev = 1; prev < size; prev = end)
     {
-        std::deque<int>::iterator pos = std::lower_bound(_winners.begin(), _winners.end(), _losers[i]);
-        _winners.insert(pos, _losers[i]);
+        end = std::min(jacobSthal(k), size);
+        for (int j = end - 1; j >= prev; j--)
+        {
+            std::deque<int>::iterator limit = _winners.begin() + j + prev;
+            if (limit > _winners.end())
+                limit = _winners.end();
+            std::deque<int>::iterator pos = std::lower_bound(_winners.begin(), _winners.end(), _losers[j]);
+            _winners.insert(pos, _losers[j]);
+        }
+        k++;
     }
+    if (struggler)
+        _winners.insert(std::lower_bound(_winners.begin(), _winners.end(), num), num);
     deq = _winners;
 }
