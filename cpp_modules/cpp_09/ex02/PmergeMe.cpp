@@ -30,6 +30,14 @@ bool    parseAndAddNumber(std::string name, std::vector<int>& vec, std::deque<in
     return true;
 }
 
+unsigned int jacobSthal(unsigned int n)
+{
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+
+    return jacobSthal(n - 1) + 2 * jacobSthal(n - 2);
+}
+
 void sortVector(std::vector<int>& vec)
 {
     std::vector<int> _winners;
