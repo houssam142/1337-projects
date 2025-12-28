@@ -27,7 +27,7 @@ int main(int ac, char **av)
 		std::cout << "Time to process a range of " << vec.size() << " elements with std::vector: " << vecTime << " us\n";
 		gettimeofday(&start, NULL);
 
-		sortDeque(deq);
+		// sortDeque(deq);
 
 		gettimeofday(&end, NULL);
 		double deqTime = (static_cast<double>(end.tv_sec) - static_cast<double>(start.tv_sec)) * 1000000.0 + (static_cast<double>(end.tv_usec) - static_cast<double>(start.tv_usec));
