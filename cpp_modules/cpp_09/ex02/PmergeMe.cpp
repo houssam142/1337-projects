@@ -25,6 +25,12 @@ bool    parseAndAddNumber(std::string name, std::vector<int>& vec, std::deque<in
         std::cerr << "Error\n";
         return false;
     }
+    std::vector<int>::iterator it = std::find(vec.begin(), vec.end(), num);
+    if (it != vec.end())
+    {
+        std::cerr << "Found duplicate" << '\n';
+        return false;
+    }
     vec.push_back(num);
     deq.push_back(num);
     return true;
@@ -84,12 +90,11 @@ void sortVector(std::vector<int>& vec)
     {
         curr_end = jacobSthal(k);
         if (curr_end > size) curr_end = size;
-        
         for (int j = curr_end - 1; j >= prev_end; j--)
         {
-            int added_elements = (curr_end - 1); 
+            int added_elements = curr_end;
             int limit_idx = std::min(static_cast<int>(_mainChain.size()), j + added_elements);
-            
+
             std::vector<int>::iterator limit = _mainChain.begin() + limit_idx;
             std::vector<int>::iterator pos = std::lower_bound(_mainChain.begin(), limit, _losers[j]);
             _mainChain.insert(pos, _losers[j]);
