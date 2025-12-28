@@ -22,7 +22,7 @@ bool    parseAndAddNumber(std::string name, std::vector<int>& vec, std::deque<in
     long num = std::strtol(name.c_str(), &leftOver, 10);
     if (*leftOver != '\0' || leftOver == name.c_str() || num < 0)
     {
-        std::cerr << "Error: negative number\n";
+        std::cerr << "Error\n";
         return false;
     }
     vec.push_back(num);
@@ -34,7 +34,6 @@ int jacobSthal(int n)
 {
     if (n == 0) return 0;
     if (n == 1) return 1;
-
     return jacobSthal(n - 1) + 2 * jacobSthal(n - 2);
 }
 
@@ -54,17 +53,20 @@ void sortVector(std::vector<int>& vec)
     }
     for (unsigned int i = 0; i < vec.size(); i+=2)
     {
-        _pair.push_back(std::make_pair(vec[i], vec[i + 1]));
+        std::pair<int, int> p;
         if (vec[i] >= vec[i + 1])
         {
-            _winners.push_back(vec[i]);
-            _losers.push_back(vec[i + 1]);
+            p.first = vec[i];
+            p.second = vec[i + 1];
         }
         else if (vec[i + 1] >= vec[i])
         {
-            _winners.push_back(vec[i + 1]);
-            _losers.push_back(vec[i]);
+            p.first = vec[i + 1];
+            p.second = vec[i];
         }
+        _pair.push_back(p);
+        _winners.push_back(p.first);
+        _losers.push_back(p.second);
     }
     sortVector(_winners);
 
