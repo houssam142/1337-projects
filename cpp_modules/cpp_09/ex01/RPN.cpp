@@ -8,13 +8,9 @@ bool isArithmetic(char c)
 void	Operations(std::stack<int>& stack, char c)
 {
 	if (stack.size() < 2)
-		throw std::invalid_argument("Error");
-	int a, b;
-
-	b = stack.top();
-	stack.pop();
-	a = stack.top();
-	stack.pop();
+		throw std::runtime_error("Error");
+	int b = stack.top(); stack.pop();
+	int a = stack.top(); stack.pop();
 	if (c == '+')
 		stack.push(a + b);
 	else if (c == '-')
