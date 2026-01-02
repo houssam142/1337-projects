@@ -34,15 +34,24 @@ void reversePolishNotation(std::string arg)
 	if (arg.empty())
 		throw std::invalid_argument("Error: empty arg");
 	std::stack<int> s;
+	bool prevWasDigit = false;
 	for (unsigned int i = 0; i < arg.size(); i++)
 	{
-		if (std::isdigit(arg[i]))
-			s.push(arg[i] - '0');
 		if (arg[i] == ' ')
+		{
+			prevWasDigit = false;
 			continue;
+		}
+		if (std::isdigit(arg[i]))
+		{
+			if (prevWasDigit)
+				throw std::runtime_error("Error");
+			s.push(arg[i] - '0');
+			prevWasDigit = true;
+		}
 		else if (isArithmetic(arg[i]))
-				Operations(s, arg[i]);
-		else if (!std::isdigit(arg[i]))
+			Operations(s, arg[i]);
+		else
 			throw std::runtime_error("Error");
 	}
 	if (s.size() != 1)
