@@ -17,17 +17,18 @@ void    fromDoubletoFloat(std::string s)
 {
     char *end = NULL;
     double d = strtod(s.c_str(), &end);
+    int count = countDigitsAfterDot(s);
     if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min()
-        || *end || end == s.c_str() || std::isnan(d))
+        || *end != '\0' || end == s.c_str())
         std::cout << (s[0] == '+' ? s.substr(1, s.size()) + "f\n" : s + "f\n");
     else
-        std::cout << std::fixed << std::setprecision(1) << d << "f\n";
+        std::cout << std::fixed << std::setprecision(count) << d << "f\n";
 }
 
 void    converttoFloat(std::string arg)
 {
     std::cout << "float: ";
-    if (arg.size() == 1 && !std::isdigit(static_cast<unsigned char>(arg[0])))
+    if (arg.size() == 1 && !isdigit(static_cast<unsigned char>(arg[0])))
     {
         float fp = static_cast<float>(arg[0]);
         std::cout << fp;
@@ -49,7 +50,7 @@ void    converttoFloat(std::string arg)
             return ;
         }
         if (d > std::numeric_limits<float>::max() || d < std::numeric_limits<float>::min()
-            || std::isnan(d) || std::isinf(d))
+            || *end || end == arg.c_str())
             std::cout << (arg[0] == '+' ? arg.substr(1, arg.size()) + "\n": arg + '\n');
         else
             std::cout << std::fixed << std::setprecision(count) << d << "f\n";

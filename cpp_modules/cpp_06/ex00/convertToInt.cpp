@@ -9,7 +9,7 @@ bool	allIsDigitforInt(const std::string s)
 		++i;
 	for (; i < s.size(); i++)
 	{
-		if (!std::isdigit(static_cast<char>(s[i])))
+		if (!isdigit(static_cast<char>(s[i])))
 			return false;
 	}
 	return true;
@@ -21,7 +21,7 @@ void    fromFloattoInt(std::string s)
     std::string subStr = s.substr(0, s.size() - 1);
     double  d = strtod(subStr.c_str(), &leftOver);
     if (d > std::numeric_limits<int>::max() || d < std::numeric_limits<int>::min()
-        || *leftOver != '\0' || leftOver == subStr.c_str() || std::isnan(d))
+        || *leftOver != '\0' || leftOver == subStr.c_str() || s == "nanf" || s == "-nanf" || s == "+nanf")
         std::cout << "impossible\n";
     else
     {
@@ -35,7 +35,7 @@ void    formDoubletoInt(std::string p)
     char *leftOver = NULL;
     double d = strtod(p.c_str(), &leftOver);
     if (d > std::numeric_limits<int>::max() || d < std::numeric_limits<int>::min()
-        || *leftOver || leftOver == p.c_str() || std::isnan(d))
+        || *leftOver || leftOver == p.c_str() || p == "nan" || p == "-nan" || p == "+nan")
         std::cout << "impossible\n";
     else
     {
@@ -47,7 +47,7 @@ void    formDoubletoInt(std::string p)
 void    convertToInt(std::string arg)
 {
     std::cout << "int: ";
-    if ((arg.size() == 1 && !std::isdigit(static_cast<unsigned char>(arg[0]))))
+    if ((arg.size() == 1 && !isdigit(static_cast<unsigned char>(arg[0]))))
     {
         int num = static_cast<int>(arg[0]);
         std::cout << num << '\n';
@@ -56,8 +56,8 @@ void    convertToInt(std::string arg)
     {
         char *leftOver = NULL;
         double d = strtod(arg.c_str(), &leftOver);
-        if (d > std::numeric_limits<int>::max() || d < std::numeric_limits<int>::min() || std::isnan(d)
-            || *leftOver != '\0' || leftOver == arg.c_str() || std::isinf(d))
+        if (d > std::numeric_limits<int>::max() || d < std::numeric_limits<int>::min()
+            || *leftOver != '\0' || leftOver == arg.c_str())
                 std::cout << "impossible\n";
         else
         {

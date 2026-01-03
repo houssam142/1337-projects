@@ -4,7 +4,7 @@
 
 Base*	generate(void)
 {
-	int i = std::rand() % 3;
+	int i = rand() % 3;
 	switch (i)
 	{
 	case 0:
@@ -64,8 +64,8 @@ int main()
 {
 	srand(time(NULL));
 	Base* ptr = generate();
-	identify(ptr);
 	identify(*ptr);
+	identify(ptr);
 	delete ptr;
 	return 0;
 }

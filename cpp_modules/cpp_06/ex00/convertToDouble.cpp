@@ -6,7 +6,7 @@ void	fromFloattoDouble(std::string s)
 	char *leftOver = NULL;
 	double d = strtod(sub.c_str(), &leftOver);
 	if (d > std::numeric_limits<double>::max() || d < std::numeric_limits<double>::min()
-		|| *leftOver != '\0' || leftOver == sub.c_str() || std::isnan(d))
+		|| *leftOver != '\0' || leftOver == sub.c_str())
 		std::cout << (sub[0] == '+' ? sub.substr(1, sub.size()) + "\n" : sub + "\n");
 
 	else
@@ -17,7 +17,7 @@ void	fromInttoDouble(std::string s)
 {
 	char *end = NULL;
 	double d = strtod(s.c_str(), &end);
-	if (*end != '\0' || end == s.c_str() || std::isnan(d) || std::isinf(d))
+	if (*end != '\0' || end == s.c_str())
 		std::cout << (s[0] == '+' ? s.substr(1, s.size()) + "\n" : s + "\n");
 	else
 	{
@@ -28,7 +28,7 @@ void	fromInttoDouble(std::string s)
 void	convertToDouble(std::string arg)
 {
 	std::cout << "Double: ";
-	if (arg.size() == 1 && !std::isdigit(static_cast<unsigned char>(arg[0])))
+	if (arg.size() == 1 && !isdigit(static_cast<unsigned char>(arg[0])))
 	{
 		double a = static_cast<double>(arg[0]);
 		std::cout << a;
@@ -43,11 +43,12 @@ void	convertToDouble(std::string arg)
 	{
 		char *end = NULL;
 		double w = strtod(arg.c_str(), &end);
+		int count = countDigitsAfterDot(arg);
 		if (w > std::numeric_limits<double>::max() || w < std::numeric_limits<double>::min()
-			|| *end || end == arg.c_str() || std::isnan(w) || std::isinf(w))
+			|| *end || end == arg.c_str())
             std::cout << (arg[0] == '+' ? arg.substr(1, arg.size()) + "\n" : arg + "\n");
 		else
-			std::cout << std::fixed << std::setprecision(1) << w << '\n';
+			std::cout << std::fixed << std::setprecision(count) << w << '\n';
 	}
 	else
 		std::cout << "impossible\n";
