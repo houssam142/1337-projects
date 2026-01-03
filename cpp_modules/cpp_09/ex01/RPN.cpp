@@ -9,8 +9,12 @@ void	Operations(std::stack<int>& stack, char c)
 {
 	if (stack.size() < 2)
 		throw std::runtime_error("Error");
-	int b = stack.top(); stack.pop();
-	int a = stack.top(); stack.pop();
+	int a, b;
+
+	b = stack.top();
+	stack.pop();
+	a = stack.top();
+	stack.pop();
 	if (c == '+')
 		stack.push(a + b);
 	else if (c == '-')
@@ -30,24 +34,24 @@ void reversePolishNotation(std::string arg)
 	if (arg.empty())
 		throw std::invalid_argument("Error: empty arg");
 	std::stack<int> s;
-	bool prevWasDigit = false;
+	bool prevDigit = false;
 	for (unsigned int i = 0; i < arg.size(); i++)
 	{
 		if (arg[i] == ' ')
 		{
-			prevWasDigit = false;
+			prevDigit = false;
 			continue;
 		}
 		if (std::isdigit(arg[i]))
 		{
-			if (prevWasDigit)
+			if (prevDigit)
 				throw std::runtime_error("Error");
 			s.push(arg[i] - '0');
-			prevWasDigit = true;
+			prevDigit = true;
 		}
 		else if (isArithmetic(arg[i]))
 			Operations(s, arg[i]);
-		else
+		else if (!std::isdigit(arg[i]))
 			throw std::runtime_error("Error");
 	}
 	if (s.size() != 1)

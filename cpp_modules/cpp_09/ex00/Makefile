@@ -1,5 +1,5 @@
 
-SRCS = main.cpp BitcoinExchange.cpp btc.cpp
+SRCS = main.cpp BitcoinExchange.cpp
 
 CXX = c++
 

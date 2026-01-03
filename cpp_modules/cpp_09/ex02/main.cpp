@@ -1,6 +1,5 @@
 #include "PmergeMe.hpp"
 
-
 template <typename T>
 bool    parseAndAddNumber(std::string name, T& cont)
 {
@@ -30,10 +29,18 @@ void display(const T& v)
     std::cout << std::endl;
 }
 
+template <typename T>
+typename T::iterator findWinnerIter(T& c, int v)
+{
+    for (typename T::iterator it = c.begin(); it != c.end(); ++it)
+        if (*it == v) return it;
+    return c.end();
+}
+
 template <typename T, typename Y>
 void FordJohnson(T& vec)
 {
-    if (vec.size() == 1)
+    if (vec.size() <= 1)
         return ;
     Y _pair;
     bool struggler = (vec.size() % 2 == 1);
@@ -44,7 +51,7 @@ void FordJohnson(T& vec)
         num = vec.back();
         vec.pop_back();
     }
-    for (unsigned int i = 0; i < vec.size(); i+=2)
+    for (unsigned int i = 0; i < vec.size(); i += 2)
     {
         if (vec[i] >= vec[i + 1])
             _pair.push_back(std::make_pair(vec[i], vec[i + 1]));
@@ -63,12 +70,11 @@ void FordJohnson(T& vec)
             if (_winners[i] == _pair[j].first)
             {
                 _losers.push_back(_pair[j].second);
-                _pair.erase(_pair.begin() + j);
                 break;
             }
         }
     }
-    
+
     _mainChain.insert(_mainChain.begin(), _losers[0]);
     int prev_end = 1;
     int curr_end = 1;
@@ -80,10 +86,18 @@ void FordJohnson(T& vec)
         if (curr_end > size) curr_end = size;
         for (int j = curr_end - 1; j >= prev_end; j--)
         {
-            int limit_idx = std::min(static_cast<int>(_mainChain.size()), j + curr_end);
-
-            typename T::iterator limit = std::find(_mainChain.begin(), _mainChain.end(), limit_idx);
-            typename T::iterator pos = std::lower_bound(_mainChain.begin(), limit, _losers[j]);
+            int winner = _pair[0].first;
+            for (size_t p = 0; p < _pair.size(); ++p)
+            {
+                if (_pair[p].second == _losers[j])
+                {
+                    winner = _pair[p].first;
+                    break;
+                }
+            }
+            typename T::iterator itWin = findWinnerIter(_mainChain, winner);
+            typename T::iterator ub = (itWin != _mainChain.end()) ? itWin : _mainChain.end();
+            typename T::iterator pos = std::lower_bound(_mainChain.begin(), ub, _losers[j]);
             _mainChain.insert(pos, _losers[j]);
         }
         prev_end = curr_end;
