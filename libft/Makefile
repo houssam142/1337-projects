@@ -45,18 +45,16 @@ $(NAME): $(OBJS)
 
 bonus: $(BONUS_SRCS) $(BONUS_OBJS)
 	$(LIBC) $(NAME) $(BONUS_OBJS)
-	touch bonus
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 clean:
 	rm -f $(OBJS) $(BONUS_OBJS)
-	touch clean
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
 
-.PHONY: all fclean re
+.PHONY: all fclean re clean
