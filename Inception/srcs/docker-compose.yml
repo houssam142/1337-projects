@@ -1,6 +1,6 @@
 services:
   nginx:
-    build: /home/houssam/Desktop/1337-projects/Inception/src/nginx
+    build: /home/houssam/Desktop/1337-projects/Inception/srcs/requirements/nginx
     ports:
       - "8080:80"
       - "8443:443"

@@ -1,9 +1,9 @@
 
 all:
-	docker compose up
+	cd srcs && docker compose up
 
 clean:
 
 fclean:
 
-re:
+re: fclean all
