@@ -1,10 +1,27 @@
 services:
-  nginx:
-    build: /home/houssam/Desktop/1337-projects/Inception/srcs/requirements/nginx
-    ports:
-      - "8080:80"
-      - "8443:443"
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: inception_mariadb
+    environment:
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
-      - /home/houssam/data:/etc/nginx/conf.d
-    restart: always
+      - mariadb_data:/home/houssam/data
+    networks:
+      - inception_network
+    restart: unless-stopped
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress
+    volumes:
+      - wordpress_data:/home/houssam/data
 
+volumes:
+  mariadb_data:
+  wordpress_data:
+
+networks:
+   inception_network:
+     driver: bridge
