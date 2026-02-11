@@ -15,14 +15,14 @@ services:
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
-    ports:
-      - "8081:80"
     depends_on:
       - mariadb
+    ports:
+      - "8081:80"
     environment:
       WORDPRESS_DB_HOST: mariadb
       WORDPRESS_DB_USER: hounejja
-      WORDPRESS_DB_PASSWORD: coffee
+      WORDPRESS_DB_PASSWORD: "coffee"
       WORDPRESS_DB_NAME: wordpress
     volumes:
       - ./wordpress_data:/home/houssam/data/www/html
