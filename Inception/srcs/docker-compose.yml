@@ -17,20 +17,24 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
-    ports:
-      - "8081:80"
     environment:
       WORDPRESS_DB_HOST: mariadb
-      WORDPRESS_DB_USER: hounejja
-      WORDPRESS_DB_PASSWORD: "coffee"
-      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: ${DB_USER}
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_DB_NAME: ${DB_NAME}
     volumes:
-      - ./wordpress_data:/home/houssam/data/www/html
+      - ./wordpress_data:/var/www/html
     restart: unless-stopped
+  nginx:
+    build: ./requirements/nginx
+    container_name: nginx
+    volumes:
+      - ../secrets:/etc/nginx/conf
 
 volumes:
   mariadb_data:
   wordpress_data:
+  secrets:
 
 networks:
    inception_network:
