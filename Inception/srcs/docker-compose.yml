@@ -3,7 +3,7 @@ services:
     build: ./requirements/mariadb
     container_name: inception_mariadb
     environment:
-      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_DATABASE: ${DB_DATABASE}
       MARIADB_USER: ${DB_USER}
       MARIADB_PASSWORD: ${DB_PASSWORD}
       MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
@@ -21,7 +21,7 @@ services:
       WORDPRESS_DB_HOST: mariadb
       WORDPRESS_DB_USER: ${DB_USER}
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
-      WORDPRESS_DB_NAME: ${DB_NAME}
+      WORDPRESS_DB_NAME: ${DB_DATABASE}
     volumes:
       - ./wordpress_data:/var/www/html
     networks:
@@ -32,8 +32,12 @@ services:
     container_name: nginx
     ports:
       - "8080:80"
+    depends_on:
+      - wordpress
+    networks:
+      - inception_network
     volumes:
-      - ../secrets:/etc/nginx/conf
+      - ./wordpress_data:/var/www/html
 
 volumes:
   mariadb_data:
