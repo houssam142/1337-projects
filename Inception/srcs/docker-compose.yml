@@ -1,7 +1,7 @@
 services:
   mariadb:
     build: ./requirements/mariadb
-    container_name: inception_mariadb
+    container_name: mariadb
     environment:
       MARIADB_DATABASE: ${DB_DATABASE}
       MARIADB_USER: ${DB_USER}

@@ -1,4 +1,4 @@
-FROM debian:11 
+FROM debian:bookworm 
 
 RUN apt-get update && apt-get install nginx -y \
     && rm -rf /var/lib/apt/lists/*
