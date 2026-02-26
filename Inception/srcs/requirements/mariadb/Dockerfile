@@ -1,12 +1,15 @@
 FROM debian:bookworm
 
-RUN apt-get update && apt-get install -y mariadb-server \ 
-	&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update && \
+	apt-get install -y mariadb-server && \
+	rm -rf /var/lib/apt/lists/*
 
-COPY conf/create_db.sh /docker-entrypoint-initdb.d/create_db.sh
+COPY tools/create_db.sh /create_db.sh
 
-RUN chmod +x /docker-entrypoint-initdb.d/create_db.sh
-	
+RUN chmod +x /create_db.sh
+
 EXPOSE 3306
 
-CMD ["mysqld_safe"]
+ENTRYPOINT ["/create_db.sh"]
+
+CMD ["mysqld"]
