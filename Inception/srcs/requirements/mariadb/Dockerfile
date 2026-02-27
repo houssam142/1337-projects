@@ -12,4 +12,5 @@ EXPOSE 3306
 
 ENTRYPOINT ["/create_db.sh"]
 
-CMD ["mysqld"]
+CMD ["mysqld_safe"]
+
