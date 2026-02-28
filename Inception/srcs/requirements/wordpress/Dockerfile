@@ -1,17 +1,25 @@
 FROM debian:bookworm
 
 RUN apt-get update && \
-	apt install php-fpm -y && \
-	apt install -y php-mysqli && \
-	apt install -y php-curl && \
-	apt install -y php-xml && \
-	apt install -y php-mbstring && \
-	apt install -y php-gd && \
+	apt-get install -y \
+	php-fpm \
+	php-mysqli \
+	php-curl \
+	php-xml \
+	php-mbstring \
+	php-gd \
+	curl && \
 	rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www/html
 
-COPY conf/wp-config.php /var/www/html/wp-config.php
+RUN curl -O https://wordpress.org/latest.tar.gz && \
+    tar -xzf latest.tar.gz && \
+    rm latest.tar.gz && \
+    mv wordpress/* . && \
+    rm -rf wordpress
+
+RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 9000
 
