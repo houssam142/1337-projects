@@ -1,10 +1,10 @@
 <?php
 
-define('WP_HOME', 'https://localhost');
-define('WP_SITEURL', 'https://localhost');
+define('WP_HOME', 'https://hounejja.42.fr');
+define('WP_SITEURL', 'https://hounejja.42.fr');
 
-define('DB_NAME', 'houssam');
-define('DB_USER', 'hounejja');
-define('DB_PASSWORD', 'Hello1234$');
+define('DB_NAME', getenv('DB_DATABASE'));
+define('DB_USER', getenv('DB_USER'));
+define('DB_PASSWORD', getenv('DB_PASSWORD'));
 define('DB_HOST', 'mariadb');
 

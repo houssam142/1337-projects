@@ -3,7 +3,7 @@ FROM debian:bookworm
 RUN apt-get update && \
 	apt-get install -y \
 	php-fpm \
-	php-mysqli \
+	php-mysql \
 	php-curl \
 	php-xml \
 	php-mbstring \
@@ -13,14 +13,10 @@ RUN apt-get update && \
 
 WORKDIR /var/www/html
 
-RUN curl -O https://wordpress.org/latest.tar.gz && \
-    tar -xzf latest.tar.gz && \
-    rm latest.tar.gz && \
-    mv wordpress/* . && \
-    rm -rf wordpress
+COPY tool/setup.sh /setup.sh
 
-RUN chown -R www-data:www-data /var/www/html
+RUN chmod +x /setup.sh
 
 EXPOSE 9000
 
-CMD ["php-fpm8.2", "-F"]
+CMD ["/setup.sh"]
