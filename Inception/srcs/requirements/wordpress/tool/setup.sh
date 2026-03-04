@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ ! -f /var/www/html/index.php ]; then
     echo "Installing WordPress..."
     cd /var/www/html
@@ -9,6 +11,8 @@ if [ ! -f /var/www/html/index.php ]; then
     mv wordpress/* .
     rm -rf wordpress
     chown -R www-data:www-data /var/www/html
+    chmod -R 755 /var/www/html
 fi
 
 exec php-fpm8.2 -F
+

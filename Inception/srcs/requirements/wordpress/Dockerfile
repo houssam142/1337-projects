@@ -11,6 +11,8 @@ RUN apt-get update && \
 	curl && \
 	rm -rf /var/lib/apt/lists/*
 
+RUN sed -i 's|^listen = .*|listen = 0.0.0.0:9000|' /etc/php/8.2/fpm/pool.d/www.conf
+
 WORKDIR /var/www/html
 
 COPY tool/setup.sh /setup.sh
