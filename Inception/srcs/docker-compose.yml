@@ -31,13 +31,14 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     ports:
-      - "8080:80"
+      - "8080:443"
     depends_on:
       - wordpress
     networks:
       - inception_network
     volumes:
       - /home/houssam/data/wordpress:/var/www/html
+    restart: unless-stopped
 
 volumes:
   mariadb_data:
