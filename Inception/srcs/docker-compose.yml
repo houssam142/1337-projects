@@ -8,7 +8,7 @@ services:
       DB_PASSWORD: $(cat /run/secrets/db_password.txt)
       DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     volumes:
-      - /home/houssam/data/mariadb:/var/lib/mysql
+      - /home/$USER/data/mariadb:/var/lib/mysql
     networks:
       - inception_network
     restart: unless-stopped
@@ -23,7 +23,7 @@ services:
       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
       WORDPRESS_DB_NAME: ${DB_DATABASE}
     volumes:
-      - /home/houssam/data/wordpress:/var/www/html
+      - /home/$USER/data/wordpress:/var/www/html
     networks:
       - inception_network
     restart: unless-stopped
@@ -37,7 +37,7 @@ services:
     networks:
       - inception_network
     volumes:
-      - /home/houssam/data/wordpress:/var/www/html
+      - /home/$USER/data/wordpress:/var/www/html
     restart: unless-stopped
 
 volumes:
