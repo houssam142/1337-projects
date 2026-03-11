@@ -39,6 +39,10 @@ services:
     volumes:
       - /home/$USER/data/wordpress:/var/www/html
     restart: unless-stopped
+  redis:
+    build: ./bonus/redis
+    container_name: redis
+    restart: unless-stopped
 
 volumes:
   mariadb_data:
