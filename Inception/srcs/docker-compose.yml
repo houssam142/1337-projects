@@ -56,7 +56,7 @@ services:
       FTP_PASSWORD: ${FTP_PASSWORD}
     volumes:
       - /home/hounejja/data/wordpress:/var/www/html
-    network:
+    networks:
       - inception_network
     restart: unless-stopped
 
