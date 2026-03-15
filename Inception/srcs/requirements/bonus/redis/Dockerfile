@@ -3,7 +3,8 @@ FROM debian:bookworm
 RUN apt-get update && \
 	apt upgrade -y && \
 	apt install -y \
-	redis-server
+	redis-server && \
+	rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["redis-server", "--daemonize", "no"]
 
