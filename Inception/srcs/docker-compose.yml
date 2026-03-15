@@ -40,8 +40,16 @@ services:
       - /home/$USER/data/wordpress:/var/www/html
     restart: unless-stopped
   redis:
-    build: ./bonus/redis
+    build: ./requirements/bonus/redis
     container_name: redis
+    networks:
+      - inception_network
+    restart: unless-stopped
+  ftp:
+    build: ./requirements/bonus/ftp
+    container_name: ftp
+    network:
+      - inception_network
     restart: unless-stopped
 
 volumes:

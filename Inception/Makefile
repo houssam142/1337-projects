@@ -1,13 +1,11 @@
 
 all:
 	@sudo docker compose -f srcs/docker-compose.yml up --build -d
-bonus:
-	@sudo docker compose -f srcs/docker-compose.yml up --build -d
 clean:
 	@sudo docker compose -f srcs/docker-compose.yml up --build -d
 
 fclean: clean
-	@sudo docker compose -f srcs/docker-compose.yml down
+	@sudo docker compose -f srcs/docker-compose.yml down -v
 
 re: fclean all
 
