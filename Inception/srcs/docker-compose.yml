@@ -49,7 +49,7 @@ services:
     build: ./requirements/bonus/ftp
     container_name: ftp
     ports:
-      - "2121:21"
+      - "21:21"
       - "21100-21110:21100-21110"
     environment:
       FTP_USER: ${FTP_USER}
@@ -62,8 +62,18 @@ services:
   static_website:
     build: ./requirements/bonus/static
     container_name: website
+    ports:
+      - "5501:5501"
     volumes:
       - /home/hounejja/data/static_web_data
+    networks:
+      - inception_network
+    restart: unless-stopped
+  adminer:
+    build: ./requirements/bonus/adminer
+    container_name: adminer
+    volumes:
+      - /home/hounejja/data/adminer:/var/www/html
     networks:
       - inception_network
     restart: unless-stopped

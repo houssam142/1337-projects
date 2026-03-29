@@ -11,7 +11,5 @@ COPY tools/setup.sh /setup.sh
 
 RUN chmod +x /setup.sh
 
-EXPOSE 21
-
 ENTRYPOINT ["/setup.sh"]
 
