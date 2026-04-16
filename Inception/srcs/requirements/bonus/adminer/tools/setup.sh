@@ -1,7 +1,11 @@
 #!/bin/bash
 
-curl
+mkdir -p /var/www/html
 
-chwon -R www-data:www-data /var/www/html
+if [ ! -f /var/www/html/index.php ]; then
+	curl -L "https://github.com" -o /var/www/html/index.php
+fi
 
-php -S [::]:8080
+chown -R www-data:www-data /var/www/html
+
+php -S [::]:8080 -t /var/www/html
