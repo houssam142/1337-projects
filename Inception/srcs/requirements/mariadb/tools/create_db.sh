@@ -12,7 +12,6 @@ fi
 
 # Start temporary server
 mysqld --user=mysql --skip-networking &
-pid="$!"
 
 # Wait until MariaDB is ready
 until mysqladmin ping --silent; do

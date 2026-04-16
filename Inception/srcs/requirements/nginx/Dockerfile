@@ -7,7 +7,6 @@ RUN 	apt-get update &&  \
 	apt install netcat-openbsd -y && \
    	rm -rf /var/lib/apt/lists/*
 
-COPY conf/default.conf /etc/nginx/conf.d/default.conf
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 RUN openssl req -x509 -nodes -days 365 \

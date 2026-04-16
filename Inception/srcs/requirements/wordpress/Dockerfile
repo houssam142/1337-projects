@@ -8,7 +8,6 @@ RUN apt-get update && \
 	php-xml \
 	php-redis \
 	php-gd \
-	netcat-openbsd \
 	mariadb-client \
 	curl && \
 	rm -rf /var/lib/apt/lists/*

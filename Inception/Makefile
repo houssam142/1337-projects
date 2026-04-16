@@ -2,9 +2,8 @@
 all:
 	@sudo docker compose -f srcs/docker-compose.yml up --build -d
 
-fclean: 
+down: 
 	@sudo docker compose -f srcs/docker-compose.yml down -v
 
-re: fclean all
 
-.PHONY: re fclean all clean
+.PHONY: down all

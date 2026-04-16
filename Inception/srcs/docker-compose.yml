@@ -31,7 +31,7 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     ports:
-      - "8080:443"
+      - "8082:443"
     depends_on:
       - wordpress
     networks:
@@ -42,6 +42,10 @@ services:
   redis:
     build: ./requirements/bonus/redis
     container_name: redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - /home/hounejja/data/redis:/etc/redis
     networks:
       - inception_network
     restart: unless-stopped
@@ -72,6 +76,8 @@ services:
   adminer:
     build: ./requirements/bonus/adminer
     container_name: adminer
+    ports:
+      - "8080:8080"
     volumes:
       - /home/hounejja/data/adminer:/var/www/html
     networks:

@@ -1,8 +1,9 @@
 #!/bin/bash
 
 set -e
-
-useradd -m -s /bin/bash $FTP_USER
+if ! id "$FTP_USER" &>/dev/null; then 
+	useradd -m -s /bin/bash $FTP_USER
+fi
 echo "$FTP_USER:$FTP_PASSWORD" | chpasswd
 
 mkdir -p /var/run/vsftpd/empty
