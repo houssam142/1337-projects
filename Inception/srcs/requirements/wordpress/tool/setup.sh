@@ -1,12 +1,9 @@
 #!/bin/bash
 set -e
 
-killall php-fpm8.2 2>/dev/null || true
-
 cd /var/www/html
 
 if [ ! -f index.php ]; then
-    echo "Installing WordPress..."
 
     curl -O https://wordpress.org/latest.tar.gz
     tar -xzf latest.tar.gz

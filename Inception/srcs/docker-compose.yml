@@ -63,11 +63,11 @@ services:
     networks:
       - inception_network
     restart: unless-stopped
-  static_website:
+  mywebsite:
     build: ./requirements/bonus/static
     container_name: website
     ports:
-      - "5501:5501"
+      - "5500:5500"
     volumes:
       - /home/hounejja/data/static_web_data
     networks:
@@ -76,10 +76,10 @@ services:
   adminer:
     build: ./requirements/bonus/adminer
     container_name: adminer
+    volumes:
+      - /home/hounejja/data/adminer_data:/var/www/html
     ports:
       - "8080:8080"
-    volumes:
-      - /home/hounejja/data/adminer:/var/www/html
     networks:
       - inception_network
     restart: unless-stopped
