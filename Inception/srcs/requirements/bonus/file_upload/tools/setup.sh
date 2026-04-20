@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec python3 /upload.py
+exec /venv/bin/python /upload.py
