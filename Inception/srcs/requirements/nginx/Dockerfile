@@ -2,9 +2,7 @@ FROM debian:bookworm
 
 RUN 	apt-get update &&  \
 	apt-get install nginx -y && \
-	apt install iputils-ping -y && \
 	apt install openssl -y && \
-	apt install netcat-openbsd -y && \
    	rm -rf /var/lib/apt/lists/*
 
 COPY conf/nginx.conf /etc/nginx/nginx.conf

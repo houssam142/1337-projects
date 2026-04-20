@@ -83,6 +83,16 @@ services:
     networks:
       - inception_network
     restart: unless-stopped
+  upload:
+    build: ./requirements/bonus/file_upload
+    container_name: upload
+    volumes:
+      - /home/hounejja/data/uploaded_data:/data/uploads
+    ports:
+      - "9443:9443"
+    networks:
+      - inception_network
+    restart: unless-stopped
 
 volumes:
   mariadb_data:

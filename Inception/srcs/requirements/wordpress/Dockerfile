@@ -5,7 +5,6 @@ RUN apt-get update && \
 	php-fpm \
 	php-mysql \
 	php-curl \
-	php-xml \
 	php-redis \
 	php-gd \
 	mariadb-client \
