@@ -1,7 +1,12 @@
 FROM debian:bookworm
 
+
 RUN apt update && \
-	apt install -y python3-pip python3 python3.11-venv dos2unix && \
+	apt install -y \
+	python3-pip \
+	python3.11-venv \
+	npm \
+	python3 && \
 	rm -rf /var/lib/apt/lists/*
 
 COPY tools/setup.sh /setup.sh

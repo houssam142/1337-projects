@@ -1,9 +1,10 @@
 #!/bin/bash
-set -e
 
 mkdir -p /run/mysqld
 chown -R mysql:mysql /run/mysqld
 chown -R mysql:mysql /var/lib/mysql
+
+DB_PASSWORD=$(cat /run/secrets/db_password)
 
 # Initialize database if empty
 if [ ! -d "/var/lib/mysql/mysql" ]; then

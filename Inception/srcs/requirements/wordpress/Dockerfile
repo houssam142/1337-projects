@@ -9,10 +9,15 @@ RUN apt-get update && \
 	php-gd \
 	mariadb-client \
 	unzip \
+	iputils-ping \
 	curl && \
 	rm -rf /var/lib/apt/lists/*
 
 RUN sed -i 's|^listen = .*|listen = 0.0.0.0:9000|' /etc/php/8.2/fpm/pool.d/www.conf
+
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+	chmod +x wp-cli.phar && \
+	mv wp-cli.phar /usr/local/bin/wp
 
 WORKDIR /var/www/html
 
