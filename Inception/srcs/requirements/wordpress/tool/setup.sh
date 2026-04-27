@@ -11,26 +11,22 @@ WORDPRESS_DB_PASSWORD=$(cat /run/secrets/db_password)
 cd /var/www/html
 
 if [ ! -f index.php ]; then
+	chown -R www-data:www-data /var/www/html
+	curl -O https://wordpress.org/latest.tar.gz
+	tar -xzf latest.tar.gz
+	rm latest.tar.gz
+	mv wordpress/* .
+	rm -rf wordpress
+	until nc -z mariadb 3306; do
+		sleep 1
+	done	
+	cp wp-config-sample.php wp-config.php
+	sed -i "s/database_name_here/${WORDPRESS_DB_NAME}/" wp-config.php
+	sed -i "s/username_here/${WORDPRESS_USER}/" wp-config.php
+	sed -i "s/password_here/${WORDPRESS_DB_PASSWORD}/" wp-config.php
+	sed -i "s/localhost/${WORDPRESS_DB_HOST}/" wp-config.php
 
-    curl -O https://wordpress.org/latest.tar.gz
-    tar -xzf latest.tar.gz
-    rm latest.tar.gz
-    mv wordpress/* .
-    rm -rf wordpress
 
-    cp wp-config-sample.php wp-config.php
-
-    sed -i "s/database_name_here/${WORDPRESS_DB_NAME}/" wp-config.php
-    sed -i "s/username_here/${WORDPRESS_USER}/" wp-config.php
-    sed -i "s/password_here/${WORDPRESS_DB_PASSWORD}/" wp-config.php
-    sed -i "s/localhost/${WORDPRESS_DB_HOST}/" wp-config.php
-
-    chown -R www-data:www-data /var/www/html
-    mkdir -p wp-content/plugins
-    cd wp-content/plugins
-    curl -L -o redis-cache.zip https://downloads.wordpress.org/plugin/redis-cache.zip
-    unzip redis-cache.zip
-    rm redis-cache.zip
     wp core install \
 	--url="$DOMAIN_NAME" \
 	--title="Inception" \

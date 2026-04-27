@@ -10,6 +10,7 @@ RUN apt-get update && \
 	mariadb-client \
 	unzip \
 	iputils-ping \
+	netcat-openbsd \
 	curl && \
 	rm -rf /var/lib/apt/lists/*
 
