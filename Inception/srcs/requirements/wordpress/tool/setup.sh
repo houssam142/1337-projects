@@ -11,7 +11,7 @@ WORDPRESS_DB_PASSWORD=$(cat /run/secrets/db_password)
 cd /var/www/html
 
 if ! wp core is-installed --allow-root; then
-	chown -R www-data:www-data /var/www/html
+
 	curl -O https://wordpress.org/latest.tar.gz
 	tar -xzf latest.tar.gz
 	rm latest.tar.gz
@@ -26,15 +26,16 @@ if ! wp core is-installed --allow-root; then
 	sed -i "s/password_here/${WORDPRESS_DB_PASSWORD}/" wp-config.php
 	sed -i "s/localhost/${WORDPRESS_DB_HOST}/" wp-config.php
 
-
-    wp core install \
-	--url="https://$DOMAIN_NAME" \
-	--title="Inception" \
-	--admin_user="$ADMIN_USER" \
-	--admin_password="$ADMIN_PASS" \
-	--admin_email="$ADMIN_EMAIL" \
-	--path="/var/www/html" \
-	--allow-root
+	chown -R www-data:www-data /var/www/html
+	
+	wp core install \
+		--url="https://$DOMAIN_NAME" \
+		--title="Inception" \
+		--admin_user="$ADMIN_USER" \
+		--admin_password="$ADMIN_PASS" \
+		--admin_email="$ADMIN_EMAIL" \
+		--path="/var/www/html" \
+		--allow-root
 
     wp user create $WP_USER $WP_EMAIL \
 	--allow-root \
