@@ -10,7 +10,7 @@ WP_EMAIL="hello@gmail.com"
 WORDPRESS_DB_PASSWORD=$(cat /run/secrets/db_password)
 cd /var/www/html
 
-if [ ! -f index.php ]; then
+if ! wp core is-installed --allow-root; then
 	chown -R www-data:www-data /var/www/html
 	curl -O https://wordpress.org/latest.tar.gz
 	tar -xzf latest.tar.gz
@@ -28,7 +28,7 @@ if [ ! -f index.php ]; then
 
 
     wp core install \
-	--url="$DOMAIN_NAME" \
+	--url="https://$DOMAIN_NAME" \
 	--title="Inception" \
 	--admin_user="$ADMIN_USER" \
 	--admin_password="$ADMIN_PASS" \
@@ -40,8 +40,7 @@ if [ ! -f index.php ]; then
 	--allow-root \
 	--user_pass="$WP_PASSWORD" \
 	--path="/var/www/html"
-    wp config set WP_REDIS_HOST redis --allow-root
-    
+    wp config set WP_REDIS_HOST redis --allow-root 
     wp config set WP_REDIS_PORT 6379 --allow-root   
     wp plugin install redis-cache \
 	--activate \
