@@ -11,9 +11,9 @@ services:
       - db_root_password
       - credentials
     volumes:
-      - /home/hounejja/data/mariadb:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     networks:
-      - inception_network
+      - docker-network
     restart: unless-stopped
   wordpress:
     build: ./requirements/wordpress
@@ -31,9 +31,9 @@ services:
       - db_root_password
       - credentials
     volumes:
-      - /home/hounejja/data/wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     networks:
-      - inception_network
+      - docker-network
     restart: unless-stopped
   nginx:
     build: ./requirements/nginx
@@ -41,12 +41,12 @@ services:
     image: nginx
     ports:
       - "443:443"
+    volumes:
+      - wordpress_data:/var/www/html
     depends_on:
       - wordpress
     networks:
-      - inception_network
-    volumes:
-      - /home/hounejja/data/wordpress:/var/www/html
+      - docker-network
     restart: unless-stopped
   redis:
     build: ./requirements/bonus/redis
@@ -54,10 +54,8 @@ services:
     image: redis
     ports:
       - "6380:6379"
-    volumes:
-      - /home/hounejja/data/redis:/etc/redis
     networks:
-      - inception_network
+      - docker-network
     restart: unless-stopped
   ftp:
     build: ./requirements/bonus/ftp
@@ -69,11 +67,11 @@ services:
     environment:
       FTP_USER: ${FTP_USER}
     volumes:
-      - /home/hounejja/data/wordpress:/var/www/html
+      - wordpress_data:/var/www/html
     secrets:
       - credentials
     networks:
-      - inception_network
+      - docker-network
     restart: unless-stopped
   mywebsite:
     build: ./requirements/bonus/static
@@ -81,32 +79,33 @@ services:
     image: mywebsite
     ports:
       - "5500:5500"
-    volumes:
-      - /home/hounejja/data/static_web_data
     networks:
-      - inception_network
+      - docker-network
     restart: unless-stopped
   adminer:
     build: ./requirements/bonus/adminer
     container_name: adminer
     image: adminer
     volumes:
-      - /home/hounejja/data/adminer_data:/var/www/html
+      - mariadb_data:/var/www/html
     ports:
       - "8080:8080"
     networks:
-      - inception_network
+      - docker-network
     restart: unless-stopped
   upload:
     build: ./requirements/bonus/upload
     container_name: upload
     image: upload
+    env_file: .env
+    secrets:
+      - db_password
     ports:
       - "9443:9443"
     volumes:
-      - /home/hounejja/data/upload_data:/uploads
+      - wordpress_data:/uploads
     networks:
-      - inception_network
+      - docker-network
     restart: unless-stopped
 
 secrets:
@@ -119,8 +118,18 @@ secrets:
 
 volumes:
   mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/hounejja/data/mariadb_data
   wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/hounejja/data/wordpress_data
 
 networks:
-   inception_network:
+   docker-network:
      driver: bridge

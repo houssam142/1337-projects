@@ -1,7 +1,7 @@
 FROM debian:bookworm
 
 RUN apt update && \
-	apt install -y mariadb-server vim && \
+	apt install -y mariadb-server && \
 	rm -rf /var/lib/apt/lists/*
 
 COPY conf/my.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
