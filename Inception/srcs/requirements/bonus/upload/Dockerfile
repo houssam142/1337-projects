@@ -6,7 +6,6 @@ RUN apt update && \
 	python3-pip \
 	python3.11-venv \
 	npm \
-	mariadb-client \
 	python3 && \
 	rm -rf /var/lib/apt/lists/*
 
@@ -15,8 +14,7 @@ COPY tools/setup.sh /setup.sh
 RUN python3 -m venv /venv
 ENV PATH="/venv/bin:$PATH"
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt --break-system-packages && \
-	pip install mysql-connector-python
+RUN pip3 install --no-cache-dir -r requirements.txt --break-system-packages
 
 COPY components/upload.py /upload.py
 

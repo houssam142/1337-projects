@@ -1,7 +1,7 @@
 FROM debian:bookworm
 
 RUN apt update && \
-	apt install -y mariadb-server && \
+	apt install -y mariadb-server vim && \
 	rm -rf /var/lib/apt/lists/*
 
 COPY conf/my.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
@@ -13,6 +13,3 @@ RUN chmod +x /create_db.sh
 EXPOSE 3306
 
 ENTRYPOINT ["/create_db.sh"]
-
-CMD ["mysqld_safe"]
-

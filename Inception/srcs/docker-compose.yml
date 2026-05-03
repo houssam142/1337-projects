@@ -3,9 +3,7 @@ services:
     build: ./requirements/mariadb
     container_name: mariadb
     image: mariadb
-    environment:
-      DB_DATABASE: ${DB_DATABASE}
-      DB_USER: ${DB_USER}
+    env_file: .env
     secrets:
       - db_password
       - db_root_password
@@ -21,11 +19,7 @@ services:
     image: wordpress
     depends_on:
       - mariadb
-    environment:
-      DOMAIN_NAME: ${DOMAIN_NAME}
-      WORDPRESS_DB_HOST: ${DB_HOST}
-      WORDPRESS_DB_NAME: ${DB_DATABASE}
-      WORDPRESS_USER: ${DB_USER}
+    env_file: .env
     secrets:
       - db_password
       - db_root_password
@@ -52,6 +46,8 @@ services:
     build: ./requirements/bonus/redis
     container_name: redis
     image: redis
+    volumes:
+      - wordpress_data:/var/www/html
     ports:
       - "6380:6379"
     networks:
@@ -64,8 +60,7 @@ services:
     ports:
       - "21:21"
       - "21100-21110:21100-21110"
-    environment:
-      FTP_USER: ${FTP_USER}
+    env_file: .env
     volumes:
       - wordpress_data:/var/www/html
     secrets:
@@ -103,7 +98,7 @@ services:
     ports:
       - "9443:9443"
     volumes:
-      - wordpress_data:/uploads
+      - uploaded_files:/uploads
     networks:
       - docker-network
     restart: unless-stopped
@@ -118,17 +113,8 @@ secrets:
 
 volumes:
   mariadb_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/hounejja/data/mariadb_data
   wordpress_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/hounejja/data/wordpress_data
+  uploaded_files:
 
 networks:
    docker-network:

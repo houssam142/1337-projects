@@ -27,6 +27,49 @@ The goal is to understand how modern applications are deployed in production usi
 git clone <repository_url>
 cd inception
 
+# Before you running the infrastructure, put this in an .env file
+```
+# ======================
+# Domain Configuration
+# ======================
+DOMAIN_NAME=hounejja.42.fr
+
+# ======================
+# Database Configuration
+# ======================
+DB_DATABASE=wordpress
+DB_USER=hounejja
+DB_PASSWORD=your_db_password
+DB_ROOT_PASSWORD=your_db_root_password
+DB_HOST=mariadb
+
+# ======================
+# FTP Server
+# ======================
+FTP_USER=hounejja
+FTP_PASS=your_ftp_password
+
+# ======================
+# WordPress Admin Configuration
+# ======================
+WP_ADMIN=hounejja
+WP_ADMIN_PASSWORD=your_admin_password
+WP_ADMIN_EMAIL=houssamounejar@gmail.com
+
+# ======================
+# WordPress User
+# ======================
+WP_USER=user2
+WP_USER_PASSWORD=your_user_password
+WP_USER_EMAIL=hello@gmail.com
+```
+# one step before running
+```
+mkdir -p secrets
+echo "db_password_here" > secrets/db_password.txt
+echo "db_root_password" > secrets/db_root_password.txt
+printf "admin_user=hounejja\nadmin_password=1234\nadmin_email=houssamounejar@gmail.com\nuser_pass=1111\nftp_pass=1234\n" > secrets/credentials.txt
+
 ### Build and Run
 make up
 

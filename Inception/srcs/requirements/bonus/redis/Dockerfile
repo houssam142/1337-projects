@@ -6,7 +6,5 @@ RUN apt-get update && \
 	redis-server && \
 	rm -rf /var/lib/apt/lists/*
 
-EXPOSE 6379
-
 CMD ["redis-server", "--daemonize", "no", "--protected-mode", "no"]
 
