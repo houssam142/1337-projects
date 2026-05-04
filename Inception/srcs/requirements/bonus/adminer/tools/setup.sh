@@ -2,8 +2,6 @@
 
 mkdir -p /var/www/html
 
-chown -R www-data:www-data /var/www/html
-
 curl -L -o /var/www/html/adminer.php https://www.adminer.org/latest.php
 
 mv adminer.php index.php

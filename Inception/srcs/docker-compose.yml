@@ -81,8 +81,6 @@ services:
     build: ./requirements/bonus/adminer
     container_name: adminer
     image: adminer
-    volumes:
-      - mariadb_data:/var/www/html
     ports:
       - "8080:8080"
     networks:

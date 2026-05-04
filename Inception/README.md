@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by <login1>.*
+This project has been created as part of the 42 curriculum by <login1>.*
 
 ## Description
 
@@ -153,9 +153,6 @@ Volumes are preferred for persistent data, while bind mounts are useful during d
 
 ### AI Usage
 
-AI tools were used for:
+AI tools were used as a support resource during the project. They helped clarify Docker concepts, troubleshoot configuration issues, and compare different approaches (such as volumes vs bind mounts or networks vs host networking). 
 
-* Understanding Docker networking and container orchestration concepts
-* Debugging configuration issues
-* Clarifying differences between Docker features (volumes, networks, secrets)
-
+All configurations and implementations were written, tested, and adapted manually to ensure full understanding of the system.
