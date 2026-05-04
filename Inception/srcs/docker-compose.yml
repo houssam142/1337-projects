@@ -96,7 +96,7 @@ services:
     ports:
       - "9443:9443"
     volumes:
-      - uploaded_files:/uploads
+      - uploaded_data:/uploads
     networks:
       - docker-network
     restart: unless-stopped
@@ -111,8 +111,23 @@ secrets:
 
 volumes:
   mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/hounejja/data/mariadb_data
   wordpress_data:
-  uploaded_files:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/hounejja/data/wordpress_data
+  uploaded_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/hounejja/data/uploaded_data
 
 networks:
    docker-network:
