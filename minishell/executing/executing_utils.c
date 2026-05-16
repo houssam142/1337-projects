@@ -56,6 +56,8 @@ int	exec_run(t_cmd *cmd, t_cmd_exec **env_lst)
 		return (ft_exit(cmd, env_lst));
 	else if (!ft_strncmp(cmd->path, "cd", 3))
 		return (ft_cd(cmd, env_lst));
+	else if (!ft_strncmp(cmd->path, "type", 4))
+		return (ft_type(cmd, env_lst));
 	return (0);
 }
 

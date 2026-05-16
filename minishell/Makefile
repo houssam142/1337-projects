@@ -18,7 +18,7 @@ SRC = main.c bultins/echo_cmd.c \
 		argument_count.c lstadd_front.c lstadd_back.c heredoc.c signals.c lst_new_ele.c tokens/toks_trim.c \
 		executing/run_child.c executing/dups.c executing/executing_utils.c bultins/unset_cmd.c bultins/exit_cmd.c \
 		tokens/lstadd_back_token.c env_lst_to_arr.c tokens/lst_last_token.c shell_vl.c ft_lstlast.c utils.c handle_dollar_cmd.c helpers.c \
-		executing/run_child_utils.c cleaning/cleanup.c heredoc_utils.c executing/executing_utils2.c
+		executing/run_child_utils.c cleaning/cleanup.c heredoc_utils.c executing/executing_utils2.c bultins/ft_type.c
 		
 OBJS = $(SRC:.c=.o)
 CC = cc
@@ -45,4 +45,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+ra: all clean
+
+.PHONY: all clean fclean re ra

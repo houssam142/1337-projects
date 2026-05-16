@@ -77,6 +77,8 @@ static int	built(t_cmd *cmd)
 			i = 1;
 		else if (!ft_strncmp(cmd->args[0], "exit", 5))
 			i = 1;
+		else if (!ft_strncmp(cmd->args[0], "type", 4))
+			i = 1;
 		cmd->builtin = i;
 	}
 	return (i);

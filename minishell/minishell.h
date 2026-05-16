@@ -72,6 +72,13 @@ typedef struct s_cmd
 	struct s_cmd		*next;
 }						t_cmd;
 
+typedef struct s_hash
+{
+	char	*key;
+	char	*value;
+	struct s_hash	*next;
+};
+
 int						arg_count(t_token **toks, t_cmd *cmd);
 int						handle_single_quotes(t_token *toks, int i);
 int						handle_dollar_sign(t_token *toks, int i,
@@ -161,5 +168,6 @@ void					build_new_tok_val(t_token *toks, char *value, int i,
 char					**env_lst_to_arr(t_cmd_exec *env_lst, char meaning,
 							int quote);
 void					exec(t_cmd **cmd, t_cmd_exec **env_lst);
+int					ft_type(t_cmd* cmd, t_cmd_exec **env_lst);
 
 #endif
