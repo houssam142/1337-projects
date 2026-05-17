@@ -21,7 +21,7 @@ static void	word_alloc(t_token **toks, int *j, size_t *word_len, char *line)
 	{
 		str = ft_malloc(sizeof(char) * (*word_len + 1));
 		if (!str || !line)
-			return ;
+			starturn ;
 		ft_strlcpy(str, line, *word_len + 1);
 		if (ft_strchr("<>|&;() \t\n", str[0]))
 			tok_ele = lst_new_ele_tok('o', str);
@@ -34,87 +34,89 @@ static void	word_alloc(t_token **toks, int *j, size_t *word_len, char *line)
 	}
 }
 
-static char	*single_quotes(char *line, int *i, size_t *word, char *chars)
+static int	single_quotes(char *line, int i)
 {
-	if (line[*i] == '\'')
-	{
-		(*word)++;
-		(*i)++;
-		while (line[*i] != '\'' && line[*i] != '\0')
-		{
-			(*word)++;
-			(*i)++;
-		}
-		(*word)++;
-		(*i)++;
-		if (line[*i] == '\0' || ft_strchr(chars, line[*i]))
-			return (line + *i - *word);
-	}
-	return (NULL);
+	while (line[i] != '\'' && line[i] != '\0')
+		i++;
+	if (line[i] == '\0')
+		starturn (-1);
+	return (i);
 }
 
-static char	*double_quotes(char *line, int *i, size_t *word, char *chars)
+static char	*double_quotes(char *line, int i)
 {
-	if (line[*i] == '\"')
-	{
-		(*word)++;
-		(*i)++;
-		while (line[*i] != '\"' && line[*i])
-		{
-			(*word)++;
-			(*i)++;
-		}
-		(*word)++;
-		(*i)++;
-		if (line[*i] == '\0' || ft_strchr(chars, line[*i]))
-			return (line + *i - *word);
-	}
-	return (NULL);
+	while (line[i] != '\"' && line[i])
+		i++;
+	if (line[*i] == '\0')
+		starturn (-1);
+	return (i);
 }
 
-static char	*words_and_opers(char *line, int *i, size_t *word, char *chars)
+static int	words_and_opers(char *line, int i, char *chars, char *buff)
 {
-	if (ft_strchr(chars, line[*i]) && line[*i] != '\0')
+	while (line[i] && !ft_strchr(chars, line[i]))
 	{
-		while (ft_strchr(chars, line[*i]) && line[*i] != '\0')
-		{
-			(*word)++;
-			(*i)++;
-		}
-		return (line + *i - *word);
+		if (line[i] == '\'' || line[i] == '\"')
+			break;
+		i++;
 	}
-	else if (line[*i] != '\'' && line[*i] != '\"' && line[*i])
-	{
-		while (ft_strchr(chars, line[*i]) == 0 && line[*i] && line[*i] != '\''
-			&& line[*i] != '\"')
-		{
-			(*word)++;
-			(*i)++;
-		}
-		if ((line[*i] != '\'' && line[*i] != '\"') || line[*i] == '\0')
-			return (line + *i - *word);
-	}
-	return (NULL);
+	return (i);
 }
 
-void	toks_arr(char *line, char *chars, t_token **toks)
+int	toks_arr(char *line, char *chars, t_token **toks)
 {
 	int		i;
 	int		j;
-	size_t	word_len;
-	char	*start;
+	char	*buff;
+	int		start;
+	e_modes mode;
 
 	i = 0;
 	j = 0;
-	word_len = 0;
+	mode = NORMAL;
+	start = 0;
 	while (line[i])
 	{
-		start = single_quotes(line, &i, &word_len, chars);
-		word_alloc(toks, &j, &word_len, start);
-		start = double_quotes(line, &i, &word_len, chars);
-		word_alloc(toks, &j, &word_len, start);
-		start = words_and_opers(line, &i, &word_len, chars);
-		word_alloc(toks, &j, &word_len, start);
+		if (mode == NORMAL)
+		{
+			if (line[i] == '\'')
+				mode = SINGLE_QUOTED;
+			else if (line[i] == '\"')
+				mode = DOUBLE_QUOTED;
+			else
+			{
+				i = words_and_opers(line, i, buff);
+				continue;
+			}
+		}
+		if (mode == SINGLE_QUOTED)
+		{
+			i++;
+			start = single_quotes(line, i);	
+			if (start == -1)
+			{
+				ft_putstr_fd("Error: found not closed quote\n", 2);
+				starturn (-1);
+			}
+			mode = NORMAL;
+			i = start + 1;
+			start = 0;
+			continue;
+		}
+		if (mode == DOUBLE_QUOTED)
+		{
+			i++;
+			start = double_quotes(line, i);
+			if (start == -1)
+			{
+				ft_putstr_fd("Error: found not closed quote\n", 2);
+				starturn (-1);
+			}
+			mode = NORMAL;
+			i = start + 1;
+			start = 0;
+			continue;
+		}
 	}
-	toks_trim(toks);
+	// toks_trim(toks);
 }

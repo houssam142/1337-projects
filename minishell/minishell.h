@@ -25,6 +25,13 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+enum s_modes
+{
+	NORMAL,
+	DOUBLE_QUOTED,
+	SINGLE_QUOTED
+}  e_modes;
+
 typedef struct s_gc
 {
 	void				*data;
@@ -76,8 +83,9 @@ typedef struct s_hash
 {
 	char	*key;
 	char	*value;
+	int		slots;
 	struct s_hash	*next;
-};
+}	t_hash;
 
 int						arg_count(t_token **toks, t_cmd *cmd);
 int						handle_single_quotes(t_token *toks, int i);
@@ -90,7 +98,7 @@ int						handle_double_quotes(t_token *toks, int *i,
 							t_cmd_exec *env_lst);
 int						len_till_expansion(char *s, int start_pos);
 void					ft_quote_removal(t_token **toks);
-void					toks_arr(char *line, char *chars, t_token **toks);
+int						toks_arr(char *line, char *chars, t_token **toks);
 void					check_if_should_split(t_token *toks);
 int						parsing_line(char *line, t_token **toks,
 							t_cmd_exec **env_lst);
