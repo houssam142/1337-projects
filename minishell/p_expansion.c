@@ -87,11 +87,10 @@ static int	ft_is_found(t_token *toks, int *i, int j, int quote)
 	return (res);
 }
 
-int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
+char*	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 {
 	char	*new_str;
 	int		j;
-	int		inside_word;
 	int		start_pos;
 
 	start_pos = *i;
@@ -99,21 +98,13 @@ int	search_and_replace(t_token *t, int *i, t_cmd_exec *env_lst, int w)
 	func(t, &j);
 	new_str = ft_substr(t->value, *i + 1, j - *i - 1);
 	if (!new_str || !new_str[0])
-		return (-1);
+		return (NULL);
 	while (env_lst && ft_strncmp(env_lst->name, new_str, ft_strlen(new_str)
 			+ 1))
 		env_lst = env_lst->next;
-	inside_word = (*i > 0 && !ft_strchr(" \t\'/$.<>|", t->value[*i - 1]));
-	if (env_lst)
-	{
-		if (inside_word)
-			t->strip = (w == 0);
-		else
-			t->strip = 1;
-		ft_replace(t, *i, j, env_lst);
-		return (*i = start_pos + len_till_expansion(env_lst->value, *i) - 1, 0);
-	}
-	return (t->strip = !(inside_word), ft_is_found(t, i, j, w));
+	if (!env_lst)
+		return (NULL);
+	return (ft_strdup(env_lst->value));
 }
 
 void	p_expansion(t_token *toks, t_cmd_exec *env_lst)

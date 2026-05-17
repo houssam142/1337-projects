@@ -24,16 +24,20 @@ int	handle_single_quotes(t_token *toks, int i)
 
 int	handle_dollar_sign(t_token *toks, int i, t_cmd_exec *env_lst)
 {
+	char	*replacement;
+
 	if (toks->value[i + 1] == '?')
 	{
-		search_and_replace(toks, &i, env_lst, 0);
-		return (-1);
+		toks->expanded = 1;
+		return (i + 2);
 	}
-	else if (search_and_replace(toks, &i, env_lst, 0) == -1)
+	replacement = search_and_replace(toks, &i, env_lst, 0);
+	if (!replacement)
 	{
 		toks->expanded = 1;
 		return (-1);
 	}
+	
 	toks->expanded = 1;
 	return (i + 1);
 }

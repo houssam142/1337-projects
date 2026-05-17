@@ -12,111 +12,153 @@
 
 #include "../minishell.h"
 
-static void	word_alloc(t_token **toks, int *j, size_t *word_len, char *line)
+static void	store_token(t_token **toks, t_buff* buff)
 {
-	t_token	*tok_ele;
+	t_token	*tok;
 	char	*str;
 
-	if (line && *word_len != 0)
+	if (!buff || !buff->buff || !buff->len)
+		return ;
+	str = ft_strdup(buff->buff);
+	tok = lst_new_ele_tok('w', str);
+	lstadd_back_tok(toks, tok);
+	free(buff->buff);
+	buff->buff = NULL;
+	buff->cap = 0;
+	buff->len = 0;
+}
+
+static void	append_operator_as_token(char *line, int *i, t_token** toks)
+{
+	char	op[3] = {0};
+
+	if (line[*i + 1] && line[*i] == '>')
 	{
-		str = ft_malloc(sizeof(char) * (*word_len + 1));
-		if (!str || !line)
-			starturn ;
-		ft_strlcpy(str, line, *word_len + 1);
-		if (ft_strchr("<>|&;() \t\n", str[0]))
-			tok_ele = lst_new_ele_tok('o', str);
+		if (line[*i + 1] == '>')
+		{
+			op[0] = '>';
+			op[1] = '>';
+			op[2] = '\0';
+			*i += 2;
+		}		
 		else
-			tok_ele = lst_new_ele_tok('w', str);
-		lstadd_back_tok(toks, tok_ele);
-		(*j)++;
-		line = NULL;
-		*word_len = 0;
+		{
+			op[0] = '>';
+			op[1] = '\0';
+			(*i)++;
+		}
 	}
-}
-
-static int	single_quotes(char *line, int i)
-{
-	while (line[i] != '\'' && line[i] != '\0')
-		i++;
-	if (line[i] == '\0')
-		starturn (-1);
-	return (i);
-}
-
-static char	*double_quotes(char *line, int i)
-{
-	while (line[i] != '\"' && line[i])
-		i++;
-	if (line[*i] == '\0')
-		starturn (-1);
-	return (i);
-}
-
-static int	words_and_opers(char *line, int i, char *chars, char *buff)
-{
-	while (line[i] && !ft_strchr(chars, line[i]))
+	else if (line[*i + 1] && line[*i] == '<')
 	{
-		if (line[i] == '\'' || line[i] == '\"')
-			break;
-		i++;
+		if (line[*i + 1] == '<')
+		{
+			op[0] = '<';
+			op[1] = '<';
+			op[2] = '\0';
+			*i += 2;
+		}
+		else
+		{
+			op[0] = '<';
+			op[1] = '\0';
+			(*i)++;
+		}
 	}
-	return (i);
+	else
+	{
+		op[0] = line[*i];
+		op[1] = '\0';
+		(*i)++;
+	}
+	lstadd_back_tok(toks, lst_new_ele_tok('o', ft_strdup(op)));
 }
 
-int	toks_arr(char *line, char *chars, t_token **toks)
+static bool	ft_isoperator(int c)
+{
+	return (c == '|' || c == '>' || c == '<');
+}
+
+static void	append_char(t_buff* buf, char c)
+{
+	if (!buf->buff)
+	{
+		buf->cap = 8;
+		buf->len = 0;
+		buf->buff = ft_malloc(buf->cap);
+	}
+	if (buf->len + 1 > buf->cap)
+	{
+		buf->cap *= 2;
+		buf->buff = realloc(buf->buff, buf->cap);
+	}
+	buf->buff[buf->len++] = c;
+	buf->buff[buf->len] = '\0';
+}
+
+int	toks_arr(char *line, t_token **toks)
 {
 	int		i;
-	int		j;
-	char	*buff;
-	int		start;
-	e_modes mode;
+	enum e_modes	mode;
+	t_buff	buff;
 
 	i = 0;
-	j = 0;
 	mode = NORMAL;
-	start = 0;
+	buff.buff = NULL;
+	buff.len = 0;
+	buff.cap = 0;
 	while (line[i])
 	{
 		if (mode == NORMAL)
 		{
 			if (line[i] == '\'')
-				mode = SINGLE_QUOTED;
-			else if (line[i] == '\"')
-				mode = DOUBLE_QUOTED;
-			else
 			{
-				i = words_and_opers(line, i, buff);
+				mode = SINGLE_QUOTED;
 				continue;
 			}
+			if (line[i] == '\"')
+			{
+				mode = DOUBLE_QUOTED;
+				continue;
+			}
+			if (ft_isspace(line[i]))
+			{
+				if (buff.len > 0)
+					store_token(toks, &buff);
+				i++;
+				continue;
+			}
+			if (ft_isoperator(line[i]))
+			{
+				if (buff.len > 0)
+					store_token(toks, &buff);
+				append_operator_as_token(line, &i, toks);
+				continue;
+			}
+			append_char(&buff, line[i++]);
+			continue;
 		}
 		if (mode == SINGLE_QUOTED)
 		{
 			i++;
-			start = single_quotes(line, i);	
-			if (start == -1)
-			{
-				ft_putstr_fd("Error: found not closed quote\n", 2);
-				starturn (-1);
-			}
+			while (line[i] && line[i] != '\'')
+				append_char(&buff, line[i++]);
+			if (!line[i])
+				return (free(buff.buff), -1);
+			i++;
 			mode = NORMAL;
-			i = start + 1;
-			start = 0;
-			continue;
 		}
 		if (mode == DOUBLE_QUOTED)
 		{
 			i++;
-			start = double_quotes(line, i);
-			if (start == -1)
-			{
-				ft_putstr_fd("Error: found not closed quote\n", 2);
-				starturn (-1);
-			}
+			while (line[i] && line[i] != '\"')
+				append_char(&buff, line[i++]);
+			if (!line[i])
+				return (free(buff.buff), -1);
+			i++;
 			mode = NORMAL;
-			i = start + 1;
-			start = 0;
-			continue;
 		}
 	}
-	// toks_trim(toks);
+	if (buff.len > 0)
+		store_token(toks, &buff);
+	return (0);
 }

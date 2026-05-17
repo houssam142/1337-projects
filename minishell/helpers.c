@@ -47,14 +47,14 @@ void	func(t_token *t, int *j)
 		(*j)++;
 		return ;
 	}
-	else
+	if (ft_isalpha(t->value[*j]) || t->value[*j] == '_')
 	{
-		while (t->value[*j] && !ft_strchr(" \t\"\'/?$=[]:.<>|", t->value[*j])
-			&& ft_isalpha(t->value[*j]))
-			(*j)++;
-		while (t->value[*j] == '_' || ft_isalnum(t->value[*j]))
+		(*j)++;
+		while (t->value[*j] && (ft_isalnum(t->value[*j]) || t->value[*j] == '_'))
 			(*j)++;
 	}
+	else
+		(*j)++;
 }
 
 static int	should_remove_token(t_token *tok)
