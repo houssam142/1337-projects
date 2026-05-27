@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 10:48:01 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/07 19:57:04 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/26 21:36:00 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ int		ft_tolower(int c);
 char	*ft_strdup(const char *s);
 void	*ft_calloc(size_t nmemb, size_t size);
 long	ft_atoi(const char *str, int *k);
-size_t	ft_strlen(const char *c);
+int		ft_strlen(const char *c);
 char	*ft_strchr(const char *s, int c);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *dest, int c, size_t n);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
-char	*ft_strnstr(const char *big, const char *little, size_t len);
+char	*ft_strnstr(const char *big, const char *little, int len);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 char	*ft_strrchr(const char *s, int c);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);

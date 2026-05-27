@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 11:30:54 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/10 11:44:07 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/26 20:25:15 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *c)
+int	ft_strlen(const char *c)
 {
-	size_t	i;
+	int	i;
 
 	if (!c)
 		return (0);

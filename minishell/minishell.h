@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:15:30 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/13 11:11:20 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/27 22:09:13 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@
 # include <unistd.h>
 
 
+typedef enum e_modes
+{
+	NORMAL,
+	DOUBLE_QUOTED,
+	SINGLE_QUOTED
+} t_modes;
+
+typedef struct e_seg
+{
+	char			*str;
+	t_modes			mode;
+	struct e_seg	*next;
+} t_seg;
+
 typedef struct s_gc
 {
 	void				*data;
@@ -40,6 +54,7 @@ typedef struct s_token
 	char				*value;
 	int					strip;
 	int					expanded;
+	t_seg				*segments;
 	struct s_token		*next;
 }						t_token;
 
@@ -74,13 +89,6 @@ typedef struct s_cmd
 	struct s_cmd		*next;
 }						t_cmd;
 
-enum e_modes
-{
-	NORMAL,
-	DOUBLE_QUOTED,
-	SINGLE_QUOTED
-};
-
 typedef struct s_buff
 {
 	char *buff;
@@ -97,18 +105,19 @@ typedef struct s_hash
 }	t_hash;
 
 int						arg_count(t_token **toks, t_cmd *cmd);
-int						handle_single_quotes(t_token *toks, int i);
-int						handle_dollar_sign(t_token *toks, int i,
-							t_cmd_exec *env_lst);
+int						handle_single_quotes(t_token *toks, int i, t_buff* buff);
+void				    add_seg(t_token *tok, t_seg *seg);
+t_seg					*new_seg(char *str, t_modes mode);
+int						handle_dollar_sign(t_token *toks, int i, t_cmd_exec *env_lst,
+							t_buff* buff);
 int						count_cmds(t_cmd *cmd);
-int						search_and_replace(t_token *t, int *i,
-							t_cmd_exec *env_lst, int w);
-int						handle_double_quotes(t_token *toks, int *i,
-							t_cmd_exec *env_lst);
+int						handle_double_quotes(t_token *toks, int i, t_cmd_exec *env_lst,
+							t_buff* buff);
 int						len_till_expansion(char *s, int start_pos);
 void					ft_quote_removal(t_token **toks);
 int						toks_arr(char *line, t_token **toks);
 void					check_if_should_split(t_token *toks);
+char					*expand_toks(t_token *tok, t_cmd_exec *env);
 int						parsing_line(char *line, t_token **toks,
 							t_cmd_exec **env_lst);
 int						copy_quotes(t_token *t, t_cmd_exec *env_lst, int i,
@@ -137,6 +146,7 @@ int						ft_env(t_cmd_exec **env_lst);
 int						ft_exit(t_cmd *cmd, t_cmd_exec **env_lst);
 char					*check_dir(t_cmd_exec **env_lst, char *path);
 int						ft_export(t_cmd *cmd, t_cmd_exec **env_lst);
+int						is_valid_expansion(char c);
 int						check_var_name(char *str, int *res,
 							t_cmd_exec **env_lst);
 void					child_proc(t_cmd **cmd, t_cmd_exec **env_lst, int id);
@@ -144,7 +154,7 @@ char					*find_cmd(t_cmd *cmd, t_cmd_exec *env_lst);
 void					exec_built(t_cmd *cmd, t_cmd_exec **env_lst,
 							int child_par);
 void					ft_signals(void);
-void					func(t_token *t, int *j);
+void					func(char *str, int *j);
 void					dups(t_cmd *tmp);
 void					check_if_dir(t_cmd *exec_cmd);
 t_cmd					*close_pipes(t_cmd **cmd, int id);
@@ -153,6 +163,8 @@ void					change_env(char *oldpwd, char *newpwd,
 							t_cmd_exec *env_lst);
 int						exec_run(t_cmd *cmd, t_cmd_exec **env_lst);
 void					exec_run_par(t_cmd *cmd, t_cmd_exec **env_lst);
+char					*resolve_dollar(char *str, int* i, t_cmd_exec* env);
+void					append_str(t_buff* buff, char *str);
 void					check_dir_exe(t_cmd *tmp, t_cmd_exec **env_lst,
 							t_cmd **cmd);
 int						parent_heredoc(pid_t pid, t_cmd *cmd, int *heredoc);
@@ -169,6 +181,7 @@ void					ft_handle_sigint(int sig);
 void					*ft_malloc(size_t size);
 void					free_grabage(void);
 char					*check_is_path_fail(t_cmd *cmd);
+void					append_char(t_buff* buf, char c);
 int						env_to_lst(char **env, t_cmd_exec **env_lst);
 void					restore_std_fds(void);
 void					change_stat(t_cmd_exec **env_lst, int stat);

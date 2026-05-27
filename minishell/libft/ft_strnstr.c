@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:37:35 by nafarid           #+#    #+#             */
-/*   Updated: 2024/11/06 19:59:56 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/26 20:26:22 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+char	*ft_strnstr(const char *big, const char *little, int len)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	if (big == NULL && len == 0)
 		return (0);

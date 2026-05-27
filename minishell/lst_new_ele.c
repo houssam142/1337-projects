@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_new_ele.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:14:26 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/07 20:14:28 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/27 21:49:24 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_token	*lst_new_ele_tok(char type, char *value)
 	new_ele->quote[sizeof(char) * ft_strlen(value)] = '\0';
 	new_ele->strip = 1;
 	new_ele->expanded = 0;
+	new_ele->segments = NULL;
 	new_ele->next = NULL;
 	return (new_ele);
 }

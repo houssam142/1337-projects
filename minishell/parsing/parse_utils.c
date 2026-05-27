@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:10:19 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/13 11:07:18 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/26 17:39:33 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,22 @@
 static int	final_parsing(t_token **toks, t_cmd_exec *env_lst)
 {
 	t_token	*tmp;
-	t_token	*tmp2;
 
 	tmp = *toks;
-	tmp2 = tmp;
 	while (tmp && tmp->type != 'c')
 	{
-		if (tmp2 != tmp && tmp2->type == 'r' && !ft_strncmp(tmp2->value, "<<",
-				3))
+		if (tmp->type == 'r' && !ft_strncmp(tmp->value, "<<", 3))
 			tmp->type = 'h';
-		quote_count(tmp);
 		if (tmp->type != 'h')
-			p_expansion(tmp, env_lst);
-		tmp2 = tmp;
+		{
+			tmp->value = expand_toks(tmp, env_lst);
+		}
 		tmp = tmp->next;
 	}
 	remove_empty_tokens(toks);
+	ft_quote_removal(toks);
 	if (!toks || !*toks)
 		return (-1);
-	ft_quote_removal(toks);
 	return (0);
 }
 

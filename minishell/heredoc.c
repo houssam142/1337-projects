@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:14:17 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/13 11:10:46 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/25 23:05:11 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ static char	*line_expansion(char *line, t_cmd_exec *env_lst)
 	tmp->quote[ft_strlen(line)] = '\0';
 	tmp->quote = ft_memset(tmp->quote, '0', ft_strlen(line));
 	tmp->next = NULL;
-	p_expansion(tmp, env_lst);
-	str = tmp->value;
+	str = expand_toks(tmp, env_lst);
 	return (str);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:10:34 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/07 20:10:37 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/25 22:48:09 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,15 @@ static int	opers(t_token *toks, t_cmd_exec **env_lst)
 
 int	parsing_line(char *line, t_token **toks, t_cmd_exec **env_lst)
 {
-	// int		count;
 	t_cmd	*cmd;
 
 	cmd = NULL;
 	*toks = NULL;
-	// count = tokens_count(line, chars);
 	if (toks_arr(line, toks) == -1)
 		return (-1);
 	if (opers(*toks, env_lst) == -1)
 		return (-1);
 	if (toks_to_struct(toks, &cmd, env_lst) == 0)
 		exec(&cmd, env_lst);
-	// else if (count < 0)
-	// 	change_stat(env_lst, 2);
 	return (1);
 }

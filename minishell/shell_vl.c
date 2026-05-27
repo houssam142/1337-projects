@@ -3,44 +3,79 @@
 /*                                                        :::      ::::::::   */
 /*   shell_vl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:15:49 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/07 20:15:54 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/27 22:08:55 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	handle_single_quotes(t_token *toks, int i)
+int	handle_single_quotes(t_token *toks, int i, t_buff* buff)
 {
 	i++;
-	while (toks->value[i] != '\'' && toks->value[i])
+	while (toks->value[i] && toks->value[i] != '\'')
+	{
+		append_char(buff, toks->value[i]);
 		i++;
+	}
 	if (toks->value[i] == '\'')
 		i++;
 	return (i);
 }
 
-int	handle_dollar_sign(t_token *toks, int i, t_cmd_exec *env_lst)
+char	*resolve_dollar(char* str, int* i, t_cmd_exec* env)
 {
-	char	*replacement;
+	char	*name;
+	int		start;
+	char	*val;
 
-	if (toks->value[i + 1] == '?')
+	if (str[*i] != '$')
+		return (NULL);
+	start = *i + 1;
+	if (!ft_isalpha(str[*i + 1]) && str[*i + 1] != '_'
+		&& str[*i + 1] == '?')
 	{
-		toks->expanded = 1;
-		return (i + 2);
+		(*i)++;
+		return (ft_strdup("$"));
 	}
-	replacement = search_and_replace(toks, &i, env_lst, 0);
-	if (!replacement)
-	{
-		toks->expanded = 1;
-		return (-1);
-	}
-	
-	toks->expanded = 1;
-	return (i + 1);
+	(*i)++;
+	func(str, i);
+	name = ft_substr(str, start, *i - start);
+	if (!name)
+		return (NULL);
+	while (env && ft_strncmp(env->name, name, ft_strlen(name) + 1))
+		env = env->next;
+	if (!env)
+		return (ft_strdup(""));
+	val = ft_strdup(env->value);
+	return (val);
 }
+
+void	append_str(t_buff* buff, char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		append_char(buff, str[i]);
+		i++;
+	}
+}
+
+// int	handle_dollar_sign(t_token *toks, int i, t_cmd_exec *env_lst, t_buff* buff)
+// {
+// 	char	*val;
+
+// 	i++;
+// 	val = resolve_dollar(toks, &i, env_lst);
+// 	if (!val)
+// 		return (i);
+// 	append_str(buff, val);
+// 	return (i);
+// }
 
 int	len_till_expansion(char *s, int start_pos)
 {

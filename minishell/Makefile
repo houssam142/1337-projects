@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+         #
+#    By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/21 14:41:13 by nafarid           #+#    #+#              #
-#    Updated: 2025/08/13 11:11:14 by nafarid          ###   ########.fr        #
+#    Updated: 2026/05/27 00:38:50 by hounejja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@ SRC = main.c bultins/echo_cmd.c \
 		env_to_lst.c parsing/parse_helpers.c parsing/parse_opers.c cleaning/quote_del.c change_stat.c p_expansion.c \
 		argument_count.c lstadd_front.c lstadd_back.c heredoc.c signals.c lst_new_ele.c tokens/toks_trim.c \
 		executing/run_child.c executing/dups.c executing/executing_utils.c bultins/unset_cmd.c bultins/exit_cmd.c \
-		tokens/lstadd_back_token.c env_lst_to_arr.c tokens/lst_last_token.c shell_vl.c ft_lstlast.c utils.c handle_dollar_cmd.c helpers.c \
-		executing/run_child_utils.c cleaning/cleanup.c heredoc_utils.c executing/executing_utils2.c bultins/ft_type.c
+		tokens/lstadd_back_token.c env_lst_to_arr.c tokens/lst_last_token.c shell_vl.c ft_lstlast.c utils.c helpers.c \
+		executing/run_child_utils.c cleaning/cleanup.c heredoc_utils.c executing/executing_utils2.c bultins/ft_type.c \
+		segments.c
 		
 OBJS = $(SRC:.c=.o)
 CC = cc
