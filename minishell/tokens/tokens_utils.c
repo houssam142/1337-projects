@@ -6,13 +6,13 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:11:27 by nafarid           #+#    #+#             */
-/*   Updated: 2026/05/27 21:59:30 by hounejja         ###   ########.fr       */
+/*   Updated: 2026/05/27 22:47:22 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	store_token(t_token **toks, t_buff* buff, t_modes mode)
+void	store_token(t_token **toks, t_buff *buff, t_modes mode)
 {
 	t_token	*tok;
 	char	*str;
@@ -28,10 +28,11 @@ void	store_token(t_token **toks, t_buff* buff, t_modes mode)
 	buff->len = 0;
 }
 
-static void	append_operator_as_token(char *line, int *i, t_token** toks)
+static void	append_operator_as_token(char *line, int *i, t_token **toks)
 {
-	char	op[3] = {0};
+	char	op[3];
 
+	ft_memset(op, 0, sizeof(op));
 	if (line[*i + 1] && line[*i] == '>')
 	{
 		if (line[*i + 1] == '>')
@@ -40,7 +41,7 @@ static void	append_operator_as_token(char *line, int *i, t_token** toks)
 			op[1] = '>';
 			op[2] = '\0';
 			*i += 2;
-		}		
+		}
 		else
 		{
 			op[0] = '>';
@@ -76,7 +77,7 @@ static void	append_operator_as_token(char *line, int *i, t_token** toks)
 static char	*join_segments_raw(t_seg *seg)
 {
 	t_buff	buff;
-	
+
 	buff.buff = NULL;
 	buff.len = 0;
 	buff.cap = 0;
@@ -95,7 +96,7 @@ static bool	ft_isoperator(int c)
 	return (c == '|' || c == '>' || c == '<');
 }
 
-void	append_char(t_buff* buf, char c)
+void	append_char(t_buff *buf, char c)
 {
 	char	*new;
 	size_t	new_cap;
@@ -145,7 +146,7 @@ static t_token	*ensure_word(t_token **curr)
 	return (*curr);
 }
 
-static void finalize_word(t_token **toks, t_token **curr)
+static void	finalize_word(t_token **toks, t_token **curr)
 {
 	if (!curr || !*curr)
 		return ;
@@ -179,32 +180,32 @@ int	toks_arr(char *line, t_token **toks)
 				flush_seg(curr, &buff, mode, 0);
 				mode = SINGLE_QUOTED;
 				i++;
-				continue;
+				continue ;
 			}
 			if (line[i] == '\"')
 			{
 				flush_seg(curr, &buff, mode, 0);
 				mode = DOUBLE_QUOTED;
 				i++;
-				continue;
+				continue ;
 			}
 			if (ft_isspace(line[i]))
 			{
 				flush_seg(curr, &buff, mode, 0);
 				finalize_word(toks, &curr);
 				i++;
-				continue;
+				continue ;
 			}
 			if (ft_isoperator(line[i]))
 			{
 				flush_seg(curr, &buff, mode, 0);
 				finalize_word(toks, &curr);
 				append_operator_as_token(line, &i, toks);
-				continue;
+				continue ;
 			}
 			ensure_word(&curr);
 			append_char(&buff, line[i++]);
-			continue;
+			continue ;
 		}
 		if (mode == SINGLE_QUOTED)
 		{
@@ -212,11 +213,11 @@ int	toks_arr(char *line, t_token **toks)
 			while (line[i] && line[i] != '\'')
 				append_char(&buff, line[i++]);
 			if (!line[i])
-				return (-1);
+				return (TOK_INCOMPLETE);
 			i++;
 			flush_seg(curr, &buff, mode, 1);
 			mode = NORMAL;
-			continue;
+			continue ;
 		}
 		if (mode == DOUBLE_QUOTED)
 		{
@@ -224,15 +225,14 @@ int	toks_arr(char *line, t_token **toks)
 			while (line[i] && line[i] != '\"')
 				append_char(&buff, line[i++]);
 			if (!line[i])
-				return (-1);
+				return (TOK_INCOMPLETE);
 			i++;
 			flush_seg(curr, &buff, mode, 1);
 			mode = NORMAL;
-			continue;
+			continue ;
 		}
 	}
 	flush_seg(curr, &buff, mode, 0);
 	finalize_word(toks, &curr);
-	return (0);
+	return (TOK_COMPLETE);
 }
-

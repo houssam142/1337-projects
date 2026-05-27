@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:10:34 by nafarid           #+#    #+#             */
-/*   Updated: 2026/05/25 22:48:09 by hounejja         ###   ########.fr       */
+/*   Updated: 2026/05/27 22:55:50 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,16 @@ static int	opers(t_token *toks, t_cmd_exec **env_lst)
 int	parsing_line(char *line, t_token **toks, t_cmd_exec **env_lst)
 {
 	t_cmd	*cmd;
+	int		status;
 
 	cmd = NULL;
 	*toks = NULL;
-	if (toks_arr(line, toks) == -1)
-		return (-1);
+	status = toks_arr(line, toks);
+	if (status == -1 || status == TOK_INCOMPLETE)
+		return (status);
 	if (opers(*toks, env_lst) == -1)
 		return (-1);
 	if (toks_to_struct(toks, &cmd, env_lst) == 0)
 		exec(&cmd, env_lst);
-	return (1);
+	return (status);
 }

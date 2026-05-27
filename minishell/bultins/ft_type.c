@@ -1,21 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_type.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/27 22:33:39 by hounejja          #+#    #+#             */
+/*   Updated: 2026/05/27 22:33:40 by hounejja         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-int	check_flags(char *arg, int* flag)
+int	check_flags(char *arg, int *flag)
 {
-	(void)flag;
 	int	i;
 
+	(void)flag;
 	i = 0;
 	while (arg[i])
 	{
 		if (arg[i] == '-' && !i)
-			continue;
+			continue ;
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
-int	ft_type(t_cmd* cmd, t_cmd_exec **env)
+int	ft_type(t_cmd *cmd, t_cmd_exec **env)
 {
 	int	i;
 	int	flag;
@@ -27,7 +39,7 @@ int	ft_type(t_cmd* cmd, t_cmd_exec **env)
 		if (check_flags(cmd->args[i], &flag) == 1)
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		i++;
 	}

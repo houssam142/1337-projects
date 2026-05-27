@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:15:02 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/13 11:11:05 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/27 23:07:45 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*join_with_newline(char *cmd, char *next)
+{
+	char	*res;
+	char	*tmp;
+
+	tmp = ft_strjoin(cmd, "\n");
+	res = ft_strjoin(tmp, next);
+	return (res);
+}
 
 static void	check_ctrl_c(t_cmd_exec *env_lst)
 {
@@ -48,6 +58,22 @@ static int	check_stat(t_cmd_exec *env_lst, int *status)
 	return (0);
 }
 
+static void matching_quotes(char *cmd, t_token *tok, t_cmd_exec *env_lst)
+{
+	char		*next;
+
+	while (parsing_line(cmd, &tok, &env_lst) == TOK_INCOMPLETE)
+	{
+		next = readline("quote> ");
+		if (!next)
+		{
+			ft_putstr_fd("\nminishelll: unexpected EOF while looking for matching `''\n", 2);
+			break;
+		}
+		cmd = join_with_newline(cmd, next);
+	}
+}
+
 static int	start(int ac, char **av, char **env, t_cmd_exec **env_lst)
 {
 	(void)av;
@@ -69,6 +95,7 @@ int	main(int ac, char **av, char **env)
 	int			status;
 
 	status = 0;
+	tok = NULL;
 	if (start(ac, av, env, &env_lst) == 1)
 		return (0);
 	while (1)
@@ -81,7 +108,7 @@ int	main(int ac, char **av, char **env)
 		if (*cmd)
 			add_history(cmd);
 		check_ctrl_c(env_lst);
-		parsing_line(cmd, &tok, &env_lst);
+		matching_quotes(cmd, tok, env_lst);
 		if (check_stat(env_lst, &status) == 1)
 			break ;
 	}

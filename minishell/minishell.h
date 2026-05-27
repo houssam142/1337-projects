@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:15:30 by nafarid           #+#    #+#             */
-/*   Updated: 2026/05/27 22:09:13 by hounejja         ###   ########.fr       */
+/*   Updated: 2026/05/27 22:47:08 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # include <stdbool.h>
 # include <unistd.h>
 
+#define TOK_INCOMPLETE 1
+# define TOK_COMPLETE 0
+#define TOK_ERROR -1 
 
 typedef enum e_modes
 {
