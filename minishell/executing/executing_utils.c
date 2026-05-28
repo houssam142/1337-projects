@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:08:24 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/10 14:36:59 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/28 13:55:55 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,26 @@ char	*ft_strjoin_sep(char *path, char *cmd, char c)
 	return (s);
 }
 
-int	exec_run(t_cmd *cmd, t_cmd_exec **env_lst)
+int	exec_run(t_cmd *cmd, t_shell *shell)
 {
 	if (!ft_strncmp(cmd->path, "pwd", 4))
-		return (ft_pwd(env_lst));
+		return (ft_pwd(&shell->env));
 	else if (!ft_strncmp(cmd->path, "env", 4))
-		return (ft_env(env_lst));
+		return (ft_env(&shell->env));
 	else if (!ft_strncmp(cmd->path, "unset", 6))
-		return (ft_unset(cmd, env_lst));
+		return (ft_unset(cmd, &shell->env));
 	else if (!ft_strncmp(cmd->path, "export", 7))
-		return (ft_export(cmd, env_lst));
+		return (ft_export(cmd, &shell->env));
 	else if (!ft_strncmp(cmd->path, "echo", 5))
-		return (ft_echo(cmd, env_lst));
+		return (ft_echo(cmd, &shell->env));
 	else if (!ft_strncmp(cmd->path, "exit", 5))
-		return (ft_exit(cmd, env_lst));
+		return (ft_exit(cmd, &shell->env));
 	else if (!ft_strncmp(cmd->path, "cd", 3))
-		return (ft_cd(cmd, env_lst));
-	else if (!ft_strncmp(cmd->path, "type", 4))
-		return (ft_type(cmd, env_lst));
+		return (ft_cd(cmd, &shell->env));
+	else if (!ft_strncmp(cmd->path, "type", 5))
+		return (ft_type(cmd, &shell->env));
+	else if (!ft_strncmp(cmd->path, "alias", 6))
+		return (ft_alias(cmd, shell));
 	return (0);
 }
 
@@ -77,27 +79,27 @@ static void	close_dups(t_cmd *cmd)
 	}
 }
 
-void	exec_run_par(t_cmd *cmd, t_cmd_exec **env_lst)
+void	exec_run_par(t_cmd *cmd, t_shell *shell)
 {
 	dups(cmd);
-	exec_run(cmd, env_lst);
+	exec_run(cmd, shell);
 	close_dups(cmd);
 }
 
-void	exec_built(t_cmd *cmd, t_cmd_exec **env_lst, int child_par)
+void	exec_built(t_cmd *cmd, t_shell *shell, int child_par)
 {
 	int	exit_code;
 
 	if (cmd->redir_error)
 	{
-		change_stat(env_lst, 1);
+		change_stat(&shell->env, 1);
 		return ;
 	}
 	if (!child_par)
-		exec_run_par(cmd, env_lst);
+		exec_run_par(cmd, shell);
 	else if (child_par == 1)
 	{
-		exit_code = exec_run(cmd, env_lst);
+		exit_code = exec_run(cmd, shell);
 		exit(exit_code);
 	}
 }

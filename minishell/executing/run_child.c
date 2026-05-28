@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   run_child.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:13 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/12 18:32:15 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/28 14:05:02 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	fun(t_cmd *exec_cmd, int *exit_code)
 	}
 }
 
-void	child_proc(t_cmd **cmd, t_cmd_exec **env_lst, int id)
+void	child_proc(t_cmd **cmd, t_shell *shell, int id)
 {
 	t_cmd	*exec_cmd;
 	int		exit_code;
@@ -78,7 +78,7 @@ void	child_proc(t_cmd **cmd, t_cmd_exec **env_lst, int id)
 	signal(SIGINT, proc_handle_ctrl_c);
 	signal(SIGQUIT, proc_handle_sigquit);
 	exec_cmd = close_pipes(cmd, id);
-	exec_cmd->path = find_cmd(exec_cmd, *env_lst);
+	exec_cmd->path = find_cmd(exec_cmd, shell->env);
 	exit_code = 0;
 	if (!exec_cmd->path)
 	{
@@ -88,10 +88,10 @@ void	child_proc(t_cmd **cmd, t_cmd_exec **env_lst, int id)
 		exit(exit_code);
 	}
 	else if (exec_cmd->builtin != 1)
-		not_built(env_lst, exec_cmd);
+		not_built(&shell->env, exec_cmd);
 	else
 	{
-		exit_code = exec_run(exec_cmd, env_lst);
+		exit_code = exec_run(exec_cmd, shell);
 		restore_std_fds();
 		free_grabage();
 		exit(exit_code);

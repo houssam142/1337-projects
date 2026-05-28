@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 14:00:18 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/12 18:32:06 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/28 14:05:37 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ pid_t	*allocate_pid_array(t_cmd *cmd)
 	return (pids);
 }
 
-void	check_dir_exe(t_cmd *tmp, t_cmd_exec **env_lst, t_cmd **cmd)
+void	check_dir_exe(t_cmd *tmp, t_shell *shell, t_cmd **cmd)
 {
 	if (tmp->redir_error && tmp->redir_error != 3)
 	{
@@ -36,5 +36,5 @@ void	check_dir_exe(t_cmd *tmp, t_cmd_exec **env_lst, t_cmd **cmd)
 		free_grabage();
 		exit(1);
 	}
-	child_proc(cmd, env_lst, tmp->id);
+	child_proc(cmd, shell, tmp->id);
 }

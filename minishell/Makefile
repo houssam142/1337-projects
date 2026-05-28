@@ -6,7 +6,7 @@
 #    By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/21 14:41:13 by nafarid           #+#    #+#              #
-#    Updated: 2026/05/27 00:38:50 by hounejja         ###   ########.fr        #
+#    Updated: 2026/05/27 23:55:13 by hounejja         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC = main.c bultins/echo_cmd.c \
 		executing/run_child.c executing/dups.c executing/executing_utils.c bultins/unset_cmd.c bultins/exit_cmd.c \
 		tokens/lstadd_back_token.c env_lst_to_arr.c tokens/lst_last_token.c shell_vl.c ft_lstlast.c utils.c helpers.c \
 		executing/run_child_utils.c cleaning/cleanup.c heredoc_utils.c executing/executing_utils2.c bultins/ft_type.c \
-		segments.c
+		segments.c bultins/ft_alias.c
 		
 OBJS = $(SRC:.c=.o)
 CC = cc

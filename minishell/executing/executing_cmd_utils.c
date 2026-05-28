@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing_cmd_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:08:10 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/12 18:31:33 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/27 23:54:04 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ static int	built(t_cmd *cmd)
 			i = 1;
 		else if (!ft_strncmp(cmd->args[0], "exit", 5))
 			i = 1;
-		else if (!ft_strncmp(cmd->args[0], "type", 4))
+		else if (!ft_strncmp(cmd->args[0], "type", 5))
+			i = 1;
+		else if (!ft_strncmp(cmd->args[0], "alias", 6))
 			i = 1;
 		cmd->builtin = i;
 	}

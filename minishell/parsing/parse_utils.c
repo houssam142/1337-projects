@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:10:19 by nafarid           #+#    #+#             */
-/*   Updated: 2026/05/26 17:39:33 by hounejja         ###   ########.fr       */
+/*   Updated: 2026/05/27 23:39:50 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ static int	final_parsing(t_token **toks, t_cmd_exec *env_lst)
 		tmp = tmp->next;
 	}
 	remove_empty_tokens(toks);
-	ft_quote_removal(toks);
 	if (!toks || !*toks)
 		return (-1);
 	return (0);

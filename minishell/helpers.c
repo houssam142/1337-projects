@@ -6,7 +6,7 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:13:02 by nafarid           #+#    #+#             */
-/*   Updated: 2026/05/27 22:13:30 by hounejja         ###   ########.fr       */
+/*   Updated: 2026/05/28 22:42:17 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,28 +81,18 @@ void	remove_empty_tokens(t_token **toks)
 	}
 }
 
-int	copy_quotes(t_token *t, t_cmd_exec *env_lst, int i, int j)
+int	is_quoted_word(t_token *tok)
 {
-	char	*new_quote;
-	char	*new_str;
-	char	*final;
-	int		env_len;
+	t_seg	*seg;
 
-	if (i < 0 || j < 0 || i > j || j > (int)ft_strlen(t->quote))
-		return (-1);
-	env_len = ft_strlen(env_lst->value);
-	new_quote = ft_malloc(env_len + 1);
-	if (!new_quote)
-		return (-1);
-	ft_memset(new_quote, '2', env_len);
-	new_quote[env_len] = '\0';
-	t->quote[i] = '\0';
-	new_str = ft_strjoin(t->quote, new_quote);
-	if (!new_str)
-		return (-1);
-	final = ft_strjoin(new_str, t->quote + j);
-	if (!final)
-		return (-1);
-	t->quote = final;
+	if (!tok || tok->type != 'w')
+		return (1);
+	seg = tok->segments;
+	while (seg)
+	{
+		if (seg->mode != NORMAL)
+			return (1);
+		seg = seg->next;
+	}
 	return (0);
 }

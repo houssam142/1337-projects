@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/11 13:21:07 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/10 14:36:55 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/28 14:07:03 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	waiting(t_cmd_exec **env_lst, int idx, int *pids)
 	ft_signals();
 }
 
-static int	fork_and_execute(t_cmd **cmd, t_cmd_exec **env_lst, pid_t *pids)
+static int	fork_and_execute(t_cmd **cmd, t_shell *shell, pid_t *pids)
 {
 	int		my_pid;
 	t_cmd	*tmp;
@@ -74,7 +74,7 @@ static int	fork_and_execute(t_cmd **cmd, t_cmd_exec **env_lst, pid_t *pids)
 		if (tmp->id == 0 || tmp2->pipe == 1)
 			my_pid = fork();
 		if (!my_pid)
-			check_dir_exe(tmp, env_lst, cmd);
+			check_dir_exe(tmp, shell, cmd);
 		else if (tmp && my_pid > 0)
 		{
 			pids[idx++] = my_pid;
@@ -85,21 +85,21 @@ static int	fork_and_execute(t_cmd **cmd, t_cmd_exec **env_lst, pid_t *pids)
 	return (idx);
 }
 
-static void	exec_in_process(t_cmd **cmd, t_cmd_exec **env_lst)
+static void	exec_in_process(t_cmd **cmd, t_shell *shell)
 {
 	pid_t	*pids;
 	int		process_count;
 
 	pids = allocate_pid_array(*cmd);
-	process_count = fork_and_execute(cmd, env_lst, pids);
-	parent_proc(env_lst, process_count, pids);
+	process_count = fork_and_execute(cmd, shell, pids);
+	parent_proc(&shell->env, process_count, pids);
 }
 
-void	exec(t_cmd **cmd, t_cmd_exec **env_lst)
+void	exec(t_cmd **cmd, t_shell *shell)
 {
-	(*cmd)->path = find_cmd(*cmd, *env_lst);
+	(*cmd)->path = find_cmd(*cmd, shell->env);
 	if ((*cmd)->path && (*cmd)->builtin == 1 && (*cmd)->next == NULL)
-		exec_built(*cmd, env_lst, 0);
+		exec_built(*cmd, shell, 0);
 	else
-		exec_in_process(cmd, env_lst);
+		exec_in_process(cmd, shell);
 }

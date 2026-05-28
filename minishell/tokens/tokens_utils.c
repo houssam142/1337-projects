@@ -6,27 +6,11 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:11:27 by nafarid           #+#    #+#             */
-/*   Updated: 2026/05/27 22:47:22 by hounejja         ###   ########.fr       */
+/*   Updated: 2026/05/28 21:33:51 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	store_token(t_token **toks, t_buff *buff, t_modes mode)
-{
-	t_token	*tok;
-	char	*str;
-
-	if (!buff || !buff->buff || !buff->len)
-		return ;
-	str = ft_strdup(buff->buff);
-	tok = lst_new_ele_tok('w', str);
-	tok->segments->mode = mode;
-	lstadd_back_tok(toks, tok);
-	buff->buff[0] = '\0';
-	buff->cap = 0;
-	buff->len = 0;
-}
 
 static void	append_operator_as_token(char *line, int *i, t_token **toks)
 {
@@ -171,6 +155,8 @@ int	toks_arr(char *line, t_token **toks)
 	buff.len = 0;
 	buff.cap = 0;
 	curr = NULL;
+	if (!line)
+		return (-1);
 	while (line[i])
 	{
 		if (mode == NORMAL)

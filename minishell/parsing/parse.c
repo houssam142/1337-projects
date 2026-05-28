@@ -6,11 +6,30 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:10:34 by nafarid           #+#    #+#             */
-/*   Updated: 2026/05/27 22:55:50 by hounejja         ###   ########.fr       */
+/*   Updated: 2026/05/28 22:16:11 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	expand_aliases(t_token **toks, t_hash *aliases)
+{
+	char	*value;
+	t_token	*cur;
+
+	if (!aliases->count)
+		return ;
+	cur = *toks;
+	while (cur)
+	{
+		value = get_alias_value(aliases, cur->value);
+		if (value)
+		{
+			//remove_empty_tokens();
+		}
+		cur = cur->next;
+	}
+}
 
 static int	opers(t_token *toks, t_cmd_exec **env_lst)
 {
@@ -41,7 +60,7 @@ static int	opers(t_token *toks, t_cmd_exec **env_lst)
 	return (0);
 }
 
-int	parsing_line(char *line, t_token **toks, t_cmd_exec **env_lst)
+int	parsing_line(char *line, t_token **toks, t_shell *shell)
 {
 	t_cmd	*cmd;
 	int		status;
@@ -51,9 +70,10 @@ int	parsing_line(char *line, t_token **toks, t_cmd_exec **env_lst)
 	status = toks_arr(line, toks);
 	if (status == -1 || status == TOK_INCOMPLETE)
 		return (status);
-	if (opers(*toks, env_lst) == -1)
+	expand_aliases(toks, &shell->aliases);
+	if (opers(*toks, &shell->env) == -1)
 		return (-1);
-	if (toks_to_struct(toks, &cmd, env_lst) == 0)
-		exec(&cmd, env_lst);
+	if (toks_to_struct(toks, &cmd, &shell->env) == 0)
+		exec(&cmd, shell);
 	return (status);
 }

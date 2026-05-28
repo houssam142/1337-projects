@@ -6,21 +6,11 @@
 /*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 20:15:02 by nafarid           #+#    #+#             */
-/*   Updated: 2026/05/27 23:07:45 by hounejja         ###   ########.fr       */
+/*   Updated: 2026/05/28 21:15:06 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static char	*join_with_newline(char *cmd, char *next)
-{
-	char	*res;
-	char	*tmp;
-
-	tmp = ft_strjoin(cmd, "\n");
-	res = ft_strjoin(tmp, next);
-	return (res);
-}
 
 static void	check_ctrl_c(t_cmd_exec *env_lst)
 {
@@ -58,11 +48,11 @@ static int	check_stat(t_cmd_exec *env_lst, int *status)
 	return (0);
 }
 
-static void matching_quotes(char *cmd, t_token *tok, t_cmd_exec *env_lst)
+static void matching_quotes(char *cmd, t_token *tok, t_shell *shell)
 {
 	char		*next;
 
-	while (parsing_line(cmd, &tok, &env_lst) == TOK_INCOMPLETE)
+	while (parsing_line(cmd, &tok, shell) == TOK_INCOMPLETE)
 	{
 		next = readline("quote> ");
 		if (!next)
@@ -77,6 +67,7 @@ static void matching_quotes(char *cmd, t_token *tok, t_cmd_exec *env_lst)
 static int	start(int ac, char **av, char **env, t_cmd_exec **env_lst)
 {
 	(void)av;
+	minishell();
 	if (ac > 1)
 	{
 		ft_putstr_fd("Error\nmore than one argument\n", 2);
@@ -90,13 +81,15 @@ static int	start(int ac, char **av, char **env, t_cmd_exec **env_lst)
 int	main(int ac, char **av, char **env)
 {
 	char		*cmd;
-	t_cmd_exec	*env_lst;
+	t_shell		shell;
 	t_token		*tok;
 	int			status;
 
 	status = 0;
 	tok = NULL;
-	if (start(ac, av, env, &env_lst) == 1)
+	shell.aliases.count = 0;
+	init_alias_table(&shell.aliases);
+	if (start(ac, av, env, &shell.env) == 1)
 		return (0);
 	while (1)
 	{
@@ -107,9 +100,9 @@ int	main(int ac, char **av, char **env)
 			ft_exitt(&status);
 		if (*cmd)
 			add_history(cmd);
-		check_ctrl_c(env_lst);
-		matching_quotes(cmd, tok, env_lst);
-		if (check_stat(env_lst, &status) == 1)
+		check_ctrl_c(shell.env);
+		matching_quotes(cmd, tok, &shell);
+		if (check_stat(shell.env, &status) == 1)
 			break ;
 	}
 	return (free_grabage(), status);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nafarid <nafarid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hounejja <hounejja@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 18:00:30 by nafarid           #+#    #+#             */
-/*   Updated: 2025/08/07 19:51:16 by nafarid          ###   ########.fr       */
+/*   Updated: 2026/05/28 10:43:51 by hounejja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ft_strlcpy(result, s + start, len + 1);
 	return (result);
 }
-// int main()
-// {
-// 	char s1[] = "helloll";
-// 	char *r = ft_substr(s1, 4, 9);
-// 	printf("%s\n", r);
-// }
